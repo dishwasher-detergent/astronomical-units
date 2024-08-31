@@ -1,5 +1,0 @@
-export const ENGAGEMENT_DELTA = 1;
-
-export const ENGAGEMENT_MULTIPLIER = 0;
-
-export const ENGAGEMENT_MULTIPLIER_DELTA = 1;

@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
 import { useAtomValue } from "jotai";
-import { likes, likesPerSecond } from "@/atoms/likes";
+import { au, PerSecond } from "@/atoms/au";
 import { Stats } from "@/components/ui/stats";
 import { LOCALE } from "@/constants/GLOBAL";
 import { useMeasureDifference } from "@/hooks/useMeasureDifference";
 
-export function Likes() {
-  const likesValue = useAtomValue(likes);
+export function ClickTotalCount() {
+  const auValue = useAtomValue(au);
 
-  useMeasureDifference(likesPerSecond, likesValue);
+  useMeasureDifference(PerSecond, auValue);
 
   return (
     <div>
       <div>
         <Stats
-          label="Likes"
-          value={likesValue.toLocaleString(LOCALE)}
+          label="Astronomical Units (AU)"
+          value={auValue.toLocaleString(LOCALE)}
         />
       </div>
     </div>

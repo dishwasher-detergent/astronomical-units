@@ -1,18 +1,14 @@
 import { atom } from "jotai";
 
-import { show } from "@/atoms/show";
-import { UPGRADE_ORDER } from "@/constants/UPGRADES";
-import { ElementKey } from "@/types";
+import { EQUIPMENT_ORDER } from "@/constants/EQUIPMENT_DETAILS";
 
 const upgradeIndex = atom(0);
 
 export const nextUpgrade = atom(
-  (get) => UPGRADE_ORDER[get(upgradeIndex)],
+  (get) => EQUIPMENT_ORDER[get(upgradeIndex)],
   (_, set) => {
     set(upgradeIndex, (current) => {
-      if (current === UPGRADE_ORDER.length - 1) {
-        set(show, ElementKey.Dominance);
-
+      if (current === EQUIPMENT_ORDER.length - 1) {
         return current;
       }
 
@@ -20,3 +16,8 @@ export const nextUpgrade = atom(
     });
   }
 );
+
+if (process.env.NODE_ENV !== "production") {
+  upgradeIndex.debugLabel = "Upgrade Index";
+  nextUpgrade.debugLabel = "Next Upgrade";
+}

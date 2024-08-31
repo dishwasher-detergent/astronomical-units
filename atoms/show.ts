@@ -10,3 +10,9 @@ export const show = atom(null, (_, set, key: ElementKey) =>
 export const showElement = atom<Partial<Record<ElementKey, boolean>>>({});
 
 export const showGameOver = atom(false);
+
+if (process.env.NODE_ENV !== "production") {
+  show.debugLabel = "Show";
+  showElement.debugLabel = "Show Element";
+  showGameOver.debugLabel = "Show Game Over";
+}

@@ -1,11 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./card";
-
 interface StatsProps {
   label: string;
   value: number | string;
@@ -13,12 +5,10 @@ interface StatsProps {
 
 const Stats = ({ label, value }: StatsProps) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardDescription>{label}</CardDescription>
-        <CardTitle className="text-4xl">{value}</CardTitle>
-      </CardHeader>
-    </Card>
+    <div>
+      <p className="text-xs font-semibold">{label}</p>
+      <p className="text-xl">{value}</p>
+    </div>
   );
 };
 

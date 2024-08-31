@@ -1,18 +1,11 @@
-'use client'
+"use client";
 
 import { useAtom } from "jotai";
 
-import { likes } from "@/atoms/likes";
-import { LOCALE } from "@/constants/GLOBAL";
+import { au } from "@/atoms/au";
 import { useAcquireCost } from "@/hooks/useAcquireCost";
 import type { AcquirableElementKey } from "@/types";
-import { Button } from "./ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { Button } from "@/components/ui/button";
 
 export function AcquireButton({
   elementKey,
@@ -23,41 +16,24 @@ export function AcquireButton({
   increment: (update?: unknown) => void;
   isSmall?: boolean;
 }) {
-  const [likesValue, setLikes] = useAtom(likes);
+  const [auValue, setAu] = useAtom(au);
 
   const cost = useAcquireCost(elementKey);
 
-  const canAcquire = cost <= likesValue;
+  const canAcquire = cost <= auValue;
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>
-          <span className="d-inline-block">
-            <Button
-              disabled={!canAcquire}
-              onClick={() => {
-                if (canAcquire) {
-                  increment();
-                  setLikes((current) => current - cost);
-                }
-              }}
-              size={isSmall ? "sm" : undefined}
-              style={{ width: isSmall ? 140 : 200 }}
-              variant="outline"
-            >
-              Acquire
-            </Button>
-          </span>
-        </TooltipTrigger>
-        <TooltipContent>
-          Cost:
-          <strong className="font-monospace">
-            {cost.toLocaleString(LOCALE)}
-          </strong>
-          Likes
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      size="sm"
+      disabled={!canAcquire}
+      onClick={() => {
+        if (canAcquire) {
+          increment();
+          setAu((current) => current - cost);
+        }
+      }}
+    >
+      {cost} AU
+    </Button>
   );
 }
