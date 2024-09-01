@@ -26,8 +26,6 @@ export function Base({
 
   useNextUpgrade(isShowing);
 
-  console.log(next);
-
   if (isShowing) {
     return (
       <AcquireButton elementKey={elementKey} increment={setRank}>

@@ -12,7 +12,6 @@ export function useNextUpgrade(isActive = false) {
   useEffect(() => {
     if (wasActive !== null && wasActive !== isActive) {
       setNextUpgrade();
-      console.log("Next upgrade set");
     }
   }, [isActive, setNextUpgrade, wasActive]);
 }
