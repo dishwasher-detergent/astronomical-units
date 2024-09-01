@@ -4,16 +4,16 @@ import { Fragment } from "react";
 
 import { Astronaut } from "@/components/equipment/astronaut";
 import { ElementKey } from "@/types";
-import { Generation } from "./generation";
-import { IronMiningRig } from "./mining-rigs/iron";
-import { ColbaltMiningRig } from "./mining-rigs/colbalt";
-import { PlatinumMiningRig } from "./mining-rigs/platinum";
+import { Generation } from "@/components/equipment/generation";
+import { IronMiningRig } from "@/components/equipment/mining-rigs/iron";
+import { CobaltMiningRig } from "@/components/equipment/mining-rigs/colbalt";
+import { PlatinumMiningRig } from "@/components/equipment/mining-rigs/platinum";
 import { EQUIPMENT_ORDER } from "@/constants/EQUIPMENT_DETAILS";
 
 export function Equipment() {
   return (
-    <div className="p-4 space-y-2">
-      <p className="font-bold text-xl">Shop</p>
+    <div className="sticky top-0 border-t bg-background">
+      <p className="font-bold px-4 py-2">Store</p>
       <div>
         {EQUIPMENT_ORDER.map((key) => (
           <Fragment key={key}>
@@ -25,8 +25,8 @@ export function Equipment() {
                 case ElementKey.IronMiningRig: {
                   return <IronMiningRig />;
                 }
-                case ElementKey.ColbaltMiningRig: {
-                  return <ColbaltMiningRig />;
+                case ElementKey.CobaltMiningRig: {
+                  return <CobaltMiningRig />;
                 }
                 case ElementKey.PlatinumMiningRig: {
                   return <PlatinumMiningRig />;

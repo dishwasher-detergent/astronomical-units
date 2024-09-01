@@ -5,8 +5,9 @@ import {
   ASTRONAUT_DELTA_MULTIPLIER,
   ASTRONAUT_DELTA_MULTIPLIER_DELTA,
 } from "@/constants/ASTRONAUT";
+import { atomWithStorage } from "jotai/utils";
 
-export const astronaut = atom({
+export const astronaut = atomWithStorage("astronaut", {
   current: 0,
   deltaMultiplier: ASTRONAUT_DELTA_MULTIPLIER,
 });

@@ -1,23 +1,21 @@
 import { ClickArea } from "@/components/click-area";
-import { ClickTotalCount } from "@/components/click-area/total-count";
-import { ClicksPerSecond } from "@/components/statistics/clicks-per-second";
-import { AusPerSecond } from "@/components/statistics/aus-per-second";
 import { Equipment } from "@/components/equipment";
+import { EquipmentDisplay } from "@/components/equipment/display";
+import { Crew } from "@/components/crew";
+import { Statistics } from "@/components/statistics";
 
 export default function Home() {
   return (
-    <section className="grid grid-cols-3 h-full w-full">
-      <div className="w-72 border-r h-full">
-        <div className="border-b">
-          <ClickArea />
-        </div>
-        <div className="border-b p-4 space-y-2">
-          <p className="font-bold text-xl">Statistics</p>
-          <ClickTotalCount />
-          <ClicksPerSecond />
-          <AusPerSecond />
-        </div>
+    <section className="h-full w-full flex flex-row flex-nowrap overflow-hidden">
+      <div className="w-72 border-r h-full flex-none overflow-y-auto">
+        <ClickArea />
+        <Crew />
+        <Statistics />
         <Equipment />
+      </div>
+      <div className="flex-1 h-full">
+        <p className="border-b p-4 font-bold bg-background">Equipment</p>
+        <EquipmentDisplay />
       </div>
     </section>
   );

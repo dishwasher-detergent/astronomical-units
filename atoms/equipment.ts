@@ -1,20 +1,43 @@
 import { atom } from "jotai";
-import { atomWithReducer } from "jotai/utils";
+import { atomWithReducer, atomWithStorage } from "jotai/utils";
+import { Getter, Setter } from "jotai/vanilla";
 
 import {
-  EQUIPMENT,
-  EQUIPMENT_DELTA,
   EQUIPMENT_RATE,
   EQUIPMENT_RATE_DELTA,
   EQUIPMENT_RATE_MINIMUM,
   EQUIPMENT_RATE_REDUCTION,
   EQUIPMENT_RATE_REDUCTION_DELTA,
 } from "@/constants/EQUIPMENT";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { Equipment } from "@/types";
 
-export const equipment = atomWithReducer(
-  EQUIPMENT,
-  (current) => current + EQUIPMENT_DELTA
+type EquipmentObject = {
+  [key: string]: number;
+};
+
+const generateEquipmentObject = (equipmentList: Record<string, Equipment>) => {
+  const newObject: EquipmentObject = {};
+
+  Object.entries(equipmentList).forEach(([key, value]: [string, Equipment]) => {
+    if (value.equipment === false) return;
+    newObject[key] = 0;
+  });
+
+  return newObject;
+};
+
+export const equipment = atomWithStorage(
+  "equipment",
+  generateEquipmentObject(EQUIPMENT_LIST)
 );
+
+// Function to add a new item to the equipment atom
+export const addEquipment =
+  (key: string, value: any) => (get: Getter, set: Setter) => {
+    const currentEquipment = get(equipment);
+    set(equipment, { ...currentEquipment, [key]: value });
+  };
 
 export const equipmentRate = atom((get) => {
   let newRate =

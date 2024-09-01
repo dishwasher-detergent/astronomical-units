@@ -35,9 +35,7 @@ export function useMeasure(atom: PrimitiveAtom<number>) {
         { elapsed: 0, sum: 0 }
       );
 
-      const measurement =
-        (sum / (Math.round(elapsed / 100) * 100)) * MEASUREMENT_RATE;
-      setAtom(Math.round(measurement)); // Round to whole numbers
+      setAtom((sum / (Math.round(elapsed / 100) * 100)) * MEASUREMENT_RATE);
       setDelta(0);
 
       setActions((current) =>
