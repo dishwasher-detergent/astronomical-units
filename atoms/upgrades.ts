@@ -1,14 +1,19 @@
 import { atom } from "jotai";
 
-import { EQUIPMENT_ORDER } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 
 const upgradeIndex = atom(0);
 
 export const nextUpgrade = atom(
-  (get) => EQUIPMENT_ORDER[get(upgradeIndex)],
+  (get) => {
+    const equipment = Object.keys(EQUIPMENT_LIST).map((key) => key);
+    return equipment[get(upgradeIndex)];
+  },
   (_, set) => {
     set(upgradeIndex, (current) => {
-      if (current === EQUIPMENT_ORDER.length - 1) {
+      const equipment = Object.keys(EQUIPMENT_LIST).map((key) => key);
+
+      if (current === equipment.length - 1) {
         return current;
       }
 

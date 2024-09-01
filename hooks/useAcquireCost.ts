@@ -5,12 +5,11 @@ import { useMemo } from "react";
 import { astronautCurrent } from "@/atoms/astronauts";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { type AcquirableElementKey, ElementKey } from "@/types";
 
-const getRankAtom = (key: AcquirableElementKey) => {
+const getRankAtom = (key: string) => {
   if (EQUIPMENT_LIST[key].equipment === false) {
     switch (key) {
-      case ElementKey.Astronaut:
+      case "astronaut":
         return astronautCurrent;
       default:
         return undefined;
@@ -20,7 +19,7 @@ const getRankAtom = (key: AcquirableElementKey) => {
   return focusAtom(equipment, (optic) => optic.prop(key));
 };
 
-export function useAcquireCost(key: AcquirableElementKey) {
+export function useAcquireCost(key: string) {
   const rankAtom = useMemo(() => getRankAtom(key), [key]);
 
   const rank = rankAtom ? useAtomValue(rankAtom) : 0;

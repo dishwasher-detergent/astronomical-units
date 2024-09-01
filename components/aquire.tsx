@@ -5,7 +5,6 @@ import React from "react";
 
 import { au } from "@/atoms/au";
 import { useAcquireCost } from "@/hooks/useAcquireCost";
-import type { AcquirableElementKey } from "@/types";
 import { Badge } from "./ui/badge";
 
 export function AcquireButton({
@@ -13,7 +12,7 @@ export function AcquireButton({
   increment,
   children,
 }: {
-  elementKey: AcquirableElementKey;
+  elementKey: string;
   increment: (update?: unknown | number) => void;
   children: React.ReactNode;
 }) {

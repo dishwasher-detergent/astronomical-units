@@ -1,29 +1,27 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
 import { astronautCurrent } from "@/atoms/astronauts";
-import { show, showGameOver } from "@/atoms/show";
-import { AU_MAXIMUM, AU_WEIGHT } from "@/constants/AU";
+import { show } from "@/atoms/show";
+import { AU_WEIGHT } from "@/constants/AU";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { AcquirableElementKey } from "@/types";
-import { atomWithStorage } from "jotai/utils";
 import { equipment } from "./equipment";
 
+export const totalAu = atomWithStorage("TOTAL_AU", 0);
 export const au = atomWithStorage("AU", 0);
 
 export const auIncrement = atom(null, (get, set) => {
   const newAu = get(au) + get(auWeight);
+  const newTotalAu = get(totalAu) + get(auWeight);
 
   set(au, newAu);
+  set(totalAu, newTotalAu);
 
   Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
-    if (newAu >= value.threshold) {
-      set(show, parseInt(key));
+    if (newTotalAu >= value.threshold) {
+      set(show, key);
     }
   });
-
-  if (newAu > AU_MAXIMUM) {
-    set(showGameOver, true);
-  }
 });
 
 export const autoIncrement = atom(null, (get, set) => {
@@ -31,10 +29,12 @@ export const autoIncrement = atom(null, (get, set) => {
 
   Object.entries(equip).forEach(([key, value]: any) => {
     if (value > 0) {
-      const itemKey = key as AcquirableElementKey;
-      const item = EQUIPMENT_LIST[itemKey];
-      const newAu = get(au) + item.incomeMultiplier * value;
+      const item = EQUIPMENT_LIST[key];
+      const newAu = get(au) + item.auPerSecond * value;
+      const newTotalAu = get(totalAu) + item.auPerSecond * value;
+
       set(au, newAu);
+      set(totalAu, newTotalAu);
     }
   });
 });

@@ -11,10 +11,6 @@ export function Generation() {
   const increment = useSetAtom(autoIncrement);
   const [delta, setDelta] = useState(0);
 
-  const value = Object.values(equipmentValue).reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
   const show =
     Object.keys(equipmentValue).filter((key) => equipmentValue[key] > 0)
       .length > 0;

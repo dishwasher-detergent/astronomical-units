@@ -1,35 +1,42 @@
-import { type AcquirableElementKey, ElementKey, Equipment } from "@/types";
+import { Equipment } from "@/types";
+import { LucidePickaxe, LucideRocket } from "lucide-react";
 
-export const EQUIPMENT_ORDER: AcquirableElementKey[] = [
-  ElementKey.Astronaut,
-  ElementKey.MiningRig,
-  ElementKey.Exploration,
-];
-
-export const EQUIPMENT_LIST: Record<AcquirableElementKey, Equipment> = {
-  [ElementKey.Astronaut]: {
+export const EQUIPMENT_LIST: Record<string, Equipment> = {
+  astronaut: {
     name: "Crew Member",
     description: "Adds another member to your mining crew.",
     baseCost: 15,
     costMultiplier: 1.15,
-    incomeMultiplier: 1,
+    auPerSecond: 1,
     threshold: 20,
     equipment: false,
   },
-  [ElementKey.MiningRig]: {
+  miningRig: {
     name: "Astoroid Mining Rig",
     description: "Generate AU passively by mining asteroids.",
     baseCost: 100,
     costMultiplier: 1.15,
-    incomeMultiplier: 3,
+    auPerSecond: 1,
     threshold: 50,
+    icon: LucidePickaxe,
+    upgrades: {
+      rocket: {
+        name: "Rocket Boosters",
+        description: "string",
+        baseCost: 100,
+        costMultiplier: 1.15,
+        delta: 1,
+        threshold: 10,
+      },
+    },
   },
-  [ElementKey.Exploration]: {
+  exploration: {
     name: "Exploration",
     description: "Generate AU passively by exploring galaxies.",
     baseCost: 400,
     costMultiplier: 1.15,
-    incomeMultiplier: 5,
-    threshold: 50,
+    auPerSecond: 8,
+    threshold: 200,
+    icon: LucideRocket,
   },
 };
