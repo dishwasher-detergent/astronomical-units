@@ -5,7 +5,7 @@ import { astronautCurrent } from "@/atoms/astronauts";
 import { show } from "@/atoms/show";
 import { AU_WEIGHT } from "@/constants/AU";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { equipment } from "./equipment";
+import { equipment, equipmentUpgrades } from "./equipment";
 
 export const totalAu = atomWithStorage("TOTAL_AU", 0);
 export const au = atomWithStorage("AU", 0);
@@ -26,6 +26,7 @@ export const auIncrement = atom(null, (get, set) => {
 
 export const autoIncrement = atom(null, (get, set) => {
   const equip = get(equipment);
+  const upgrades = get(equipmentUpgrades);
 
   Object.entries(equip).forEach(([key, value]: any) => {
     if (value > 0) {

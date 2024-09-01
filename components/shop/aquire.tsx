@@ -5,7 +5,7 @@ import React from "react";
 
 import { au } from "@/atoms/au";
 import { useAcquireCost } from "@/hooks/useAcquireCost";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 export function AcquireButton({
   elementKey,

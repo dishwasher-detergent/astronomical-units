@@ -27,9 +27,30 @@ const generateEquipmentObject = (equipmentList: Record<string, Equipment>) => {
   return newObject;
 };
 
+const generateEquipmentUpgradesObject = (
+  equipmentList: Record<string, Equipment>
+) => {
+  const newObject: EquipmentObject = {};
+
+  Object.entries(equipmentList).forEach(([key, value]: [string, Equipment]) => {
+    if (value.upgrades) {
+      Object.entries(value.upgrades).forEach(([upgradeKey, _]) => {
+        newObject[`${key}_${upgradeKey}`] = 0;
+      });
+    }
+  });
+
+  return newObject;
+};
+
 export const equipment = atomWithStorage(
   "EQUIPMENT",
   generateEquipmentObject(EQUIPMENT_LIST)
+);
+
+export const equipmentUpgrades = atomWithStorage(
+  "EQUIPMENT_UPGRADES",
+  generateEquipmentUpgradesObject(EQUIPMENT_LIST)
 );
 
 // Function to add a new item to the equipment atom
@@ -57,5 +78,6 @@ export const equipmentRateReduction = atomWithReducer(
 
 if (process.env.NODE_ENV !== "production") {
   equipment.debugLabel = "Equipment";
+  equipmentUpgrades.debugLabel = "Equipment Upgrades";
   equipmentRate.debugLabel = "Equipment Rate";
 }

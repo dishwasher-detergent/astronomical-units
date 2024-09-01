@@ -3,12 +3,11 @@
 import { useAtom, useAtomValue, WritableAtom } from "jotai";
 
 import { showElement } from "@/atoms/show";
-import { AcquireButton } from "@/components/aquire";
+import { nextUpgrade } from "@/atoms/upgrades";
+import { AcquireButton } from "@/components/shop/aquire";
+import { Skeleton } from "@/components/ui/skeleton";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
-import { Skeleton } from "@/components/ui/skeleton";
-import { use } from "react";
-import { nextUpgrade } from "@/atoms/upgrades";
 
 export function Base({
   atom,

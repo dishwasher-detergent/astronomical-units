@@ -3,9 +3,9 @@ export type DeltaDirection = -1 | 1;
 export type Upgrade = {
   name: string;
   description: string;
-  baseCost: number;
-  costMultiplier: number;
-  delta: number;
+  cost: number;
+  multiplier: number;
+  maxCount: number;
   threshold: number;
 };
 

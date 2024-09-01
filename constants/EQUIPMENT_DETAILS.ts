@@ -23,9 +23,9 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       rocket: {
         name: "Rocket Boosters",
         description: "string",
-        baseCost: 100,
-        costMultiplier: 1.15,
-        delta: 1,
+        cost: 100,
+        multiplier: 1.15,
+        maxCount: 5,
         threshold: 10,
       },
     },

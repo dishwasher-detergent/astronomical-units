@@ -5,6 +5,8 @@ import { useAtomValue } from "jotai";
 import { equipment } from "@/atoms/equipment";
 import { Badge } from "@/components/ui/badge";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { LucideArrowUp } from "lucide-react";
+import { Upgrade } from "@/components/shop/upgrade";
 
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);
@@ -29,8 +31,20 @@ export function EquipmentDisplay() {
             {value}
           </Badge>
         </p>
-        <p className="text-xs text-muted-foreground">{item.description}</p>
-        <div className="flex flex-row flex-wrap gap-2 mt-2 p-3 bg-muted rounded-lg">
+        <p className="text-xs text-muted-foreground mb-2">{item.description}</p>
+        <div className="mb-2">
+          {item.upgrades &&
+            Object.entries(item.upgrades).map(([upgradeKey, _]) => {
+              return (
+                <Upgrade
+                  key={`${key}_${upgradeKey}`}
+                  parentKey={key}
+                  elementKey={upgradeKey}
+                />
+              );
+            })}
+        </div>
+        <div className="flex flex-row flex-wrap gap-2 p-3 bg-muted rounded-lg">
           {[...Array(value)].map((_, i) => {
             const Icon = item.icon;
 
