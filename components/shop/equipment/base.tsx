@@ -4,10 +4,10 @@ import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 import { equipment } from "@/atoms/equipment";
-import { Base } from "@/components/equipment/base";
+import { Base } from "@/components/shop/base-item";
 import { AcquirableElementKey } from "@/types";
 
-export function BaseMiningRig({
+export function BaseEquipment({
   elementKey,
 }: {
   elementKey: AcquirableElementKey;

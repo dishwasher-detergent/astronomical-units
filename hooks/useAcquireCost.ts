@@ -8,16 +8,16 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { type AcquirableElementKey, ElementKey } from "@/types";
 
 const getRankAtom = (key: AcquirableElementKey) => {
-  switch (key) {
-    case ElementKey.Astronaut:
-      return astronautCurrent;
-    case ElementKey.IronMiningRig:
-    case ElementKey.CobaltMiningRig:
-    case ElementKey.PlatinumMiningRig:
-      return focusAtom(equipment, (optic) => optic.prop(key));
-    default:
-      return undefined;
+  if (EQUIPMENT_LIST[key].equipment === false) {
+    switch (key) {
+      case ElementKey.Astronaut:
+        return astronautCurrent;
+      default:
+        return undefined;
+    }
   }
+
+  return focusAtom(equipment, (optic) => optic.prop(key));
 };
 
 export function useAcquireCost(key: AcquirableElementKey) {

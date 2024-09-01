@@ -1,5 +1,5 @@
 import { ClickArea } from "@/components/click-area";
-import { Equipment } from "@/components/equipment";
+import { Shop } from "@/components/shop";
 import { EquipmentDisplay } from "@/components/equipment/display";
 import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
@@ -11,7 +11,7 @@ export default function Home() {
         <ClickArea />
         <Crew />
         <Statistics />
-        <Equipment />
+        <Shop />
       </div>
       <div className="flex-1 h-full">
         <p className="border-b p-4 font-bold bg-background">Equipment</p>

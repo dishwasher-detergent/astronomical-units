@@ -1,15 +1,13 @@
 export type AcquirableElementKey =
   | ElementKey.Astronaut
-  | ElementKey.IronMiningRig
-  | ElementKey.CobaltMiningRig
-  | ElementKey.PlatinumMiningRig;
+  | ElementKey.MiningRig
+  | ElementKey.Exploration;
 
 export enum ElementKey {
   Upgrades,
   Astronaut,
-  IronMiningRig,
-  CobaltMiningRig,
-  PlatinumMiningRig,
+  MiningRig,
+  Exploration,
 }
 
 export type UpgradableElementKey = AcquirableElementKey;
@@ -18,10 +16,10 @@ export type DeltaDirection = -1 | 1;
 
 export type Equipment = {
   name: string;
+  description: string;
   baseCost: number;
   costMultiplier: number;
   incomeMultiplier: number;
   threshold: number;
-  description: string;
   equipment?: boolean;
 };

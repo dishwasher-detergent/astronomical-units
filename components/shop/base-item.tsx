@@ -7,7 +7,7 @@ import { AcquireButton } from "@/components/aquire";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { UpgradableElementKey } from "@/types";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function Base({
   atom,

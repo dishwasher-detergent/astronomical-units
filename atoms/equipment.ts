@@ -10,13 +10,15 @@ import {
   EQUIPMENT_RATE_REDUCTION_DELTA,
 } from "@/constants/EQUIPMENT";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { Equipment } from "@/types";
+import { AcquirableElementKey, Equipment } from "@/types";
 
 type EquipmentObject = {
   [key: string]: number;
 };
 
-const generateEquipmentObject = (equipmentList: Record<string, Equipment>) => {
+const generateEquipmentObject = (
+  equipmentList: Record<AcquirableElementKey, Equipment>
+) => {
   const newObject: EquipmentObject = {};
 
   Object.entries(equipmentList).forEach(([key, value]: [string, Equipment]) => {

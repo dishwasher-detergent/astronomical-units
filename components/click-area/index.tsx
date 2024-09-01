@@ -23,8 +23,8 @@ export function ClickArea() {
       }}
       className="sticky top-0 w-full h-auto aspect-square bg-muted flex flex-col items-center justify-center text-muted-foreground rounded-none hover:bg-muted"
     >
-      <span className="mb-2">Click Here</span>
-      <LucideOrbit className="size-16" />
+      <LucideOrbit className="size-16 mb-2" />
+      <span>Click Here</span>
     </Button>
   );
 }

@@ -2,9 +2,8 @@ import { type AcquirableElementKey, ElementKey, Equipment } from "@/types";
 
 export const EQUIPMENT_ORDER: AcquirableElementKey[] = [
   ElementKey.Astronaut,
-  ElementKey.IronMiningRig,
-  ElementKey.CobaltMiningRig,
-  ElementKey.PlatinumMiningRig,
+  ElementKey.MiningRig,
+  ElementKey.Exploration,
 ];
 
 export const EQUIPMENT_LIST: Record<AcquirableElementKey, Equipment> = {
@@ -17,28 +16,20 @@ export const EQUIPMENT_LIST: Record<AcquirableElementKey, Equipment> = {
     threshold: 20,
     equipment: false,
   },
-  [ElementKey.IronMiningRig]: {
-    name: "Iron Mining Rig",
-    description: "Increases your clicks per second.",
+  [ElementKey.MiningRig]: {
+    name: "Astoroid Mining Rig",
+    description: "Generate AU passively by mining asteroids.",
     baseCost: 100,
     costMultiplier: 1.15,
     incomeMultiplier: 3,
     threshold: 50,
   },
-  [ElementKey.CobaltMiningRig]: {
-    name: "Cobalt Mining Rig",
-    description: "Increases your clicks per second.",
+  [ElementKey.Exploration]: {
+    name: "Exploration",
+    description: "Generate AU passively by exploring galaxies.",
     baseCost: 400,
     costMultiplier: 1.15,
     incomeMultiplier: 5,
-    threshold: 200,
-  },
-  [ElementKey.PlatinumMiningRig]: {
-    name: "Platinum Mining Rig",
-    description: "Increases your clicks per second.",
-    baseCost: 1000,
-    costMultiplier: 1.15,
-    incomeMultiplier: 20,
-    threshold: 500,
+    threshold: 50,
   },
 };
