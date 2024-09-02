@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Nunito, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
 
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { Generation } from "@/components/shop/generation";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           <main className="relative w-full flex-1">
             {children}
             <Dev />
+            <Generation />
           </main>
         </ThemeProvider>
       </body>

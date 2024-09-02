@@ -28,18 +28,18 @@ export function EquipmentDisplay() {
     const auPerSecond = item.auPerSecond * multiplier * equipment.value;
 
     return (
-      <div key={key} className="border-b p-4">
+      <div key={key} className="bg-muted/25 p-4 md:border-b md:bg-background">
         <p className="mb-1 flex items-center font-bold">
           {item.name}
           <Badge className="ml-2" variant="outline">
             {equipment.value}
           </Badge>
         </p>
-        <p className="text-xs">{item.description}</p>
-        <p className="mb-2 text-xs">Generates {auPerSecond} AU/s</p>
+        <p className="text-sm md:text-xs">{item.description}</p>
+        <p className="mb-2 text-sm md:text-xs">Generates {auPerSecond} AU/s</p>
         {item.upgrades && (
           <div className="mb-2">
-            <p className="mb-1 text-xs font-semibold">Upgrades</p>
+            <p className="mb-1 text-sm font-semibold md:text-xs">Upgrades</p>
             <div className="flex flex-row gap-1">
               {Object.entries(item.upgrades).map(([upgradeKey, _]) => {
                 return (

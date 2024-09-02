@@ -7,6 +7,16 @@ import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { LucideStore, LucideTractor } from "lucide-react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 export default function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -33,24 +43,48 @@ export default function Home() {
   }
 
   return (
-    <Tabs defaultValue="account" className="w-full">
-      <div className="sticky top-12 border-b bg-background p-2">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="main">Main</TabsTrigger>
-          <TabsTrigger value="equipment">Equipment</TabsTrigger>
-        </TabsList>
+    <>
+      <div className="flex h-full w-full flex-none flex-col pb-12">
+        <ClickArea />
+        <Statistics />
+        <Crew />
       </div>
-      <TabsContent value="main">
-        <div className="flex h-full w-full flex-none flex-col">
-          <ClickArea />
-          <Statistics />
-          <Crew />
-          <Shop />
-        </div>
-      </TabsContent>
-      <TabsContent value="equipment">
-        <EquipmentDisplay />
-      </TabsContent>
-    </Tabs>
+      <div className="fixed bottom-0 flex w-full items-center justify-center gap-4 border-t bg-background p-2">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button size="icon" variant="ghost">
+              <LucideTractor />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle>Equipment</DrawerTitle>
+              </DrawerHeader>
+              <div className="space-y-2 py-2">
+                <EquipmentDisplay />
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button size="icon" variant="ghost">
+              <LucideStore />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle>Shop</DrawerTitle>
+              </DrawerHeader>
+              <div className="py-2">
+                <Shop />
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </>
   );
 }
