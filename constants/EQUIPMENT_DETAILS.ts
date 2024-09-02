@@ -69,7 +69,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   miningRig: {
     name: "Astoroid Mining Rig",
     description: "Mine asteroids around the galaxy to earn AU.",
-    baseCost: 250,
+    baseCost: 1000,
     costMultiplier: 1.15,
     auPerSecond: 2,
     threshold: 125,
@@ -107,7 +107,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   exploration: {
     name: "Exploration",
     description: "Explore other galaxies in search of precious metals.",
-    baseCost: 600,
+    baseCost: 3000,
     costMultiplier: 1.15,
     auPerSecond: 4,
     threshold: 300,
@@ -145,7 +145,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   colonization: {
     name: "Colonize a Planet",
     description: "Assist man in colonizing a helpless planet.",
-    baseCost: 5000,
+    baseCost: 10000,
     costMultiplier: 1.15,
     auPerSecond: 8,
     threshold: 1000,

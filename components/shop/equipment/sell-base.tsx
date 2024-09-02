@@ -4,7 +4,7 @@ import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 import { equipment } from "@/atoms/equipment";
-import { SellBase } from "../sell-base-item";
+import { SellBase } from "@/components/shop/sell-base-item";
 
 export function SellBaseEquipment({ elementKey }: { elementKey: string }) {
   const item = focusAtom(equipment, (optic) => optic.prop(elementKey));

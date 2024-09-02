@@ -2,8 +2,7 @@
 
 import { useAtom, WritableAtom } from "jotai";
 
-import { LucideHandCoins } from "lucide-react";
-import { SellButton } from "./sell";
+import { SellButton } from "@/components/shop/sell";
 
 export function SellBase({
   atom,

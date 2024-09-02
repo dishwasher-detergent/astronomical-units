@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
+import { LucideGithub } from "lucide-react";
 
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { Generation } from "@/components/shop/generation";
+import { Generation } from "@/components/generation";
 import { LastUpdated } from "@/components/last_updated";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
-import { LucideGithub } from "lucide-react";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 

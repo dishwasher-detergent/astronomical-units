@@ -7,7 +7,8 @@ import { au } from "@/atoms/au";
 import { toast } from "sonner";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useSellCost } from "@/hooks/useSellCost";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { LOCALE } from "@/constants/GLOBAL";
 
 export function SellButton({
   elementKey,
@@ -23,24 +24,21 @@ export function SellButton({
 
   const cost = useSellCost(elementKey);
 
-  const canAcquire = cost <= auValue;
-
   return (
     <Button
       variant="destructive"
       size="sm"
       className="h-6 px-2 text-xs"
-      disabled={!canAcquire}
       onClick={() => {
-        if (canAcquire) {
-          decrement();
-          setAu((current) => current + cost);
-          toast.error(`Sold ${element.name} for ${cost} AU`);
-        }
+        decrement();
+        setAu((current) => current + cost);
+        toast.error(
+          `Sold ${element.name} for ${cost.toLocaleString(LOCALE)} AU`,
+        );
       }}
     >
       {children}
-      {cost} AU
+      {cost.toLocaleString(LOCALE)} AU
     </Button>
   );
 }
