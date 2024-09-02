@@ -37,23 +37,6 @@ export default function Home() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
-                <LucideSatellite />
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent className="max-h-[80%]">
-              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
-                <DrawerHeader className="flex-none">
-                  <DrawerTitle>Equipment</DrawerTitle>
-                </DrawerHeader>
-                <div className="flex-1 space-y-2 overflow-y-auto py-2">
-                  <EquipmentDisplay />
-                </div>
-              </div>
-            </DrawerContent>
-          </Drawer>
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Button size="icon" variant="ghost">
                 <LucideStore />
               </Button>
             </DrawerTrigger>
@@ -64,6 +47,23 @@ export default function Home() {
                 </DrawerHeader>
                 <div className="flex-1 overflow-y-auto py-2">
                   <Shop />
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <LucideSatellite />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="max-h-[80%]">
+              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+                <DrawerHeader className="flex-none">
+                  <DrawerTitle>Equipment</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex-1 space-y-2 overflow-y-auto py-2">
+                  <EquipmentDisplay />
                 </div>
               </div>
             </DrawerContent>
