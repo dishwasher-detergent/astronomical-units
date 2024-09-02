@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Nunito, Space_Grotesk } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
 
 import "./globals.css";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Astronomical Units",
@@ -19,14 +20,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`flex h-lvh w-screen flex-col overflow-x-hidden ${font.className}`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="relative h-lvh w-screen overflow-x-hidden">
+          <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-bold">
+            <p>Astronomical Units</p>
+            <ModeToggle />
+          </nav>
+          <main className="relative w-full flex-1">
             {children}
             <Dev />
           </main>
