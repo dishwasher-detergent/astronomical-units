@@ -43,7 +43,7 @@ export function Base({
           <Skeleton className="h-4 w-12" />
         </div>
         <div className="flex-none">
-          <Skeleton className="h-4 w-12" />
+          <Skeleton className="h-6 w-16 rounded-full" />
         </div>
       </div>
     );
