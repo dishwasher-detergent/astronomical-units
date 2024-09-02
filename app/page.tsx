@@ -8,7 +8,7 @@ import { Statistics } from "@/components/statistics";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { LucideStore, LucideTractor } from "lucide-react";
+import { LucideSatellite, LucideStore, LucideTractor } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -53,7 +53,7 @@ export default function Home() {
         <Drawer>
           <DrawerTrigger asChild>
             <Button size="icon" variant="ghost">
-              <LucideTractor />
+              <LucideSatellite />
             </Button>
           </DrawerTrigger>
           <DrawerContent>
