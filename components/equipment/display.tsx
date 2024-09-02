@@ -56,12 +56,39 @@ export function EquipmentDisplay() {
             </div>
           </div>
         )}
-        <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
-          {[...Array(equipment.value)].map((_, i) => {
-            const Icon = item.icon;
+        <div className="space-y-2 rounded-lg bg-muted p-3">
+          <div>
+            <p className="mb-1 text-sm font-semibold md:text-xs">
+              Purchased Equipment
+            </p>
+            <div className="flex flex-row flex-wrap gap-2">
+              {[...Array(equipment.value)].map((_, i) => {
+                const Icon = item.icon;
 
-            return <Icon key={i} className="size-4 flex-none" />;
-          })}
+                return <Icon key={i} className="size-4 flex-none" />;
+              })}
+            </div>
+          </div>
+          <div>
+            <p className="mb-1 text-sm font-semibold md:text-xs">
+              Equiped Upgrades
+            </p>
+            <div className="flex flex-row flex-wrap gap-2">
+              {equipment.upgrades &&
+                Object.entries(equipment.upgrades).map(
+                  ([upgradeKey, upgradeVal]) => {
+                    return [...Array(upgradeVal)].map((_, i) => {
+                      const upgrades = item?.upgrades;
+                      if (!upgrades) return;
+
+                      const Icon = upgrades[upgradeKey].icon;
+
+                      return <Icon key={i} className="size-4 flex-none" />;
+                    });
+                  },
+                )}
+            </div>
+          </div>
         </div>
       </div>
     );

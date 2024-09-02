@@ -40,7 +40,7 @@ export function BaseUpgrade({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div>
+            <div className="relative">
               <UpgradeButton
                 name={element.name}
                 cost={element.cost}
