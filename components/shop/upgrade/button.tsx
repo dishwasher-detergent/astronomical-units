@@ -5,14 +5,17 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { au } from "@/atoms/au";
+import { toast } from "sonner";
 
 export function UpgradeButton({
   cost,
+  name,
   disabled = false,
   increment,
   children,
 }: {
   cost: number;
+  name: string;
   disabled: boolean;
   increment: (update?: unknown | number) => void;
   children: React.ReactNode;
@@ -29,6 +32,7 @@ export function UpgradeButton({
         if (!disabled) {
           increment();
           setAu((current) => current - cost);
+          toast.success(`Purchased ${name} for ${cost} AU`);
         }
       }}
     >

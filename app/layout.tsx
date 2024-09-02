@@ -6,6 +6,8 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Generation } from "@/components/shop/generation";
+import { LastUpdated } from "@/components/last_updated";
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -38,6 +40,8 @@ export default function RootLayout({
             {children}
             <Dev />
             <Generation />
+            <LastUpdated />
+            <Toaster position="top-right" richColors />
           </main>
         </ThemeProvider>
       </body>

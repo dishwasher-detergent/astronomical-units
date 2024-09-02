@@ -8,9 +8,11 @@ import { autoIncrement } from "@/atoms/au";
 import { useAnimation } from "@/hooks/useAnimation";
 import { generateEquipmentObject, mergeNestedObjects } from "@/lib/utils";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { lastUpdated } from "@/atoms/global";
 
 export function Generation() {
   const [equipmentValue, setEquipment] = useAtom(equipment);
+  const last = useSetAtom(lastUpdated);
   const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
   const equipmentRateValue = useAtomValue(equipmentRate);
   const increment = useSetAtom(autoIncrement);
@@ -29,6 +31,8 @@ export function Generation() {
       // Merge the new equipment with the existing equipment, to account for new items being added to the game.
       const mergedEquipment = mergeNestedObjects(equipmentValue, newEquipment);
       setEquipment(mergedEquipment);
+
+      last(Date.now());
 
       increment();
       setDelta(0);

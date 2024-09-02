@@ -6,6 +6,7 @@ import { equipment } from "@/atoms/equipment";
 import { show } from "@/atoms/show";
 import { AU_WEIGHT } from "@/constants/AU";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { gameData } from "./global";
 
 export const totalAu = focusAtom(gameData, (optic) =>
@@ -27,31 +28,20 @@ export const auIncrement = atom(null, (get, set) => {
   });
 });
 
-export const autoIncrement = atom(null, (get, set) => {
+export const PerSecond = atom(0);
+
+export const auWeight = atom((get) => AU_WEIGHT + get(astronautCurrent));
+
+export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const equip = get(equipment);
 
-  const calculateMultiplier = (
-    item: any,
-    upgrades: Record<string, number> | undefined,
-  ): number => {
-    let multiplier = 1;
-    if (upgrades) {
-      Object.entries(upgrades).forEach(([upgradeKey, upgradeVal]) => {
-        if (upgradeVal > 0) {
-          const upgrade = item.upgrades?.[upgradeKey];
-          if (upgrade) {
-            multiplier += upgradeVal * upgrade.multiplier;
-          }
-        }
-      });
-    }
-    return multiplier;
-  };
-
-  const updateAuValues = (key: string, eq: any, multiplier: number) => {
+  const updateAuValues = (key: string, eq: any, multiplier: number = 1) => {
     const item = EQUIPMENT_LIST[key];
-    const newAu = get(au) + item.auPerSecond * multiplier * eq.value;
-    const newTotalAu = get(totalAu) + item.auPerSecond * multiplier * eq.value;
+
+    const earned = item.auPerSecond * multiplier * eq.value * seconds;
+
+    const newAu = get(au) + earned;
+    const newTotalAu = get(totalAu) + earned;
 
     set(au, newAu);
     set(totalAu, newTotalAu);
@@ -66,15 +56,11 @@ export const autoIncrement = atom(null, (get, set) => {
   Object.entries(equip).forEach(([key, eq]: any) => {
     if (eq.value > 0) {
       const item = EQUIPMENT_LIST[key];
-      const multiplier = calculateMultiplier(item, eq.upgrades);
+      const multiplier = calculateUpgradeMultiplier(eq, item);
       updateAuValues(key, eq, multiplier);
     }
   });
 });
-
-export const PerSecond = atom(0);
-
-export const auWeight = atom((get) => AU_WEIGHT + get(astronautCurrent));
 
 if (process.env.NODE_ENV !== "production") {
   au.debugLabel = "AUs";

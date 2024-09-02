@@ -6,6 +6,8 @@ import React from "react";
 import { au } from "@/atoms/au";
 import { useAcquireCost } from "@/hooks/useAcquireCost";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 
 export function AcquireButton({
   elementKey,
@@ -17,6 +19,7 @@ export function AcquireButton({
   children: React.ReactNode;
 }) {
   const [auValue, setAu] = useAtom(au);
+  const element = EQUIPMENT_LIST[elementKey];
 
   const cost = useAcquireCost(elementKey);
 
@@ -30,6 +33,7 @@ export function AcquireButton({
         if (canAcquire) {
           increment();
           setAu((current) => current - cost);
+          toast.success(`Purchased ${element.name} for ${cost} AU`);
         }
       }}
     >

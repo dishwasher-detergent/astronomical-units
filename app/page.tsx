@@ -21,70 +21,74 @@ import {
 export default function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  if (isDesktop) {
+  if (isDesktop == null) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isDesktop) {
     return (
-      <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
-        <div className="flex h-full w-72 flex-none flex-col overflow-y-hidden border-r">
+      <>
+        <div className="flex h-full w-full flex-none flex-col pb-14">
           <ClickArea />
           <Statistics />
           <Crew />
-          <Shop />
         </div>
-        <div className="flex h-full flex-1 flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <nav className="sticky top-0 z-50 flex h-12 items-center justify-between border-b bg-background px-4 font-bold">
-              <p>Equipment</p>
-            </nav>
-            <EquipmentDisplay />
-          </div>
+        <div className="fixed bottom-0 flex w-full items-center justify-center gap-4 border-t bg-background p-2">
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <LucideSatellite />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="max-h-[80%]">
+              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+                <DrawerHeader className="flex-none">
+                  <DrawerTitle>Equipment</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex-1 space-y-2 overflow-y-auto py-2">
+                  <EquipmentDisplay />
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <LucideStore />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="max-h-[80%]">
+              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+                <DrawerHeader className="flex-none">
+                  <DrawerTitle>Shop</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex-1 overflow-y-auto py-2">
+                  <Shop />
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
-      </section>
+      </>
     );
   }
 
   return (
-    <>
-      <div className="flex h-full w-full flex-none flex-col pb-14">
+    <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
+      <div className="flex h-full w-72 flex-none flex-col overflow-y-hidden border-r">
         <ClickArea />
         <Statistics />
         <Crew />
+        <Shop />
       </div>
-      <div className="fixed bottom-0 flex w-full items-center justify-center gap-4 border-t bg-background p-2">
-        <Drawer>
-          <DrawerTrigger asChild>
-            <Button size="icon" variant="ghost">
-              <LucideSatellite />
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent className="max-h-[80%]">
-            <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
-              <DrawerHeader className="flex-none">
-                <DrawerTitle>Equipment</DrawerTitle>
-              </DrawerHeader>
-              <div className="flex-1 space-y-2 overflow-y-auto py-2">
-                <EquipmentDisplay />
-              </div>
-            </div>
-          </DrawerContent>
-        </Drawer>
-        <Drawer>
-          <DrawerTrigger asChild>
-            <Button size="icon" variant="ghost">
-              <LucideStore />
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent className="max-h-[80%]">
-            <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
-              <DrawerHeader className="flex-none">
-                <DrawerTitle>Shop</DrawerTitle>
-              </DrawerHeader>
-              <div className="flex-1 overflow-y-auto py-2">
-                <Shop />
-              </div>
-            </div>
-          </DrawerContent>
-        </Drawer>
+      <div className="flex h-full flex-1 flex-col">
+        <div className="flex-1 overflow-y-auto">
+          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between border-b bg-background px-4 font-bold">
+            <p>Equipment</p>
+          </nav>
+          <EquipmentDisplay />
+        </div>
       </div>
-    </>
+    </section>
   );
 }

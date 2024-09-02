@@ -45,4 +45,5 @@ export type GameData = {
   };
   show: Record<string, boolean>;
   clicks_per_second: number;
+  last_updated: number;
 };
