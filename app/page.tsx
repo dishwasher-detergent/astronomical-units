@@ -26,7 +26,7 @@ export default function Home() {
   if (!isDesktop) {
     return (
       <>
-        <div className="flex h-full w-full flex-none flex-col pb-16">
+        <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-16">
           <ClickArea />
           <Statistics />
           <Crew />
