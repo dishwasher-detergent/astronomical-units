@@ -8,6 +8,8 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Generation } from "@/components/shop/generation";
 import { LastUpdated } from "@/components/last_updated";
 import { Toaster } from "@/components/ui/sonner";
+import { Button } from "@/components/ui/button";
+import { LucideGithub } from "lucide-react";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -34,7 +36,17 @@ export default function RootLayout({
         >
           <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-bold">
             <p>Astronomical Units</p>
-            <ModeToggle />
+            <div className="flex items-center gap-1">
+              <Button asChild variant="outline" size="icon" className="size-8">
+                <a
+                  target="_blank"
+                  href="https://github.com/dishwasher-detergent/astronomical-units"
+                >
+                  <LucideGithub className="size-4" />
+                </a>
+              </Button>
+              <ModeToggle />
+            </div>
           </nav>
           <main className="relative w-full flex-1 overflow-hidden">
             {children}
