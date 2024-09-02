@@ -7,8 +7,8 @@ import { BaseEquipment } from "@/components/shop/equipment/base";
 
 export function Shop() {
   return (
-    <div className="sticky top-0 border-t bg-background">
-      <p className="font-bold px-4 py-2">Store</p>
+    <div className="sticky top-0 border-t bg-background overflow-y-auto">
+      <p className="font-bold px-4 py-2 sticky top-0 bg-background">Store</p>
       <div className="w-full">
         <Astronaut />
         {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
