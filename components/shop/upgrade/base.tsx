@@ -68,6 +68,6 @@ export function BaseUpgrade({
       </TooltipProvider>
     );
   } else {
-    <Skeleton className="size-8" />;
+    return <Skeleton className="size-8" />;
   }
 }
