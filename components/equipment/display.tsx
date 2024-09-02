@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { Upgrade } from "@/components/shop/upgrade";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { SellBaseEquipment } from "../shop/equipment/sell-base";
 
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);
@@ -56,7 +57,7 @@ export function EquipmentDisplay() {
             </div>
           </div>
         )}
-        <div className="space-y-2 rounded-lg bg-muted p-3">
+        <div className="mb-2 space-y-2 rounded-lg bg-muted p-3">
           <div>
             <p className="mb-1 text-sm font-semibold md:text-xs">
               Purchased Equipment
@@ -90,6 +91,11 @@ export function EquipmentDisplay() {
             </div>
           </div>
         </div>
+        <p className="mb-2 text-xs font-bold text-red-600">
+          Equipment is sold at 30% the buy price, if you sell your last
+          equipment you lose all upgrades.
+        </p>
+        <SellBaseEquipment elementKey={key} />
       </div>
     );
   });
