@@ -21,7 +21,7 @@ export function LastUpdated() {
       initialized.current = true;
       const now = Date.now();
 
-      if (last <= now) {
+      if (last <= now - 60000) {
         const diff = (now - last) / 1000;
         update(diff);
         let earned = 0;
