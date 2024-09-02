@@ -56,12 +56,12 @@ export default function Home() {
               <LucideSatellite />
             </Button>
           </DrawerTrigger>
-          <DrawerContent>
-            <div className="mx-auto w-full max-w-sm">
-              <DrawerHeader>
+          <DrawerContent className="max-h-[80%]">
+            <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+              <DrawerHeader className="flex-none">
                 <DrawerTitle>Equipment</DrawerTitle>
               </DrawerHeader>
-              <div className="space-y-2 py-2">
+              <div className="flex-1 space-y-2 overflow-y-auto py-2">
                 <EquipmentDisplay />
               </div>
             </div>
@@ -73,12 +73,12 @@ export default function Home() {
               <LucideStore />
             </Button>
           </DrawerTrigger>
-          <DrawerContent>
-            <div className="mx-auto w-full max-w-sm">
-              <DrawerHeader>
+          <DrawerContent className="max-h-[80%]">
+            <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+              <DrawerHeader className="flex-none">
                 <DrawerTitle>Shop</DrawerTitle>
               </DrawerHeader>
-              <div className="py-2">
+              <div className="flex-1 overflow-y-auto py-2">
                 <Shop />
               </div>
             </div>
