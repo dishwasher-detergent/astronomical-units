@@ -1,25 +1,26 @@
 "use client";
 
 import { useAtom } from "jotai";
-import React, { forwardRef } from "react";
+import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { au } from "@/atoms/au";
 
-export const UpgradeButton = forwardRef<
-  HTMLButtonElement,
-  {
-    cost: number;
-    disabled: boolean;
-    increment: (update?: unknown | number) => void;
-    children: React.ReactNode;
-  }
->(({ cost, disabled = false, increment, children }, ref) => {
+export function UpgradeButton({
+  cost,
+  disabled = false,
+  increment,
+  children,
+}: {
+  cost: number;
+  disabled: boolean;
+  increment: (update?: unknown | number) => void;
+  children: React.ReactNode;
+}) {
   const [auValue, setAu] = useAtom(au);
 
   return (
     <Button
-      ref={ref}
       size="icon"
       className="size-8"
       variant="outline"
@@ -34,4 +35,4 @@ export const UpgradeButton = forwardRef<
       {children}
     </Button>
   );
-});
+}

@@ -31,7 +31,7 @@ export function Generation() {
       increment();
       setDelta(0);
     }
-  }, [delta, increment, equipmentRateValue, equipmentValue]);
+  }, [delta, increment, equipmentRateValue, equipmentValue, newEquipment]);
 
   return null;
 }
