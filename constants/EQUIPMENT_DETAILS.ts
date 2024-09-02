@@ -3,6 +3,7 @@ import {
   LucideArrowBigUpDash,
   LucideBoxes,
   LucideDrill,
+  LucidePersonStanding,
   LucidePickaxe,
   LucideRocket,
 } from "lucide-react";
@@ -62,6 +63,35 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.15,
     auPerSecond: 8,
     threshold: 200,
+    icon: LucideRocket,
+    upgrades: {
+      boosters: {
+        name: "Rocket Boosters",
+        description: "Increase the mining rigs travel speed.",
+        cost: 1000,
+        multiplier: 0.25,
+        maxCount: 5,
+        threshold: 10,
+        icon: LucideArrowBigUpDash,
+      },
+      crew: {
+        name: "Crew Members",
+        description: "Add more crew members to speed up research.",
+        cost: 1500,
+        multiplier: 0.25,
+        maxCount: 5,
+        threshold: 15,
+        icon: LucidePersonStanding,
+      },
+    },
+  },
+  test: {
+    name: "test",
+    description: "test.",
+    baseCost: 400,
+    costMultiplier: 1,
+    auPerSecond: 100,
+    threshold: 300,
     icon: LucideRocket,
   },
 };

@@ -45,7 +45,7 @@ export function calculateUpgradeMultiplier(
 ) {
   let multiplier = 1;
 
-  if (equipment.upgrades) {
+  if (equipment?.upgrades) {
     Object.entries(equipment.upgrades).forEach(([upgradeKey, upgradeVal]) => {
       const upgradeItem = item.upgrades?.[upgradeKey];
 
@@ -58,4 +58,19 @@ export function calculateUpgradeMultiplier(
   }
 
   return multiplier;
+}
+
+export function mergeNestedObjects<
+  T extends Record<string, any>,
+  U extends Record<string, any>
+>(obj1: T, obj2: U): T & U {
+  const result: Record<string, any> = { ...obj2, ...obj1 };
+
+  Object.keys(result).forEach((key) => {
+    if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
+      result[key] = mergeNestedObjects(obj1[key], obj2[key]);
+    }
+  });
+
+  return result as T & U;
 }

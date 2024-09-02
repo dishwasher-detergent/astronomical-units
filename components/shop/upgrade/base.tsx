@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { au } from "@/atoms/au";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function BaseUpgrade({
   atom,
@@ -67,6 +68,6 @@ export function BaseUpgrade({
       </TooltipProvider>
     );
   } else {
-    null;
+    <Skeleton className="size-8" />;
   }
 }

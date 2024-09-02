@@ -16,7 +16,7 @@ export function AusPerSecond() {
       const item = equip[key];
       let multiplier = calculateUpgradeMultiplier(item, value);
 
-      return value.auPerSecond * multiplier * item.value;
+      return value.auPerSecond * multiplier * (item?.value ?? 0);
     })
     .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0);
 

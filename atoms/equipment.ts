@@ -1,7 +1,6 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { atomWithReducer } from "jotai/utils";
-import { Getter, Setter } from "jotai/vanilla";
 
 import {
   EQUIPMENT_RATE,
@@ -17,12 +16,6 @@ export const equipment = focusAtom(gameData, (optic) =>
 );
 
 // Function to add a new item to the equipment atom
-export const addEquipment =
-  (key: string, value: any) => (get: Getter, set: Setter) => {
-    const currentEquipment = get(equipment);
-    set(equipment, { ...currentEquipment, [key]: value });
-  };
-
 export const equipmentRate = atom((get) => {
   let newRate =
     EQUIPMENT_RATE - get(equipmentRateReduction) * EQUIPMENT_RATE_DELTA;

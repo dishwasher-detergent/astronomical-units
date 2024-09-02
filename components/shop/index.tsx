@@ -9,7 +9,7 @@ export function Shop() {
   return (
     <div className="sticky top-0 border-t bg-background">
       <p className="font-bold px-4 py-2">Store</p>
-      <div>
+      <div className="w-full">
         <Astronaut />
         {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
           if (value.equipment === false) return null;

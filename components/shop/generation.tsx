@@ -1,12 +1,15 @@
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 
 import { equipment, equipmentRate } from "@/atoms/equipment";
 import { autoIncrement } from "@/atoms/au";
 import { useAnimation } from "@/hooks/useAnimation";
+import { generateEquipmentObject, mergeNestedObjects } from "@/lib/utils";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 
 export function Generation() {
-  const equipmentValue = useAtomValue(equipment);
+  const [equipmentValue, setEquipment] = useAtom(equipment);
+  const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
   const equipmentRateValue = useAtomValue(equipmentRate);
   const increment = useSetAtom(autoIncrement);
   const [delta, setDelta] = useState(0);
@@ -21,6 +24,10 @@ export function Generation() {
 
   useEffect(() => {
     if (delta >= equipmentRateValue) {
+      // Merge the new equipment with the existing equipment, to account for new items being added to the game.
+      const mergedEquipment = mergeNestedObjects(equipmentValue, newEquipment);
+      setEquipment(mergedEquipment);
+
       increment();
       setDelta(0);
     }
