@@ -21,9 +21,9 @@ export function ClickArea() {
         setClicks();
         currentTarget.blur();
       }}
-      className="flex-none sticky top-0 w-full h-auto aspect-square bg-muted flex flex-col items-center justify-center text-muted-foreground rounded-none hover:bg-muted"
+      className="sticky top-0 flex aspect-square h-auto w-full flex-none flex-col items-center justify-center rounded-none bg-muted text-muted-foreground hover:bg-muted"
     >
-      <LucideOrbit className="size-16 mb-2" />
+      <LucideOrbit className="mb-2 size-16" />
       <span>Click Here</span>
     </Button>
   );

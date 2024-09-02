@@ -51,9 +51,9 @@ export function BaseUpgrade({
             </div>
           </TooltipTrigger>
           <TooltipContent side="bottom">
-            <div className="text-xs w-48 flex flex-row">
+            <div className="flex w-48 flex-row text-xs">
               <div className="flex-1">
-                <p className="font-bold text-sm">{element.name}</p>
+                <p className="text-sm font-bold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
                 <p>
                   {rankValue ?? 0}/{element.maxCount} Owned

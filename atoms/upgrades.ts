@@ -19,7 +19,7 @@ export const nextUpgrade = atom(
 
       return current + 1;
     });
-  }
+  },
 );
 
 if (process.env.NODE_ENV !== "production") {

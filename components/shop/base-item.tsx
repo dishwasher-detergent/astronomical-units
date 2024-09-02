@@ -29,21 +29,21 @@ export function Base({
     return (
       <AcquireButton elementKey={elementKey} increment={setRank}>
         <>
-          <p className="text-sm font-bold mb-1">{element.name}</p>
+          <p className="mb-1 text-sm font-bold">{element.name}</p>
           <p className="text-xs">{element.description}</p>
         </>
       </AcquireButton>
     );
   } else if (next == elementKey) {
     return (
-      <div className="flex gap-1 flex-row align-top px-4 py-2">
-        <div className="flex-1 text-left space-y-1">
-          <Skeleton className="w-24 h-4" />
-          <Skeleton className="w-full h-8" />
-          <Skeleton className="w-12 h-4" />
+      <div className="flex flex-row gap-1 px-4 py-2 align-top">
+        <div className="flex-1 space-y-1 text-left">
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-8 w-full" />
+          <Skeleton className="h-4 w-12" />
         </div>
         <div className="flex-none">
-          <Skeleton className="w-12 h-4" />
+          <Skeleton className="h-4 w-12" />
         </div>
       </div>
     );

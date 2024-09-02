@@ -23,7 +23,7 @@ export function generateEquipmentUpgradesObject(equipment: Equipment) {
 }
 
 export function generateEquipmentObject(
-  equipmentList: Record<string, Equipment>
+  equipmentList: Record<string, Equipment>,
 ) {
   const newObject: EquipmentObject = {};
 
@@ -41,7 +41,7 @@ export function generateEquipmentObject(
 
 export function calculateUpgradeMultiplier(
   equipment: EquipmentItem,
-  item: Equipment
+  item: Equipment,
 ) {
   let multiplier = 1;
 
@@ -62,7 +62,7 @@ export function calculateUpgradeMultiplier(
 
 export function mergeNestedObjects<
   T extends Record<string, any>,
-  U extends Record<string, any>
+  U extends Record<string, any>,
 >(obj1: T, obj2: U): T & U {
   const result: Record<string, any> = { ...obj2, ...obj1 };
 

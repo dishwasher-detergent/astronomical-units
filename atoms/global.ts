@@ -21,7 +21,7 @@ const data: GameData = {
 export const gameData = atomWithStorage("GAME_DATA", data);
 
 export const clicksPerSecond = focusAtom(gameData, (optic) =>
-  optic.prop("clicks_per_second")
+  optic.prop("clicks_per_second"),
 );
 
 if (process.env.NODE_ENV !== "production") {

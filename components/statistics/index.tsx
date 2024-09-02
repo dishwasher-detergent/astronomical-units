@@ -4,7 +4,7 @@ import { ClicksPerSecond } from "@/components/statistics/clicks-per-second";
 
 export function Statistics() {
   return (
-    <div className="flex-none border-t p-4 bg-background space-y-2">
+    <div className="flex-none space-y-2 border-t bg-background p-4">
       <ClickTotalCount />
       <ClicksPerSecond />
       <AusPerSecond />

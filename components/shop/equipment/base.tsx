@@ -28,7 +28,7 @@ export function BaseEquipment({ elementKey }: { elementKey: string }) {
           }
         });
       }
-    }
+    },
   );
 
   return <Base atom={equipmentCurrent} elementKey={elementKey} />;

@@ -14,14 +14,14 @@ export function Upgrade({
   elementKey: string;
 }) {
   const item = focusAtom(equipment, (optic) =>
-    optic.path(`${parentKey}.upgrades.${elementKey}`)
+    optic.path(`${parentKey}.upgrades.${elementKey}`),
   );
   const upgradeCurrent = atom(
     (get) => get(item),
     (_, set) => {
       // @ts-ignore
       set(item, (current) => current + 1);
-    }
+    },
   );
 
   return (

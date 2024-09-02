@@ -24,7 +24,7 @@ export function AcquireButton({
 
   return (
     <button
-      className="w-full flex gap-1 flex-row align-top hover:bg-muted px-4 py-2 disabled:text-muted-foreground disabled:cursor-not-allowed"
+      className="flex w-full flex-row gap-1 px-4 py-2 align-top hover:bg-muted disabled:cursor-not-allowed disabled:text-muted-foreground"
       disabled={!canAcquire}
       onClick={() => {
         if (canAcquire) {

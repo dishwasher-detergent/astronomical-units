@@ -80,7 +80,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full;
+  @apply rounded-full bg-muted;
 }
 
 /* Handle on hover */

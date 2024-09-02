@@ -12,7 +12,7 @@ import {
 import { gameData } from "./global";
 
 export const equipment = focusAtom(gameData, (optic) =>
-  optic.prop("equipment")
+  optic.prop("equipment"),
 );
 
 // Function to add a new item to the equipment atom
@@ -29,7 +29,7 @@ export const equipmentRate = atom((get) => {
 
 export const equipmentRateReduction = atomWithReducer(
   EQUIPMENT_RATE_REDUCTION,
-  (current) => current + EQUIPMENT_RATE_REDUCTION_DELTA
+  (current) => current + EQUIPMENT_RATE_REDUCTION_DELTA,
 );
 
 if (process.env.NODE_ENV !== "production") {

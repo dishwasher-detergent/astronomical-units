@@ -29,17 +29,17 @@ export function EquipmentDisplay() {
 
     return (
       <div key={key} className="border-b p-4">
-        <p className="font-bold flex items-center mb-1">
+        <p className="mb-1 flex items-center font-bold">
           {item.name}
           <Badge className="ml-2" variant="outline">
             {equipment.value}
           </Badge>
         </p>
         <p className="text-xs">{item.description}</p>
-        <p className="text-xs mb-2">Generates {auPerSecond} AU/s</p>
+        <p className="mb-2 text-xs">Generates {auPerSecond} AU/s</p>
         {item.upgrades && (
           <div className="mb-2">
-            <p className="text-xs font-semibold mb-1">Upgrades</p>
+            <p className="mb-1 text-xs font-semibold">Upgrades</p>
             <div className="flex flex-row gap-1">
               {Object.entries(item.upgrades).map(([upgradeKey, _]) => {
                 return (
@@ -53,7 +53,7 @@ export function EquipmentDisplay() {
             </div>
           </div>
         )}
-        <div className="flex flex-row flex-wrap gap-2 p-3 bg-muted rounded-lg">
+        <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
           {[...Array(equipment.value)].map((_, i) => {
             const Icon = item.icon;
 

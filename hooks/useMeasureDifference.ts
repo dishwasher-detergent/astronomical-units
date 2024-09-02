@@ -6,7 +6,7 @@ import { usePreviousValue } from "@/hooks/usePreviousValue";
 
 export function useMeasureDifference(
   atom: PrimitiveAtom<number>,
-  value: number
+  value: number,
 ) {
   const measure = useMeasure(atom);
   const previousValue = usePreviousValue<number>(value);

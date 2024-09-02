@@ -9,7 +9,7 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { gameData } from "./global";
 
 export const totalAu = focusAtom(gameData, (optic) =>
-  optic.path("income.total")
+  optic.path("income.total"),
 );
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
 
@@ -32,7 +32,7 @@ export const autoIncrement = atom(null, (get, set) => {
 
   const calculateMultiplier = (
     item: any,
-    upgrades: Record<string, number> | undefined
+    upgrades: Record<string, number> | undefined,
   ): number => {
     let multiplier = 1;
     if (upgrades) {

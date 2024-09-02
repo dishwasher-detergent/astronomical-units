@@ -8,7 +8,7 @@ import {
 import { gameData } from "./global";
 
 export const astronaut = focusAtom(gameData, (optic) =>
-  optic.prop("astronaut")
+  optic.prop("astronaut"),
 );
 
 export const astronautCurrent = atom(
@@ -22,11 +22,11 @@ export const astronautCurrent = atom(
         current: newastronaut < 0 ? 0 : newastronaut,
       };
     });
-  }
+  },
 );
 
 export const astronautDelta = atom(
-  (get) => ASTRONAUT_DELTA + ASTRONAUT_DELTA * get(astronautDeltaMultiplier)
+  (get) => ASTRONAUT_DELTA + ASTRONAUT_DELTA * get(astronautDeltaMultiplier),
 );
 
 export const astronautDeltaMultiplier = atom(
@@ -36,7 +36,7 @@ export const astronautDeltaMultiplier = atom(
       deltaMultiplier: deltaMultiplier + ASTRONAUT_DELTA_MULTIPLIER_DELTA,
       ...astronautContents,
     }));
-  }
+  },
 );
 
 if (process.env.NODE_ENV !== "production") {

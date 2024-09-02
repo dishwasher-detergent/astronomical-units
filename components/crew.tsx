@@ -9,14 +9,14 @@ export function Crew() {
   const crew = useAtomValue(astronaut);
 
   return (
-    <div className="flex-none p-4 pr-0 space-y-2 border-t bg-background">
+    <div className="flex-none space-y-2 border-t bg-background p-4 pr-0">
       <p className="text-xs font-semibold">
         {crew.current} Crew Member
         {(crew.current > 1 || crew.current == 0) && "s"}
       </p>
       {crew.current > 0 && (
         <div className="max-h-12 overflow-y-auto">
-          <div className="flex flex-row gap-1 flex-wrap">
+          <div className="flex flex-row flex-wrap gap-1">
             {[...Array(crew.current)].map((_, i) => {
               return <LucidePersonStanding key={i} className="size-4" />;
             })}
