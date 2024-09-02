@@ -80,7 +80,7 @@ export default function Home() {
         <Shop />
       </div>
       <div className="flex h-full flex-1 flex-col">
-        <div className="flex-1 overflow-y-auto">
+        <div className="relative flex-1 overflow-y-auto">
           <nav className="sticky top-0 z-50 flex h-12 items-center justify-between border-b bg-background px-4 font-bold">
             <p>Equipment</p>
           </nav>

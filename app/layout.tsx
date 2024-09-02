@@ -36,7 +36,7 @@ export default function RootLayout({
             <p>Astronomical Units</p>
             <ModeToggle />
           </nav>
-          <main className="relative w-full flex-1">
+          <main className="relative w-full flex-1 overflow-hidden">
             {children}
             <Dev />
             <Generation />
