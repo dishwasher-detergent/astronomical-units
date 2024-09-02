@@ -7,6 +7,7 @@ import {
   LucideChurch,
   LucideDollarSign,
   LucideDrill,
+  LucideHospital,
   LucideHouse,
   LucideMicroscope,
   LucidePersonStanding,
@@ -175,7 +176,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         multiplier: 0.5,
         maxCount: 3,
         threshold: 20,
-        icon: LucideChurch,
+        icon: LucideHospital,
       },
       church: {
         name: "Churches",
