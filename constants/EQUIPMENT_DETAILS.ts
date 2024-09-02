@@ -11,6 +11,7 @@ import {
   LucideMicroscope,
   LucidePersonStanding,
   LucidePickaxe,
+  LucidePresentation,
   LucideRocket,
   LucideTentTree,
 } from "lucide-react";
@@ -60,7 +61,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         multiplier: 0.25,
         maxCount: 5,
         threshold: 15,
-        icon: LucidePersonStanding,
+        icon: LucidePresentation,
       },
     },
   },
