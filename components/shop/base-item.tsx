@@ -29,9 +29,8 @@ export function Base({
     return (
       <AcquireButton elementKey={elementKey} increment={setRank}>
         <>
-          <p className="text-sm font-bold">{element.name}</p>
-          <p className="text-sm">{element.description}</p>
-          <p className="text-sm">{rankValue.value} Units</p>
+          <p className="text-sm font-bold mb-1">{element.name}</p>
+          <p className="text-xs">{element.description}</p>
         </>
       </AcquireButton>
     );

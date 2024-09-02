@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { au } from "@/atoms/au";
+import { Badge } from "@/components/ui/badge";
 
 export function BaseUpgrade({
   atom,
@@ -38,22 +39,28 @@ export function BaseUpgrade({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <UpgradeButton
-              cost={element.cost}
-              disabled={!canAquire}
-              increment={setRank}
-            >
-              <Icon />
-            </UpgradeButton>
+            <div>
+              <UpgradeButton
+                cost={element.cost}
+                disabled={!canAquire}
+                increment={setRank}
+              >
+                <Icon className="size-4" />
+              </UpgradeButton>
+            </div>
           </TooltipTrigger>
-          <TooltipContent>
-            <div className="text-xs max-w-sm">
-              <p className="font-bold text-sm">{element.name}</p>
-              <p className="mb-2">{element.description}</p>
-              <p>{element.cost} AU</p>
-              <p>
-                {rankValue}/{element.maxCount} Owned
-              </p>
+          <TooltipContent side="bottom">
+            <div className="text-xs w-48 flex flex-row">
+              <div className="flex-1">
+                <p className="font-bold text-sm">{element.name}</p>
+                <p className="mb-2">{element.description}</p>
+                <p>
+                  {rankValue ?? 0}/{element.maxCount} Owned
+                </p>
+              </div>
+              <div>
+                <Badge className="text-xs">{element.cost} AU</Badge>
+              </div>
             </div>
           </TooltipContent>
         </Tooltip>

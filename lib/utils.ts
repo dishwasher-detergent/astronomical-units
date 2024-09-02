@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { Equipment, EquipmentObject } from "@/types";
+import { Equipment, EquipmentItem, EquipmentObject } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -37,4 +37,25 @@ export function generateEquipmentObject(
   });
 
   return newObject;
+}
+
+export function calculateUpgradeMultiplier(
+  equipment: EquipmentItem,
+  item: Equipment
+) {
+  let multiplier = 1;
+
+  if (equipment.upgrades) {
+    Object.entries(equipment.upgrades).forEach(([upgradeKey, upgradeVal]) => {
+      const upgradeItem = item.upgrades?.[upgradeKey];
+
+      if (!upgradeItem) {
+        return;
+      }
+
+      multiplier += upgradeItem.multiplier * upgradeVal;
+    });
+  }
+
+  return multiplier;
 }

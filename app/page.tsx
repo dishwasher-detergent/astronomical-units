@@ -9,8 +9,8 @@ export default function Home() {
     <section className="h-full w-full flex flex-row flex-nowrap overflow-hidden">
       <div className="w-72 border-r h-full flex-none overflow-y-auto">
         <ClickArea />
-        <Crew />
         <Statistics />
+        <Crew />
         <Shop />
       </div>
       <div className="flex-1 h-full">

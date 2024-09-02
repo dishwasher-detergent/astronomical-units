@@ -25,10 +25,12 @@ export type Equipment = {
 };
 
 export type EquipmentObject = {
-  [key: string]: {
-    value: number;
-    upgrades?: Record<string, number>;
-  };
+  [key: string]: EquipmentItem;
+};
+
+export type EquipmentItem = {
+  value: number;
+  upgrades?: Record<string, number>;
 };
 
 export type GameData = {

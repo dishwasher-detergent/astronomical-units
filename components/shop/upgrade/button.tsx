@@ -21,7 +21,7 @@ export const UpgradeButton = forwardRef<
     <Button
       ref={ref}
       size="icon"
-      className="size-6"
+      className="size-8"
       variant="outline"
       disabled={disabled}
       onClick={() => {

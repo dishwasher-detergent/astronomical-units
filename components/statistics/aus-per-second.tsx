@@ -6,6 +6,7 @@ import { Stats } from "@/components/ui/stats";
 import { LOCALE } from "@/constants/GLOBAL";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { calculateUpgradeMultiplier } from "@/lib/utils";
 
 export function AusPerSecond() {
   const equip = useAtomValue(equipment);
@@ -13,21 +14,7 @@ export function AusPerSecond() {
     .map(([key, value]) => {
       if (value.equipment === false) return;
       const item = equip[key];
-
-      const currentUpgrades = item.upgrades;
-      let multiplier = 1;
-
-      if (currentUpgrades) {
-        Object.entries(currentUpgrades).forEach(([upgradeKey, upgradeVal]) => {
-          const upgradeItem = value.upgrades?.[upgradeKey];
-
-          if (!upgradeItem) {
-            return;
-          }
-
-          multiplier += upgradeItem.multiplier * upgradeVal;
-        });
-      }
+      let multiplier = calculateUpgradeMultiplier(item, value);
 
       return value.auPerSecond * multiplier * item.value;
     })
