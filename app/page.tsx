@@ -26,12 +26,12 @@ export default function Home() {
   if (!isDesktop) {
     return (
       <>
-        <div className="flex h-full w-full flex-none flex-col pb-14">
+        <div className="flex h-full w-full flex-none flex-col pb-16">
           <ClickArea />
           <Statistics />
           <Crew />
         </div>
-        <div className="fixed bottom-0 flex w-full items-center justify-center gap-4 border-t bg-background p-2">
+        <div className="fixed bottom-0 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
