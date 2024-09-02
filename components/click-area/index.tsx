@@ -1,10 +1,10 @@
 "use client";
 
-import { useAtomValue, useSetAtom } from "jotai";
-import { LucideEarth, LucideOrbit } from "lucide-react";
+import { useSetAtom } from "jotai";
+import { LucideEarth } from "lucide-react";
 
 import { clicksPerSecond } from "@/atoms/global";
-import { auIncrement, auWeight } from "@/atoms/au";
+import { auIncrement } from "@/atoms/au";
 import { useMeasure } from "@/hooks/useMeasure";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +20,7 @@ export function ClickArea() {
         setClicks();
         currentTarget.blur();
       }}
-      className="relative flex aspect-square h-auto w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none bg-muted hover:bg-muted"
+      className="relative flex aspect-video h-auto w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none bg-muted hover:bg-muted md:aspect-square"
     >
       <div className="z-10 text-muted-foreground dark:text-primary">
         <LucideEarth className="mb-2 size-16" />
