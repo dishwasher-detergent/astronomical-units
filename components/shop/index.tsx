@@ -1,7 +1,7 @@
 "use client";
 
 import { Astronaut } from "@/components/shop/astronaut";
-import { Generation } from "@/components/shop/generation";
+import { Generation } from "@/components/generation";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { BaseEquipment } from "@/components/shop/equipment/base";
 
