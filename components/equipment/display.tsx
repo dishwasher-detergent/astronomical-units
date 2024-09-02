@@ -16,7 +16,9 @@ export function EquipmentDisplay() {
   ) {
     return (
       <div className="p-4">
-        <p className="text-muted-foreground">No equipment yet!</p>
+        <p className="text-muted-foreground">
+          Earn Austonomical Units(AU) to buy equipment.
+        </p>
       </div>
     );
   }

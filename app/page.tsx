@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex h-full w-full flex-none flex-col pb-12">
+      <div className="flex h-full w-full flex-none flex-col pb-14">
         <ClickArea />
         <Statistics />
         <Crew />
