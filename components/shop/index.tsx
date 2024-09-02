@@ -11,7 +11,7 @@ export function Shop() {
       <p className="sticky top-0 hidden bg-background px-4 py-2 font-bold md:block">
         Store
       </p>
-      <div className="w-full space-y-2">
+      <div className="w-full space-y-2 md:space-y-0">
         <Astronaut />
         {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
           if (value.equipment === false) return null;

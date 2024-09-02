@@ -6,13 +6,11 @@ import { EquipmentDisplay } from "@/components/equipment/display";
 import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { LucideSatellite, LucideStore, LucideTractor } from "lucide-react";
+import { LucideSatellite, LucideStore } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -41,7 +39,7 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent className="max-h-[80%]">
-              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+              <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Shop</DrawerTitle>
                 </DrawerHeader>
@@ -58,7 +56,7 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent className="max-h-[80%]">
-              <div className="mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden">
+              <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
@@ -75,7 +73,7 @@ export default function Home() {
 
   return (
     <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
-      <div className="flex h-full w-72 flex-none flex-col overflow-y-hidden border-r">
+      <div className="flex h-full w-96 flex-none flex-col overflow-y-hidden border-r">
         <ClickArea />
         <Statistics />
         <Crew />

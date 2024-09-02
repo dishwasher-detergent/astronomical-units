@@ -7,7 +7,7 @@ export type Upgrade = {
   multiplier: number;
   maxCount: number;
   threshold: number;
-  icon?: any;
+  icon: any;
 };
 
 export type Upgrades = Record<string, Upgrade>;
@@ -19,8 +19,8 @@ export type Equipment = {
   costMultiplier: number;
   auPerSecond: number;
   threshold: number;
+  icon: any;
   equipment?: boolean;
-  icon?: any;
   upgrades?: Upgrades;
 };
 

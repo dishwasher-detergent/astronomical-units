@@ -24,6 +24,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 1,
     threshold: 20,
     equipment: false,
+    icon: LucidePersonStanding,
   },
   charter: {
     name: "Charter a Billionaire",

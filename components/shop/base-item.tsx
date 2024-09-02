@@ -8,6 +8,7 @@ import { AcquireButton } from "@/components/shop/aquire";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
+import { LucideBoxSelect } from "lucide-react";
 
 export function Base({
   atom,
@@ -22,16 +23,22 @@ export function Base({
 
   const isShowing = showElementValue[elementKey];
   const element = EQUIPMENT_LIST[elementKey];
+  const Icon = element.icon;
 
   useNextUpgrade(isShowing);
 
   if (isShowing) {
     return (
       <AcquireButton elementKey={elementKey} increment={setRank}>
-        <>
-          <p className="mb-1 font-bold md:text-sm">{element.name}</p>
-          <p className="text-sm md:text-xs">{element.description}</p>
-        </>
+        <div className="flex flex-row gap-2">
+          <div className="flex flex-none items-start pt-1">
+            <Icon className="size-4" />
+          </div>
+          <div className="flex-1">
+            <p className="mb-1 font-bold md:text-sm">{element.name}</p>
+            <p className="text-sm md:text-xs">{element.description}</p>
+          </div>
+        </div>
       </AcquireButton>
     );
   } else if (next == elementKey) {
