@@ -30,7 +30,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     description: "Show some billionaire earth from space.",
     baseCost: 100,
     costMultiplier: 1.15,
-    auPerSecond: 8,
+    auPerSecond: 1,
     threshold: 50,
     icon: LucideDollarSign,
     upgrades: {
@@ -68,7 +68,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     description: "Mine asteroids around the galaxy to earn AU.",
     baseCost: 250,
     costMultiplier: 1.15,
-    auPerSecond: 1,
+    auPerSecond: 2,
     threshold: 125,
     icon: LucidePickaxe,
     upgrades: {
@@ -106,7 +106,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     description: "Explore other galaxies in search of precious metals.",
     baseCost: 600,
     costMultiplier: 1.15,
-    auPerSecond: 8,
+    auPerSecond: 4,
     threshold: 300,
     icon: LucideRocket,
     upgrades: {
