@@ -2,8 +2,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 
 import { equipment, equipmentRate } from "@/atoms/equipment";
-import { useAnimation } from "@/hooks/useAnimation";
 import { autoIncrement } from "@/atoms/au";
+import { useAnimation } from "@/hooks/useAnimation";
 
 export function Generation() {
   const equipmentValue = useAtomValue(equipment);
@@ -12,7 +12,7 @@ export function Generation() {
   const [delta, setDelta] = useState(0);
 
   const show =
-    Object.keys(equipmentValue).filter((key) => equipmentValue[key] > 0)
+    Object.keys(equipmentValue).filter((key) => equipmentValue[key].value > 0)
       .length > 0;
 
   useAnimation((deltaTime) => {

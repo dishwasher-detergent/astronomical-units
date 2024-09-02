@@ -1,4 +1,4 @@
-import { ClickTotalCount } from "@/components/click-area/total-count";
+import { ClickTotalCount } from "@/components/statistics/total-count";
 import { AusPerSecond } from "@/components/statistics/aus-per-second";
 import { ClicksPerSecond } from "@/components/statistics/clicks-per-second";
 

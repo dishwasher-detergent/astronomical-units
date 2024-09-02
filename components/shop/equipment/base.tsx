@@ -14,9 +14,12 @@ export function BaseEquipment({ elementKey }: { elementKey: string }) {
     (get) => get(item),
     (get, set) => {
       const equip = EQUIPMENT_LIST[elementKey].upgrades;
-      const newVal = get(item) + 1;
+      const newVal = get(item).value + 1;
 
-      set(item, () => newVal);
+      set(item, (current) => ({
+        ...current,
+        value: newVal,
+      }));
 
       if (equip) {
         Object.entries(equip).forEach(([key, value]: any) => {

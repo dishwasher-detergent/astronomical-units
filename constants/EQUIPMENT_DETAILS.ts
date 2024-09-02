@@ -1,5 +1,9 @@
 import { Equipment } from "@/types";
-import { LucidePickaxe, LucideRocket } from "lucide-react";
+import {
+  LucideArrowBigUpDash,
+  LucidePickaxe,
+  LucideRocket,
+} from "lucide-react";
 
 export const EQUIPMENT_LIST: Record<string, Equipment> = {
   astronaut: {
@@ -22,11 +26,12 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     upgrades: {
       rocket: {
         name: "Rocket Boosters",
-        description: "string",
-        cost: 100,
-        multiplier: 1.15,
+        description: "Increase the Mining Rigs load capacity.",
+        cost: 1000,
+        multiplier: 0.25,
         maxCount: 5,
         threshold: 10,
+        icon: LucideArrowBigUpDash,
       },
     },
   },

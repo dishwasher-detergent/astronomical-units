@@ -3,8 +3,8 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-import { equipmentUpgrades } from "@/atoms/equipment";
-import { BaseUpgrade } from "./base";
+import { equipment } from "@/atoms/equipment";
+import { BaseUpgrade } from "@/components/shop/upgrade/base";
 
 export function Upgrade({
   parentKey,
@@ -13,12 +13,13 @@ export function Upgrade({
   parentKey: string;
   elementKey: string;
 }) {
-  const item = focusAtom(equipmentUpgrades, (optic) =>
-    optic.prop(`${parentKey}_${elementKey}`)
+  const item = focusAtom(equipment, (optic) =>
+    optic.path(`${parentKey}.upgrades.${elementKey}`)
   );
   const upgradeCurrent = atom(
     (get) => get(item),
     (_, set) => {
+      // @ts-ignore
       set(item, (current) => current + 1);
     }
   );

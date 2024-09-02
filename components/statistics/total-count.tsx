@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtomValue } from "jotai";
+
 import { au, PerSecond } from "@/atoms/au";
 import { Stats } from "@/components/ui/stats";
 import { LOCALE } from "@/constants/GLOBAL";

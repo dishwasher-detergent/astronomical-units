@@ -7,6 +7,7 @@ export type Upgrade = {
   multiplier: number;
   maxCount: number;
   threshold: number;
+  icon?: any;
 };
 
 export type Upgrades = Record<string, Upgrade>;
@@ -21,4 +22,25 @@ export type Equipment = {
   equipment?: boolean;
   icon?: any;
   upgrades?: Upgrades;
+};
+
+export type EquipmentObject = {
+  [key: string]: {
+    value: number;
+    upgrades?: Record<string, number>;
+  };
+};
+
+export type GameData = {
+  income: {
+    total: number;
+    current: number;
+  };
+  equipment: EquipmentObject;
+  astronaut: {
+    current: number;
+    deltaMultiplier: number;
+  };
+  show: Record<string, boolean>;
+  clicks_per_second: number;
 };

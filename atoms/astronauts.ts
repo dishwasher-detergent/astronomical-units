@@ -1,16 +1,15 @@
 import { atom } from "jotai";
+import { focusAtom } from "jotai-optics";
 
 import {
   ASTRONAUT_DELTA,
-  ASTRONAUT_DELTA_MULTIPLIER,
   ASTRONAUT_DELTA_MULTIPLIER_DELTA,
 } from "@/constants/ASTRONAUT";
-import { atomWithStorage } from "jotai/utils";
+import { gameData } from "./global";
 
-export const astronaut = atomWithStorage("ASTRONAUT", {
-  current: 0,
-  deltaMultiplier: ASTRONAUT_DELTA_MULTIPLIER,
-});
+export const astronaut = focusAtom(gameData, (optic) =>
+  optic.prop("astronaut")
+);
 
 export const astronautCurrent = atom(
   (get) => get(astronaut).current,

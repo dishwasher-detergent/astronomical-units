@@ -24,7 +24,9 @@ export function useAcquireCost(key: string) {
 
   const rank = rankAtom ? useAtomValue(rankAtom) : 0;
 
+  const rankValue = typeof rank === "number" ? rank : rank.value;
+
   const { baseCost, costMultiplier } = EQUIPMENT_LIST[key];
 
-  return Math.ceil(baseCost * Math.pow(costMultiplier, rank));
+  return Math.ceil(baseCost * Math.pow(costMultiplier, rankValue));
 }

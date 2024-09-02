@@ -3,7 +3,7 @@
 import { Astronaut } from "@/components/shop/astronaut";
 import { Generation } from "@/components/shop/generation";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { BaseEquipment } from "./equipment/base";
+import { BaseEquipment } from "@/components/shop/equipment/base";
 
 export function Shop() {
   return (

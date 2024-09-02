@@ -14,7 +14,22 @@ export function AusPerSecond() {
       if (value.equipment === false) return;
       const item = equip[key];
 
-      return value.auPerSecond * item;
+      const currentUpgrades = item.upgrades;
+      let multiplier = 1;
+
+      if (currentUpgrades) {
+        Object.entries(currentUpgrades).forEach(([upgradeKey, upgradeVal]) => {
+          const upgradeItem = value.upgrades?.[upgradeKey];
+
+          if (!upgradeItem) {
+            return;
+          }
+
+          multiplier += upgradeItem.multiplier * upgradeVal;
+        });
+      }
+
+      return value.auPerSecond * multiplier * item.value;
     })
     .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0);
 
