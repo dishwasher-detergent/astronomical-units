@@ -76,7 +76,16 @@ export default function Home() {
 
   return (
     <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
-      <Sidebar />
+      <div className="flex h-full w-96 flex-none flex-col overflow-hidden border-r">
+          <div className="aspect-video h-auto w-full">
+            <ClickArea />
+          </div>
+        <div className="overflow-y-auto sticky top-0">
+          <Statistics />
+          <Crew />
+          <Shop />
+        </div>
+      </div>
       <div className="flex h-full flex-1 flex-col">
         <div className="relative flex-1 overflow-y-auto">
           <nav className="sticky top-0 z-50 flex h-12 items-center justify-between border-b bg-background px-4 font-bold">
