@@ -12,7 +12,7 @@ export function Shop() {
   const auVal = useAtomValue(au);
 
   return (
-    <div className="sticky top-0 overflow-y-auto bg-background md:border-t">
+    <div className="relative bg-background md:border-t">
       <p className="sticky top-0 hidden bg-background px-4 py-2 font-bold md:block">
         Store
       </p>

@@ -73,11 +73,13 @@ export default function Home() {
 
   return (
     <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
-      <div className="flex h-full w-96 flex-none flex-col overflow-y-hidden border-r">
+      <div className="flex h-full w-96 flex-none flex-col overflow-hidden border-r">
         <ClickArea />
-        <Statistics />
-        <Crew />
-        <Shop />
+        <div className="overflow-y-auto sticky top-0">
+          <Statistics />
+          <Crew />
+          <Shop />
+        </div>
       </div>
       <div className="flex h-full flex-1 flex-col">
         <div className="relative flex-1 overflow-y-auto">
