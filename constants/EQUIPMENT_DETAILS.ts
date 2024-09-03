@@ -5,7 +5,6 @@ import {
   LucideBoxes,
   LucideBuilding,
   LucideChurch,
-  LucideDollarSign,
   LucideDrill,
   LucideHospital,
   LucideHouse,
@@ -15,6 +14,7 @@ import {
   LucidePresentation,
   LucideRocket,
   LucideTentTree,
+  LucidePlaneTakeoff
 } from "lucide-react";
 
 export const EQUIPMENT_LIST: Record<string, Equipment> = {
@@ -35,7 +35,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.15,
     auPerSecond: 1,
     threshold: 50,
-    icon: LucideDollarSign,
+    icon: LucidePlaneTakeoff,
     upgrades: {
       seats: {
         name: "Additional Seats",
