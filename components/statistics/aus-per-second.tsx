@@ -21,11 +21,9 @@ export function AusPerSecond() {
     .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0);
 
   return (
-    <div>
-      <Stats
-        label="Passive AUs per second"
-        value={auPerSecond?.toLocaleString(LOCALE)}
-      />
-    </div>
+    <Stats
+      label="Passive AUs per second"
+      value={auPerSecond?.toLocaleString(LOCALE)}
+    />
   );
 }

@@ -10,11 +10,9 @@ export function ClicksPerSecond() {
   const clicksPerSecondValue = useAtomValue(clicksPerSecond);
 
   return (
-    <div>
-      <Stats
-        label="Clicks per second"
-        value={clicksPerSecondValue.toLocaleString(LOCALE)}
-      />
-    </div>
+    <Stats
+      label="Clicks per second"
+      value={clicksPerSecondValue.toLocaleString(LOCALE)}
+    />
   );
 }

@@ -8,6 +8,7 @@ import { useAcquireCost } from "@/hooks/useAcquireCost";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { LOCALE } from "@/constants/GLOBAL";
 
 export function AcquireButton({
   elementKey,
@@ -39,7 +40,7 @@ export function AcquireButton({
     >
       <div className="flex-1 text-left">{children}</div>
       <div className="flex-none">
-        <Badge>{cost} AU</Badge>
+        <Badge>{cost.toLocaleString(LOCALE)} AU</Badge>
       </div>
     </button>
   );

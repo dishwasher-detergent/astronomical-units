@@ -13,13 +13,9 @@ export function ClickTotalCount() {
   useMeasureDifference(PerSecond, auValue);
 
   return (
-    <div>
-      <div>
-        <Stats
-          label="Astronomical Units (AU)"
-          value={auValue.toLocaleString(LOCALE)}
-        />
-      </div>
-    </div>
+    <Stats
+      label="Astronomical Units (AU)"
+      value={auValue.toLocaleString(LOCALE)}
+    />
   );
 }

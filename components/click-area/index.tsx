@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
-
   const measureClicks = useMeasure(clicksPerSecond);
 
   return (
@@ -20,10 +19,10 @@ export function ClickArea() {
         setClicks();
         currentTarget.blur();
       }}
-      className="relative flex aspect-video h-auto w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none bg-muted hover:bg-muted md:aspect-square"
+      className="relative h-full w-full flex flex-none flex-col items-center justify-center overflow-hidden rounded-none bg-muted hover:bg-muted border-b"
     >
-      <div className="z-10 text-muted-foreground dark:text-primary">
-        <LucideEarth className="mb-2 size-16" />
+      <div className="z-10 text-muted-foreground dark:text-primary flex items-center flex-col">
+        <LucideEarth className="mb-2 size-8" />
         <span>Tap Here</span>
       </div>
       <div className="animate-blob absolute -left-4 top-0 h-72 w-72 rounded-full bg-green-300 opacity-40 blur-xl filter dark:bg-green-500"></div>
