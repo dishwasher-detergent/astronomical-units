@@ -10,7 +10,7 @@ export function Crew() {
 
   return (
     <div className="flex-none space-y-2 border-t bg-background p-4 md:pr-0">
-      <p className="text-xs font-semibold">
+      <p className="text-sm font-semibold md:text-xs">
         {crew.current} Crew Member
         {(crew.current > 1 || crew.current == 0) && "s"}
       </p>
@@ -18,7 +18,9 @@ export function Crew() {
         <div className="overflow-y-auto md:max-h-12">
           <div className="flex flex-row flex-wrap gap-1">
             {[...Array(crew.current)].map((_, i) => {
-              return <LucidePersonStanding key={i} className="size-4" />;
+              return (
+                <LucidePersonStanding key={i} className="size-5 md:size-4" />
+              );
             })}
           </div>
         </div>

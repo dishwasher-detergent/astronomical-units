@@ -6,7 +6,7 @@ interface StatsProps {
 const Stats = ({ label, value }: StatsProps) => {
   return (
     <div>
-      <p className="text-xs font-semibold">{label}</p>
+      <p className="text-sm font-semibold md:text-xs">{label}</p>
       <p className="text-xl">{value ?? 0}</p>
     </div>
   );

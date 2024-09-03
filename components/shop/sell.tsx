@@ -28,7 +28,7 @@ export function SellButton({
     <Button
       variant="destructive"
       size="sm"
-      className="h-6 px-2 text-xs"
+      className="h-8 text-xs md:h-6 md:px-2"
       onClick={() => {
         decrement();
         setAu((current) => current + cost);
