@@ -79,7 +79,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  @apply w-2;
+  @apply w-4;
 }
 
 /* Track */
@@ -89,7 +89,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-muted;
+  @apply rounded-full border-4 border-solid border-background bg-muted;
 }
 
 /* Handle on hover */

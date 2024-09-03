@@ -40,7 +40,7 @@ export function EquipmentDisplay() {
         const multiplier = calculateUpgradeMultiplier(equipment, item);
         const auPerSecond = item.auPerSecond * multiplier * equipment.value;
         return (
-          <div key={key} className="p-4 md:border-b md:bg-background">
+          <div key={key} className="py-4 md:border-b md:bg-background md:p-4">
             <p className="mb-1 flex items-center font-bold">
               {item.name}
               <Badge className="ml-2" variant="outline">

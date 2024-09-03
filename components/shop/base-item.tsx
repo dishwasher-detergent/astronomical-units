@@ -21,6 +21,8 @@ export function Base({
   const next = useAtomValue(nextUpgrade);
   const [rankValue, setRank] = useAtom(atom);
 
+  const rankVal = typeof rankValue === "number" ? rankValue : rankValue.value;
+
   const isShowing = showElementValue[elementKey];
   const element = EQUIPMENT_LIST[elementKey];
   const Icon = element.icon;
@@ -37,6 +39,7 @@ export function Base({
           <div className="flex-1">
             <p className="mb-1 font-bold md:text-sm">{element.name}</p>
             <p className="text-sm md:text-xs">{element.description}</p>
+            <p className="text-sm md:text-xs">{rankVal ?? 0} Owned</p>
           </div>
         </div>
       </AcquireButton>
