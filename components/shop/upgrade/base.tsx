@@ -52,7 +52,7 @@ export function BaseUpgrade({
               <Icon className="size-4" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="max-w-sm">
+          <PopoverContent side="bottom" align="start" className="max-w-sm">
             <div className="mb-2 flex w-full flex-row gap-2 text-xs">
               <div className="flex-1">
                 <p className="text-sm font-bold">{element.name}</p>
