@@ -23,7 +23,8 @@ export function LastUpdated() {
       const now = Date.now();
 
       if (last <= now - 60000) {
-        const diff = (now - last) / 1000;
+        // 14400 is 4 hours in seconds
+        const diff = Math.min((now - last) / 1000, 14400);
         update(diff);
         let earned = 0;
 
