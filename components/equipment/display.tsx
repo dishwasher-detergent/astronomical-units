@@ -43,7 +43,7 @@ export function EquipmentDisplay() {
           return (
             <div
               key={key}
-              className="rounded-lg bg-muted/30 p-4 md:border-b md:bg-background"
+              className="rounded-lg bg-muted/30 p-4 md:rounded-none md:border-b md:bg-background"
             >
               <p className="mb-1 flex items-center font-bold">
                 {item.name}
