@@ -38,8 +38,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   astronaut: {
     name: "Crew Member",
     description: "Adds another member to your crew.",
-    baseCost: 15,
-    costMultiplier: 1.15,
+    baseCost: 50, // Increased base cost
+    costMultiplier: 1.2, // Slightly higher cost multiplier
     auPerSecond: 1,
     threshold: 20,
     equipment: false,
@@ -48,17 +48,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   charter: {
     name: "Charter a Billionaire",
     description: "Show some billionaire earth from space.",
-    baseCost: 100,
-    costMultiplier: 1.15,
-    auPerSecond: 1,
+    baseCost: 250,
+    costMultiplier: 1.25,
+    auPerSecond: 5, // Increased AU/s to balance the cost
     threshold: 50,
     icon: LucidePlaneTakeoff,
     upgrades: {
       seats: {
         name: "Additional Seats",
         description: "Increase your carrying capacity.",
-        cost: 1000,
-        multiplier: 0.25,
+        cost: 2000, // Higher cost
+        multiplier: 0.2, // Lower upgrade effectiveness to balance the boost
         maxCount: 5,
         threshold: 5,
         icon: LucideArmchair,
@@ -66,7 +66,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       crew: {
         name: "Crew Members",
         description: "Add more crew members to speed up research.",
-        cost: 1500,
+        cost: 3000, // Increased cost
         multiplier: 0.25,
         maxCount: 5,
         threshold: 10,
@@ -75,8 +75,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       marketing: {
         name: "Marketing Budget",
         description: "Increase the marketing budget to scam more billionaires.",
-        cost: 2000,
-        multiplier: 0.25,
+        cost: 4000, // Increased cost
+        multiplier: 0.3, // More impact due to higher cost
         maxCount: 5,
         threshold: 15,
         icon: LucidePresentation,
@@ -84,27 +84,27 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     },
   },
   miningRig: {
-    name: "Astoroid Mining Rig",
+    name: "Asteroid Mining Rig",
     description: "Mine asteroids around the galaxy to earn AU.",
-    baseCost: 1000,
-    costMultiplier: 1.15,
-    auPerSecond: 2,
+    baseCost: 1500,
+    costMultiplier: 1.3, // Higher cost multiplier to reflect scaling difficulty
+    auPerSecond: 8, // Increased AU/s to balance the higher cost
     threshold: 500,
     icon: LucidePickaxe,
     upgrades: {
       cargo_capacity: {
         name: "Cargo Capacity",
-        description: "Increase the Mining Rigs load capacity.",
-        cost: 5000,
-        multiplier: 0.125,
+        description: "Increase the Mining Rig's load capacity.",
+        cost: 7500, // Increased upgrade cost
+        multiplier: 0.15, // Reduced effectiveness to match increased cost
         maxCount: 10,
         threshold: 5,
         icon: LucideBoxes,
       },
       boosters: {
         name: "Rocket Boosters",
-        description: "Increase the mining rigs travel speed.",
-        cost: 7500,
+        description: "Increase the mining rig's travel speed.",
+        cost: 10000, // Increased cost
         multiplier: 0.25,
         maxCount: 5,
         threshold: 10,
@@ -113,8 +113,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       drill: {
         name: "Drill Efficiency",
         description: "Increase the efficiency of the drill bit.",
-        cost: 10000,
-        multiplier: 0.5,
+        cost: 15000, // Increased cost
+        multiplier: 0.35, // Balanced effectiveness
         maxCount: 2,
         threshold: 15,
         icon: LucideDrill,
@@ -124,17 +124,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   exploration: {
     name: "Exploration",
     description: "Explore other galaxies in search of precious metals.",
-    baseCost: 3000,
-    costMultiplier: 1.15,
-    auPerSecond: 4,
+    baseCost: 4500, // Increased cost
+    costMultiplier: 1.35, // Increased cost multiplier
+    auPerSecond: 15, // Higher AU/s output
     threshold: 1500,
     icon: LucideRocket,
     upgrades: {
       boosters: {
         name: "Rocket Boosters",
-        description: "Increase the mining rigs travel speed.",
-        cost: 7500,
-        multiplier: 0.125,
+        description: "Increase the exploration ship's travel speed.",
+        cost: 10000,
+        multiplier: 0.15, // Lowered multiplier
         maxCount: 5,
         threshold: 5,
         icon: LucideArrowBigUpDash,
@@ -142,8 +142,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       crew: {
         name: "Crew Members",
         description: "Add more crew members to help around the ship.",
-        cost: 10000,
-        multiplier: 0.25,
+        cost: 15000,
+        multiplier: 0.3, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucidePersonStanding,
@@ -151,8 +151,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       scientists: {
         name: "Scientists",
         description: "Add more scientists to speed up research.",
-        cost: 15000,
-        multiplier: 0.5,
+        cost: 20000, // Increased cost
+        multiplier: 0.4, // Balanced multiplier
         maxCount: 5,
         threshold: 15,
         icon: LucideMicroscope,
@@ -162,16 +162,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   satellite: {
     name: "Satellite Network",
     description: "Deploy satellites to enhance communication and resource gathering.",
-    baseCost: 5000,
-    costMultiplier: 1.15,
-    auPerSecond: 3,
+    baseCost: 7000,
+    costMultiplier: 1.4,
+    auPerSecond: 12, // Increased AU/s output
     threshold: 2500,
     icon: LucideSatelliteDish,
     upgrades: {
       solarPanels: {
         name: "Solar Panels",
         description: "Increase energy efficiency of the satellites.",
-        cost: 10000,
+        cost: 15000, // Increased cost
         multiplier: 0.15,
         maxCount: 10,
         threshold: 5,
@@ -180,8 +180,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       dataProcessing: {
         name: "Data Processing Units",
         description: "Improve data collection and analysis.",
-        cost: 15000,
-        multiplier: 0.2,
+        cost: 20000, // Increased cost
+        multiplier: 0.25, // Higher multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideCpu,
@@ -189,8 +189,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       thrusters: {
         name: "Advanced Thrusters",
         description: "Enable satellites to reposition faster.",
-        cost: 20000,
-        multiplier: 0.25,
+        cost: 30000, // Increased cost
+        multiplier: 0.35, // Higher multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideRocket,
@@ -200,17 +200,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   spaceStation: {
     name: "Space Station",
     description: "Construct a space station to serve as a hub for operations.",
-    baseCost: 20000,
-    costMultiplier: 1.15,
-    auPerSecond: 10,
+    baseCost: 25000, // Increased cost
+    costMultiplier: 1.45, // Higher multiplier
+    auPerSecond: 25, // Higher AU/s output
     threshold: 10000,
     icon: LucideBuilding2,
     upgrades: {
       livingQuarters: {
         name: "Living Quarters",
         description: "Expand the space station to accommodate more crew.",
-        cost: 30000,
-        multiplier: 0.15,
+        cost: 35000, // Increased cost
+        multiplier: 0.2, // Increased multiplier
         maxCount: 5,
         threshold: 5,
         icon: LucideBed,
@@ -218,8 +218,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       researchLab: {
         name: "Research Labs",
         description: "Improve scientific research and technological advancements.",
-        cost: 50000,
-        multiplier: 0.3,
+        cost: 60000, // Increased cost
+        multiplier: 0.35, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideMicroscope,
@@ -227,8 +227,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       defenseSystem: {
         name: "Defense Systems",
         description: "Protect the station from asteroids and other threats.",
-        cost: 75000,
-        multiplier: 0.4,
+        cost: 90000, // Increased cost
+        multiplier: 0.45, // Higher multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideShieldAlert,
@@ -237,45 +237,45 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   },
   colonization: {
     name: "Colonize a Planet",
-    description: "Assist man in colonizing a helpless planet.",
-    baseCost: 40000,
-    costMultiplier: 1.15,
-    auPerSecond: 8,
+    description: "Assist mankind in colonizing a new planet.",
+    baseCost: 60000, // Increased cost
+    costMultiplier: 1.5, // Higher multiplier
+    auPerSecond: 40, // Higher AU/s output
     threshold: 5000,
     icon: LucideTentTree,
     upgrades: {
       buildings: {
         name: "Buildings",
-        description: "Additional buildings to house more people.",
-        cost: 15000,
-        multiplier: 0.125,
+        description: "Construct additional buildings to house more people.",
+        cost: 25000, // Increased cost
+        multiplier: 0.2, // Balanced multiplier
         maxCount: 2,
         threshold: 5,
         icon: LucideBuilding,
       },
       houses: {
         name: "Houses",
-        description: "More houses, room to grow!",
-        cost: 20000,
-        multiplier: 0.25,
+        description: "Build more houses, offering room for population growth.",
+        cost: 35000, // Increased cost
+        multiplier: 0.3, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideHouse,
       },
       hospitals: {
         name: "Hospitals",
-        description: "People can get hurt, and still survive!",
-        cost: 25000,
-        multiplier: 0.5,
+        description: "Provide medical facilities to ensure population health.",
+        cost: 50000, // Increased cost
+        multiplier: 0.4, // Increased multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideHospital,
       },
       church: {
         name: "Churches",
-        description: "People need something to believe in, right?",
-        cost: 30000,
-        multiplier: 0.75,
+        description: "Establish places of worship to strengthen morale.",
+        cost: 75000, // Increased cost
+        multiplier: 0.6, // Higher multiplier
         maxCount: 1,
         threshold: 25,
         icon: LucideChurch,
@@ -285,17 +285,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   terraforming: {
     name: "Terraforming Project",
     description: "Transform a barren planet into a habitable world.",
-    baseCost: 50000,
-    costMultiplier: 1.15,
-    auPerSecond: 20,
+    baseCost: 100000, // Increased cost
+    costMultiplier: 1.55, // Higher multiplier
+    auPerSecond: 75, // Higher AU/s output
     threshold: 25000,
     icon: LucideMountain,
     upgrades: {
       atmosphereGenerators: {
         name: "Atmosphere Generators",
         description: "Accelerate the creation of a breathable atmosphere.",
-        cost: 75000,
-        multiplier: 0.1,
+        cost: 150000, // Increased cost
+        multiplier: 0.2, // Balanced multiplier
         maxCount: 10,
         threshold: 5,
         icon: LucideWind,
@@ -303,8 +303,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       waterPurification: {
         name: "Water Purification Plants",
         description: "Ensure a clean and sustainable water supply.",
-        cost: 100000,
-        multiplier: 0.2,
+        cost: 200000, // Increased cost
+        multiplier: 0.3, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideDroplet,
@@ -312,8 +312,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       ecoSystem: {
         name: "Ecosystem Development",
         description: "Introduce flora and fauna to the new world.",
-        cost: 150000,
-        multiplier: 0.5,
+        cost: 300000, // Increased cost
+        multiplier: 0.5, // Balanced multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideLeaf,
@@ -323,17 +323,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   spaceElevator: {
     name: "Space Elevator",
     description: "Build a space elevator to drastically reduce launch costs.",
-    baseCost: 100000,
-    costMultiplier: 1.15,
-    auPerSecond: 30,
+    baseCost: 200000, // Increased cost
+    costMultiplier: 1.6, // Higher multiplier
+    auPerSecond: 120, // Higher AU/s output
     threshold: 50000,
     icon: LucideCableCar,
     upgrades: {
       cableMaterial: {
         name: "Advanced Cable Materials",
         description: "Enhance the strength and durability of the elevator cable.",
-        cost: 150000,
-        multiplier: 0.15,
+        cost: 300000, // Increased cost
+        multiplier: 0.2, // Balanced multiplier
         maxCount: 10,
         threshold: 5,
         icon: LucideLink,
@@ -341,8 +341,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       cargoCapacity: {
         name: "Cargo Capacity",
         description: "Increase the amount of materials that can be transported.",
-        cost: 200000,
-        multiplier: 0.25,
+        cost: 400000, // Increased cost
+        multiplier: 0.3, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideBoxes,
@@ -350,8 +350,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       safetyProtocols: {
         name: "Enhanced Safety Protocols",
         description: "Minimize the risks of catastrophic failure.",
-        cost: 300000,
-        multiplier: 0.35,
+        cost: 600000, // Increased cost
+        multiplier: 0.4, // Higher multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideShieldCheck,
@@ -361,17 +361,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   warpDrive: {
     name: "Warp Drive",
     description: "Develop warp drive technology for faster-than-light travel.",
-    baseCost: 500000,
-    costMultiplier: 1.15,
-    auPerSecond: 50,
+    baseCost: 1000000, // Increased cost
+    costMultiplier: 1.65, // Higher multiplier
+    auPerSecond: 250, // Higher AU/s output
     threshold: 250000,
     icon: LucideBolt,
     upgrades: {
       energySource: {
         name: "Advanced Energy Source",
         description: "Power the warp drive with a highly efficient energy core.",
-        cost: 750000,
-        multiplier: 0.1,
+        cost: 1500000, // Increased cost
+        multiplier: 0.2, // Balanced multiplier
         maxCount: 10,
         threshold: 5,
         icon: LucideBatteryCharging,
@@ -379,8 +379,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       navigationSystem: {
         name: "Quantum Navigation System",
         description: "Navigate through space with pinpoint accuracy.",
-        cost: 1000000,
-        multiplier: 0.3,
+        cost: 2000000, // Increased cost
+        multiplier: 0.35, // Increased multiplier
         maxCount: 5,
         threshold: 10,
         icon: LucideCompass,
@@ -388,8 +388,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       stabilizers: {
         name: "Warp Field Stabilizers",
         description: "Ensure a smooth and stable warp travel experience.",
-        cost: 1500000,
-        multiplier: 0.5,
+        cost: 3000000, // Increased cost
+        multiplier: 0.5, // Balanced multiplier
         maxCount: 3,
         threshold: 15,
         icon: LucideRotate3D,
