@@ -245,7 +245,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     baseCost: 60000,
     costMultiplier: 1.5,
     auPerSecond: 40,
-    threshold: 5000,
+    threshold: 25000,
     icon: LucideTentTree,
     upgrades: {
       buildings: {
@@ -292,7 +292,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     baseCost: 100000,
     costMultiplier: 1.55,
     auPerSecond: 75,
-    threshold: 25000,
+    threshold: 50000,
     icon: LucideMountain,
     upgrades: {
       atmosphereGenerators: {
@@ -330,7 +330,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     baseCost: 200000,
     costMultiplier: 1.6,
     auPerSecond: 120,
-    threshold: 50000,
+    threshold: 75000,
     icon: LucideCableCar,
     upgrades: {
       cableMaterial: {
