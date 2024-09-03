@@ -28,7 +28,7 @@ export default function Home() {
     return (
       <>
         <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-16">
-          <div className="aspect-video h-auto w-full">
+          <div className="aspect-video h-auto w-full flex-none">
             <ClickArea />
           </div>
           <Statistics />
@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
       <div className="flex h-full w-96 flex-none flex-col overflow-hidden border-r">
-          <div className="aspect-video h-auto w-full">
+          <div className="aspect-video h-auto w-full flex-none">
             <ClickArea />
           </div>
         <div className="overflow-y-auto sticky top-0">
