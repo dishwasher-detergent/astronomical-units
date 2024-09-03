@@ -80,7 +80,7 @@ export function BaseUpgrade({
 
     return (
       <TooltipProvider>
-        <Tooltip>
+        <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
             <div className="relative">
               <UpgradeButton
