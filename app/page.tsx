@@ -60,7 +60,7 @@ export default function Home() {
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
-                <div className="flex-1 space-y-2 overflow-y-auto py-2">
+                <div className="flex-1 overflow-y-auto py-2">
                   <EquipmentDisplay />
                 </div>
               </div>

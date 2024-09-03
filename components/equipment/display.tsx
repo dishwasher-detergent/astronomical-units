@@ -29,83 +29,88 @@ export function EquipmentDisplay() {
   }
 
   return (
-    <div>
+    <>
       <div className="mb-2 md:hidden">
         <p className="font-bold">Balance</p>
         <p>{auVal.toLocaleString(LOCALE)} AU</p>
       </div>
-      {Object.entries(items).map(([key, equipment]) => {
-        if (equipment.value == 0) return;
-        const item = EQUIPMENT_LIST[key];
-        const multiplier = calculateUpgradeMultiplier(equipment, item);
-        const auPerSecond = item.auPerSecond * multiplier * equipment.value;
-        return (
-          <div key={key} className="py-4 md:border-b md:bg-background md:p-4">
-            <p className="mb-1 flex items-center font-bold">
-              {item.name}
-              <Badge className="ml-2" variant="outline">
-                {equipment.value}
-              </Badge>
-            </p>
-            <p className="text-sm md:text-xs">{item.description}</p>
-            <p className="mb-2 text-sm md:text-xs">
-              Generates {auPerSecond} AU/s
-            </p>
-            {item.upgrades && (
+      <div className="space-y-2">
+        {Object.entries(items).map(([key, equipment]) => {
+          if (equipment.value == 0) return;
+          const item = EQUIPMENT_LIST[key];
+          const multiplier = calculateUpgradeMultiplier(equipment, item);
+          const auPerSecond = item.auPerSecond * multiplier * equipment.value;
+          return (
+            <div
+              key={key}
+              className="rounded-lg bg-muted/30 p-4 md:border-b md:bg-background"
+            >
+              <p className="mb-1 flex items-center font-bold">
+                {item.name}
+                <Badge className="ml-2" variant="outline">
+                  {equipment.value}
+                </Badge>
+              </p>
+              <p className="text-sm md:text-xs">{item.description}</p>
+              <p className="mb-2 text-sm md:text-xs">
+                Generates {auPerSecond} AU/s
+              </p>
+              {item.upgrades && (
+                <div className="mb-2">
+                  <p className="mb-1 text-sm font-semibold md:text-xs">
+                    Upgrades
+                  </p>
+                  <div className="flex flex-row gap-1">
+                    {Object.entries(item.upgrades).map(([upgradeKey, _]) => {
+                      return (
+                        <Upgrade
+                          key={`${key}_${upgradeKey}`}
+                          parentKey={key}
+                          elementKey={upgradeKey}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
               <div className="mb-2">
                 <p className="mb-1 text-sm font-semibold md:text-xs">
-                  Upgrades
+                  Purchased Equipment
                 </p>
-                <div className="flex flex-row gap-1">
-                  {Object.entries(item.upgrades).map(([upgradeKey, _]) => {
-                    return (
-                      <Upgrade
-                        key={`${key}_${upgradeKey}`}
-                        parentKey={key}
-                        elementKey={upgradeKey}
-                      />
-                    );
+                <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
+                  {[...Array(equipment.value)].map((_, i) => {
+                    const Icon = item.icon;
+                    return <Icon key={i} className="size-4 flex-none" />;
                   })}
                 </div>
               </div>
-            )}
-            <div className="mb-2">
-              <p className="mb-1 text-sm font-semibold md:text-xs">
-                Purchased Equipment
-              </p>
-              <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
-                {[...Array(equipment.value)].map((_, i) => {
-                  const Icon = item.icon;
-                  return <Icon key={i} className="size-4 flex-none" />;
-                })}
+              <div className="mb-2">
+                <p className="mb-1 text-sm font-semibold md:text-xs">
+                  Equiped Upgrades
+                </p>
+                <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
+                  {equipment.upgrades &&
+                    Object.entries(equipment.upgrades).map(
+                      ([upgradeKey, upgradeVal]) => {
+                        return [...Array(upgradeVal)].map((_, i) => {
+                          const upgrades = item?.upgrades;
+                          if (!upgrades) return;
+                          const Icon = upgrades[upgradeKey].icon;
+                          return <Icon key={i} className="size-4 flex-none" />;
+                        });
+                      },
+                    )}
+                </div>
               </div>
-            </div>
-            <div className="mb-2">
-              <p className="mb-1 text-sm font-semibold md:text-xs">
-                Equiped Upgrades
+              <p className="mb-2 text-sm font-bold text-red-600 md:text-xs">
+                Equipment is sold at 30% the buy price, if you sell your last
+                equipment you lose all upgrades.
               </p>
-              <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
-                {equipment.upgrades &&
-                  Object.entries(equipment.upgrades).map(
-                    ([upgradeKey, upgradeVal]) => {
-                      return [...Array(upgradeVal)].map((_, i) => {
-                        const upgrades = item?.upgrades;
-                        if (!upgrades) return;
-                        const Icon = upgrades[upgradeKey].icon;
-                        return <Icon key={i} className="size-4 flex-none" />;
-                      });
-                    },
-                  )}
-              </div>
+              <SellBaseEquipment elementKey={key} />
             </div>
-            <p className="mb-2 text-sm font-bold text-red-600 md:text-xs">
-              Equipment is sold at 30% the buy price, if you sell your last
-              equipment you lose all upgrades.
-            </p>
-            <SellBaseEquipment elementKey={key} />
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
