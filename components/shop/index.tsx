@@ -1,9 +1,10 @@
 "use client";
 
+import { useAtomValue } from "jotai";
+
 import { Astronaut } from "@/components/shop/astronaut";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { BaseEquipment } from "@/components/shop/equipment/base";
-import { useAtomValue } from "jotai";
 import { au } from "@/atoms/au";
 import { LOCALE } from "@/constants/GLOBAL";
 
