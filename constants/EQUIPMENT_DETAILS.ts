@@ -42,8 +42,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   astronaut: {
     name: "Crew Member",
     description: "Adds another member to your crew.",
-    baseCost: 50,
-    costMultiplier: 1.2,
+    baseCost: 15,
+    costMultiplier: 1.15,
     auPerSecond: 1,
     threshold: 20,
     equipment: false,
@@ -52,8 +52,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   charter: {
     name: "Charter a Billionaire",
     description: "Show some billionaire Earth from space.",
-    baseCost: 250,
-    costMultiplier: 1.25,
+    baseCost: 100,
+    costMultiplier: 1.15,
     auPerSecond: 5,
     threshold: 50,
     icon: LucidePlaneTakeoff,
