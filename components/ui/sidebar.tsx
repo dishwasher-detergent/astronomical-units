@@ -12,7 +12,7 @@ export function Sidebar() {
     const minHeight = 100;
     const [scrollPos, setScrollPos] = useState(0);
     const [scrollDirection, setScrollDirection] = useState(true);
-    const sidebarRef = useRef(null);
+    const sidebarRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
       const handleScroll = () => {
