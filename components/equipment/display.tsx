@@ -30,7 +30,7 @@ export function EquipmentDisplay() {
 
   return (
     <>
-      <div className="mb-2 md:hidden">
+      <div className="mb-2 md:hidden sticky top-0 bg-background z-10 border-b pb-2">
         <p className="font-bold">Balance</p>
         <p>{auVal.toLocaleString(LOCALE)} AU</p>
       </div>
@@ -43,7 +43,7 @@ export function EquipmentDisplay() {
           return (
             <div
               key={key}
-              className="rounded-lg bg-muted/30 p-4 md:rounded-none md:border-b md:bg-background"
+              className="rounded-lg bg-muted/50 p-4 md:rounded-none md:border-b md:bg-background"
             >
               <p className="mb-1 flex items-center font-bold">
                 {item.name}

@@ -16,7 +16,7 @@ export function Shop() {
       <p className="sticky top-0 hidden bg-background px-4 py-2 font-bold md:block">
         Store
       </p>
-      <div className="mb-2 md:hidden">
+      <div className="mb-2 md:hidden sticky top-0 bg-background z-10 border-b pb-2">
         <p className="font-bold">Balance</p>
         <p>{auVal.toLocaleString(LOCALE)} AU</p>
       </div>
