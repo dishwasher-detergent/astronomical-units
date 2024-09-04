@@ -11,7 +11,7 @@ export function Balance() {
   return (
     <div className="sticky top-0 z-10 mb-2 border-b bg-background pb-2 md:hidden">
       <p className="font-bold">Balance</p>
-      <p>{auVal.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</p>
+      <p>{auVal?.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</p>
     </div>
   );
 }
