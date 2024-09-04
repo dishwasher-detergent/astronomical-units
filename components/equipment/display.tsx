@@ -32,10 +32,6 @@ export function EquipmentDisplay() {
 
   return (
     <>
-      <div className="sticky top-0 z-10 mb-2 border-b bg-background pb-2 md:hidden">
-        <p className="font-bold">Balance</p>
-        <p>{auVal.toLocaleString(LOCALE)} AU</p>
-      </div>
       <div className="space-y-2">
         {Object.entries(items).map(([key, equipment]) => {
           if (equipment.value == 0) return;

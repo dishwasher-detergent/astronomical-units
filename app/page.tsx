@@ -15,7 +15,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Sidebar } from "@/components/ui/sidebar";
+import { Balance } from "@/components/balance";
 
 export default function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -28,7 +28,7 @@ export default function Home() {
     return (
       <>
         <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-16">
-          <div className="aspect-video h-auto w-full flex-none">
+          <div className="aspect-square h-auto w-full flex-none">
             <ClickArea />
           </div>
           <Statistics />
@@ -46,6 +46,7 @@ export default function Home() {
                   <DrawerTitle>Shop</DrawerTitle>
                 </DrawerHeader>
                 <div className="flex-1 overflow-y-auto pb-4">
+                  <Balance />
                   <Shop />
                 </div>
               </div>
@@ -62,8 +63,12 @@ export default function Home() {
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
-                <div className="flex-1 overflow-y-auto pb-4">
+                <div className="flex-1 space-y-2 overflow-y-auto pb-4">
+                  <Balance />
                   <Crew />
+                  <nav className="flex h-12 items-center justify-between bg-background px-4 font-bold">
+                    <p>Equipment</p>
+                  </nav>
                   <EquipmentDisplay />
                 </div>
               </div>
