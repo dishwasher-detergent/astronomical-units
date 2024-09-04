@@ -32,6 +32,7 @@ export function EquipmentDisplay() {
         const auPerSecond = item.auPerSecond * multiplier * equipment.value;
         return (
           <DisplayItem
+            key={key}
             item={item}
             equipment={equipment}
             auPerSecond={auPerSecond}
