@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 
 import { au, PerSecond } from "@/atoms/au";
 import { Stats } from "@/components/ui/stats";
-import { LOCALE } from "@/constants/GLOBAL";
+import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { useMeasureDifference } from "@/hooks/useMeasureDifference";
 
 export function ClickTotalCount() {
@@ -15,10 +15,7 @@ export function ClickTotalCount() {
   return (
     <Stats
       label="Astronomical Units (AU)"
-      value={auValue.toLocaleString(LOCALE, {
-        style: 'currency',
-        currency: 'USD'
-      })}
+      value={auValue.toLocaleString(LOCALE, NUMBER_OPTIONS)}
     />
   );
 }

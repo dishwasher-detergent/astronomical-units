@@ -8,7 +8,7 @@ import { useAcquireCost } from "@/hooks/useAcquireCost";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { LOCALE } from "@/constants/GLOBAL";
+import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 
 export function AcquireButton({
   elementKey,
@@ -34,19 +34,13 @@ export function AcquireButton({
         if (canAcquire) {
           increment();
           setAu((current) => current - cost);
-          toast.success(`Purchased ${element.name} for ${cost.toLocaleString(LOCALE, {
-            style: 'currency',
-            currency: 'USD'
-          })} AU`);
+          toast.success(`Purchased ${element.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`);
         }
       }}
     >
       <div className="flex-1 text-left">{children}</div>
       <div className="flex-none">
-        <Badge>{cost.toLocaleString(LOCALE, {
-          style: 'currency',
-          currency: 'USD'
-        })} AU</Badge>
+        <Badge>{cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</Badge>
       </div>
     </button>
   );

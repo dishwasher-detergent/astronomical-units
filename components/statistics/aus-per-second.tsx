@@ -3,7 +3,7 @@
 import { useAtomValue } from "jotai";
 
 import { Stats } from "@/components/ui/stats";
-import { LOCALE } from "@/constants/GLOBAL";
+import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
@@ -23,7 +23,7 @@ export function AusPerSecond() {
   return (
     <Stats
       label="Passive AUs per second"
-      value={auPerSecond?.toLocaleString(LOCALE)}
+      value={auPerSecond?.toLocaleString(LOCALE, NUMBER_OPTIONS)}
     />
   );
 }

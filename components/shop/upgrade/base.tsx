@@ -22,6 +22,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 
 export function BaseUpgrade({
   atom,
@@ -62,7 +63,7 @@ export function BaseUpgrade({
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">{element.cost} AU</Badge>
+                <Badge className="text-xs">{element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</Badge>
               </div>
             </div>
             <UpgradeButton
@@ -103,7 +104,7 @@ export function BaseUpgrade({
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">{element.cost} AU</Badge>
+                <Badge className="text-xs">{element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</Badge>
               </div>
             </div>
           </TooltipContent>

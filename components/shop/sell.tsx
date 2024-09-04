@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useSellCost } from "@/hooks/useSellCost";
 import { Button } from "@/components/ui/button";
-import { LOCALE } from "@/constants/GLOBAL";
+import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import {
   Dialog,
   DialogContent,
@@ -63,18 +63,12 @@ export function SellButton({
             decrement();
             setAu((current) => current + cost);
             toast.error(
-              `Sold ${element.name} for ${cost.toLocaleString(LOCALE, {
-                style: 'currency',
-                currency: 'USD'
-              })} AU`,
+              `Sold ${element.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
             );
           }}
         >
           {children}
-          {cost.toLocaleString(LOCALE, {
-            style: 'currency',
-            currency: 'USD'
-          })} AU
+          {cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
         </Button>
       </DialogContent>
     </Dialog>
