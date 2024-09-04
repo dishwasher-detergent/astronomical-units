@@ -93,7 +93,7 @@ export function BaseUpgrade({
               </UpgradeButton>
             </div>
           </TooltipTrigger>
-          <TooltipContent side="bottom">
+          <TooltipContent side="bottom" align="start">
             <div className="flex w-48 flex-row text-xs">
               <div className="flex-1">
                 <p className="text-sm font-bold">{element.name}</p>

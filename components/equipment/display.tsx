@@ -53,7 +53,7 @@ export function EquipmentDisplay() {
                 Generates {auPerSecond} AU/s
               </p>
               <div className="mb-2">
-                <p className="mb-1 text-sm font-semibold">
+                <p className="mb-2 text-sm font-semibold">
                   Purchased Equipment
                   <Badge className="ml-2 bg-background" variant="outline">
                     {equipment.value}
@@ -88,7 +88,7 @@ export function EquipmentDisplay() {
                 </div>
               )}
               <div className="mb-2">
-                <p className="mb-1 text-sm font-semibold">Equiped Upgrades</p>
+                <p className="mb-2 text-sm font-semibold">Equiped Upgrades</p>
                 <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
                   {equipment.upgrades &&
                     Object.entries(equipment.upgrades).map(

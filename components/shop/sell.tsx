@@ -36,7 +36,7 @@ export function SellButton({
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button
           variant="ghost"
           className="text-red-600 hover:bg-red-300/10 hover:text-red-600"
@@ -51,7 +51,7 @@ export function SellButton({
             Are you sure you want to sell {element.name}?
           </DialogTitle>
           <DialogDescription>
-            <p className="text-red-600">
+            <p className="py-4 text-red-600">
               Equipment is sold at 30% the buy price, if you sell your last
               equipment you lose all upgrades.
             </p>

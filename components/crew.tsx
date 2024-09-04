@@ -15,14 +15,12 @@ export function Crew() {
         {(crew.current > 1 || crew.current == 0) && "s"}
       </p>
       {crew.current > 0 && (
-        <div className="overflow-y-auto md:max-h-12">
-          <div className="flex flex-row flex-wrap gap-1">
-            {[...Array(crew.current)].map((_, i) => {
-              return (
-                <LucidePersonStanding key={i} className="size-5 md:size-4" />
-              );
-            })}
-          </div>
+        <div className="flex flex-row flex-wrap gap-1">
+          {[...Array(crew.current)].map((_, i) => {
+            return (
+              <LucidePersonStanding key={i} className="size-5 md:size-4" />
+            );
+          })}
         </div>
       )}
     </div>

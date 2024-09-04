@@ -2,40 +2,41 @@ import { Equipment } from "@/types";
 import {
   LucideArmchair,
   LucideArrowBigUpDash,
+  LucideBattery,
+  LucideBatteryCharging,
+  LucideBed,
+  LucideBolt,
   LucideBoxes,
   LucideBuilding,
+  LucideBuilding2,
+  LucideCableCar,
   LucideChurch,
+  LucideCircleDot,
+  LucideCompass,
+  LucideCpu,
+  LucideCrown,
   LucideDrill,
+  LucideDroplet,
   LucideHospital,
   LucideHouse,
+  LucideLayers,
+  LucideLeaf,
+  LucideLink,
   LucideMicroscope,
+  LucideMountain,
   LucidePersonStanding,
   LucidePickaxe,
+  LucidePlaneTakeoff,
   LucidePresentation,
   LucideRocket,
-  LucideTentTree,
-  LucidePlaneTakeoff,
-  LucideCompass,
-  LucideBatteryCharging,
-  LucideBolt,
-  LucideShieldCheck,
-  LucideLink,
-  LucideLeaf,
-  LucideDroplet,
-  LucideWind,
-  LucideMountain,
-  LucideShieldAlert,
-  LucideBed,
-  LucideBuilding2,
-  LucideCpu,
-  LucideSun,
-  LucideSatelliteDish,
-  LucideCableCar,
   LucideRotate3D,
-  LucideBattery,
-  LucideCircleDot,
-  LucideLayers,
-  LucideTrain
+  LucideSatelliteDish,
+  LucideShieldAlert,
+  LucideShieldCheck,
+  LucideSun,
+  LucideTentTree,
+  LucideTrain,
+  LucideWind,
 } from "lucide-react";
 
 export const EQUIPMENT_LIST: Record<string, Equipment> = {
@@ -165,7 +166,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   },
   satellite: {
     name: "Satellite Network",
-    description: "Deploy satellites to enhance communication and resource gathering.",
+    description:
+      "Deploy satellites to enhance communication and resource gathering.",
     baseCost: 7000,
     costMultiplier: 1.4,
     auPerSecond: 12,
@@ -221,7 +223,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       },
       researchLab: {
         name: "Research Labs",
-        description: "Improve scientific research and technological advancements.",
+        description:
+          "Improve scientific research and technological advancements.",
         cost: 60000,
         multiplier: 0.35,
         maxCount: 5,
@@ -284,6 +287,15 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 25,
         icon: LucideChurch,
       },
+      stori: {
+        name: "Stori Beans",
+        description: "The queen of the world!",
+        cost: 100000,
+        multiplier: 0.75,
+        maxCount: 1,
+        threshold: 50,
+        icon: LucideCrown,
+      },
     },
   },
   terraforming: {
@@ -335,7 +347,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     upgrades: {
       cableMaterial: {
         name: "Advanced Cable Materials",
-        description: "Enhance the strength and durability of the elevator cable.",
+        description:
+          "Enhance the strength and durability of the elevator cable.",
         cost: 300000,
         multiplier: 0.2,
         maxCount: 10,
@@ -344,7 +357,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       },
       cargoCapacity: {
         name: "Cargo Capacity",
-        description: "Increase the amount of materials that can be transported.",
+        description:
+          "Increase the amount of materials that can be transported.",
         cost: 400000,
         multiplier: 0.3,
         maxCount: 5,
@@ -373,7 +387,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     upgrades: {
       energySource: {
         name: "Advanced Energy Source",
-        description: "Power the warp drive with a highly efficient energy core.",
+        description:
+          "Power the warp drive with a highly efficient energy core.",
         cost: 1500000,
         multiplier: 0.2,
         maxCount: 10,
@@ -402,7 +417,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   },
   orbitalRing: {
     name: "Orbital Ring",
-    description: "Construct an orbital ring around the planet for enhanced logistics.",
+    description:
+      "Construct an orbital ring around the planet for enhanced logistics.",
     baseCost: 3000000,
     costMultiplier: 1.7,
     auPerSecond: 400,
