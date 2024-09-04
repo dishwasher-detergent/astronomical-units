@@ -2,7 +2,8 @@ export const LOCALE = "en-US";
 
 export const NUMBER_OPTIONS = { 
   style: 'decimal', 
-  maximumFractionDigits: 2 
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 2
 }
 
 export const MAXIMUM = "MAX";
