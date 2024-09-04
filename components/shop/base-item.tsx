@@ -8,7 +8,6 @@ import { AcquireButton } from "@/components/shop/aquire";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
-import { LucideBoxSelect } from "lucide-react";
 
 export function Base({
   atom,

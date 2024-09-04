@@ -13,10 +13,8 @@ export function Shop() {
 
   return (
     <div className="relative bg-background md:border-b">
-      <p className="hidden bg-background px-4 py-2 font-bold md:block">
-        Store
-      </p>
-      <div className="mb-2 md:hidden sticky top-0 bg-background z-10 border-b pb-2">
+      <p className="hidden bg-background px-4 py-2 font-bold md:block">Store</p>
+      <div className="sticky top-0 z-10 mb-2 border-b bg-background pb-2 md:hidden">
         <p className="font-bold">Balance</p>
         <p>{auVal.toLocaleString(LOCALE)} AU</p>
       </div>

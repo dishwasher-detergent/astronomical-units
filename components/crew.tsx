@@ -10,7 +10,7 @@ export function Crew() {
 
   return (
     <div className="flex-none space-y-2 border-b bg-background p-4 md:pr-0">
-      <p className="text-sm font-semibold md:text-xs">
+      <p className="font-semibold">
         {crew.current} Crew Member
         {(crew.current > 1 || crew.current == 0) && "s"}
       </p>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
+import { LucideInfo } from "lucide-react";
 
 import { equipment } from "@/atoms/equipment";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +11,7 @@ import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { SellBaseEquipment } from "../shop/equipment/sell-base";
 import { au } from "@/atoms/au";
 import { LOCALE } from "@/constants/GLOBAL";
+import { Tip } from "@/components/ui/tip";
 
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);
@@ -30,7 +32,7 @@ export function EquipmentDisplay() {
 
   return (
     <>
-      <div className="mb-2 md:hidden sticky top-0 bg-background z-10 border-b pb-2">
+      <div className="sticky top-0 z-10 mb-2 border-b bg-background pb-2 md:hidden">
         <p className="font-bold">Balance</p>
         <p>{auVal.toLocaleString(LOCALE)} AU</p>
       </div>
@@ -45,21 +47,33 @@ export function EquipmentDisplay() {
               key={key}
               className="rounded-lg bg-muted/50 p-4 md:rounded-none md:border-b md:bg-background"
             >
-              <p className="mb-1 flex items-center font-bold">
-                {item.name}
-                <Badge className="ml-2" variant="outline">
-                  {equipment.value}
-                </Badge>
-              </p>
+              <p className="mb-1 flex items-center font-bold">{item.name}</p>
               <p className="text-sm md:text-xs">{item.description}</p>
               <p className="mb-2 text-sm md:text-xs">
                 Generates {auPerSecond} AU/s
               </p>
+              <div className="mb-2">
+                <p className="mb-1 text-sm font-semibold">
+                  Purchased Equipment
+                  <Badge className="ml-2 bg-background" variant="outline">
+                    {equipment.value}
+                  </Badge>
+                </p>
+                <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
+                  {[...Array(equipment.value)].map((_, i) => {
+                    const Icon = item.icon;
+                    return <Icon key={i} className="size-4 flex-none" />;
+                  })}
+                </div>
+              </div>
               {item.upgrades && (
                 <div className="mb-2">
-                  <p className="mb-1 text-sm font-semibold md:text-xs">
-                    Upgrades
-                  </p>
+                  <div className="mb-1 flex flex-row items-center gap-1">
+                    <p className="text-sm font-semibold">Upgrades</p>
+                    <Tip content="Unlock upgrades by purchasing more of this type of equipment.">
+                      <LucideInfo className="size-3" />
+                    </Tip>
+                  </div>
                   <div className="flex flex-row gap-1">
                     {Object.entries(item.upgrades).map(([upgradeKey, _]) => {
                       return (
@@ -74,20 +88,7 @@ export function EquipmentDisplay() {
                 </div>
               )}
               <div className="mb-2">
-                <p className="mb-1 text-sm font-semibold md:text-xs">
-                  Purchased Equipment
-                </p>
-                <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
-                  {[...Array(equipment.value)].map((_, i) => {
-                    const Icon = item.icon;
-                    return <Icon key={i} className="size-4 flex-none" />;
-                  })}
-                </div>
-              </div>
-              <div className="mb-2">
-                <p className="mb-1 text-sm font-semibold md:text-xs">
-                  Equiped Upgrades
-                </p>
+                <p className="mb-1 text-sm font-semibold">Equiped Upgrades</p>
                 <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
                   {equipment.upgrades &&
                     Object.entries(equipment.upgrades).map(
@@ -102,10 +103,6 @@ export function EquipmentDisplay() {
                     )}
                 </div>
               </div>
-              <p className="mb-2 text-sm font-bold text-red-600 md:text-xs">
-                Equipment is sold at 30% the buy price, if you sell your last
-                equipment you lose all upgrades.
-              </p>
               <SellBaseEquipment elementKey={key} />
             </div>
           );

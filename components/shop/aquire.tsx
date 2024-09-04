@@ -8,7 +8,6 @@ import { useAcquireCost } from "@/hooks/useAcquireCost";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { LOCALE } from "@/constants/GLOBAL";
 
 export function AcquireButton({
   elementKey,
@@ -28,7 +27,7 @@ export function AcquireButton({
 
   return (
     <button
-      className="flex w-full flex-row gap-4 rounded-lg bg-muted/50 px-4 py-2 align-top hover:bg-muted disabled:cursor-not-allowed disabled:text-muted-foreground md:rounded-none md:bg-background"
+      className="flex w-full flex-row gap-4 rounded-lg bg-muted/30 px-4 py-2 align-top hover:bg-muted disabled:cursor-not-allowed disabled:text-muted-foreground md:rounded-none md:bg-background"
       disabled={!canAcquire}
       onClick={() => {
         if (canAcquire) {
@@ -40,7 +39,7 @@ export function AcquireButton({
     >
       <div className="flex-1 text-left">{children}</div>
       <div className="flex-none">
-        <Badge>{cost.toLocaleString(LOCALE)} AU</Badge>
+        <Badge>{cost} AU</Badge>
       </div>
     </button>
   );

@@ -32,7 +32,6 @@ export default function Home() {
             <ClickArea />
           </div>
           <Statistics />
-          <Crew />
         </div>
         <div className="fixed bottom-0 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
           <Drawer>
@@ -64,6 +63,7 @@ export default function Home() {
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
                 <div className="flex-1 overflow-y-auto pb-4">
+                  <Crew />
                   <EquipmentDisplay />
                 </div>
               </div>
@@ -77,18 +77,18 @@ export default function Home() {
   return (
     <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
       <div className="flex h-full w-96 flex-none flex-col overflow-hidden border-r">
-          <div className="aspect-video h-auto w-full flex-none">
-            <ClickArea />
-          </div>
-        <div className="overflow-y-auto sticky top-0">
+        <div className="aspect-video h-auto w-full flex-none">
+          <ClickArea />
+        </div>
+        <div className="sticky top-0 overflow-y-auto">
           <Statistics />
-          <Crew />
           <Shop />
         </div>
       </div>
       <div className="flex h-full flex-1 flex-col">
         <div className="relative flex-1 overflow-y-auto">
-          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between border-b bg-background px-4 font-bold">
+          <Crew />
+          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between bg-background px-4 font-bold">
             <p>Equipment</p>
           </nav>
           <EquipmentDisplay />
