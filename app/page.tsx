@@ -34,7 +34,7 @@ export default function Home() {
           </div>
           <Statistics />
         </div>
-        <div className="fixed bottom-0 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
+        <nav className="fixed bottom-0 z-[9999] flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
@@ -75,7 +75,7 @@ export default function Home() {
               </div>
             </DrawerContent>
           </Drawer>
-        </div>
+        </nav>
       </>
     );
   }
