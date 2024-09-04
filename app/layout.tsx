@@ -15,7 +15,7 @@ const font = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Astronomical Units",
-  description: "An idle game that will take you to the moon!",
+  description: "Embark on a cosmic journey where you start as a small space explorer gathering resources from nearby asteroids. As you accumulate more energy and materials, expand your fleet, colonize distant planets, and unlock advanced technologies. Set your sights on conquering the galaxy by discovering new star systems, establishing trade routes, and managing interstellar alliances. The universe is vast, and with every click, your empire grows—one astronomical unit at a time!",
 };
 
 export default function RootLayout({
