@@ -49,7 +49,10 @@ export function LastUpdated() {
               toast.info(
                 "You've been away for a while, here's what you've earned while you were gone!",
                 {
-                  description: `You've earned ${earned.toLocaleString(LOCALE)} AUs while you were away!`,
+                  description: `You've earned ${earned.toLocaleString(LOCALE, {
+                    style: 'currency',
+                    currency: 'USD'
+                  })} AUs while you were away!`,
                   duration: 5000,
                 },
               );

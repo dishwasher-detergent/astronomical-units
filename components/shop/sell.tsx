@@ -63,12 +63,18 @@ export function SellButton({
             decrement();
             setAu((current) => current + cost);
             toast.error(
-              `Sold ${element.name} for ${cost.toLocaleString(LOCALE)} AU`,
+              `Sold ${element.name} for ${cost.toLocaleString(LOCALE, {
+                style: 'currency',
+                currency: 'USD'
+              })} AU`,
             );
           }}
         >
           {children}
-          {cost.toLocaleString(LOCALE)} AU
+          {cost.toLocaleString(LOCALE, {
+            style: 'currency',
+            currency: 'USD'
+          })} AU
         </Button>
       </DialogContent>
     </Dialog>

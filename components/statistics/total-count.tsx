@@ -15,7 +15,10 @@ export function ClickTotalCount() {
   return (
     <Stats
       label="Astronomical Units (AU)"
-      value={auValue.toLocaleString(LOCALE)}
+      value={auValue.toLocaleString(LOCALE, {
+        style: 'currency',
+        currency: 'USD'
+      })}
     />
   );
 }
