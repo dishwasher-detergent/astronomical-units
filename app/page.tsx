@@ -21,7 +21,7 @@ export default function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop == null) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   if (!isDesktop) {
