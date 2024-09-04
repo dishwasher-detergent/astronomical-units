@@ -8,9 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { Upgrade } from "@/components/shop/upgrade";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
-import { SellBaseEquipment } from "../shop/equipment/sell-base";
+import { SellBaseEquipment } from "@/components/shop/equipment/sell-base";
 import { au } from "@/atoms/au";
-import { LOCALE } from "@/constants/GLOBAL";
 import { Tip } from "@/components/ui/tip";
 
 export function EquipmentDisplay() {
