@@ -3,19 +3,15 @@
 import { useSetAtom } from "jotai";
 import { LucideEarth } from "lucide-react";
 
-import { clicksPerSecond } from "@/atoms/global";
 import { auIncrement } from "@/atoms/au";
-import { useMeasure } from "@/hooks/useMeasure";
 import { Button } from "@/components/ui/button";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
-  const measureClicks = useMeasure(clicksPerSecond);
 
   return (
     <Button
       onClick={({ currentTarget }) => {
-        measureClicks(1);
         setClicks();
         currentTarget.blur();
       }}

@@ -44,6 +44,5 @@ export type GameData = {
     deltaMultiplier: number;
   };
   show: Record<string, boolean>;
-  clicks_per_second: number;
   last_updated: number;
 };

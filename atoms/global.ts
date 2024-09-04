@@ -15,7 +15,6 @@ const data: GameData = {
     deltaMultiplier: ASTRONAUT_DELTA_MULTIPLIER,
   },
   show: {},
-  clicks_per_second: 0,
   last_updated: 0,
 };
 
@@ -23,14 +22,10 @@ export const gameData = atomWithStorage("GAME_DATA", data, undefined, {
   getOnInit: true,
 });
 
-export const clicksPerSecond = focusAtom(gameData, (optic) =>
-  optic.prop("clicks_per_second"),
-);
-
 export const lastUpdated = focusAtom(gameData, (optic) =>
   optic.prop("last_updated"),
 );
 
 if (process.env.NODE_ENV !== "production") {
-  clicksPerSecond.debugLabel = "CPS";
+  gameData.debugLabel = "CPS";
 }
