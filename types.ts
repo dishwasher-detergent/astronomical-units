@@ -39,10 +39,6 @@ export type GameData = {
     current: number;
   };
   equipment: EquipmentObject;
-  astronaut: {
-    current: number;
-    deltaMultiplier: number;
-  };
   show: Record<string, boolean>;
   last_updated: number;
 };

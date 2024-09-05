@@ -53,7 +53,11 @@ export function BaseUpgrade({
               <Icon className="size-4" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent side="bottom" align="start" className="max-w-sm">
+          <PopoverContent
+            side="bottom"
+            align="start"
+            className="z-[9999] max-w-sm"
+          >
             <div className="mb-2 flex w-full flex-row gap-2 text-xs">
               <div className="flex-1">
                 <p className="text-sm font-bold">{element.name}</p>
@@ -63,7 +67,9 @@ export function BaseUpgrade({
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">{element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</Badge>
+                <Badge className="text-xs">
+                  {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
+                </Badge>
               </div>
             </div>
             <UpgradeButton
@@ -83,7 +89,7 @@ export function BaseUpgrade({
       <TooltipProvider>
         <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
-            <div className="relative">
+            <div className="relative z-10">
               <UpgradeButton
                 name={element.name}
                 cost={element.cost}
@@ -94,7 +100,7 @@ export function BaseUpgrade({
               </UpgradeButton>
             </div>
           </TooltipTrigger>
-          <TooltipContent side="bottom" align="start">
+          <TooltipContent side="bottom" align="start" className="z-[9999]">
             <div className="flex max-w-sm flex-row text-xs">
               <div className="flex-1">
                 <p className="text-sm font-bold">{element.name}</p>
@@ -104,7 +110,9 @@ export function BaseUpgrade({
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">{element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU</Badge>
+                <Badge className="text-xs">
+                  {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
+                </Badge>
               </div>
             </div>
           </TooltipContent>

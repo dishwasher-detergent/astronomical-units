@@ -28,8 +28,6 @@ export function generateEquipmentObject(
   const newObject: EquipmentObject = {};
 
   Object.entries(equipmentList).forEach(([key, value]: [string, Equipment]) => {
-    if (value.equipment === false) return;
-
     newObject[key] = {
       value: 0,
       upgrades: generateEquipmentUpgradesObject(value),

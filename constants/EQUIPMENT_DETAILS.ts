@@ -17,6 +17,7 @@ import {
   LucideCrown,
   LucideDrill,
   LucideDroplet,
+  LucideGraduationCap,
   LucideHospital,
   LucideHouse,
   LucideLayers,
@@ -50,6 +51,17 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 20,
     equipment: false,
     icon: LucidePersonStanding,
+    upgrades: {
+      training: {
+        name: "Training",
+        description: "Train your crew members to more efficiently operate.",
+        cost: 5000,
+        multiplier: 0.2,
+        maxCount: 5,
+        threshold: 5,
+        icon: LucideGraduationCap,
+      },
+    },
   },
   charter: {
     name: "Charter a Billionaire",

@@ -1,47 +1,36 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-import {
-  ASTRONAUT_DELTA,
-  ASTRONAUT_DELTA_MULTIPLIER_DELTA,
-} from "@/constants/ASTRONAUT";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { gameData } from "./global";
+import { show } from "./show";
 
 export const astronaut = focusAtom(gameData, (optic) =>
-  optic.prop("astronaut"),
+  optic.path("equipment.astronaut"),
 );
 
 export const astronautCurrent = atom(
-  (get) => get(astronaut).current,
+  (get) => get(astronaut).value,
   (get, set) => {
-    set(astronaut, ({ current, ...astronautContents }) => {
-      const newastronaut = current + get(astronautDelta);
+    const equip = EQUIPMENT_LIST.astronaut?.upgrades;
+    const newVal = get(astronaut).value + 1;
 
-      return {
-        ...astronautContents,
-        current: newastronaut < 0 ? 0 : newastronaut,
-      };
-    });
-  },
-);
-
-export const astronautDelta = atom(
-  (get) => ASTRONAUT_DELTA + ASTRONAUT_DELTA * get(astronautDeltaMultiplier),
-);
-
-export const astronautDeltaMultiplier = atom(
-  (get) => get(astronaut).deltaMultiplier,
-  (_, set) => {
-    set(astronaut, ({ deltaMultiplier, ...astronautContents }) => ({
-      deltaMultiplier: deltaMultiplier + ASTRONAUT_DELTA_MULTIPLIER_DELTA,
-      ...astronautContents,
+    set(astronaut, (current) => ({
+      ...current,
+      value: newVal,
     }));
+
+    if (equip) {
+      Object.entries(equip).forEach(([key, value]: any) => {
+        if (newVal >= value.threshold) {
+          set(show, `astronaut_${key}`);
+        }
+      });
+    }
   },
 );
 
 if (process.env.NODE_ENV !== "production") {
   astronaut.debugLabel = "Astronaut";
   astronautCurrent.debugLabel = "Astronaut Current";
-  astronautDelta.debugLabel = "Astronaut Delta";
-  astronautDeltaMultiplier.debugLabel = "Astronaut Delta Multiplier";
 }

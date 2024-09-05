@@ -1,10 +1,9 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-import { astronautCurrent } from "@/atoms/astronauts";
+import { astronaut } from "@/atoms/astronauts";
 import { equipment } from "@/atoms/equipment";
 import { show } from "@/atoms/show";
-import { AU_WEIGHT } from "@/constants/AU";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { gameData } from "./global";
@@ -15,8 +14,17 @@ export const totalAu = focusAtom(gameData, (optic) =>
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
 
 export const auIncrement = atom(null, (get, set) => {
-  const newAu = get(au) + get(auWeight);
-  const newTotalAu = get(totalAu) + get(auWeight);
+  const item = EQUIPMENT_LIST.astronaut;
+  const astro = get(astronaut);
+  const multiplier = calculateUpgradeMultiplier(astro, item);
+
+  const valuePerClick = Math.max(
+    item.auPerSecond * multiplier * astro.value,
+    1,
+  );
+
+  const newAu = get(au) + valuePerClick;
+  const newTotalAu = get(totalAu) + valuePerClick;
 
   set(au, newAu);
   set(totalAu, newTotalAu);
@@ -28,15 +36,13 @@ export const auIncrement = atom(null, (get, set) => {
   });
 });
 
-export const PerSecond = atom(0);
-
-export const auWeight = atom((get) => AU_WEIGHT + get(astronautCurrent));
-
 export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const equip = get(equipment);
 
   const updateAuValues = (key: string, eq: any, multiplier: number = 1) => {
     const item = EQUIPMENT_LIST[key];
+
+    if (item.equipment === false) return;
 
     const earned = item.auPerSecond * multiplier * eq.value * seconds;
 
@@ -65,6 +71,4 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
 if (process.env.NODE_ENV !== "production") {
   au.debugLabel = "AUs";
   auIncrement.debugLabel = "AU Increment";
-  PerSecond.debugLabel = "Per Second";
-  auWeight.debugLabel = "AU Weight";
 }
