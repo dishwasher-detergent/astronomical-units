@@ -1,4 +1,5 @@
 "use client";
+
 import { useAtomValue } from "jotai";
 import { LucidePersonStanding } from "lucide-react";
 

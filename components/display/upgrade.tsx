@@ -1,3 +1,5 @@
+"use client";
+
 import { LucideInfo } from "lucide-react";
 
 import { Tip } from "@/components/ui/tip";

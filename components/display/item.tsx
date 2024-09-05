@@ -1,3 +1,5 @@
+"use client";
+
 import { SellBaseEquipment } from "@/components/shop/equipment/sell-base";
 import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";

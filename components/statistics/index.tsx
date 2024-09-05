@@ -1,3 +1,5 @@
+"use client";
+
 import { ClickTotalCount } from "@/components/statistics/total-count";
 import { AusPerSecond } from "@/components/statistics/aus-per-second";
 

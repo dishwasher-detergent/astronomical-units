@@ -20,7 +20,7 @@ export const gameData = atomWithStorage(
   data,
   {
     getItem(key, initialValue) {
-      const storedValue = window.localStorage.getItem(key);
+      const storedValue = localStorage.getItem(key);
       const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
 
       try {
@@ -42,10 +42,10 @@ export const gameData = atomWithStorage(
       }
     },
     setItem(key, value) {
-      window.localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(key, JSON.stringify(value));
     },
     removeItem(key) {
-      window.localStorage.removeItem(key);
+      localStorage.removeItem(key);
     },
   },
   {
