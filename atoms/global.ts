@@ -1,3 +1,5 @@
+"use client";
+
 import { focusAtom } from "jotai-optics";
 import { atomWithStorage } from "jotai/utils";
 
