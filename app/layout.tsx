@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex h-lvh w-screen flex-col overflow-x-hidden ${font.className}`}
+        className={`flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className}`}
       >
         <ThemeProvider
           attribute="class"

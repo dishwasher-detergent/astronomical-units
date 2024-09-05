@@ -28,7 +28,7 @@ export default function Home() {
   if (!isDesktop) {
     return (
       <>
-        <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-16">
+        <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-14">
           <div className="aspect-square h-auto w-full flex-none">
             <ClickArea />
           </div>
