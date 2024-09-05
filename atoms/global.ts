@@ -20,6 +20,8 @@ export const gameData = atomWithStorage(
   data,
   {
     getItem(key, initialValue) {
+      if (typeof localStorage === "undefined") return initialValue;
+
       const storedValue = localStorage.getItem(key);
       const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
 
