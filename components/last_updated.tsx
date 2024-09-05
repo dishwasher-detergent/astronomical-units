@@ -38,6 +38,9 @@ export function LastUpdated() {
           Object.entries(equip).forEach(([key, eq]: any) => {
             if (eq.value > 0) {
               const item = EQUIPMENT_LIST[key];
+
+              if (!item || item.equipment === false) return;
+
               const multiplier = calculateUpgradeMultiplier(eq, item);
 
               earned += item.auPerSecond * multiplier * eq.value * diff;

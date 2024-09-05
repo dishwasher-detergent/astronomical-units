@@ -63,8 +63,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     if (eq.value > 0) {
       const item = EQUIPMENT_LIST[key];
 
-      if (!item) return;
-
       const multiplier = calculateUpgradeMultiplier(eq, item);
       updateAuValues(key, eq, multiplier);
     }

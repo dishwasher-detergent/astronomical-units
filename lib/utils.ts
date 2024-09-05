@@ -43,6 +43,10 @@ export function calculateUpgradeMultiplier(
 ) {
   let multiplier = 1;
 
+  if (!item) {
+    return multiplier;
+  }
+
   if (equipment?.upgrades) {
     Object.entries(equipment.upgrades).forEach(([upgradeKey, upgradeVal]) => {
       const upgradeItem = item.upgrades?.[upgradeKey];
