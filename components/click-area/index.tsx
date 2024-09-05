@@ -4,15 +4,15 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import { auIncrement } from "@/atoms/au";
 import { Button } from "@/components/ui/button";
-import { astronaut } from "@/atoms/astronauts";
+import { crew } from "@/atoms/crew";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
-  const crew = useAtomValue(astronaut);
-  const item = EQUIPMENT_LIST.astronaut;
-  const multiplier = calculateUpgradeMultiplier(crew, item);
+  const crewAtom = useAtomValue(crew);
+  const item = EQUIPMENT_LIST.crew;
+  const multiplier = calculateUpgradeMultiplier(crewAtom, item);
 
   return (
     <Button
@@ -24,7 +24,7 @@ export function ClickArea() {
       <div className="z-10 flex flex-col items-center text-primary">
         <span>Tap Here</span>
         <span className="text-xl font-bold">
-          +{crew.value * multiplier + 1}
+          +{crewAtom.value * multiplier + 1}
         </span>
       </div>
       <div className="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-green-300 opacity-40 blur-xl filter dark:bg-green-500"></div>

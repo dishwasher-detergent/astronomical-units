@@ -2,15 +2,15 @@ import { useAtomValue } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { useMemo } from "react";
 
-import { astronautCurrent } from "@/atoms/astronauts";
+import { crewCurrent } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 
 const getRankAtom = (key: string) => {
   if (EQUIPMENT_LIST[key].equipment === false) {
     switch (key) {
-      case "astronaut":
-        return astronautCurrent;
+      case "crew":
+        return crewCurrent;
       default:
         return undefined;
     }

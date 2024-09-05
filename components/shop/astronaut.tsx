@@ -1,8 +1,8 @@
 "use client";
 
 import { Base } from "@/components/shop/base-item";
-import { astronautCurrent } from "@/atoms/astronauts";
+import { crewCurrent } from "@/atoms/crew";
 
 export function Astronaut() {
-  return <Base atom={astronautCurrent} elementKey="astronaut" />;
+  return <Base atom={crewCurrent} elementKey="crew" />;
 }

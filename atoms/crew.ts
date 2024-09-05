@@ -5,17 +5,17 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { gameData } from "./global";
 import { show } from "./show";
 
-export const astronaut = focusAtom(gameData, (optic) =>
-  optic.path("equipment.astronaut"),
+export const crew = focusAtom(gameData, (optic) =>
+  optic.path("equipment.crew"),
 );
 
-export const astronautCurrent = atom(
-  (get) => get(astronaut).value,
+export const crewCurrent = atom(
+  (get) => get(crew).value,
   (get, set) => {
-    const equip = EQUIPMENT_LIST.astronaut?.upgrades;
-    const newVal = get(astronaut).value + 1;
+    const equip = EQUIPMENT_LIST.crew?.upgrades;
+    const newVal = get(crew).value + 1;
 
-    set(astronaut, (current) => ({
+    set(crew, (current) => ({
       ...current,
       value: newVal,
     }));
@@ -23,7 +23,7 @@ export const astronautCurrent = atom(
     if (equip) {
       Object.entries(equip).forEach(([key, value]: any) => {
         if (newVal >= value.threshold) {
-          set(show, `astronaut_${key}`);
+          set(show, `crew_${key}`);
         }
       });
     }
@@ -31,6 +31,6 @@ export const astronautCurrent = atom(
 );
 
 if (process.env.NODE_ENV !== "production") {
-  astronaut.debugLabel = "Astronaut";
-  astronautCurrent.debugLabel = "Astronaut Current";
+  crew.debugLabel = "Crew";
+  crewCurrent.debugLabel = "Crew Current";
 }

@@ -29,7 +29,7 @@ export function EquipmentDisplay() {
         if (equipment.value == 0) return;
         const item = EQUIPMENT_LIST[key];
 
-        if (item.equipment === false) return;
+        if (!item || item.equipment === false) return;
 
         const multiplier = calculateUpgradeMultiplier(equipment, item);
         const auPerSecond = item.auPerSecond * multiplier * equipment.value;

@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-import { astronaut } from "@/atoms/astronauts";
+import { crew } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
@@ -14,12 +14,12 @@ export const totalAu = focusAtom(gameData, (optic) =>
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
 
 export const auIncrement = atom(null, (get, set) => {
-  const item = EQUIPMENT_LIST.astronaut;
-  const astro = get(astronaut);
-  const multiplier = calculateUpgradeMultiplier(astro, item);
+  const item = EQUIPMENT_LIST.crew;
+  const crewAtom = get(crew);
+  const multiplier = calculateUpgradeMultiplier(crewAtom, item);
 
   const valuePerClick = Math.max(
-    item.auPerSecond * multiplier * astro.value,
+    item.auPerSecond * multiplier * crewAtom.value,
     1,
   );
 
@@ -42,7 +42,7 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const updateAuValues = (key: string, eq: any, multiplier: number = 1) => {
     const item = EQUIPMENT_LIST[key];
 
-    if (item.equipment === false) return;
+    if (!item || item.equipment === false) return;
 
     const earned = item.auPerSecond * multiplier * eq.value * seconds;
 
@@ -62,6 +62,9 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   Object.entries(equip).forEach(([key, eq]: any) => {
     if (eq.value > 0) {
       const item = EQUIPMENT_LIST[key];
+
+      if (!item) return;
+
       const multiplier = calculateUpgradeMultiplier(eq, item);
       updateAuValues(key, eq, multiplier);
     }

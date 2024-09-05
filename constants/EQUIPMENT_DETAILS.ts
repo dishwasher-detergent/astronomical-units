@@ -41,7 +41,7 @@ import {
 } from "lucide-react";
 
 export const EQUIPMENT_LIST: Record<string, Equipment> = {
-  astronaut: {
+  crew: {
     name: "Crew Member",
     description:
       "Adds another member to your crew, increasing your AU per click.",

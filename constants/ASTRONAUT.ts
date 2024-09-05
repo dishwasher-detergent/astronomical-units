@@ -1,5 +1,0 @@
-export const ASTRONAUT_DELTA = 1;
-
-export const ASTRONAUT_DELTA_MULTIPLIER = 0;
-
-export const ASTRONAUT_DELTA_MULTIPLIER_DELTA = 1;
