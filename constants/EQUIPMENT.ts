@@ -1,7 +1,3 @@
-export const EQUIPMENT = 0;
-
-export const EQUIPMENT_DELTA = 1;
-
 export const EQUIPMENT_RATE = 1000;
 
 export const EQUIPMENT_RATE_DELTA = 33;

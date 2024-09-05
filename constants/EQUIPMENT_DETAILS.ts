@@ -42,7 +42,8 @@ import {
 export const EQUIPMENT_LIST: Record<string, Equipment> = {
   astronaut: {
     name: "Crew Member",
-    description: "Adds another member to your crew.",
+    description:
+      "Adds another member to your crew, increasing your AU per click.",
     baseCost: 15,
     costMultiplier: 1.15,
     auPerSecond: 1,

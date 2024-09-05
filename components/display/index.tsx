@@ -5,7 +5,7 @@ import { useAtomValue } from "jotai";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
-import { DisplayItem } from "@/components/equipment/item";
+import { DisplayItem } from "@/components/display/item";
 
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);

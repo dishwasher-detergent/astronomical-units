@@ -6,7 +6,7 @@ import { ClickArea } from "@/components/click-area";
 import { Shop } from "@/components/shop";
 import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
-import { EquipmentDisplay } from "@/components/equipment/display";
+import { EquipmentDisplay } from "@/components/display";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Button } from "@/components/ui/button";
 import {

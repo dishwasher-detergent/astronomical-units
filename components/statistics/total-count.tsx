@@ -2,15 +2,12 @@
 
 import { useAtomValue } from "jotai";
 
-import { au, PerSecond } from "@/atoms/au";
+import { au } from "@/atoms/au";
 import { Stats } from "@/components/ui/stats";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
-import { useMeasureDifference } from "@/hooks/useMeasureDifference";
 
 export function ClickTotalCount() {
   const auValue = useAtomValue(au);
-
-  useMeasureDifference(PerSecond, auValue);
 
   return (
     <Stats
