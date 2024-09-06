@@ -70,7 +70,7 @@ function Modal({
             Sell
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="max-h-[80%]">
+        <DrawerContent>
           <DrawerHeader className="flex-none">
             <DrawerTitle className="text-left">
               Are you sure you want to sell {element.name}?

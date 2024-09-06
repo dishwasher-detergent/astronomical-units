@@ -34,14 +34,14 @@ export default function Home() {
           </div>
           <Statistics />
         </div>
-        <nav className="fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
+        <nav className="mb-safe fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
                 <LucideStore />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="max-h-[80%]">
+            <DrawerContent>
               <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Shop</DrawerTitle>
@@ -59,7 +59,7 @@ export default function Home() {
                 <LucideSatellite />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="max-h-[80%]">
+            <DrawerContent>
               <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
