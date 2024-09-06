@@ -3,10 +3,8 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import {
-  type ISourceOptions,
-} from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim"
+import { type ISourceOptions } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
 import { useTheme } from "next-themes";
 
 import { auIncrement } from "@/atoms/au";
@@ -47,47 +45,47 @@ export function ClickArea() {
         },
         modes: {
           push: {
-            quantity: 1,            
+            quantity: 1,
           },
         },
       },
       particles: {
         number: {
-          value: 0
+          value: 0,
         },
         color: {
-          value: theme == 'dark' ? "#fff" : '#000'
+          value: theme == "dark" ? "#fff" : "#000",
         },
         shape: {
           type: ["star"],
         },
         opacity: {
-          value: { min: 0, max: 1 },
+          value: { min: 0, max: 0.5 },
           animation: {
             enable: true,
             speed: 1,
             startValue: "max",
-            destroy: "min"
-          }
+            destroy: "min",
+          },
         },
         size: {
-          value: { min: 3, max: 7 }
+          value: { min: 3, max: 7 },
         },
         life: {
           duration: {
             sync: true,
-            value: .5
+            value: 0.5,
           },
-          count: 1
+          count: 1,
         },
         move: {
           enable: true,
           gravity: {
-            enable: true
+            enable: true,
           },
           drift: {
             min: -2,
-            max: 2
+            max: 2,
           },
           speed: { min: 10, max: 30 },
           decay: 0.1,
@@ -96,20 +94,20 @@ export function ClickArea() {
           straight: false,
           outModes: {
             default: "destroy",
-            top: "none"
-          }
+            top: "none",
+          },
         },
         rotate: {
           value: {
             min: 0,
-            max: 360
+            max: 360,
           },
           direction: "random",
           move: true,
           animation: {
             enable: true,
-            speed: 60
-          }
+            speed: 60,
+          },
         },
         tilt: {
           direction: "random",
@@ -117,23 +115,23 @@ export function ClickArea() {
           move: true,
           value: {
             min: 0,
-            max: 360
+            max: 360,
           },
           animation: {
             enable: true,
-            speed: 60
-          }
+            speed: 60,
+          },
         },
         roll: {
           darken: {
             enable: true,
-            value: 25
+            value: 25,
           },
           enable: true,
           speed: {
             min: 15,
-            max: 25
-          }
+            max: 25,
+          },
         },
         wobble: {
           distance: 30,
@@ -141,9 +139,9 @@ export function ClickArea() {
           move: true,
           speed: {
             min: -15,
-            max: 15
-          }
-        }
+            max: 15,
+          },
+        },
       },
       detectRetina: true,
     }),
@@ -152,27 +150,23 @@ export function ClickArea() {
 
   return (
     <>
-    <Button
-      onClick={() => {
-        setClicks();
-      }}
-      className="relative flex h-full w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none border-b bg-muted hover:bg-muted"
-    >
-      <div className="z-10 flex flex-col items-center text-primary">
-        <span>Tap Here</span>
-        <span className="text-xl font-bold">
-          +{(crewAtom.value * multiplier + 1).toLocaleString(LOCALE)} AU
-        </span>
-      </div>
-      <Particles
-        className="absolute inset-0 z-10"
-        options={options}
-      />
-      <div className="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-green-300 opacity-40 blur-xl filter dark:bg-green-500"></div>
-      <div className="animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full bg-yellow-300 opacity-40 blur-xl filter dark:bg-yellow-500"></div>
-      <div className="animation-delay-4000 absolute -bottom-8 left-28 h-72 w-72 animate-blob rounded-full bg-pink-300 opacity-40 blur-xl filter dark:bg-pink-500"></div>
-    </Button>
+      <Button
+        onClick={() => {
+          setClicks();
+        }}
+        className="relative flex h-full w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none border-b bg-muted hover:bg-muted"
+      >
+        <div className="z-10 flex flex-col items-center text-primary">
+          <span>Tap Here</span>
+          <span className="text-xl font-bold">
+            +{(crewAtom.value * multiplier + 1).toLocaleString(LOCALE)} AU
+          </span>
+        </div>
+        <Particles className="absolute inset-0 z-10" options={options} />
+        <div className="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-green-300 opacity-40 blur-xl filter dark:bg-green-500"></div>
+        <div className="animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full bg-yellow-300 opacity-40 blur-xl filter dark:bg-yellow-500"></div>
+        <div className="animation-delay-4000 absolute -bottom-8 left-28 h-72 w-72 animate-blob rounded-full bg-pink-300 opacity-40 blur-xl filter dark:bg-pink-500"></div>
+      </Button>
     </>
   );
 }
-

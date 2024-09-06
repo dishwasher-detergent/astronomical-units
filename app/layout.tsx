@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
-import { LucideGithub } from "lucide-react";
+import { LucideGithub, LucideOrbit } from "lucide-react";
 
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
@@ -258,7 +258,11 @@ export default function RootLayout({
         >
           <InstallPrompt />
           <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-bold">
-            <p>Astronomical Units</p>
+            <div className="flex flex-row items-center gap-1">
+              <LucideOrbit className="size-4" />
+              <p className="hidden md:block">Astronomical Units</p>
+              <p className="block md:hidden">AU</p>
+            </div>
             <div className="flex items-center gap-1">
               <Button asChild variant="outline" size="icon" className="size-8">
                 <a
