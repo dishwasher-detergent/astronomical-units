@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className}`}
+        className={`pb-safe flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className}`}
       >
         <ThemeProvider
           attribute="class"
