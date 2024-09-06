@@ -22,4 +22,13 @@ const serwist = new Serwist({
   runtimeCaching: defaultCache,
 });
 
+self.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "visible") {
+    console.log("APP resumed");
+
+    // Reload the page to get the latest content
+    window.location.reload();
+  }
+});
+
 serwist.addEventListeners();
