@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
     title: APP_SHORT_NAME,
-    // startUpImage: [],
     startupImage: [
       {
         media:
@@ -238,6 +237,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
