@@ -15,6 +15,10 @@ export function DisplayUpgrade({
   equipment: EquipmentItem;
   primaryKey: string;
 }) {
+  const hasEquippedUpgrades =
+    equipment.upgrades &&
+    Object.values(equipment.upgrades).some((upgrade) => upgrade > 0);
+
   return (
     <>
       {item?.upgrades && (
@@ -38,22 +42,24 @@ export function DisplayUpgrade({
           </div>
         </div>
       )}
-      <div className="mb-2">
-        <p className="mb-2 text-sm font-semibold">Equiped Upgrades</p>
-        <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
-          {equipment.upgrades &&
-            Object.entries(equipment.upgrades).map(
-              ([upgradeKey, upgradeVal]) => {
-                return [...Array(upgradeVal)].map((_, i) => {
-                  const upgrades = item?.upgrades;
-                  if (!upgrades) return;
-                  const Icon = upgrades[upgradeKey].icon;
-                  return <Icon key={i} className="size-4 flex-none" />;
-                });
-              },
-            )}
+      {hasEquippedUpgrades && (
+        <div className="mb-2">
+          <p className="mb-2 text-sm font-semibold">Equiped Upgrades</p>
+          <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted p-3">
+            {equipment.upgrades &&
+              Object.entries(equipment.upgrades).map(
+                ([upgradeKey, upgradeVal]) => {
+                  return [...Array(upgradeVal)].map((_, i) => {
+                    const upgrades = item?.upgrades;
+                    if (!upgrades) return;
+                    const Icon = upgrades[upgradeKey].icon;
+                    return <Icon key={i} className="size-4 flex-none" />;
+                  });
+                },
+              )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
