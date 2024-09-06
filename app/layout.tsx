@@ -12,6 +12,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { APP_DESCRIPTION, APP_NAME, APP_SHORT_NAME } from "@/constants/GLOBAL";
 import { InstallPrompt } from "@/components/install-prompt";
+import { Backup } from "@/components/backup";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -264,6 +265,7 @@ export default function RootLayout({
               <p className="block md:hidden">AU</p>
             </div>
             <div className="flex items-center gap-1">
+              <Backup />
               <Button asChild variant="outline" size="icon" className="size-8">
                 <a
                   target="_blank"

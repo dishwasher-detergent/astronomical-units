@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { LucideHandCoins, LucideStore } from "lucide-react";
+import { LucideHandCoins } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
   Drawer,
@@ -58,6 +58,23 @@ function Modal({
   const cost = useSellCost(elementKey);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  const handleSell = () => {
+    decrement();
+    setAu((current) => current + cost);
+    toast.error(
+      `Sold ${element.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
+    );
+  };
+
+  const SellContent = () => (
+    <>
+      <Button variant="destructive" onClick={handleSell} className="w-full">
+        {children}
+        {cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
+      </Button>
+    </>
+  );
+
   if (!isDesktop) {
     return (
       <Drawer>
@@ -81,20 +98,7 @@ function Modal({
             </DrawerDescription>
           </DrawerHeader>
           <div className="p-2">
-            <Button
-              className="w-full"
-              variant="destructive"
-              onClick={() => {
-                decrement();
-                setAu((current) => current + cost);
-                toast.error(
-                  `Sold ${element.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
-                );
-              }}
-            >
-              {children}
-              {cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
-            </Button>
+            <SellContent />
           </div>
         </DrawerContent>
       </Drawer>
@@ -122,19 +126,7 @@ function Modal({
             equipment you lose all upgrades.
           </DialogDescription>
         </DialogHeader>
-        <Button
-          variant="destructive"
-          onClick={() => {
-            decrement();
-            setAu((current) => current + cost);
-            toast.error(
-              `Sold ${element.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
-            );
-          }}
-        >
-          {children}
-          {cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
-        </Button>
+        <SellContent />
       </DialogContent>
     </Dialog>
   );
