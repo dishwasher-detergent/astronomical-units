@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { toast } from "sonner";
+import { RESET } from "jotai/utils";
 
 export function Backup() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -87,9 +88,18 @@ export function Backup() {
                 Would you like to...
               </p>
               <Button onClick={handleDownload}>Download Backup</Button>
-              <p className="text-center text-sm font-semibold">Or</p>
               <Button variant="secondary" onClick={triggerFileInput}>
                 Restore from Backup
+              </Button>
+              <p className="text-center text-sm font-semibold">Or</p>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  toast.error("Game data reset successfully!");
+                  setGameData(RESET);
+                }}
+              >
+                Reset Game Data
               </Button>
               <input
                 type="file"
@@ -121,9 +131,18 @@ export function Backup() {
             Would you like to...
           </p>
           <Button onClick={handleDownload}>Download Backup</Button>
-          <p className="text-center text-sm font-semibold">Or</p>
           <Button variant="secondary" onClick={triggerFileInput}>
             Restore from Backup
+          </Button>
+          <p className="text-center text-sm font-semibold">Or</p>
+          <Button
+            variant="destructive"
+            onClick={() => {
+              toast.error("Game data reset successfully!");
+              setGameData(RESET);
+            }}
+          >
+            Reset Game Data
           </Button>
           <input
             type="file"
