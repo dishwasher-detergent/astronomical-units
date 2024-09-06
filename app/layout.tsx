@@ -11,6 +11,7 @@ import { LastUpdated } from "@/components/last_updated";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { APP_DESCRIPTION, APP_NAME } from "@/constants/GLOBAL";
+import { InstallPrompt } from "@/components/install-prompt";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -60,6 +61,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <InstallPrompt />
           <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-bold">
             <p>Astronomical Units</p>
             <div className="flex items-center gap-1">
