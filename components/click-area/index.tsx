@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { crew } from "@/atoms/crew";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
-import { LOCALE } from "@/constants/GLOBAL";
+import { EFFECT_MAX, EFFECT_MIN, LOCALE } from "@/constants/GLOBAL";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
@@ -45,7 +45,10 @@ export function ClickArea() {
         },
         modes: {
           push: {
-            quantity: 1,
+            quantity: Math.min(
+              Math.max(crewAtom.value + 1, EFFECT_MIN),
+              EFFECT_MAX,
+            ),
           },
         },
       },
@@ -145,7 +148,7 @@ export function ClickArea() {
       },
       detectRetina: true,
     }),
-    [theme],
+    [theme, crewAtom],
   );
 
   return (
