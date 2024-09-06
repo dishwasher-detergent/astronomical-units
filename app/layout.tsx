@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: APP_NAME,
   description: APP_DESCRIPTION,
+  icons: {
+    icon: "/icons/icon-192.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
