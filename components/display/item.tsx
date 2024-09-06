@@ -18,10 +18,10 @@ export function DisplayItem({
   elementKey: string;
 }) {
   return (
-    <div className="rounded-lg bg-muted/50 p-4 md:rounded-none md:border-b md:bg-background">
-      <p className="mb-1 flex items-center font-bold">{item.name}</p>
-      <p className="text-sm md:text-xs">{item.description}</p>
-      <p className="mb-2 text-sm md:text-xs">
+    <div className="border-b border-dashed p-4 md:bg-background">
+      <p className="mb-1 flex items-center font-semibold">{item.name}</p>
+      <p className="text-sm">{item.description}</p>
+      <p className="mb-2 text-sm">
         Generates {auPerSecond.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU/s
       </p>
       <div className="mb-2">

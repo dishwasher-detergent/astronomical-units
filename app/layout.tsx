@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Fredoka, Space_Grotesk } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
-import { LucideGithub, LucideOrbit } from "lucide-react";
+import { LucideGithub } from "lucide-react";
 
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
@@ -13,8 +13,9 @@ import { Button } from "@/components/ui/button";
 import { APP_DESCRIPTION, APP_NAME, APP_SHORT_NAME } from "@/constants/GLOBAL";
 import { InstallPrompt } from "@/components/install-prompt";
 import { Backup } from "@/components/backup";
+import { Logo } from "@/components/logo";
 
-const font = Space_Grotesk({ subsets: ["latin"] });
+const font = Fredoka({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   applicationName: APP_SHORT_NAME,
@@ -258,9 +259,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <InstallPrompt />
-          <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-bold">
+          <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-semibold">
             <div className="flex flex-row items-center gap-1">
-              <LucideOrbit className="size-4" />
+              <Logo />
               <p className="hidden md:block">Astronomical Units</p>
               <p className="block md:hidden">AU</p>
             </div>

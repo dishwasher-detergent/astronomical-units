@@ -158,7 +158,7 @@ export function ClickArea() {
       >
         <div className="z-10 flex flex-col items-center text-primary">
           <span>Tap Here</span>
-          <span className="text-xl font-bold">
+          <span className="text-xl font-semibold">
             +{(crewAtom.value * multiplier + 1).toLocaleString(LOCALE)} AU
           </span>
         </div>

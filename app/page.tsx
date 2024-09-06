@@ -42,12 +42,12 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
+              <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Shop</DrawerTitle>
                 </DrawerHeader>
-                <div className="flex-1 overflow-y-auto pb-4">
-                  <Balance />
+                <Balance />
+                <div className="flex-1 overflow-y-auto px-2 pb-4">
                   <Shop />
                 </div>
               </div>
@@ -60,14 +60,14 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <div className="mx-auto flex h-full w-full flex-col overflow-hidden px-4">
+              <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
+                <Balance />
                 <div className="flex-1 space-y-2 overflow-y-auto pb-4">
-                  <Balance />
                   <Crew />
-                  <nav className="flex h-12 items-center justify-between bg-background px-4 font-bold">
+                  <nav className="flex h-12 items-center justify-between border-t bg-background px-4 font-semibold">
                     <p>Equipment</p>
                   </nav>
                   <EquipmentDisplay />
@@ -94,7 +94,7 @@ export default function Home() {
       <div className="flex h-full flex-1 flex-col">
         <div className="relative flex-1 overflow-y-auto">
           <Crew />
-          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between bg-background px-4 font-bold">
+          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between bg-background px-4 font-semibold">
             <p>Equipment</p>
           </nav>
           <EquipmentDisplay />

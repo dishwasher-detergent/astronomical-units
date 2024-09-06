@@ -22,9 +22,9 @@ export function InstallPrompt() {
   return (
     isIOS && (
       <div className="border-b bg-slate-900 p-1 text-white">
-        <p className="flex flex-row items-center text-xs">
+        <p className="flex flex-row items-center">
           To install this app, tap <LucideShare className="mx-1 size-3" /> then
-          <span className="ml-1 font-bold">Add to Home Screen</span>.
+          <span className="ml-1 font-semibold">Add to Home Screen</span>.
         </p>
       </div>
     )

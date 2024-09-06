@@ -58,16 +58,16 @@ export function BaseUpgrade({
             align="start"
             className="z-[9999] max-w-sm"
           >
-            <div className="mb-2 flex w-full flex-row gap-2 text-xs">
+            <div className="mb-2 flex w-full flex-row gap-2">
               <div className="flex-1">
-                <p className="text-sm font-bold">{element.name}</p>
+                <p className="text-sm font-semibold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
                 <p>
                   {rankValue ?? 0}/{element.maxCount} Owned
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">
+                <Badge>
                   {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
                 </Badge>
               </div>
@@ -101,16 +101,16 @@ export function BaseUpgrade({
             </div>
           </TooltipTrigger>
           <TooltipContent side="bottom" align="start" className="z-[9999]">
-            <div className="flex max-w-sm flex-row text-xs">
+            <div className="flex max-w-sm flex-row">
               <div className="flex-1">
-                <p className="text-sm font-bold">{element.name}</p>
+                <p className="text-sm font-semibold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
                 <p>
                   {rankValue ?? 0}/{element.maxCount} Owned
                 </p>
               </div>
               <div>
-                <Badge className="text-xs">
+                <Badge>
                   {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
                 </Badge>
               </div>

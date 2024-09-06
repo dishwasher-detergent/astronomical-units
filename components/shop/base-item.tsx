@@ -36,9 +36,9 @@ export function Base({
             <Icon className="size-4" />
           </div>
           <div className="flex-1">
-            <p className="mb-1 font-bold md:text-sm">{element.name}</p>
-            <p className="text-sm md:text-xs">{element.description}</p>
-            <p className="text-sm md:text-xs">{rankVal ?? 0} Owned</p>
+            <p className="mb-1 font-semibold">{element.name}</p>
+            <p className="text-sm">{element.description}</p>
+            <p className="text-sm">{rankVal ?? 0} Owned</p>
           </div>
         </div>
       </AcquireButton>
