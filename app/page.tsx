@@ -47,7 +47,7 @@ export default function Home() {
                   <DrawerTitle>Shop</DrawerTitle>
                 </DrawerHeader>
                 <Balance />
-                <div className="flex-1 overflow-y-auto p-2 pb-4">
+                <div className="flex-1 overflow-y-auto pb-4">
                   <Shop />
                 </div>
               </div>
@@ -65,7 +65,7 @@ export default function Home() {
                   <DrawerTitle>Equipment</DrawerTitle>
                 </DrawerHeader>
                 <Balance />
-                <div className="flex-1 space-y-2 overflow-y-auto pb-4">
+                <div className="flex-1 overflow-y-auto pb-4">
                   <Crew />
                   <nav className="sticky top-0 z-10 flex h-12 items-center justify-between border-t bg-background px-4 font-semibold">
                     <p>Equipment</p>

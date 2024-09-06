@@ -10,7 +10,7 @@ export function Shop() {
       <p className="hidden bg-background px-4 py-2 font-semibold md:block">
         Store
       </p>
-      <div className="w-full space-y-2 md:space-y-0">
+      <div className="w-full">
         <Astronaut />
         {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
           if (value.equipment === false) return null;
