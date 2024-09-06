@@ -97,6 +97,7 @@ export function Backup() {
                 onClick={() => {
                   toast.error("Game data reset successfully!");
                   setGameData(RESET);
+                  setOpen(false);
                 }}
               >
                 Reset Game Data
@@ -140,6 +141,7 @@ export function Backup() {
             onClick={() => {
               toast.error("Game data reset successfully!");
               setGameData(RESET);
+              setOpen(false);
             }}
           >
             Reset Game Data

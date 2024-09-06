@@ -11,13 +11,15 @@ export const nextUpgrade = atom(
   },
   (_, set) => {
     set(upgradeIndex, (current) => {
-      const equipment = Object.keys(EQUIPMENT_LIST).map((key) => key);
+      const equipment = Object.entries(EQUIPMENT_LIST).map(
+        ([key, value]) => key,
+      );
 
       if (current === equipment.length - 1) {
         return current;
       }
 
-      return current + 1;
+      return current + 2;
     });
   },
 );
