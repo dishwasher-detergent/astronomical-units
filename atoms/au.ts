@@ -3,6 +3,7 @@ import { focusAtom } from "jotai-optics";
 
 import { crew } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
+import { prestigeMultiplier } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
@@ -16,11 +17,12 @@ export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
 export const auIncrement = atom(null, (get, set) => {
   const item = EQUIPMENT_LIST.crew;
   const crewAtom = get(crew);
-  const multiplier = calculateUpgradeMultiplier(crewAtom, item);
+  const presMultiplier = get(prestigeMultiplier) || 1;
+  const multiplier = calculateUpgradeMultiplier(crewAtom, item, presMultiplier);
 
   const valuePerClick = Math.max(
     item.auPerSecond * multiplier * crewAtom.value,
-    1,
+    1 * presMultiplier,
   );
 
   const newAu = get(au) + valuePerClick;
@@ -38,6 +40,7 @@ export const auIncrement = atom(null, (get, set) => {
 
 export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const equip = get(equipment);
+  const presMultiplier = get(prestigeMultiplier) || 1;
 
   const updateAuValues = (key: string, eq: any, multiplier: number = 1) => {
     const item = EQUIPMENT_LIST[key];
@@ -63,13 +66,29 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     if (eq.value > 0) {
       const item = EQUIPMENT_LIST[key];
 
-      const multiplier = calculateUpgradeMultiplier(eq, item);
+      const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
       updateAuValues(key, eq, multiplier);
     }
   });
 });
 
+// Development mode functions
+export const addAu = atom(null, (get, set, amount: number) => {
+  const currentAu = get(au);
+  const currentTotalAu = get(totalAu);
+
+  set(au, currentAu + amount);
+  set(totalAu, currentTotalAu + amount);
+});
+
+export const setAuDirectly = atom(null, (get, set, amount: number) => {
+  set(au, amount);
+  set(totalAu, amount);
+});
+
 if (process.env.NODE_ENV !== "production") {
   au.debugLabel = "AUs";
   auIncrement.debugLabel = "AU Increment";
+  addAu.debugLabel = "Add AU (Dev)";
+  setAuDirectly.debugLabel = "Set AU (Dev)";
 }

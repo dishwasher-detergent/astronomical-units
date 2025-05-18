@@ -13,6 +13,12 @@ const data: GameData = {
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
   show: {},
   last_updated: 0,
+  prestige: {
+    level: 0,
+    points: 0,
+    multiplier: 1,
+    lifetime: 0,
+  },
 };
 
 export const gameData = atomWithStorage(

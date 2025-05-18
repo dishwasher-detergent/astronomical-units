@@ -7,6 +7,8 @@ import { Shop } from "@/components/shop";
 import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
 import { EquipmentDisplay } from "@/components/display";
+import { Prestige } from "@/components/prestige";
+import { DevMode } from "@/components/dev-mode";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,10 +37,11 @@ export default function Home() {
           <Statistics />
         </div>
         <nav className="mb-safe fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
+          <Prestige />
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
-                <LucideStore />
+                <LucideStore className="size-6" />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
@@ -56,7 +59,7 @@ export default function Home() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
-                <LucideSatellite />
+                <LucideSatellite className="size-6" />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
@@ -75,6 +78,7 @@ export default function Home() {
               </div>
             </DrawerContent>
           </Drawer>
+          <DevMode />
         </nav>
       </>
     );
@@ -88,6 +92,10 @@ export default function Home() {
         </div>
         <div className="sticky top-0 overflow-y-auto">
           <Statistics />
+          <div className="flex flex-row gap-2 border-b p-4">
+            <Prestige />
+            <DevMode />
+          </div>
           <Shop />
         </div>
       </div>

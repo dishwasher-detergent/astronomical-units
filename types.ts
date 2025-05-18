@@ -41,4 +41,10 @@ export type GameData = {
   equipment: EquipmentObject;
   show: Record<string, boolean>;
   last_updated: number;
+  prestige: {
+    level: number;
+    points: number;
+    multiplier: number;
+    lifetime: number;
+  };
 };

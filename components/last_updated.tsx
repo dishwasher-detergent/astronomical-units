@@ -11,11 +11,13 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { useAnimation } from "@/hooks/useAnimation";
+import { prestigeMultiplier } from "@/atoms/prestige";
 
 export function LastUpdated() {
   const last = useAtomValue(lastUpdated);
   const equip = useAtomValue(equipment);
   const update = useSetAtom(autoIncrement);
+  const presMultiplier = useAtomValue(prestigeMultiplier) || 1;
   const initialized = useRef(false);
   const [delta, setDelta] = useState(0);
 
@@ -41,7 +43,11 @@ export function LastUpdated() {
 
               if (!item || item.equipment === false) return;
 
-              const multiplier = calculateUpgradeMultiplier(eq, item);
+              const multiplier = calculateUpgradeMultiplier(
+                eq,
+                item,
+                presMultiplier,
+              );
 
               earned += item.auPerSecond * multiplier * eq.value * diff;
             }

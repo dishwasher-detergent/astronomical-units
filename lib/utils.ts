@@ -40,6 +40,7 @@ export function generateEquipmentObject(
 export function calculateUpgradeMultiplier(
   equipment: EquipmentItem,
   item: Equipment,
+  prestigeMultiplier: number = 1,
 ) {
   let multiplier = 1;
 
@@ -59,7 +60,8 @@ export function calculateUpgradeMultiplier(
     });
   }
 
-  return multiplier;
+  // Apply prestige multiplier to the result
+  return multiplier * prestigeMultiplier;
 }
 
 export function mergeNestedObjects<
