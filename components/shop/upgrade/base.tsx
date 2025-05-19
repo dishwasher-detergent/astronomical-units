@@ -93,16 +93,20 @@ export function BaseUpgrade({
             </div>
           </TooltipTrigger>
           <TooltipContent side="bottom" align="start" className="z-9999">
-            <div className="flex max-w-sm flex-row">
+            <div className="flex max-w-sm flex-col">
               <div className="flex-1">
                 <p className="text-sm font-semibold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
-                <p>
-                  {rankValue ?? 0}/{element.maxCount} Owned
-                </p>
               </div>
-              <div>
-                <Badge>{formatMoney(element.cost)} AU</Badge>
+              <div className="flex w-full flex-col gap-2">
+                <div className="flex flex-row gap-2">
+                  <Badge variant="outline">
+                    {formatMoney(element.cost)} AU
+                  </Badge>
+                  <Badge variant="outline">
+                    Qty: {rankValue ?? 0}/{element.maxCount}
+                  </Badge>
+                </div>
               </div>
             </div>
           </TooltipContent>
