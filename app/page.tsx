@@ -22,7 +22,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useInstallDetection } from "@/hooks/useInstallDetection";
 
 export default function Home() {
-  const { isIOS, isStandalone } = useInstallDetection();
+  const { isStandalone } = useInstallDetection();
   const isMobile = useIsMobile();
 
   if (isMobile == null) {
@@ -32,7 +32,7 @@ export default function Home() {
   if (isMobile) {
     return (
       <div
-        className={`flex h-full w-full flex-col overflow-hidden ${isIOS ? "pb-6" : ""}`}
+        className={`flex h-full w-full flex-col overflow-hidden ${isStandalone ? "pb-6" : ""}`}
       >
         <div className="flex w-full flex-1 flex-col overflow-y-auto">
           <div className="border-b p-2">
