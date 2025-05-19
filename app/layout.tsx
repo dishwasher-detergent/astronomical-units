@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fredoka, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Nunito } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { LucideGithub } from "lucide-react";
 
@@ -16,7 +16,7 @@ import { Logo } from "@/components/logo";
 import { DevMode } from "@/components/dev-mode";
 import { UpdateNotification } from "@/components/update-notification";
 
-const font = Fredoka({ subsets: ["latin"] });
+const font = Nunito({ subsets: ["latin"] });
 const mono = IBM_Plex_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["latin"],
