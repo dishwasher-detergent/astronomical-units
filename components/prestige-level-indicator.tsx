@@ -29,10 +29,10 @@ export function PrestigeLevelIndicator() {
           <p className="font-bold whitespace-nowrap">Lvl {lifetimeLevel}</p>
           <div className="w-full">
             <div className="mb-1 flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Next Level:</span>
+              <span>Next Level:</span>
               <span>{formatMoney(nextLevelRequirement)} AU</span>
             </div>
-            <Progress value={levelProgress} />
+            <Progress value={levelProgress} className="h-2" />
           </div>
         </div>
       ) : (

@@ -4,10 +4,7 @@
  * @param showDecimalsUnderMillion - Whether to show decimals for values under 1 million (default: true)
  * @returns Formatted string with appropriate suffix
  */
-export function formatMoney(
-  value?: number | null,
-  showDecimalsUnderMillion = true,
-): string {
+export function formatMoney(value?: number | null): string {
   if (value === 0 || value === undefined || value === null) return "0";
 
   const suffixes = [
