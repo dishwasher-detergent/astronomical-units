@@ -42,22 +42,24 @@ export function calculateUpgradeMultiplier(
   item: Equipment,
   prestigeMultiplier: number = 1,
 ) {
+  // Start with base multiplier of 1
   let multiplier = 1;
 
   if (!item) {
-    return multiplier;
+    return multiplier * prestigeMultiplier;
   }
 
+  // Only perform equipment upgrade calculations if we have upgrades
   if (equipment?.upgrades) {
-    Object.entries(equipment.upgrades).forEach(([upgradeKey, upgradeVal]) => {
-      const upgradeItem = item.upgrades?.[upgradeKey];
-
-      if (!upgradeItem) {
-        return;
-      }
-
-      multiplier += upgradeItem.multiplier ?? 1 * upgradeVal;
-    });
+    // Use reduce instead of forEach for better performance
+    multiplier += Object.entries(equipment.upgrades).reduce(
+      (acc, [upgradeKey, upgradeVal]) => {
+        const upgradeItem = item.upgrades?.[upgradeKey];
+        if (!upgradeItem) return acc;
+        return acc + (upgradeItem.multiplier ?? 1) * upgradeVal;
+      },
+      0,
+    );
   }
 
   // Apply prestige multiplier to the result

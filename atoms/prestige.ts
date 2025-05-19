@@ -45,12 +45,41 @@ export const canPrestige = atom((get) => {
   return potential > 0;
 });
 
-export const calculatePrestigeMultiplier = (points: number): number => {
-  const baseMultiplier = 1;
-  const earlyGameBonus = Math.min(points, 10) * 0.25;
-  const lateGameBonus = points > 10 ? Math.pow(points - 10, 0.9) * 0.15 : 0;
+const prestigeMultiplierCache = new Map<number, number>();
+const MAX_CACHE_SIZE = 1000;
 
-  return baseMultiplier + earlyGameBonus + lateGameBonus;
+export const calculatePrestigeMultiplier = (points: number): number => {
+  const roundedPoints = Math.round(points);
+
+  if (prestigeMultiplierCache.has(roundedPoints)) {
+    return prestigeMultiplierCache.get(roundedPoints)!;
+  }
+
+  // Base calculation
+  const baseMultiplier = 1;
+  const earlyGameBonus = Math.min(roundedPoints, 10) * 0.25;
+
+  let lateGameBonus = 0;
+  if (roundedPoints > 10) {
+    if (roundedPoints > 1000) {
+      lateGameBonus = Math.pow(roundedPoints - 10, 0.8) * 0.15;
+    } else {
+      lateGameBonus = Math.pow(roundedPoints - 10, 0.9) * 0.15;
+    }
+  }
+
+  const result = baseMultiplier + earlyGameBonus + lateGameBonus;
+
+  prestigeMultiplierCache.set(roundedPoints, result);
+
+  if (prestigeMultiplierCache.size > MAX_CACHE_SIZE) {
+    const firstKeyValue = prestigeMultiplierCache.keys().next();
+    if (!firstKeyValue.done && firstKeyValue.value !== undefined) {
+      prestigeMultiplierCache.delete(firstKeyValue.value);
+    }
+  }
+
+  return result;
 };
 
 export const performPrestige = atom(null, (get, set) => {

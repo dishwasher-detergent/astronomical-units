@@ -42,15 +42,27 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const equip = get(equipment);
   const presMultiplier = get(prestigeMultiplier) || 1;
 
-  const updateAuValues = (key: string, eq: any, multiplier: number = 1) => {
-    const item = EQUIPMENT_LIST[key];
+  let totalEarned = 0;
 
-    if (!item || item.equipment === false) return;
+  Object.entries(equip).forEach(([key, eq]: any) => {
+    if (eq.value > 0) {
+      const item = EQUIPMENT_LIST[key];
 
-    const earned = item.auPerSecond * multiplier * eq.value * seconds;
+      if (!item || item.equipment === false) return;
 
-    const newAu = get(au) + earned;
-    const newTotalAu = get(totalAu) + earned;
+      const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
+      const earned = item.auPerSecond * multiplier * eq.value * seconds;
+
+      totalEarned += earned;
+    }
+  });
+
+  if (totalEarned > 0) {
+    const currentAu = get(au);
+    const currentTotalAu = get(totalAu);
+
+    const newAu = currentAu + totalEarned;
+    const newTotalAu = currentTotalAu + totalEarned;
 
     set(au, newAu);
     set(totalAu, newTotalAu);
@@ -60,19 +72,9 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
         set(show, key);
       }
     });
-  };
-
-  Object.entries(equip).forEach(([key, eq]: any) => {
-    if (eq.value > 0) {
-      const item = EQUIPMENT_LIST[key];
-
-      const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
-      updateAuValues(key, eq, multiplier);
-    }
-  });
+  }
 });
 
-// Development mode functions
 export const addAu = atom(null, (get, set, amount: number) => {
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);

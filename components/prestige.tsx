@@ -53,9 +53,9 @@ export function Prestige() {
     >
       <div className="space-y-4">
         <div className="rounded-md border p-4">
-          <p className="mb-2 font-medium">Prestige Rewards</p>{" "}
+          <p className="mb-2 font-medium">Prestige Rewards</p>
           <p className="text-sm text-muted-foreground">
-            Prestige points are earned based on your total AU. You'll earn{" "}
+            Prestige points are earned based on your total AU. You&apos;ll earn{" "}
             <span className="font-bold">{potentialPoints}</span> prestige points
             if you reset now, increasing your multiplier to{" "}
             <span className="font-bold">
