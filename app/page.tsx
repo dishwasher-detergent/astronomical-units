@@ -29,8 +29,8 @@ export default function Home() {
 
   if (isMobile) {
     return (
-      <>
-        <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-14">
+      <div className="flex h-full w-full flex-col overflow-hidden pb-6">
+        <div className="flex w-full flex-1 flex-col overflow-y-auto">
           <div className="border-b p-2">
             <PrestigeLevelIndicator />
           </div>
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
           <Statistics />
         </div>
-        <nav className="mb-safe bg-background fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t p-2">
+        <nav className="mb-safe bg-background z-40 flex w-full flex-none items-center justify-center gap-4 p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
@@ -54,7 +54,7 @@ export default function Home() {
                     <Balance />
                   </DrawerDescription>
                 </DrawerHeader>
-                <div className="flex-1 overflow-y-auto pb-4">
+                <div className="mb-8 flex-1 overflow-y-auto pb-4">
                   <Shop />
                 </div>
               </div>
@@ -74,7 +74,7 @@ export default function Home() {
                     <Balance />
                   </DrawerDescription>
                 </DrawerHeader>
-                <div className="flex-1 overflow-y-auto pb-4">
+                <div className="mb-8 flex-1 overflow-y-auto pb-4">
                   <Crew />
                   <nav className="bg-background sticky top-0 z-10 flex h-12 items-center justify-between border-t px-4 font-semibold">
                     <p>Equipment</p>
@@ -85,7 +85,7 @@ export default function Home() {
             </DrawerContent>
           </Drawer>
         </nav>
-      </>
+      </div>
     );
   }
 
