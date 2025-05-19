@@ -146,10 +146,17 @@ export const addAu = atom(null, (get, set, amount: number) => {
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
   const currentPrestigeIncome = get(prestigeIncome);
+  const newTotalAu = currentTotalAu + currentAu;
 
   set(au, currentAu + amount);
   set(totalAu, currentTotalAu + amount);
   set(prestigeIncome, currentPrestigeIncome + amount);
+
+  Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
+    if (newTotalAu >= value.threshold) {
+      set(show, key);
+    }
+  });
 });
 
 /**

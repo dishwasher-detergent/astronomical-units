@@ -13,7 +13,6 @@ import { animationsEnabled } from "@/atoms/ui";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
-  const addAuDirectly = useSetAtom(addAu);
   const multiplier = useAtomValue(prestigeMultiplier);
   const crewAtom = useAtomValue(crew);
   const clickValue = useAtomValue(clickValueAtom);
@@ -24,33 +23,15 @@ export function ClickArea() {
   const { renderParticles, addParticle } = useClickParticles();
 
   const handleClick = (e: React.MouseEvent) => {
-    let valuePerClick = clickValue;
-    let isBonus = false;
-
-    const preciousFindsLevel = allUpgrades.preciousFinds || 0;
-    if (preciousFindsLevel > 0) {
-      const bonusChance = preciousFindsLevel * 0.07;
-      if (Math.random() < bonusChance) {
-        const bonusValue = valuePerClick * 0.5;
-        isBonus = true;
-        valuePerClick += bonusValue;
-      }
-    }
-
     if (showAnimations) {
       const rect = containerRef.current?.getBoundingClientRect();
       const x = e.clientX - (rect?.left || 0);
       const y = e.clientY - (rect?.top || 0);
 
-      if (isBonus) {
-        addParticle(x, y, clickValue, false);
-        addParticle(x, y - 30, valuePerClick, true);
-      } else {
-        addParticle(x, y, valuePerClick, false);
-      }
+      addParticle(x, y, clickValue, false);
     }
 
-    addAuDirectly(valuePerClick);
+    setClicks();
   };
 
   return (
