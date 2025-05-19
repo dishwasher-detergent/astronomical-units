@@ -5,8 +5,19 @@ import { atomWithStorage } from "jotai/utils";
 
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { AU } from "@/constants/GLOBAL";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { generateEquipmentObject, mergeNestedObjects } from "@/lib/utils";
 import { GameData } from "@/types";
+
+const initPrestigeUpgrades = () => {
+  const upgrades: Record<string, number> = {};
+
+  Object.keys(PRESTIGE_UPGRADES).forEach((key) => {
+    upgrades[key] = 0;
+  });
+
+  return upgrades;
+};
 
 const data: GameData = {
   income: AU,
@@ -18,6 +29,7 @@ const data: GameData = {
     points: 0,
     multiplier: 1,
     lifetime: 0,
+    upgrades: initPrestigeUpgrades(),
   },
 };
 
@@ -30,6 +42,7 @@ export const gameData = atomWithStorage(
 
       const storedValue = localStorage.getItem(key);
       const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
+      const newPrestigeUpgrades = initPrestigeUpgrades();
 
       try {
         // Merge the new equipment with the existing equipment, to account for new items being added to the game.
@@ -39,9 +52,17 @@ export const gameData = atomWithStorage(
           newEquipment,
         );
 
+        // Initialize prestigeUpgrades if it doesn't exist in the saved data
+        const existingPrestigeUpgrades = equipmentValue.prestigeUpgrades || {};
+        const mergedPrestigeUpgrades = mergeNestedObjects(
+          existingPrestigeUpgrades,
+          newPrestigeUpgrades,
+        );
+
         const data = {
           ...equipmentValue,
           equipment: mergedEquipment,
+          prestigeUpgrades: mergedPrestigeUpgrades,
         };
 
         return data;

@@ -4,7 +4,7 @@ export type Upgrade = {
   name: string;
   description: string;
   cost: number;
-  multiplier: number;
+  multiplier?: number;
   maxCount: number;
   threshold: number;
   icon: any;
@@ -46,5 +46,6 @@ export type GameData = {
     points: number;
     multiplier: number;
     lifetime: number;
+    upgrades: Record<string, number>;
   };
 };

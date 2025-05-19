@@ -26,13 +26,15 @@ export function UpgradeButton({
   return (
     <Button
       className="h-8 md:w-8 md:p-0"
-      variant="outline"
+      variant="default"
       disabled={disabled}
       onClick={() => {
         if (!disabled) {
           increment();
           setAu((current) => current - cost);
-          toast.success(`Purchased ${name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`);
+          toast.success(
+            `Purchased ${name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
+          );
         }
       }}
     >

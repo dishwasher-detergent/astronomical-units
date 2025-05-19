@@ -56,7 +56,7 @@ export function calculateUpgradeMultiplier(
         return;
       }
 
-      multiplier += upgradeItem.multiplier * upgradeVal;
+      multiplier += upgradeItem.multiplier ?? 1 * upgradeVal;
     });
   }
 

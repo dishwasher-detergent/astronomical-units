@@ -2,6 +2,7 @@
 
 import { useAtom, useAtomValue, WritableAtom } from "jotai";
 import { LucidePlus } from "lucide-react";
+import { useState } from "react";
 
 import { showElement } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
@@ -16,13 +17,9 @@ import { au } from "@/atoms/au";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
+import { DyanmicPopover } from "@/components/ui/dynamic-popover";
 
 export function BaseUpgrade({
   atom,
@@ -33,6 +30,7 @@ export function BaseUpgrade({
   parentKey: string;
   elementKey: string;
 }) {
+  const [open, setOpen] = useState(false);
   const showElementValue = useAtomValue(showElement);
   const [rankValue, setRank] = useAtom(atom);
   const auValue = useAtomValue(au);
@@ -47,41 +45,39 @@ export function BaseUpgrade({
 
     if (!isDesktop) {
       return (
-        <Popover>
-          <PopoverTrigger asChild>
+        <DyanmicPopover
+          title={element.name}
+          open={open}
+          setOpen={setOpen}
+          button={
             <Button className="size-8" size="icon" variant="outline">
               <Icon className="size-4" />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            side="bottom"
-            align="start"
-            className="z-[9999] max-w-sm"
-          >
-            <div className="mb-2 flex w-full flex-row gap-2">
-              <div className="flex-1">
-                <p className="text-sm font-semibold">{element.name}</p>
-                <p className="mb-2">{element.description}</p>
-                <p>
-                  {rankValue ?? 0}/{element.maxCount} Owned
-                </p>
-              </div>
-              <div>
-                <Badge>
-                  {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
-                </Badge>
-              </div>
+          }
+        >
+          <div className="mb-2 flex w-full flex-row gap-2">
+            <div className="flex-1">
+              <p className="text-sm font-semibold">{element.name}</p>
+              <p className="mb-2">{element.description}</p>
+              <p>
+                {rankValue ?? 0}/{element.maxCount} Owned
+              </p>
             </div>
-            <UpgradeButton
-              name={element.name}
-              cost={element.cost}
-              disabled={!canAquire}
-              increment={setRank}
-            >
-              Upgrade
-            </UpgradeButton>
-          </PopoverContent>
-        </Popover>
+            <div>
+              <Badge>
+                {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
+              </Badge>
+            </div>
+          </div>
+          <UpgradeButton
+            name={element.name}
+            cost={element.cost}
+            disabled={!canAquire}
+            increment={setRank}
+          >
+            Upgrade
+          </UpgradeButton>
+        </DyanmicPopover>
       );
     }
 

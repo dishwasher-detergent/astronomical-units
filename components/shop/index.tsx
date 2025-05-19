@@ -4,6 +4,8 @@ import { Astronaut } from "@/components/shop/astronaut";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { BaseEquipment } from "@/components/shop/equipment/base";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
+import { BasePrestigeUpgrade } from "@/components/shop/prestige/base";
 
 export function Shop() {
   return (
@@ -12,12 +14,18 @@ export function Shop() {
         Store
       </p>
       <Tabs defaultValue="general" className="w-full">
-        <div className="px-4 pt-4 md:pt-0">
-          <TabsList className="w-full">
-            <TabsTrigger value="general" className="flex-1">
+        <div className="sticky top-0 z-10 border-b pt-4 md:pt-0">
+          <TabsList className="w-full rounded-none bg-background">
+            <TabsTrigger
+              value="general"
+              className="flex-1 data-[state=active]:bg-muted"
+            >
               General
             </TabsTrigger>
-            <TabsTrigger value="prestige" className="flex-1">
+            <TabsTrigger
+              value="prestige"
+              className="flex-1 data-[state=active]:bg-muted"
+            >
               Prestige
             </TabsTrigger>
           </TabsList>
@@ -32,7 +40,11 @@ export function Shop() {
             })}
           </div>
         </TabsContent>
-        <TabsContent value="prestige">Coming Soon.</TabsContent>
+        <TabsContent value="prestige">
+          {Object.entries(PRESTIGE_UPGRADES).map(([key, value]) => {
+            return <BasePrestigeUpgrade key={key} upgradeKey={key} />;
+          })}
+        </TabsContent>
       </Tabs>
     </div>
   );

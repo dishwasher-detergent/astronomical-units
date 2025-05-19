@@ -3,6 +3,7 @@
 import {
   Drawer,
   DrawerContent,
+  DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
@@ -42,9 +43,11 @@ export function DyanmicPopover({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{button}</DrawerTrigger>
-      <DrawerContent className="max-h-[80dvh]">
-        <DrawerTitle className="sr-only">{title}</DrawerTitle>
-        <div className="mt-4">{children}</div>
+      <DrawerContent className="mb-4 max-h-[80dvh] p-4">
+        <DrawerHeader className="mb-4 p-0 text-left">
+          <DrawerTitle className="truncate">{title}</DrawerTitle>
+        </DrawerHeader>
+        {children}
       </DrawerContent>
     </Drawer>
   );

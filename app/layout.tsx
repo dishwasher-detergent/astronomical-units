@@ -280,7 +280,7 @@ export default function RootLayout({
           </nav>
           <main className="relative w-full flex-1 overflow-hidden">
             {children}
-            <Dev />
+            {/* <Dev /> */}
             <Generation />
             <LastUpdated />
             <Toaster position="top-right" richColors />

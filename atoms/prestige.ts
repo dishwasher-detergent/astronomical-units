@@ -1,14 +1,15 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
+import { toast } from "sonner";
 
 import { au, totalAu } from "@/atoms/au";
 import { equipment } from "@/atoms/equipment";
 import { gameData } from "@/atoms/global";
-import { showElement } from "@/atoms/show";
+import { show, showElement } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { generateEquipmentObject } from "@/lib/utils";
-import { toast } from "sonner";
 
 export const prestigeLevel = focusAtom(gameData, (optic) =>
   optic.path("prestige.level"),
@@ -25,18 +26,15 @@ export const prestigePoints = focusAtom(gameData, (optic) =>
 export const lifetimePrestigePoints = focusAtom(gameData, (optic) =>
   optic.path("prestige.lifetime"),
 );
+export const prestigeUpgrades = focusAtom(gameData, (optic) =>
+  optic.path("prestige.upgrades"),
+);
 
 export const potentialPrestigePoints = atom((get) => {
   const currentTotalAu = get(totalAu);
-  // Base points from logarithmic scaling (1 point at 1,000 AU)
   const basePoints = Math.floor(Math.log10(Math.max(currentTotalAu, 1)) / 3);
-
-  // Bonus points for saving up - square root scaling provides diminishing returns but rewards saving
-  // This gives fractional points starting at around 5,000 AU
   const bonusPoints =
     basePoints > 0 ? Math.sqrt(currentTotalAu / 1000) / 2 - 0.5 : 0;
-
-  // Total points is base points plus bonus (rounded down)
   const totalPoints = Math.floor(basePoints + Math.max(0, bonusPoints));
 
   return Math.max(0, totalPoints);
@@ -67,8 +65,10 @@ export const performPrestige = atom(null, (get, set) => {
   const currentLifetime = get(lifetimePrestigePoints) || 0;
   const currentPoints = get(prestigePoints) || 0;
 
+  const newCurrentPoints = currentPoints + potential;
+
   set(prestigeLevel, currentLevel + 1);
-  set(prestigePoints, currentPoints + potential);
+  set(prestigePoints, newCurrentPoints);
   set(lifetimePrestigePoints, currentLifetime + potential);
 
   const newMultiplier = calculatePrestigeMultiplier(currentPoints + potential);
@@ -78,6 +78,21 @@ export const performPrestige = atom(null, (get, set) => {
   set(totalAu, 0);
   set(equipment, generateEquipmentObject(EQUIPMENT_LIST));
   set(showElement, {});
+
+  const currentUpgrades = get(prestigeUpgrades) || {};
+  if (Object.keys(currentUpgrades).length === 0) {
+    const initialUpgrades: Record<string, number> = {};
+    Object.keys(PRESTIGE_UPGRADES).forEach((key) => {
+      initialUpgrades[key] = 0;
+    });
+    set(prestigeUpgrades, initialUpgrades);
+  }
+
+  Object.entries(PRESTIGE_UPGRADES).forEach(([key, value]: any) => {
+    if (newCurrentPoints >= value.threshold) {
+      set(show, key);
+    }
+  });
 
   toast.success(
     `Prestige complete! You've gained ${potential.toLocaleString(LOCALE, NUMBER_OPTIONS)} prestige points.`,
@@ -99,7 +114,6 @@ export const addPrestigePoints = atom(null, (get, set, amount: number) => {
   set(prestigePoints, newPoints);
   set(lifetimePrestigePoints, currentLifetime + amount);
 
-  // Update multiplier
   const newMultiplier = calculatePrestigeMultiplier(newPoints);
   set(prestigeMultiplier, newMultiplier);
 });
@@ -118,4 +132,5 @@ if (process.env.NODE_ENV !== "production") {
   lifetimePrestigePoints.debugLabel = "Lifetime Prestige Points";
   potentialPrestigePoints.debugLabel = "Potential Prestige Points";
   canPrestige.debugLabel = "Can Prestige";
+  prestigeUpgrades.debugLabel = "Prestige Upgrades";
 }
