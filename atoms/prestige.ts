@@ -107,14 +107,13 @@ export const calculatePrestigeMultiplier = (points: number): number => {
   if (prestigeMultiplierCache.has(roundedPoints)) {
     return prestigeMultiplierCache.get(roundedPoints)!;
   }
-
   const baseMultiplier = 1;
-  const earlyGameBonus = Math.min(roundedPoints, 10) * 0.25;
+  const earlyGameBonus = Math.min(roundedPoints, 10) * 0.15;
 
   let lateGameBonus = 0;
   if (roundedPoints > 10) {
-    const exponent = roundedPoints > 1000 ? 0.8 : 0.9;
-    lateGameBonus = Math.pow(roundedPoints - 10, exponent) * 0.15;
+    const exponent = roundedPoints > 1000 ? 0.7 : 0.8;
+    lateGameBonus = Math.pow(roundedPoints - 10, exponent) * 0.1;
   }
 
   const result = baseMultiplier + earlyGameBonus + lateGameBonus;
