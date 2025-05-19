@@ -1,52 +1,65 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 
-const upgradeIndex = atom(0);
+/**
+ * Memoize equipment keys for better performance
+ */
+const EQUIPMENT_KEYS = Object.keys(EQUIPMENT_LIST);
+const PRESTIGE_UPGRADE_KEYS = Object.keys(PRESTIGE_UPGRADES);
 
+/**
+ * Persistent storage for upgrade index to remember between sessions
+ */
+export const upgradeIndex = atomWithStorage("UPGRADE_INDEX", 0);
+
+/**
+ * Get/cycle through next available upgrade
+ */
 export const nextUpgrade = atom(
+  // Get the current upgrade based on index
   (get) => {
-    const equipment = Object.keys(EQUIPMENT_LIST).map((key) => key);
-    return equipment[get(upgradeIndex)];
+    const index = get(upgradeIndex);
+    return EQUIPMENT_KEYS[index % EQUIPMENT_KEYS.length];
   },
+  // Cycle to the next upgrade
   (_, set) => {
     set(upgradeIndex, (current) => {
-      const equipment = Object.entries(EQUIPMENT_LIST).map(
-        ([key, value]) => key,
-      );
-
-      if (current === equipment.length - 1) {
-        return current;
-      }
-
-      return current + 2;
+      const nextIndex = current + 2; // Skip by 2 for variety
+      return nextIndex >= EQUIPMENT_KEYS.length ? 0 : nextIndex;
     });
   },
 );
 
-const prestigeUpgradeIndex = atom(0);
+/**
+ * Persistent storage for prestige upgrade index
+ */
+export const prestigeUpgradeIndex = atomWithStorage(
+  "PRESTIGE_UPGRADE_INDEX",
+  0,
+);
 
+/**
+ * Get/cycle through next available prestige upgrade
+ */
 export const nextPrestigeUpgrade = atom(
+  // Get the current prestige upgrade based on index
   (get) => {
-    const equipment = Object.keys(PRESTIGE_UPGRADES).map((key) => key);
-    return equipment[get(prestigeUpgradeIndex)];
+    const index = get(prestigeUpgradeIndex);
+    return PRESTIGE_UPGRADE_KEYS[index % PRESTIGE_UPGRADE_KEYS.length];
   },
+  // Cycle to the next prestige upgrade
   (_, set) => {
     set(prestigeUpgradeIndex, (current) => {
-      const equipment = Object.entries(PRESTIGE_UPGRADES).map(
-        ([key, value]) => key,
-      );
-
-      if (current === equipment.length - 1) {
-        return current;
-      }
-
-      return current + 2;
+      const nextIndex = current + 2; // Skip by 2 for variety
+      return nextIndex >= PRESTIGE_UPGRADE_KEYS.length ? 0 : nextIndex;
     });
   },
 );
 
+// Debug labels
 if (process.env.NODE_ENV !== "production") {
   upgradeIndex.debugLabel = "Upgrade Index";
   nextUpgrade.debugLabel = "Next Upgrade";

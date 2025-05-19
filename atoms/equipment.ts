@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
-import { atomWithReducer } from "jotai/utils";
+import { atomFamily, atomWithReducer } from "jotai/utils";
 
 import { show } from "@/atoms/show";
 import {
@@ -11,10 +11,39 @@ import {
   EQUIPMENT_RATE_REDUCTION_DELTA,
 } from "@/constants/EQUIPMENT";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EquipmentItem } from "@/types";
 import { gameData } from "./global";
 
+// Main equipment focus atom - direct access to all equipment
 export const equipment = focusAtom(gameData, (optic) =>
   optic.prop("equipment"),
+);
+
+/**
+ * Atom family for accessing individual equipment items
+ * This improves performance by preventing unnecessary rerenders
+ * when only one equipment item changes
+ */
+export const equipmentItemFamily = atomFamily((key: string) =>
+  atom(
+    (get) => get(equipment)[key] || { value: 0, upgrades: {} },
+    (get, set, newValue: EquipmentItem) => {
+      set(equipment, (current) => ({
+        ...current,
+        [key]: newValue,
+      }));
+
+      // Show appropriate upgrades based on equipment value
+      const equip = EQUIPMENT_LIST[key]?.upgrades;
+      if (equip) {
+        Object.entries(equip).forEach(([upgradeKey, value]: any) => {
+          if (newValue.value >= value.threshold) {
+            set(show, `${key}_${upgradeKey}`);
+          }
+        });
+      }
+    },
+  ),
 );
 
 export const equipmentRate = atom((get) => {
@@ -33,23 +62,32 @@ export const equipmentRateReduction = atomWithReducer(
   (current) => current + EQUIPMENT_RATE_REDUCTION_DELTA,
 );
 
+/**
+ * Helper function to increment an equipment item's value
+ */
+export const incrementEquipment = atom(null, (get, set, key: string) => {
+  const currentItem = get(equipmentItemFamily(key));
+  set(equipmentItemFamily(key), {
+    ...currentItem,
+    value: currentItem.value + 1,
+  });
+});
+
 // Development helper to add equipment directly
 export const addEquipment = atom<null, [{ key: string; amount: number }], void>(
   null,
-  (_, set, params) => {
+  (get, set, params) => {
     const { key, amount } = params;
 
     if (!EQUIPMENT_LIST[key]) {
       return;
     }
 
-    set(equipment, (current) => ({
-      ...current,
-      [key]: {
-        ...(current[key] || { upgrades: {} }),
-        value: (current[key]?.value || 0) + amount,
-      },
-    }));
+    const currentItem = get(equipmentItemFamily(key));
+    set(equipmentItemFamily(key), {
+      ...currentItem,
+      value: currentItem.value + amount,
+    });
 
     set(show, key);
   },
@@ -64,6 +102,7 @@ export const unlockAllEquipment = atom(null, (get, set) => {
 if (process.env.NODE_ENV !== "production") {
   equipment.debugLabel = "Equipment";
   equipmentRate.debugLabel = "Equipment Rate";
+  incrementEquipment.debugLabel = "Increment Equipment";
   addEquipment.debugLabel = "Add Equipment (Dev)";
   unlockAllEquipment.debugLabel = "Unlock All Equipment (Dev)";
 }
