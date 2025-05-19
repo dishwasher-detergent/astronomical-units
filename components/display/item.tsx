@@ -1,11 +1,12 @@
 "use client";
 
+import { memo } from "react";
+
 import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
-import { memo } from "react";
+import { formatMoney } from "@/lib/utils";
 
 export const DisplayItem = memo(
   ({
@@ -30,9 +31,7 @@ export const DisplayItem = memo(
               <h3 className="flex items-center font-semibold">{item.name}</h3>
             </div>
             <div className="flex gap-2">
-              <Badge variant="outline">
-                {auPerSecond.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU/s
-              </Badge>
+              <Badge variant="outline">{formatMoney(auPerSecond)} AU/s</Badge>
               <Badge variant="outline">Qty: {equipment.value}</Badge>
             </div>
           </div>

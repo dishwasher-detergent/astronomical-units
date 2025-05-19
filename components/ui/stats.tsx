@@ -12,7 +12,7 @@ const Stats = ({ label, value, variant = "default" }: StatsProps) => {
       <p className="text-sm font-semibold">{label}</p>
       <p
         className={cn(
-          "text-xl",
+          "font-mono text-xl",
           variant === "highlight" && "font-bold text-purple-500",
         )}
       >

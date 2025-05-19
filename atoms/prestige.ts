@@ -7,9 +7,8 @@ import { totalAu } from "@/atoms/au";
 import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { generateEquipmentObject } from "@/lib/utils";
+import { formatMoney, generateEquipmentObject } from "@/lib/utils";
 
 /**
  * Focus atoms for accessing prestige data directly
@@ -169,12 +168,9 @@ export const performPrestige = atom(null, (get, set) => {
 
   // Show success notification
   toast.success(
-    `Prestige complete! You've gained ${potential.toLocaleString(LOCALE, NUMBER_OPTIONS)} prestige points.`,
+    `Prestige complete! You've gained ${formatMoney(potential)} prestige points.`,
     {
-      description: `Your production multiplier is now ${newMultiplier.toLocaleString(
-        LOCALE,
-        NUMBER_OPTIONS,
-      )}x`,
+      description: `Your production multiplier is now ${formatMoney(newMultiplier)}x`,
       duration: 5000,
     },
   );

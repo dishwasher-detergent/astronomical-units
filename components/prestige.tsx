@@ -1,17 +1,10 @@
 "use client";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { LucideArrowBigUpDash, LucideRotate3D } from "lucide-react";
+import { LucideArrowBigUpDash } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { DialogFooter } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { totalAu } from "@/atoms/au";
 import {
@@ -24,6 +17,7 @@ import {
   calculatePrestigeMultiplier,
 } from "@/atoms/prestige";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { formatMoney } from "@/lib/utils";
 
 export function Prestige() {
   const [open, setOpen] = useState(false);
@@ -59,9 +53,9 @@ export function Prestige() {
             <span className="font-bold">{potentialPoints}</span> prestige points
             if you reset now, increasing your multiplier to{" "}
             <span className="font-bold">
-              {calculatePrestigeMultiplier(
-                points + potentialPoints,
-              ).toLocaleString(LOCALE, NUMBER_OPTIONS)}
+              {formatMoney(
+                calculatePrestigeMultiplier(points + potentialPoints),
+              )}
               x
             </span>
           </p>
@@ -70,7 +64,7 @@ export function Prestige() {
             points give 25% each, with points beyond that providing additional
             scaling bonuses.
           </p>
-          <p className="mt-2 text-sm font-semibold text-amber-500 text-muted-foreground">
+          <p className="mt-2 text-sm font-semibold text-muted-foreground">
             TIP: Saving up beyond 1,000 AU will give you bonus prestige points,
             making it more rewarding to wait longer between resets!
           </p>
@@ -87,14 +81,14 @@ export function Prestige() {
             </div>
             <div>
               <p className="text-sm font-medium">Current Multiplier</p>
-              <p className="text-xl font-bold">
-                {multiplier.toLocaleString(LOCALE, NUMBER_OPTIONS)}x
+              <p className="font-mono text-xl font-bold">
+                {formatMoney(multiplier)}
               </p>
             </div>
             <div>
               <p className="text-sm font-medium">Total AU</p>
-              <p className="text-xl font-bold">
-                {totalAuValue.toLocaleString(LOCALE, NUMBER_OPTIONS)}
+              <p className="font-mono text-xl font-bold">
+                {formatMoney(totalAuValue)}
               </p>
             </div>
           </div>

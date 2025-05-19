@@ -9,7 +9,7 @@ import { lastUpdated } from "@/atoms/global";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { calculateUpgradeMultiplier, formatMoney } from "@/lib/utils";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { useAnimation } from "@/hooks/useAnimation";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
@@ -79,7 +79,7 @@ export function LastUpdated() {
               toast.info(
                 "You've been away for a while, here's what you've earned while you were gone!",
                 {
-                  description: `You've earned ${earned.toLocaleString(LOCALE, NUMBER_OPTIONS)} AUs while you were away!${bonusMessage}`,
+                  description: `You've earned ${formatMoney(earned)} AUs while you were away!${bonusMessage}`,
                   duration: 5000,
                 },
               );

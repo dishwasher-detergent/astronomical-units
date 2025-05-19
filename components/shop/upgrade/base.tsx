@@ -65,9 +65,7 @@ export function BaseUpgrade({
               </p>
             </div>
             <div>
-              <Badge>
-                {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
-              </Badge>
+              <Badge>{formatMoney(element.cost)} AU</Badge>
             </div>
           </div>
           <UpgradeButton

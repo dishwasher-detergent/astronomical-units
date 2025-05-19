@@ -3,7 +3,6 @@
 import { useAtomValue } from "jotai";
 
 import { Stats } from "@/components/ui/stats";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import {
   prestigeMultiplier,
   prestigePoints,
@@ -11,6 +10,7 @@ import {
   lifetimePrestigePoints,
   potentialPrestigePoints,
 } from "@/atoms/prestige";
+import { formatMoney } from "@/lib/utils";
 
 export function PrestigeStats() {
   const points = useAtomValue(prestigePoints) || 0;
@@ -30,7 +30,7 @@ export function PrestigeStats() {
       <Stats label="Lifetime Prestige Points" value={lifetime.toString()} />
       <Stats
         label="Production Multiplier"
-        value={`${multiplier.toLocaleString(LOCALE, NUMBER_OPTIONS)}x`}
+        value={`${formatMoney(multiplier)}x`}
       />
       {potential > 0 && (
         <Stats

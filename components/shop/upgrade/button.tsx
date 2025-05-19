@@ -2,11 +2,11 @@
 
 import { useAtom } from "jotai";
 import React from "react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { au } from "@/atoms/au";
-import { toast } from "sonner";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
+import { formatMoney } from "@/lib/utils";
 
 export function UpgradeButton({
   cost,
@@ -32,9 +32,7 @@ export function UpgradeButton({
         if (!disabled) {
           increment();
           setAu((current) => current - cost);
-          toast.success(
-            `Purchased ${name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`,
-          );
+          toast.success(`Purchased ${name} for ${formatMoney(cost)} AU`);
         }
       }}
     >

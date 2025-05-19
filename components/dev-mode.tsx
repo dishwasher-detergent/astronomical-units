@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { showElement } from "@/atoms/show";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { formatMoney } from "@/lib/utils";
 
 export function DevMode() {
   if (process.env.NODE_ENV === "production") {
@@ -55,7 +56,7 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     addAuAmount(amount);
-    toast.success(`Added ${amount.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU`);
+    toast.success(`Added ${formatMoney(amount)} AU`);
   };
 
   const handleSetAu = () => {
@@ -63,7 +64,7 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     setAuAmountDirectly(amount);
-    toast.success(`Set AU to ${amount.toLocaleString(LOCALE, NUMBER_OPTIONS)}`);
+    toast.success(`Set AU to ${formatMoney(amount)}`);
   };
 
   const handleAddPrestigePoints = () => {
@@ -113,10 +114,10 @@ function DevModeContent() {
         <TabsContent value="currency" className="space-y-4">
           <div className="rounded-md bg-muted p-3">
             <p className="text-sm text-muted-foreground">
-              Current AU: {currentAu.toLocaleString(LOCALE, NUMBER_OPTIONS)}
+              Current AU: {formatMoney(currentAu)}
             </p>
             <p className="text-sm text-muted-foreground">
-              Total AU: {currentTotalAu.toLocaleString(LOCALE, NUMBER_OPTIONS)}
+              Total AU: {formatMoney(currentTotalAu)}
             </p>
           </div>
           <div className="flex items-end gap-4">
@@ -144,8 +145,7 @@ function DevModeContent() {
               Prestige Points: {points || 0}
             </p>
             <p className="text-sm text-muted-foreground">
-              Production Multiplier:{" "}
-              {multiplier?.toLocaleString(LOCALE, NUMBER_OPTIONS) || 1}x
+              Production Multiplier: {formatMoney(multiplier) || 1}x
             </p>
           </div>
           <div className="flex items-end gap-4">
@@ -170,7 +170,7 @@ function DevModeContent() {
               <Label htmlFor="equipment-select">Equipment</Label>
               <select
                 id="equipment-select"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="focus-visible:outline-hidden flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 value={selectedEquipment}
                 onChange={(e) => setSelectedEquipment(e.target.value)}
               >

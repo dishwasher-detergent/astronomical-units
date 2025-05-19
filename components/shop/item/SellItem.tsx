@@ -7,7 +7,6 @@ import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { LucideHandCoins } from "lucide-react";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/utils";
 
@@ -44,7 +43,7 @@ export function SellItem({
     setItemValue(newValue);
     currency.update((current) => current + sellPrice);
     toast.error(
-      `Sold ${details.name} for ${sellPrice.toLocaleString(LOCALE, NUMBER_OPTIONS)} ${currency.name}`,
+      `Sold ${details.name} for ${formatMoney(sellPrice)} ${currency.name}`,
     );
     onSell?.();
   };
