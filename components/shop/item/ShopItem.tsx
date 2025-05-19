@@ -6,15 +6,14 @@ import { toast } from "sonner";
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { Button } from "@/components/ui/button";
 import { showElement } from "@/atoms/show";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LucidePlus, LucideTrendingUp } from "lucide-react";
-import { Equipment } from "@/types";
-import { Card } from "@/components/ui/card";
 import { formatMoney } from "@/lib/utils";
+import { calculateBulkCost, useBulkCosts } from "@/hooks/useItemCost";
+import { prestigeUpgrades } from "@/atoms/prestige";
 
 interface ShopItemProps {
   elementKey: string;
@@ -46,29 +45,74 @@ export function ShopItem({
   const showElementValue = useAtomValue(showElement);
   const next = useAtomValue(nextUpgrade ?? atom(""));
   const [itemValue, setItemValue] = useAtom(itemAtom);
+  const allUpgrades = useAtomValue(prestigeUpgrades) || {};
+
+  const { cost1, cost10, cost20, cost50, itemCount } = useBulkCosts(elementKey);
 
   const isShowing = showElementValue[elementKey];
   const Icon = details?.icon || LucidePlus;
-  const itemCount =
-    typeof itemValue === "number" ? itemValue : itemValue?.value || 0;
-  const cost = getCost(elementKey);
-  const canAcquire = cost <= currency.value && itemCount < maxCount;
+  const canAcquire = cost1 <= currency.value && itemCount < maxCount;
 
   useNextHook?.(isShowing);
 
-  const handlePurchase = () => {
-    if (canAcquire) {
-      setItemValue(
-        typeof itemValue === "number"
-          ? itemValue + 1
-          : { ...itemValue, value: itemValue.value + 1 },
-      );
-      currency.update((current) => current - cost);
-      toast.success(
-        `Purchased ${details.name} for ${formatMoney(cost)} ${currency.name}`,
-      );
-      onPurchase?.();
+  const handlePurchase = (quantity: number = 1) => {
+    if (!canAcquire && quantity === 1) return;
+
+    // Get the appropriate cost based on quantity
+    let totalCost: number;
+    switch (quantity) {
+      case 10:
+        totalCost = cost10;
+        break;
+      case 20:
+        totalCost = cost20;
+        break;
+      case 50:
+        totalCost = cost50;
+        break;
+      default:
+        totalCost = cost1;
     }
+
+    // Check if we can afford it and haven't hit max count
+    if (totalCost > currency.value || itemCount + quantity > maxCount) return;
+
+    // Calculate how many we can actually buy (might be limited by maxCount)
+    const actualQuantity = Math.min(quantity, maxCount - itemCount);
+
+    if (actualQuantity <= 0) return;
+
+    // If we're buying less than the requested quantity, recalculate the cost
+    let actualCost = totalCost;
+    if (actualQuantity < quantity) {
+      const discountCount = allUpgrades.upgradeDiscount || 0;
+      const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
+      actualCost = calculateBulkCost(
+        elementKey,
+        itemCount,
+        actualQuantity,
+        discountPercentage,
+      );
+    }
+
+    // Update item count with the quantity
+    if (typeof itemValue === "number") {
+      setItemValue(itemValue + actualQuantity);
+    } else {
+      // For equipment atoms, we need to pass quantity to the purchase atom
+      // The atom has been updated to handle quantity parameter
+      setItemValue(actualQuantity);
+    }
+
+    // Deduct currency
+    currency.update((current) => current - actualCost);
+
+    // Show success toast
+    toast.success(
+      `Purchased ${actualQuantity} ${details.name} for ${formatMoney(actualCost)} ${currency.name}`,
+    );
+
+    onPurchase?.();
   };
 
   if (isShowing) {
@@ -76,14 +120,15 @@ export function ShopItem({
     const isPrestigeUpgrade =
       details.multiplier !== undefined && details.auPerSecond === undefined;
     const isMaxed = itemCount >= maxCount;
-    const cantAfford = cost > currency.value;
+    const cantAfford = cost1 > currency.value;
+
+    // Determine if we can afford each quantity
+    const canBuy10 = cost10 <= currency.value && itemCount + 10 <= maxCount;
+    const canBuy20 = cost20 <= currency.value && itemCount + 20 <= maxCount;
+    const canBuy50 = cost50 <= currency.value && itemCount + 50 <= maxCount;
 
     return (
-      <button
-        className="flex w-full flex-col border-b border-dashed px-4 py-3 align-top hover:bg-muted/50 disabled:cursor-not-allowed disabled:text-muted-foreground"
-        disabled={!canAcquire}
-        onClick={handlePurchase}
-      >
+      <div className="flex w-full flex-col border-b border-dashed px-4 py-3 align-top">
         <div className="mb-2 flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
             <Icon className="size-4" />
@@ -102,7 +147,7 @@ export function ShopItem({
         </div>
         <div className="mb-2 flex flex-col text-left">
           <p className="mb-2 text-sm">{details.description}</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex flex-wrap gap-x-6 gap-y-1 text-sm">
             {isPrestigeUpgrade ? (
               <div className="flex items-center">
                 <LucideTrendingUp className="mr-1 size-4 text-blue-500" />
@@ -128,11 +173,54 @@ export function ShopItem({
         <div className="flex items-center justify-between pt-2 text-sm">
           <p className="font-medium">Current cost:</p>
           <p>
-            <span className="font-mono">{formatMoney(cost)}</span>{" "}
+            <span className="font-mono">{formatMoney(cost1)}</span>{" "}
             {currency.name}
           </p>
         </div>
-      </button>
+
+        {/* Add button group for different quantities */}
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Button
+            size="sm"
+            variant="default"
+            className="flex-1"
+            disabled={!canAcquire}
+            onClick={() => handlePurchase(1)}
+          >
+            Buy 1
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex-1"
+            disabled={!canBuy10}
+            onClick={() => handlePurchase(10)}
+            title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
+          >
+            Buy 10
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex-1"
+            disabled={!canBuy20}
+            onClick={() => handlePurchase(20)}
+            title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
+          >
+            Buy 20
+          </Button>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="flex-1"
+            disabled={!canBuy50}
+            onClick={() => handlePurchase(50)}
+            title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
+          >
+            Buy 50
+          </Button>
+        </div>
+      </div>
     );
   } else if (next === elementKey) {
     return (

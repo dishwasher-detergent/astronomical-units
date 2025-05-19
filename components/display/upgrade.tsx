@@ -35,7 +35,7 @@ export const DisplayUpgrade = memo(
             return Array.from({ length: upgradeVal }, (_, i) => (
               <Icon
                 key={`${upgradeKey}_${i}`}
-                className="size-4 flex-none text-accent"
+                className="text-primary size-4 flex-none"
               />
             ));
           },
@@ -48,7 +48,7 @@ export const DisplayUpgrade = memo(
           <div className="mb-1 flex flex-row items-center gap-1">
             <p className="text-sm font-semibold">Upgrades</p>
             <Tip content="Unlock upgrades by purchasing more of this type of equipment.">
-              <LucideInfo className="size-3 text-muted-foreground" />
+              <LucideInfo className="text-muted-foreground size-3" />
             </Tip>
           </div>
           <div className="flex flex-row gap-1">
@@ -63,9 +63,9 @@ export const DisplayUpgrade = memo(
         </div>
 
         {hasEquippedUpgrades && (
-          <div className="mb-2">
+          <div>
             <p className="mb-1 text-sm font-semibold">Equipped Upgrades</p>
-            <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted/60 p-2">
+            <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
               {equippedUpgradesElements}
             </div>
           </div>

@@ -43,7 +43,7 @@ export function DyanmicPopover({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{button}</DrawerTrigger>
-      <DrawerContent className="mb-4 max-h-[80dvh] p-4">
+      <DrawerContent className="mb-4 p-4">
         <DrawerHeader className="mb-4 p-0 text-left">
           <DrawerTitle className="truncate">{title}</DrawerTitle>
         </DrawerHeader>

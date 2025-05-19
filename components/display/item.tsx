@@ -23,11 +23,11 @@ export const DisplayItem = memo(
     const Icon = item.icon;
 
     return (
-      <div className="space-y-3 border-b border-dashed p-4 transition-colors hover:bg-muted/30 md:bg-background">
+      <div className="hover:bg-muted/30 md:bg-background space-y-3 border-b border-dashed p-4 transition-colors">
         <div>
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-2">
-              <Icon className="size-5 flex-none text-primary" />
+              <Icon className="text-primary size-5 flex-none" />
               <h3 className="flex items-center font-semibold">{item.name}</h3>
             </div>
             <div className="flex gap-2">
@@ -35,12 +35,12 @@ export const DisplayItem = memo(
               <Badge variant="outline">Qty: {equipment.value}</Badge>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground">{item.description}</p>
+          <p className="text-muted-foreground text-sm">{item.description}</p>
         </div>
-        {equipment.value > 0 && equipment.value <= 10 && (
-          <div className="flex flex-row flex-wrap gap-2 rounded-lg bg-muted/60 p-3">
+        {equipment.value > 0 && (
+          <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
             {Array.from({ length: equipment.value }, (_, i) => (
-              <Icon key={i} className="size-4 flex-none text-primary" />
+              <Icon key={i} className="text-primary size-4 flex-none" />
             ))}
           </div>
         )}

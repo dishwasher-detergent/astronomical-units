@@ -13,9 +13,10 @@ export function createEquipmentAtom(elementKey: string) {
   return {
     purchase: atom(
       (get) => get(item),
-      (get, set) => {
+      (get, set, quantity: number = 1) => {
         const equip = EQUIPMENT_LIST[elementKey].upgrades;
-        const newVal = get(item).value + 1;
+        const currentVal = get(item).value;
+        const newVal = currentVal + quantity;
 
         set(item, (current) => ({
           ...current,
@@ -24,7 +25,8 @@ export function createEquipmentAtom(elementKey: string) {
 
         if (equip) {
           Object.entries(equip).forEach(([key, value]: any) => {
-            if (newVal >= value.threshold) {
+            // Show upgrades that should be unlocked after the purchase
+            if (newVal >= value.threshold && currentVal < value.threshold) {
               set(show, `${elementKey}_${key}`);
             }
           });

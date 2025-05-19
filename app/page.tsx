@@ -36,7 +36,7 @@ export default function Home() {
           </div>
           <Statistics />
         </div>
-        <nav className="mb-safe fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t bg-background p-2">
+        <nav className="mb-safe bg-background fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t p-2">
           <Prestige />
           <Drawer>
             <DrawerTrigger asChild>
@@ -70,7 +70,7 @@ export default function Home() {
                 <Balance />
                 <div className="flex-1 overflow-y-auto pb-4">
                   <Crew />
-                  <nav className="sticky top-0 z-10 flex h-12 items-center justify-between border-t bg-background px-4 font-semibold">
+                  <nav className="bg-background sticky top-0 z-10 flex h-12 items-center justify-between border-t px-4 font-semibold">
                     <p>Equipment</p>
                   </nav>
                   <EquipmentDisplay />
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
         <div className="relative flex-1 overflow-y-auto">
           <Crew />
-          <nav className="sticky top-0 z-50 flex h-12 items-center justify-between bg-background px-4 font-semibold">
+          <nav className="bg-background sticky top-0 z-50 flex h-12 items-center justify-between px-4 font-semibold">
             <p>Equipment</p>
           </nav>
           <EquipmentDisplay />

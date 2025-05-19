@@ -264,7 +264,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <InstallPrompt />
-          <nav className="sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b bg-background px-4 font-semibold">
+          <nav className="bg-background sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b px-4 font-semibold">
             <div className="flex flex-row items-center gap-1">
               <Logo />
               <p className="hidden md:block">Astronomical Units</p>

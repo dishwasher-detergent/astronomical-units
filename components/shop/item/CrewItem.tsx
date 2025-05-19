@@ -1,19 +1,23 @@
 "use client";
 
-import { crewCurrent } from "@/atoms/crew";
+import { useAtom } from "jotai";
+import { useMemo } from "react";
+
 import { ShopItem } from "@/components/shop/item/ShopItem";
 import { useAcquireCost } from "@/hooks/useItemCost";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { useAtom } from "jotai";
 import { au } from "@/atoms/au";
 import { nextUpgrade } from "@/atoms/upgrades";
+import { createEquipmentAtom } from "@/hooks/useItemAtoms";
 
 export function CrewItem() {
   const [auValue, setAu] = useAtom(au);
+  const equipAtoms = useMemo(() => createEquipmentAtom("crew"), ["crew"]);
+
   return (
     <ShopItem
       elementKey="crew"
-      itemAtom={crewCurrent}
+      itemAtom={equipAtoms.purchase}
       details={EQUIPMENT_LIST["crew"]}
       currency={{
         value: auValue,
