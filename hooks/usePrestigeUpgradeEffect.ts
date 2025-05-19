@@ -16,6 +16,10 @@ export function usePrestigeUpgradeEffect(
     return baseValue;
   }
 
+  if (upgradeKey === "criticalProduction" || upgradeKey === "preciousFinds") {
+    return upgradeCount;
+  }
+
   const multiplier = Math.pow(upgrade?.multiplier ?? 1, upgradeCount);
 
   return baseValue * multiplier;

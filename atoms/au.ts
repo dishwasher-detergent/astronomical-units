@@ -3,9 +3,10 @@ import { focusAtom } from "jotai-optics";
 
 import { crew } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
-import { prestigeMultiplier } from "@/atoms/prestige";
+import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { gameData } from "./global";
 
@@ -18,12 +19,29 @@ export const auIncrement = atom(null, (get, set) => {
   const item = EQUIPMENT_LIST.crew;
   const crewAtom = get(crew);
   const presMultiplier = get(prestigeMultiplier) || 1;
+  const allUpgrades = get(prestigeUpgrades) || {};
   const multiplier = calculateUpgradeMultiplier(crewAtom, item, presMultiplier);
 
-  const valuePerClick = Math.max(
+  let valuePerClick = Math.max(
     item.auPerSecond * multiplier * crewAtom.value,
     1 * presMultiplier,
   );
+
+  const preciousFindsLevel = allUpgrades.preciousFinds || 0;
+  if (preciousFindsLevel > 0) {
+    const bonusChance = preciousFindsLevel * 0.07;
+    if (Math.random() < bonusChance) {
+      const bonusValue = valuePerClick * 0.5;
+      valuePerClick += bonusValue;
+
+      import("sonner").then(({ toast }) => {
+        toast.success("Precious Find!", {
+          description: `Found bonus AUs! (+${Math.round(bonusValue)})`,
+          duration: 2000,
+        });
+      });
+    }
+  }
 
   const newAu = get(au) + valuePerClick;
   const newTotalAu = get(totalAu) + valuePerClick;
@@ -41,6 +59,20 @@ export const auIncrement = atom(null, (get, set) => {
 export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const equip = get(equipment);
   const presMultiplier = get(prestigeMultiplier) || 1;
+  const allUpgrades = get(prestigeUpgrades) || {};
+
+  const resourceMagnetismLevel = allUpgrades.resourceMagnetism || 0;
+  const resourceMagnetismBonus =
+    resourceMagnetismLevel > 0
+      ? Math.pow(
+          PRESTIGE_UPGRADES.resourceMagnetism.multiplier || 1,
+          resourceMagnetismLevel,
+        )
+      : 1;
+
+  const criticalProductionLevel = allUpgrades.criticalProduction || 0;
+  const criticalChance = criticalProductionLevel * 0.05; // 5% per level
+  const criticalMultiplier = Math.random() < criticalChance ? 2 : 1; // Double production on critical
 
   let totalEarned = 0;
 
@@ -51,7 +83,13 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
       if (!item || item.equipment === false) return;
 
       const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
-      const earned = item.auPerSecond * multiplier * eq.value * seconds;
+      const earned =
+        item.auPerSecond *
+        multiplier *
+        eq.value *
+        seconds *
+        resourceMagnetismBonus *
+        criticalMultiplier;
 
       totalEarned += earned;
     }

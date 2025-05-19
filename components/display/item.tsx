@@ -19,18 +19,12 @@ export function DisplayItem({
   equipment: EquipmentItem;
   elementKey: string;
 }) {
-  const presMultiplier = useAtomValue(prestigeMultiplier) || 1;
   return (
     <div className="border-b border-dashed p-4 md:bg-background">
       <p className="mb-1 flex items-center font-semibold">{item.name}</p>
       <p className="text-sm">{item.description}</p>{" "}
       <p className="mb-2 text-sm">
         Generates {auPerSecond.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU/s
-        {presMultiplier > 1 && (
-          <Badge className="ml-2" variant="secondary">
-            {presMultiplier.toFixed(2)}x Prestige Bonus
-          </Badge>
-        )}
       </p>
       <div className="mb-2">
         <p className="mb-2 text-sm font-semibold">

@@ -1,8 +1,8 @@
 export const EQUIPMENT_RATE = 1000;
 
-export const EQUIPMENT_RATE_DELTA = 33;
+export const EQUIPMENT_RATE_DELTA = 25;
 
-export const EQUIPMENT_RATE_MINIMUM = 16.66;
+export const EQUIPMENT_RATE_MINIMUM = 33.33;
 
 export const EQUIPMENT_RATE_REDUCTION = 0;
 
