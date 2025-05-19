@@ -28,7 +28,7 @@ export function DyanmicDrawer({
 }: {
   title: string;
   description: string;
-  button: string | React.ReactNode;
+  button?: string | React.ReactNode;
   children: React.ReactNode;
   setOpen: (e: boolean) => void;
   open: boolean;
@@ -38,7 +38,7 @@ export function DyanmicDrawer({
   if (!isMobile) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>{button}</DialogTrigger>
+        {button && <DialogTrigger asChild>{button}</DialogTrigger>}
         <DialogContent className="flex max-h-[60vh] flex-col overflow-hidden p-4">
           <DialogHeader className="flex-none p-0">
             <DialogTitle className="truncate pr-8">{title}</DialogTitle>
@@ -52,7 +52,7 @@ export function DyanmicDrawer({
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>{button}</DrawerTrigger>
+      {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
       <DrawerContent className="mb-4 p-4">
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
           <DrawerTitle className="truncate">{title}</DrawerTitle>

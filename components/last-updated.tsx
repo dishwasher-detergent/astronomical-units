@@ -1,10 +1,9 @@
 "use client";
 
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 
-import { autoIncrement } from "@/atoms/au";
+import { autoIncrement, au } from "@/atoms/au";
 import { lastUpdated } from "@/atoms/global";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
@@ -13,6 +12,8 @@ import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";
 import { useAnimation } from "@/hooks/useAnimation";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
+import { Button } from "@/components/ui/button";
+import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
 
 export function LastUpdated() {
   const last = useAtomValue(lastUpdated);
@@ -22,10 +23,19 @@ export function LastUpdated() {
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
   const initialized = useRef(false);
   const [delta, setDelta] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [offlineEarnings, setOfflineEarnings] = useState(0);
+  const [bonusMessage, setBonusMessage] = useState("");
+  const [currentAu, setCurrentAu] = useAtom(au);
 
   useAnimation((deltaTime) => {
     setDelta((current) => current + deltaTime);
   }, false);
+
+  const claimOfflineEarnings = () => {
+    setCurrentAu((current) => current + offlineEarnings);
+    setDialogOpen(false);
+  };
 
   useEffect(() => {
     const checkOfflineEarnings = () => {
@@ -67,20 +77,14 @@ export function LastUpdated() {
         });
 
         if (earned > 0) {
-          setTimeout(() => {
-            const bonusMessage =
-              offlineProductionCount > 0
-                ? ` (includes ${((offlineMultiplier - 1) * 100).toFixed(0)}% offline production bonus)`
-                : "";
+          const bonusMsg =
+            offlineProductionCount > 0
+              ? ` (includes ${((offlineMultiplier - 1) * 100).toFixed(0)}% offline production bonus)`
+              : "";
 
-            toast.info(
-              "You've been away for a while, here's what you've earned while you were gone!",
-              {
-                description: `You've earned ${formatMoney(earned)} AUs while you were away!${bonusMessage}`,
-                duration: 5000,
-              },
-            );
-          }, 500);
+          setOfflineEarnings(earned);
+          setBonusMessage(bonusMsg);
+          setDialogOpen(true);
         }
       }
     };
@@ -97,5 +101,22 @@ export function LastUpdated() {
     }
   }, [delta]);
 
-  return null;
+  return (
+    <DyanmicDrawer
+      title="Welcome Back!"
+      description="You have been away for a while, here is what you have earned while you were gone!"
+      setOpen={setDialogOpen}
+      open={dialogOpen}
+    >
+      <>
+        <p className="text-lg font-medium">
+          You&apos;ve earned {formatMoney(offlineEarnings)} AUs while you were
+          away!{bonusMessage}
+        </p>
+        <Button size="sm" className="w-full" onClick={claimOfflineEarnings}>
+          Claim Earnings
+        </Button>
+      </>
+    </DyanmicDrawer>
+  );
 }
