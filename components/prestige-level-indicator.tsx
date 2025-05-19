@@ -14,7 +14,6 @@ export function PrestigeLevelIndicator() {
   const lifetimeLevel = useAtomValue(currentLifetimeLevel);
   const levelProgress = useAtomValue(lifetimeLevelProgress);
 
-  // Calculate next level requirement
   const nextLevelRequirement =
     lifetimeLevel < PRESTIGE_LEVEL_REQUIREMENTS.length - 1
       ? PRESTIGE_LEVEL_REQUIREMENTS[lifetimeLevel + 1]

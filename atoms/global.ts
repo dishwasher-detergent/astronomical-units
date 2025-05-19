@@ -118,7 +118,6 @@ export const saveGameState = atom(null, (get, set) => {
   });
 });
 
-// Debug labels
 if (process.env.NODE_ENV !== "production") {
   gameData.debugLabel = "GameData";
   lastUpdated.debugLabel = "LastUpdated";

@@ -114,8 +114,8 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
       : 1;
 
   const criticalProductionLevel = allUpgrades.criticalProduction || 0;
-  const criticalChance = criticalProductionLevel * 0.05; // 5% per level
-  const criticalMultiplier = Math.random() < criticalChance ? 2 : 1; // Double production on critical
+  const criticalChance = criticalProductionLevel * 0.05;
+  const criticalMultiplier = Math.random() < criticalChance ? 2 : 1;
   let totalEarned = 0;
   productionRates.forEach((baseRate) => {
     totalEarned +=
@@ -135,7 +135,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     set(totalAu, newTotalAu);
     set(lifetimeIncome, newLifetimeIncome);
 
-    // Check unlocks
     Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
       if (newTotalAu >= value.threshold) {
         set(show, key);

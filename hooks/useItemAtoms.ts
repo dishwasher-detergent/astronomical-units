@@ -25,7 +25,6 @@ export function createEquipmentAtom(elementKey: string) {
 
         if (equip) {
           Object.entries(equip).forEach(([key, value]: any) => {
-            // Show upgrades that should be unlocked after the purchase
             if (newVal >= value.threshold && currentVal < value.threshold) {
               set(show, `${elementKey}_${key}`);
             }

@@ -17,14 +17,12 @@ export const DisplayUpgrade = memo(
     equipment: EquipmentItem;
     primaryKey: string;
   }) => {
-    // Early return if no upgrades are available for this item
     if (!item?.upgrades) return null;
 
     const hasEquippedUpgrades =
       equipment.upgrades &&
       Object.values(equipment.upgrades).some((upgrade) => upgrade > 0);
 
-    // Precompute equipped upgrades for rendering
     const equippedUpgradesElements = hasEquippedUpgrades
       ? Object.entries(equipment.upgrades || {}).flatMap(
           ([upgradeKey, upgradeVal]) => {

@@ -4,7 +4,6 @@ import { useAtom } from "jotai";
 import { useMemo } from "react";
 
 import { ShopItem } from "@/components/shop/item/ShopItem";
-import { useAcquireCost } from "@/hooks/useItemCost";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { au } from "@/atoms/au";
 import { nextUpgrade } from "@/atoms/upgrades";

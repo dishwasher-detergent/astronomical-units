@@ -52,7 +52,7 @@ export function useItemCost(key: string, type: "buy" | "sell" = "buy") {
 
   if (type === "buy") {
     const discountCount = allUpgrades.upgradeDiscount || 0;
-    const discountPercentage = discountCount > 0 ? discountCount * 5 : 0; // 5% discount per level
+    const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
     const discountMultiplier = 1 - discountPercentage / 100;
 
     calculatedCost = Math.ceil(
@@ -104,7 +104,7 @@ export function useBulkCosts(key: string) {
   const itemCount = typeof item === "number" ? item : (item && item.value) || 0;
 
   const discountCount = allUpgrades.upgradeDiscount || 0;
-  const discountPercentage = discountCount > 0 ? discountCount * 5 : 0; // 5% discount per level
+  const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
   if (!EQUIPMENT_LIST[key]) {
     const prestigeCost = getPrestigeCost(key);
 

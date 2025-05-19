@@ -42,10 +42,10 @@ export type GameData = {
   show: Record<string, boolean>;
   last_updated: number;
   prestige: {
-    level: number; // Current prestige level
+    level: number;
     points: number;
     multiplier: number;
-    lifetime: number; // Total prestige points earned
+    lifetime: number;
     upgrades: Record<string, number>;
   };
 };

@@ -42,16 +42,13 @@ export function calculateUpgradeMultiplier(
   item: Equipment,
   prestigeMultiplier: number = 1,
 ) {
-  // Start with base multiplier of 1
   let multiplier = 1;
 
   if (!item) {
     return multiplier * prestigeMultiplier;
   }
 
-  // Only perform equipment upgrade calculations if we have upgrades
   if (equipment?.upgrades) {
-    // Use reduce instead of forEach for better performance
     multiplier += Object.entries(equipment.upgrades).reduce(
       (acc, [upgradeKey, upgradeVal]) => {
         const upgradeItem = item.upgrades?.[upgradeKey];
@@ -62,7 +59,6 @@ export function calculateUpgradeMultiplier(
     );
   }
 
-  // Apply prestige multiplier to the result
   return multiplier * prestigeMultiplier;
 }
 
@@ -104,7 +100,6 @@ export class MemoizedCalculator {
     const result = fn();
     this.cache.set(key, result);
 
-    // Manage cache size
     if (this.cache.size > this.maxSize) {
       const oldestKey = this.cache.keys().next().value;
       if (oldestKey !== undefined) {

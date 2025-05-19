@@ -71,7 +71,6 @@ export const incrementEquipment = atom(null, (get, set, key: string) => {
   });
 });
 
-// Development helper to add equipment directly
 export const addEquipment = atom<null, [{ key: string; amount: number }], void>(
   null,
   (get, set, params) => {

@@ -48,7 +48,6 @@ export const crewCurrent = atom(
   },
 );
 
-// Debug labels
 if (process.env.NODE_ENV !== "production") {
   crew.debugLabel = "Crew";
   crewValue.debugLabel = "Crew Value";

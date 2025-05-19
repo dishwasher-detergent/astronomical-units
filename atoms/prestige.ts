@@ -71,7 +71,6 @@ export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
         ...currentUpgrades,
         [upgradeKey]: newLevel,
       });
-      // Force save after upgrade purchase
       set(saveGameState);
     },
   ),
@@ -82,7 +81,6 @@ export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
  */
 export const potentialPrestigePoints = atom((get) => {
   const level = get(currentLifetimeLevel);
-  // Fixed value of 5 prestige points per prestige
   return level >= 100 ? 5 : 0;
 });
 
@@ -108,31 +106,24 @@ const MAX_CACHE_SIZE = 1000;
 export const calculatePrestigeMultiplier = (points: number): number => {
   const roundedPoints = Math.round(points);
 
-  // Check cache first for improved performance
   if (prestigeMultiplierCache.has(roundedPoints)) {
     return prestigeMultiplierCache.get(roundedPoints)!;
   }
 
-  // Base calculation
   const baseMultiplier = 1;
   const earlyGameBonus = Math.min(roundedPoints, 10) * 0.25;
 
-  // Late game bonus calculation with performance optimization
   let lateGameBonus = 0;
   if (roundedPoints > 10) {
-    // Different scaling for very late game
     const exponent = roundedPoints > 1000 ? 0.8 : 0.9;
     lateGameBonus = Math.pow(roundedPoints - 10, exponent) * 0.15;
   }
 
   const result = baseMultiplier + earlyGameBonus + lateGameBonus;
 
-  // Cache the result
   prestigeMultiplierCache.set(roundedPoints, result);
 
-  // Manage cache size with LRU-like behavior
   if (prestigeMultiplierCache.size > MAX_CACHE_SIZE) {
-    // Remove oldest entry (approximation of LRU)
     const oldestKey = prestigeMultiplierCache.keys().next().value;
     if (oldestKey !== undefined) {
       prestigeMultiplierCache.delete(oldestKey);
@@ -223,7 +214,6 @@ export const setPrestigeMultiplier = atom(
   },
 );
 
-// Debug labels
 if (process.env.NODE_ENV !== "production") {
   prestigeLevel.debugLabel = "Prestige Level";
   prestigeMultiplier.debugLabel = "Prestige Multiplier";

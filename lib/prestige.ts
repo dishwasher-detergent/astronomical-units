@@ -15,7 +15,6 @@ export function calculatePrestigeLevel(
 ): number {
   let level = 0;
 
-  // Get the appropriate requirements list based on prestige level
   const requirements =
     currentPrestigeLevel === 0
       ? PRESTIGE_LEVEL_REQUIREMENTS
@@ -47,13 +46,11 @@ export function calculateNextLevelProgress(
     currentPrestigeLevel,
   );
 
-  // Get the appropriate requirements list based on prestige level
   const requirements =
     currentPrestigeLevel === 0
       ? PRESTIGE_LEVEL_REQUIREMENTS
       : getLevelRequirements(currentPrestigeLevel);
 
-  // If already at max level, return 100%
   if (currentLevel >= requirements.length - 1 || currentLevel >= 100) {
     return 100;
   }
@@ -61,7 +58,6 @@ export function calculateNextLevelProgress(
   const currentThreshold = requirements[currentLevel];
   const nextThreshold = requirements[currentLevel + 1];
 
-  // Calculate progress percentage
   const progress =
     ((lifetimeIncome - currentThreshold) / (nextThreshold - currentThreshold)) *
     100;
@@ -79,7 +75,6 @@ export function getNextLevelRequirement(
   currentLevel: number,
   currentPrestigeLevel: number = 0,
 ): number | null {
-  // Get the appropriate requirements list based on prestige level
   const requirements =
     currentPrestigeLevel === 0
       ? PRESTIGE_LEVEL_REQUIREMENTS

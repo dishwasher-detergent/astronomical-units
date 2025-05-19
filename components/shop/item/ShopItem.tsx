@@ -75,7 +75,7 @@ export function ShopItem({
         totalCost = cost1;
     }
 
-    if (totalCost > currency.value || itemCount + quantity > maxCount) return; // Calculate how many we can actually buy (limited by max count)
+    if (totalCost > currency.value || itemCount + quantity > maxCount) return;
     const actualQuantity = Math.min(quantity, maxCount - itemCount);
 
     if (actualQuantity <= 0) return;
@@ -121,8 +121,6 @@ export function ShopItem({
       details.multiplier !== undefined && details.auPerSecond === undefined;
     const isMaxed = itemCount >= maxCount;
     const cantAfford = cost1 > currency.value;
-
-    // Make sure we can't buy more than the max by checking the remaining count
     const remainingCount = maxCount - itemCount;
     const canBuy10 = cost10 <= currency.value && remainingCount >= 10;
     const canBuy20 = cost20 <= currency.value && remainingCount >= 20;
