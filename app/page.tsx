@@ -8,7 +8,6 @@ import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
 import { EquipmentDisplay } from "@/components/display";
 import { PrestigeLevelIndicator } from "@/components/prestige-level-indicator";
-import { DevMode } from "@/components/dev-mode";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
