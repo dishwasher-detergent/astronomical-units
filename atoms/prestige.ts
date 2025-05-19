@@ -91,46 +91,6 @@ export const canPrestige = atom((get) => {
 });
 
 /**
- * Memoization cache for prestige multiplier calculations
- * This avoids recalculating multipliers for the same point values
- */
-const prestigeMultiplierCache = new Map<number, number>();
-const MAX_CACHE_SIZE = 1000;
-
-/**
- * Calculate prestige multiplier with efficient caching
- * This function uses memoization to avoid recalculating values
- */
-export const calculatePrestigeMultiplier = (points: number): number => {
-  const roundedPoints = Math.round(points);
-
-  if (prestigeMultiplierCache.has(roundedPoints)) {
-    return prestigeMultiplierCache.get(roundedPoints)!;
-  }
-  const baseMultiplier = 1;
-  const earlyGameBonus = Math.min(roundedPoints, 10) * 0.15;
-
-  let lateGameBonus = 0;
-  if (roundedPoints > 10) {
-    const exponent = roundedPoints > 1000 ? 0.7 : 0.8;
-    lateGameBonus = Math.pow(roundedPoints - 10, exponent) * 0.1;
-  }
-
-  const result = baseMultiplier + earlyGameBonus + lateGameBonus;
-
-  prestigeMultiplierCache.set(roundedPoints, result);
-
-  if (prestigeMultiplierCache.size > MAX_CACHE_SIZE) {
-    const oldestKey = prestigeMultiplierCache.keys().next().value;
-    if (oldestKey !== undefined) {
-      prestigeMultiplierCache.delete(oldestKey);
-    }
-  }
-
-  return result;
-};
-
-/**
  * Perform prestige reset with optimized state updates
  */
 export const performPrestige = atom(null, (get, set) => {
@@ -146,7 +106,8 @@ export const performPrestige = atom(null, (get, set) => {
   const currentLifetime = get(lifetimePrestigePoints) || 0;
   const currentPoints = get(prestigePoints) || 0;
   const newCurrentPoints = currentPoints + prestigePointsReward;
-  const newMultiplier = calculatePrestigeMultiplier(newCurrentPoints);
+  const currentMultiplier = get(prestigeMultiplier) || 1;
+  const newMultiplier = currentMultiplier + 0.25;
   const currentLifetimeIncome = get(totalAu);
   set(gameData, (prev) => ({
     ...prev,
@@ -193,7 +154,6 @@ export const addPrestigePoints = atom(null, (get, set, amount: number) => {
       ...prev.prestige,
       points: newPoints,
       lifetime: currentLifetime + amount,
-      multiplier: calculatePrestigeMultiplier(newPoints),
     },
   }));
 
