@@ -52,7 +52,7 @@ export function ClickArea() {
     if (containerWidth === 0 || containerHeight === 0) return;
 
     const interval = setInterval(() => {
-      addPassiveParticle(containerWidth, containerHeight, auPerSecond / 2);
+      addPassiveParticle(containerWidth, containerHeight, auPerSecond);
     }, 1000);
 
     return () => clearInterval(interval);
