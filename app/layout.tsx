@@ -268,7 +268,6 @@ export default function RootLayout({
             <div className="flex flex-row items-center gap-1">
               <Logo />
               <p className="hidden md:block">Astronomical Units</p>
-              <p className="block md:hidden">AU</p>
             </div>
             <div className="flex items-center gap-1">
               <Backup />
