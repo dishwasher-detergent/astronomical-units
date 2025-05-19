@@ -1,14 +1,12 @@
 "use client";
 
 import { memo, useState, useEffect } from "react";
-import { LucideTimer } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 import { formatMoney } from "@/lib/formatters";
-import { Progress } from "@/components/ui/progress";
 
 export const DisplayItem = memo(
   ({
