@@ -8,7 +8,6 @@ import { crew } from "@/atoms/crew";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { calculateUpgradeMultiplier } from "@/lib/utils";
 import { LOCALE } from "@/constants/GLOBAL";
-import { DevMode } from "@/components/dev-mode";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);

@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -49,8 +50,10 @@ export default function Home() {
               <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Shop</DrawerTitle>
+                  <DrawerDescription>
+                    <Balance />
+                  </DrawerDescription>
                 </DrawerHeader>
-                <Balance />
                 <div className="flex-1 overflow-y-auto pb-4">
                   <Shop />
                 </div>
@@ -67,8 +70,10 @@ export default function Home() {
               <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Equipment</DrawerTitle>
+                  <DrawerDescription>
+                    <Balance />
+                  </DrawerDescription>
                 </DrawerHeader>
-                <Balance />
                 <div className="flex-1 overflow-y-auto pb-4">
                   <Crew />
                   <nav className="bg-background sticky top-0 z-10 flex h-12 items-center justify-between border-t px-4 font-semibold">
