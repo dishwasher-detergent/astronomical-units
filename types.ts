@@ -37,15 +37,16 @@ export type GameData = {
   income: {
     total: number;
     current: number;
+    lifetime: number; // Total income ever earned, doesn't reset on prestige
   };
   equipment: EquipmentObject;
   show: Record<string, boolean>;
   last_updated: number;
   prestige: {
-    level: number;
+    level: number; // Current prestige level
     points: number;
     multiplier: number;
-    lifetime: number;
+    lifetime: number; // Total prestige points earned
     upgrades: Record<string, number>;
   };
 };

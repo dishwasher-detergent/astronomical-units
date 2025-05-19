@@ -7,7 +7,7 @@ import { Shop } from "@/components/shop";
 import { Crew } from "@/components/crew";
 import { Statistics } from "@/components/statistics";
 import { EquipmentDisplay } from "@/components/display";
-import { Prestige } from "@/components/prestige";
+import { PrestigeLevelIndicator } from "@/components/prestige-level-indicator";
 import { DevMode } from "@/components/dev-mode";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,10 +34,12 @@ export default function Home() {
           <div className="w-full flex-1">
             <ClickArea />
           </div>
+          <div className="flex flex-none flex-row items-center justify-between border-b p-2">
+            <PrestigeLevelIndicator />
+          </div>
           <Statistics />
         </div>
         <nav className="mb-safe bg-background fixed bottom-0 z-40 flex w-full flex-none items-center justify-center gap-4 border-t p-2">
-          <Prestige />
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
@@ -78,7 +80,6 @@ export default function Home() {
               </div>
             </DrawerContent>
           </Drawer>
-          <DevMode />
         </nav>
       </>
     );
@@ -91,9 +92,9 @@ export default function Home() {
           <ClickArea />
         </div>
         <div className="sticky top-0 overflow-y-auto md:w-96 md:border-r">
-          <div className="flex flex-row gap-2 border-b p-2">
-            <Prestige />
-            <DevMode />
+          {" "}
+          <div className="flex flex-row items-center justify-between border-b p-2">
+            <PrestigeLevelIndicator />
           </div>
           <Statistics />
         </div>

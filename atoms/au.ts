@@ -14,6 +14,9 @@ export const totalAu = focusAtom(gameData, (optic) =>
   optic.path("income.total"),
 );
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
+export const lifetimeIncome = focusAtom(gameData, (optic) =>
+  optic.path("income.lifetime"),
+);
 
 /**
  * Memoized calculation of click value to avoid recalculating on each click
@@ -52,15 +55,17 @@ export const auIncrement = atom(null, (get, set) => {
       });
     }
   }
-
   // Update AU values efficiently by reading current values only once
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
+  const currentLifetimeIncome = get(lifetimeIncome);
   const newAu = currentAu + valuePerClick;
   const newTotalAu = currentTotalAu + valuePerClick;
+  const newLifetimeIncome = currentLifetimeIncome + valuePerClick;
 
   set(au, newAu);
   set(totalAu, newTotalAu);
+  set(lifetimeIncome, newLifetimeIncome);
 
   // Check for equipment unlocks
   Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
@@ -126,13 +131,16 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     // Read current values only once
     const currentAu = get(au);
     const currentTotalAu = get(totalAu);
+    const currentLifetimeIncome = get(lifetimeIncome);
 
     const newAu = currentAu + totalEarned;
     const newTotalAu = currentTotalAu + totalEarned;
+    const newLifetimeIncome = currentLifetimeIncome + totalEarned;
 
     // Update values
     set(au, newAu);
     set(totalAu, newTotalAu);
+    set(lifetimeIncome, newLifetimeIncome);
 
     // Check unlocks
     Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
@@ -149,9 +157,11 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
 export const addAu = atom(null, (get, set, amount: number) => {
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
+  const currentLifetimeIncome = get(lifetimeIncome);
 
   set(au, currentAu + amount);
   set(totalAu, currentTotalAu + amount);
+  set(lifetimeIncome, currentLifetimeIncome + amount);
 });
 
 /**
@@ -160,6 +170,7 @@ export const addAu = atom(null, (get, set, amount: number) => {
 export const setAuDirectly = atom(null, (get, set, amount: number) => {
   set(au, amount);
   set(totalAu, amount);
+  set(lifetimeIncome, amount);
 });
 
 if (process.env.NODE_ENV !== "production") {

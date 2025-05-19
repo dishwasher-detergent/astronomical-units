@@ -1,12 +1,12 @@
 "use client";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { LucideArrowBigUpDash, LucideCrown } from "lucide-react";
+import { LucideCrown } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
-import { totalAu } from "@/atoms/au";
+import { PRESTIGE_LEVEL_REQUIREMENTS } from "@/constants/GLOBAL";
+import { totalAu, lifetimeIncome } from "@/atoms/au";
 import {
   canPrestige,
   performPrestige,
@@ -15,6 +15,8 @@ import {
   prestigeMultiplier,
   prestigePoints,
   calculatePrestigeMultiplier,
+  currentLifetimeLevel,
+  lifetimeLevelProgress,
 } from "@/atoms/prestige";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/utils";
@@ -29,55 +31,76 @@ export function Prestige() {
   const multiplier = useAtomValue(prestigeMultiplier) || 1;
   const doPrestige = useSetAtom(performPrestige);
 
+  const currentLifetimeIncomeValue = useAtomValue(lifetimeIncome);
+  const lifetimeLevel = useAtomValue(currentLifetimeLevel);
+  const levelProgress = useAtomValue(lifetimeLevelProgress);
+
+  const nextLevelRequirement =
+    lifetimeLevel < PRESTIGE_LEVEL_REQUIREMENTS.length - 1
+      ? PRESTIGE_LEVEL_REQUIREMENTS[lifetimeLevel + 1]
+      : null;
+
   return (
     <DyanmicDrawer
       title="Prestige System"
-      description="Reset your progress to gain permanent production multipliers"
+      description="Reset your progress to gain prestige points."
       open={open}
       setOpen={setOpen}
       button={
         <Button
-          size="icon"
+          size="sm"
           variant={canPerformPrestige ? "default" : "ghost"}
           disabled={!canPerformPrestige}
+          className="w-full"
         >
           <LucideCrown className="size-6" />
+          Prestige
         </Button>
       }
     >
       <div className="space-y-4">
         <div className="rounded-md border p-4">
-          <p className="mb-2 font-medium">Prestige Rewards</p>
-          <p className="text-muted-foreground text-sm">
-            Prestige points are earned based on your total AU. You&apos;ll earn{" "}
-            <span className="font-bold">{potentialPoints}</span> prestige points
-            if you reset now, increasing your multiplier to{" "}
-            <span className="font-bold">
-              {formatMoney(
-                calculatePrestigeMultiplier(points + potentialPoints),
-              )}
-              x
-            </span>
-          </p>
+          <p className="mb-2 font-medium">Level Progress</p>
+          <div className="flex items-center gap-2">
+            <p className="text-muted-foreground text-sm">Current Level:</p>
+            <p className="text-xl font-bold">{lifetimeLevel}/100</p>
+          </div>
+
+          {lifetimeLevel < 100 && nextLevelRequirement && (
+            <>
+              <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-gray-200">
+                <div
+                  className="bg-primary h-full"
+                  style={{ width: `${levelProgress}%` }}
+                />
+              </div>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Progress: {formatMoney(currentLifetimeIncomeValue)} /{" "}
+                {formatMoney(nextLevelRequirement)} AU (
+                {Math.round(levelProgress)}%)
+              </p>
+            </>
+          )}
+
+          {lifetimeLevel >= 100 && (
+            <p className="text-muted-foreground mt-1 text-sm font-semibold">
+              Maximum level reached! You can now prestige to reset and gain
+              permanent bonuses.
+            </p>
+          )}
+
           <p className="text-muted-foreground mt-2 text-sm">
-            Each prestige point provides a bonus to all production. The first 10
-            points give 25% each, with points beyond that providing additional
-            scaling bonuses.
-          </p>
-          <p className="text-muted-foreground mt-2 text-sm font-semibold">
-            TIP: Saving up beyond 1,000 AU will give you bonus prestige points,
-            making it more rewarding to wait longer between resets!
+            Earn income to increase your level from 1 to 100. Once you reach
+            level 100, you can prestige to reset your progress and prestige
+            points. Each prestige will require you to reach level 100 again, but
+            with higher income requirements.
           </p>
         </div>
         <div className="bg-muted rounded-md p-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm font-medium">Prestige Level</p>
-              <p className="text-xl font-bold">{level}</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium">Prestige Points</p>
-              <p className="text-xl font-bold">{points}</p>
+              <p className="text-sm font-medium">Reset Count</p>
+              <p className="font-mono text-xl font-bold">{level}</p>
             </div>
             <div>
               <p className="text-sm font-medium">Current Multiplier</p>
@@ -85,19 +108,13 @@ export function Prestige() {
                 {formatMoney(multiplier)}
               </p>
             </div>
-            <div>
-              <p className="text-sm font-medium">Total AU</p>
-              <p className="font-mono text-xl font-bold">
-                {formatMoney(totalAuValue)}
-              </p>
-            </div>
           </div>
-        </div>
+        </div>{" "}
         <footer className="flex items-center justify-between">
           <div className="text-muted-foreground text-sm">
             {canPerformPrestige
-              ? `You will gain ${potentialPoints} prestige points`
-              : "You need at least 1,000 AU to prestige"}
+              ? "You will gain 5 prestige points"
+              : `You need to reach Level 100 (currently ${lifetimeLevel})`}
           </div>
           <Button onClick={() => doPrestige()} disabled={!canPerformPrestige}>
             Prestige Now

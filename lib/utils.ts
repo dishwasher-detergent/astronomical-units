@@ -167,10 +167,10 @@ export function calculateUpgradeMultiplierOptimized(
  * @returns Formatted string with appropriate suffix
  */
 export function formatMoney(
-  value?: number,
+  value?: number | null,
   showDecimalsUnderMillion = true,
 ): string {
-  if (value === 0 || value === undefined) return "0";
+  if (value === 0 || value === undefined || value === null) return "0";
 
   const suffixes = [
     "",

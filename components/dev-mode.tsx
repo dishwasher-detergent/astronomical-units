@@ -100,7 +100,7 @@ function DevModeContent() {
       open={open}
       setOpen={setOpen}
       button={
-        <Button variant="ghost" size="icon">
+        <Button variant="outline" size="icon" className="size-8">
           <LucideCode2 className="size-6" />
         </Button>
       }
@@ -112,11 +112,11 @@ function DevModeContent() {
           <TabsTrigger value="equipment">Equipment</TabsTrigger>
         </TabsList>
         <TabsContent value="currency" className="space-y-4">
-          <div className="rounded-md bg-muted p-3">
-            <p className="text-sm text-muted-foreground">
+          <div className="bg-muted rounded-md p-3">
+            <p className="text-muted-foreground text-sm">
               Current AU: {formatMoney(currentAu)}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Total AU: {formatMoney(currentTotalAu)}
             </p>
           </div>
@@ -137,14 +137,14 @@ function DevModeContent() {
           </div>
         </TabsContent>
         <TabsContent value="prestige" className="space-y-4 py-4">
-          <div className="rounded-md bg-muted p-3">
-            <p className="text-sm text-muted-foreground">
+          <div className="bg-muted rounded-md p-3">
+            <p className="text-muted-foreground text-sm">
               Prestige Level: {level || 0}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Prestige Points: {points || 0}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Production Multiplier: {formatMoney(multiplier) || 1}x
             </p>
           </div>
@@ -170,7 +170,7 @@ function DevModeContent() {
               <Label htmlFor="equipment-select">Equipment</Label>
               <select
                 id="equipment-select"
-                className="focus-visible:outline-hidden flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="border-input bg-background ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
                 value={selectedEquipment}
                 onChange={(e) => setSelectedEquipment(e.target.value)}
               >

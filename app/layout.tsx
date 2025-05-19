@@ -14,6 +14,7 @@ import { APP_DESCRIPTION, APP_NAME, APP_SHORT_NAME } from "@/constants/GLOBAL";
 import { InstallPrompt } from "@/components/install-prompt";
 import { Backup } from "@/components/backup";
 import { Logo } from "@/components/logo";
+import { DevMode } from "@/components/dev-mode";
 
 const font = Fredoka({ subsets: ["latin"] });
 const mono = IBM_Plex_Mono({
@@ -281,6 +282,7 @@ export default function RootLayout({
                 </a>
               </Button>
               <ModeToggle />
+              <DevMode />
             </div>
           </nav>
           <main className="relative w-full flex-1 overflow-hidden">

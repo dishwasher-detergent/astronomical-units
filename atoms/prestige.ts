@@ -3,11 +3,15 @@ import { focusAtom } from "jotai-optics";
 import { atomFamily } from "jotai/utils";
 import { toast } from "sonner";
 
-import { totalAu } from "@/atoms/au";
+import { lifetimeIncome } from "@/atoms/au";
 import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
+import {
+  calculateNextLevelProgress,
+  calculatePrestigeLevel,
+} from "@/lib/prestige";
 import { formatMoney, generateEquipmentObject } from "@/lib/utils";
 
 /**
@@ -20,6 +24,27 @@ export const prestigeLevel = focusAtom(gameData, (optic) =>
 export const prestigeMultiplier = focusAtom(gameData, (optic) =>
   optic.path("prestige.multiplier"),
 );
+
+/**
+ * Calculate the prestige level based on lifetime income
+ */
+export const currentLifetimeLevel = atom((get) => {
+  const currentLifetimeIncome = get(lifetimeIncome);
+  const currentPrestigeLevel = get(prestigeLevel) || 0;
+  return calculatePrestigeLevel(currentLifetimeIncome, currentPrestigeLevel);
+});
+
+/**
+ * Calculate progress to next prestige level
+ */
+export const lifetimeLevelProgress = atom((get) => {
+  const currentLifetimeIncome = get(lifetimeIncome);
+  const currentPrestigeLevel = get(prestigeLevel) || 0;
+  return calculateNextLevelProgress(
+    currentLifetimeIncome,
+    currentPrestigeLevel,
+  );
+});
 
 export const prestigePoints = focusAtom(gameData, (optic) =>
   optic.path("prestige.points"),
@@ -53,24 +78,20 @@ export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
 );
 
 /**
- * Calculate potential prestige points based on current total AUs
+ * Fixed prestige points (5) when player reaches level 100
  */
 export const potentialPrestigePoints = atom((get) => {
-  const currentTotalAu = get(totalAu);
-  const basePoints = Math.floor(Math.log10(Math.max(currentTotalAu, 1)) / 3);
-  const bonusPoints =
-    basePoints > 0 ? Math.sqrt(currentTotalAu / 1000) / 2 - 0.5 : 0;
-  const totalPoints = Math.floor(basePoints + Math.max(0, bonusPoints));
-
-  return Math.max(0, totalPoints);
+  const level = get(currentLifetimeLevel);
+  // Fixed value of 5 prestige points per prestige
+  return level >= 100 ? 5 : 0;
 });
 
 /**
- * Whether the player can prestige now
+ * Whether the player can prestige now (only at level 100)
  */
 export const canPrestige = atom((get) => {
-  const potential = get(potentialPrestigePoints);
-  return potential > 0;
+  const level = get(currentLifetimeLevel);
+  return level >= 100;
 });
 
 /**
@@ -125,33 +146,43 @@ export const calculatePrestigeMultiplier = (points: number): number => {
  * Perform prestige reset with optimized state updates
  */
 export const performPrestige = atom(null, (get, set) => {
-  const potential = get(potentialPrestigePoints);
+  const level = get(currentLifetimeLevel);
 
-  if (potential <= 0) {
-    toast.error("You need more AUs to perform a prestige reset!");
+  if (level < 100) {
+    toast.error("You need to reach Level 100 to prestige!");
     return;
   }
+
+  // Fixed prestige points reward
+  const prestigePointsReward = 5;
 
   // Get all current values in one batch to avoid multiple reads
   const currentLevel = get(prestigeLevel) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
   const currentPoints = get(prestigePoints) || 0;
-  const newCurrentPoints = currentPoints + potential;
+  const currentLifetimeIncome = get(lifetimeIncome) || 0;
+  const newCurrentPoints = currentPoints + prestigePointsReward;
 
   // Calculate new multiplier
   const newMultiplier = calculatePrestigeMultiplier(newCurrentPoints);
 
+  // Calculate lifetime level based on current lifetime income
+  const lifetimeLevel = calculatePrestigeLevel(currentLifetimeIncome);
   // Batch update prestige data
   set(gameData, (prev) => ({
     ...prev,
-    income: { total: 0, current: 0 },
+    income: {
+      total: 0,
+      current: 0,
+      lifetime: 0, // Reset lifetime income to start back at level 1
+    },
     equipment: generateEquipmentObject(EQUIPMENT_LIST),
     show: {},
     prestige: {
       ...prev.prestige,
       level: currentLevel + 1,
       points: newCurrentPoints,
-      lifetime: currentLifetime + potential,
+      lifetime: currentLifetime + prestigePointsReward,
       multiplier: newMultiplier,
     },
   }));
@@ -164,16 +195,11 @@ export const performPrestige = atom(null, (get, set) => {
   });
 
   // Force save after prestige
-  set(saveGameState);
-
-  // Show success notification
-  toast.success(
-    `Prestige complete! You've gained ${formatMoney(potential)} prestige points.`,
-    {
-      description: `Your production multiplier is now ${formatMoney(newMultiplier)}x`,
-      duration: 5000,
-    },
-  );
+  set(saveGameState); // Show success notification
+  toast.success(`Prestige complete! You've gained 5 prestige points.`, {
+    description: `Your production multiplier is now ${formatMoney(newMultiplier)}x. You've been reset to Level 1 (Prestige ${currentLevel + 1}).`,
+    duration: 5000,
+  });
 });
 
 /**
@@ -226,4 +252,6 @@ if (process.env.NODE_ENV !== "production") {
   performPrestige.debugLabel = "Perform Prestige";
   addPrestigePoints.debugLabel = "Add Prestige Points (Dev)";
   setPrestigeMultiplier.debugLabel = "Set Prestige Multiplier (Dev)";
+  currentLifetimeLevel.debugLabel = "Current Lifetime Level";
+  lifetimeLevelProgress.debugLabel = "Lifetime Level Progress";
 }
