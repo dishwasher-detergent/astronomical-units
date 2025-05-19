@@ -1,13 +1,10 @@
 "use client";
 
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom } from "jotai";
 import { focusAtom } from "jotai-optics";
+
 import { ShopItem } from "@/components/shop/item/ShopItem";
-import {
-  prestigePoints,
-  prestigeUpgrades,
-  prestigeUpgradeFamily,
-} from "@/atoms/prestige";
+import { prestigePoints, prestigeUpgrades } from "@/atoms/prestige";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { nextPrestigeUpgrade } from "@/atoms/upgrades";
 import { useNextPrestigeUpgrade } from "@/hooks/useNextUpgrade";
@@ -21,18 +18,18 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
   const upgrade = focusAtom(prestigeUpgrades, (optic) =>
     optic.path(upgradeKey),
   );
-
   const upgradeAtom = atom(
     (get) => get(upgrade) || 0,
-    (_, set) => {
-      set(upgrade, (current = 0) => current + 1);
+    (_, set, newValue?: number) => {
+      if (typeof newValue === "number") {
+        set(upgrade, newValue);
+      } else {
+        set(upgrade, (current = 0) => current + 1);
+      }
     },
   );
   const element = PRESTIGE_UPGRADES[upgradeKey];
-  const currentCount = useAtomValue(upgrade) || 0;
   const maxCount = element.maxCount || Infinity;
-
-  const getPrestigeCost = () => element.cost;
 
   return (
     <ShopItem
@@ -44,7 +41,6 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
         update: setPP,
         name: "Prestige Points",
       }}
-      getCost={() => getPrestigeCost()}
       nextUpgrade={nextPrestigeUpgrade}
       useNextHook={useNextPrestigeUpgrade}
       maxCount={maxCount}

@@ -6,8 +6,20 @@ import { crewCurrent } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
 import { prestigeUpgrades } from "@/atoms/prestige";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
+
+const getPrestigeCost = (key: string): number => {
+  if (PRESTIGE_UPGRADES[key]) {
+    return PRESTIGE_UPGRADES[key].cost;
+  }
+  return 0;
+};
 
 const getItemAtom = (key: string) => {
+  if (!EQUIPMENT_LIST[key]) {
+    return undefined;
+  }
+
   if (EQUIPMENT_LIST[key].equipment === false) {
     switch (key) {
       case "crew":
@@ -24,11 +36,18 @@ export function useItemCost(key: string, type: "buy" | "sell" = "buy") {
   const itemAtom = useMemo(() => getItemAtom(key), [key]);
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
 
+  if (PRESTIGE_UPGRADES[key]) {
+    return PRESTIGE_UPGRADES[key].cost;
+  }
+
+  if (!EQUIPMENT_LIST[key]) {
+    return 0;
+  }
+
   const item = itemAtom ? useAtomValue(itemAtom) : 0;
   const itemCount = typeof item === "number" ? item : item.value;
   const { baseCost, costMultiplier } = EQUIPMENT_LIST[key];
 
-  // Only apply discount on buy, not on sell
   let calculatedCost;
 
   if (type === "buy") {
@@ -40,7 +59,6 @@ export function useItemCost(key: string, type: "buy" | "sell" = "buy") {
       baseCost * Math.pow(costMultiplier, itemCount) * discountMultiplier,
     );
   } else {
-    // For selling, we calculate the buy price of the previous level and take 30%
     calculatedCost = Math.ceil(
       baseCost * Math.pow(costMultiplier, itemCount - 1) * 0.3,
     );
@@ -55,6 +73,13 @@ export function calculateBulkCost(
   quantity: number,
   discountPercentage: number = 0,
 ) {
+  if (!EQUIPMENT_LIST[key]) {
+    if (PRESTIGE_UPGRADES[key]) {
+      return PRESTIGE_UPGRADES[key].cost * quantity;
+    }
+    return 0;
+  }
+
   const { baseCost, costMultiplier } = EQUIPMENT_LIST[key];
   const discountMultiplier = 1 - discountPercentage / 100;
 
@@ -76,10 +101,25 @@ export function useBulkCosts(key: string) {
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
 
   const item = itemAtom ? useAtomValue(itemAtom) : 0;
-  const itemCount = typeof item === "number" ? item : item.value;
+  const itemCount = typeof item === "number" ? item : (item && item.value) || 0;
 
   const discountCount = allUpgrades.upgradeDiscount || 0;
   const discountPercentage = discountCount > 0 ? discountCount * 5 : 0; // 5% discount per level
+  if (!EQUIPMENT_LIST[key]) {
+    const prestigeCost = getPrestigeCost(key);
+
+    const prestigeItemCount = PRESTIGE_UPGRADES[key]
+      ? allUpgrades[key] || 0
+      : itemCount;
+
+    return {
+      cost1: prestigeCost,
+      cost10: prestigeCost * 10,
+      cost20: prestigeCost * 20,
+      cost50: prestigeCost * 50,
+      itemCount: prestigeItemCount,
+    };
+  }
 
   const cost1 = useItemCost(key, "buy");
   const cost10 = calculateBulkCost(key, itemCount, 10, discountPercentage);

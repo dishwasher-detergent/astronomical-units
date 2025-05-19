@@ -85,17 +85,17 @@ export default function Home() {
   }
 
   return (
-    <section className="flex h-full w-full flex-row flex-nowrap overflow-hidden">
-      <div className="flex h-full w-96 flex-none flex-col overflow-hidden border-r">
+    <section className="flex h-full w-full flex-col flex-nowrap overflow-hidden lg:flex-row">
+      <div className="flex w-full flex-none flex-row-reverse overflow-hidden lg:h-full lg:w-96 lg:flex-col lg:border-r">
         <div className="w-full flex-1">
           <ClickArea />
         </div>
-        <div className="sticky top-0 overflow-y-auto">
-          <Statistics />
-          <div className="flex flex-row gap-2 border-b p-4">
+        <div className="sticky top-0 overflow-y-auto md:w-96 md:border-r">
+          <div className="flex flex-row gap-2 border-b p-2">
             <Prestige />
             <DevMode />
           </div>
+          <Statistics />
         </div>
       </div>
       <div className="flex h-full flex-1 flex-row">

@@ -10,19 +10,21 @@ import { ShopDisplay } from "@/components/shop/item/ShopDisplay";
 export function Shop() {
   return (
     <div className="relative">
-      <p className="hidden px-4 py-2 font-semibold md:block">Store</p>
+      <p className="bg-background sticky top-0 z-10 hidden px-4 py-2 font-semibold md:block">
+        Store
+      </p>
       <Tabs defaultValue="general" className="w-full">
-        <div className="sticky top-0 z-10 border-b">
-          <TabsList className="w-full rounded-none bg-background">
+        <div className="sticky top-0 z-10 border-b md:top-10">
+          <TabsList className="bg-background w-full rounded-none">
             <TabsTrigger
               value="general"
-              className="flex-1 data-[state=active]:bg-muted"
+              className="data-[state=active]:bg-muted flex-1"
             >
               General
             </TabsTrigger>
             <TabsTrigger
               value="prestige"
-              className="flex-1 data-[state=active]:bg-muted"
+              className="data-[state=active]:bg-muted flex-1"
             >
               Prestige
             </TabsTrigger>

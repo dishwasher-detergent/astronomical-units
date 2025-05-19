@@ -30,7 +30,6 @@ export function EquipmentItem({ elementKey }: EquipmentItemProps) {
         update: setAu,
         name: "AU",
       }}
-      getCost={useAcquireCost}
       nextUpgrade={nextUpgrade}
     />
   );

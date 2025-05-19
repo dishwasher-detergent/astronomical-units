@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { LucideArrowBigUpDash } from "lucide-react";
+import { LucideArrowBigUpDash, LucideCrown } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -41,14 +41,14 @@ export function Prestige() {
           variant={canPerformPrestige ? "default" : "ghost"}
           disabled={!canPerformPrestige}
         >
-          <LucideArrowBigUpDash className="size-6" />
+          <LucideCrown className="size-6" />
         </Button>
       }
     >
       <div className="space-y-4">
         <div className="rounded-md border p-4">
           <p className="mb-2 font-medium">Prestige Rewards</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Prestige points are earned based on your total AU. You&apos;ll earn{" "}
             <span className="font-bold">{potentialPoints}</span> prestige points
             if you reset now, increasing your multiplier to{" "}
@@ -59,17 +59,17 @@ export function Prestige() {
               x
             </span>
           </p>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             Each prestige point provides a bonus to all production. The first 10
             points give 25% each, with points beyond that providing additional
             scaling bonuses.
           </p>
-          <p className="mt-2 text-sm font-semibold text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm font-semibold">
             TIP: Saving up beyond 1,000 AU will give you bonus prestige points,
             making it more rewarding to wait longer between resets!
           </p>
         </div>
-        <div className="rounded-md bg-muted p-4">
+        <div className="bg-muted rounded-md p-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-sm font-medium">Prestige Level</p>
@@ -94,7 +94,7 @@ export function Prestige() {
           </div>
         </div>
         <footer className="flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
+          <div className="text-muted-foreground text-sm">
             {canPerformPrestige
               ? `You will gain ${potentialPoints} prestige points`
               : "You need at least 1,000 AU to prestige"}

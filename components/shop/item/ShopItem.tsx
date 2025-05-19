@@ -18,13 +18,12 @@ import { prestigeUpgrades } from "@/atoms/prestige";
 interface ShopItemProps {
   elementKey: string;
   itemAtom: WritableAtom<any, any, any>;
-  details: any; // Allow any type to support both Equipment and Upgrade types
+  details: any;
   currency: {
     value: number;
     update: (update: (current: number) => number) => void;
     name: string;
   };
-  getCost: (key: string) => number;
   onPurchase?: () => void;
   nextUpgrade?: WritableAtom<string, [], void>;
   useNextHook?: (isShowing: boolean) => void;
@@ -36,7 +35,6 @@ export function ShopItem({
   itemAtom,
   details,
   currency,
-  getCost,
   onPurchase,
   nextUpgrade,
   useNextHook = useNextUpgrade,
@@ -54,11 +52,14 @@ export function ShopItem({
   const canAcquire = cost1 <= currency.value && itemCount < maxCount;
 
   useNextHook?.(isShowing);
-
   const handlePurchase = (quantity: number = 1) => {
     if (!canAcquire && quantity === 1) return;
 
-    // Get the appropriate cost based on quantity
+    if (itemCount >= maxCount) return;
+
+    const isPrestigeUpgrade =
+      details.multiplier !== undefined && details.auPerSecond === undefined;
+
     let totalCost: number;
     switch (quantity) {
       case 10:
@@ -74,58 +75,58 @@ export function ShopItem({
         totalCost = cost1;
     }
 
-    // Check if we can afford it and haven't hit max count
-    if (totalCost > currency.value || itemCount + quantity > maxCount) return;
-
-    // Calculate how many we can actually buy (might be limited by maxCount)
+    if (totalCost > currency.value || itemCount + quantity > maxCount) return; // Calculate how many we can actually buy (limited by max count)
     const actualQuantity = Math.min(quantity, maxCount - itemCount);
 
     if (actualQuantity <= 0) return;
 
-    // If we're buying less than the requested quantity, recalculate the cost
     let actualCost = totalCost;
     if (actualQuantity < quantity) {
-      const discountCount = allUpgrades.upgradeDiscount || 0;
-      const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
-      actualCost = calculateBulkCost(
-        elementKey,
-        itemCount,
-        actualQuantity,
-        discountPercentage,
-      );
+      if (isPrestigeUpgrade) {
+        actualCost = cost1 * actualQuantity;
+      } else {
+        const discountCount = allUpgrades.upgradeDiscount || 0;
+        const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
+        actualCost = calculateBulkCost(
+          elementKey,
+          itemCount,
+          actualQuantity,
+          discountPercentage,
+        );
+      }
     }
+    const newItemValue = Math.min(
+      typeof itemValue === "number"
+        ? itemValue + actualQuantity
+        : actualQuantity,
+      maxCount,
+    );
 
-    // Update item count with the quantity
     if (typeof itemValue === "number") {
-      setItemValue(itemValue + actualQuantity);
+      setItemValue(newItemValue);
     } else {
-      // For equipment atoms, we need to pass quantity to the purchase atom
-      // The atom has been updated to handle quantity parameter
-      setItemValue(actualQuantity);
+      setItemValue(newItemValue);
     }
 
-    // Deduct currency
     currency.update((current) => current - actualCost);
 
-    // Show success toast
     toast.success(
       `Purchased ${actualQuantity} ${details.name} for ${formatMoney(actualCost)} ${currency.name}`,
     );
 
     onPurchase?.();
   };
-
   if (isShowing) {
-    // Check whether this is a prestige item (with multiplier) or regular equipment
     const isPrestigeUpgrade =
       details.multiplier !== undefined && details.auPerSecond === undefined;
     const isMaxed = itemCount >= maxCount;
     const cantAfford = cost1 > currency.value;
 
-    // Determine if we can afford each quantity
-    const canBuy10 = cost10 <= currency.value && itemCount + 10 <= maxCount;
-    const canBuy20 = cost20 <= currency.value && itemCount + 20 <= maxCount;
-    const canBuy50 = cost50 <= currency.value && itemCount + 50 <= maxCount;
+    // Make sure we can't buy more than the max by checking the remaining count
+    const remainingCount = maxCount - itemCount;
+    const canBuy10 = cost10 <= currency.value && remainingCount >= 10;
+    const canBuy20 = cost20 <= currency.value && remainingCount >= 20;
+    const canBuy50 = cost50 <= currency.value && remainingCount >= 50;
 
     return (
       <div className="flex w-full flex-col border-b border-dashed px-4 py-3 align-top">
@@ -133,7 +134,7 @@ export function ShopItem({
           <div className="flex items-center gap-2">
             <Icon className="size-4" />
             <p className="truncate text-lg font-semibold">{details.name}</p>
-          </div>
+          </div>{" "}
           <Badge
             variant={
               isMaxed ? "destructive" : cantAfford ? "outline" : "default"
@@ -176,9 +177,7 @@ export function ShopItem({
             <span className="font-mono">{formatMoney(cost1)}</span>{" "}
             {currency.name}
           </p>
-        </div>
-
-        {/* Add button group for different quantities */}
+        </div>{" "}
         <div className="mt-3 flex flex-wrap gap-2">
           <Button
             size="sm"
@@ -189,36 +188,42 @@ export function ShopItem({
           >
             Buy 1
           </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="flex-1"
-            disabled={!canBuy10}
-            onClick={() => handlePurchase(10)}
-            title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
-          >
-            Buy 10
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="flex-1"
-            disabled={!canBuy20}
-            onClick={() => handlePurchase(20)}
-            title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
-          >
-            Buy 20
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="flex-1"
-            disabled={!canBuy50}
-            onClick={() => handlePurchase(50)}
-            title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
-          >
-            Buy 50
-          </Button>
+          {maxCount >= 10 && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="flex-1"
+              disabled={!canBuy10}
+              onClick={() => handlePurchase(10)}
+              title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
+            >
+              Buy 10
+            </Button>
+          )}
+          {maxCount >= 20 && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="flex-1"
+              disabled={!canBuy20}
+              onClick={() => handlePurchase(20)}
+              title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
+            >
+              Buy 20
+            </Button>
+          )}
+          {maxCount >= 50 && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="flex-1"
+              disabled={!canBuy50}
+              onClick={() => handlePurchase(50)}
+              title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
+            >
+              Buy 50
+            </Button>
+          )}
         </div>
       </div>
     );
