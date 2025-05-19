@@ -39,7 +39,7 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
       currency={{
         value: ppValue,
         update: setPP,
-        name: "Prestige Points",
+        name: "PP",
       }}
       nextUpgrade={nextPrestigeUpgrade}
       useNextHook={useNextPrestigeUpgrade}

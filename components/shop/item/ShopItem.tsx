@@ -4,12 +4,11 @@ import { atom, useAtom, useAtomValue } from "jotai";
 import { WritableAtom } from "jotai";
 import React from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { showElement } from "@/atoms/show";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LucidePlus, LucideTrendingUp } from "lucide-react";
+import { LucidePlus } from "lucide-react";
 import { formatMoney } from "@/lib/formatters";
 import { calculateBulkCost, useBulkCosts } from "@/hooks/useItemCost";
 import { prestigeUpgrades } from "@/atoms/prestige";
@@ -114,121 +113,133 @@ export function ShopItem({
   if (isShowing) {
     const isPrestigeUpgrade =
       details.multiplier !== undefined && details.auPerSecond === undefined;
-    const isMaxed = itemCount >= maxCount;
-    const cantAfford = cost1 > currency.value;
     const remainingCount = maxCount - itemCount;
     const canBuy10 = cost10 <= currency.value && remainingCount >= 10;
     const canBuy20 = cost20 <= currency.value && remainingCount >= 20;
     const canBuy50 = cost50 <= currency.value && remainingCount >= 50;
 
     return (
-      <div className="flex w-full flex-col border-b border-dashed px-4 py-3 align-top">
-        <div className="mb-2 flex w-full items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Icon className="size-4" />
-            <p className="truncate text-lg font-semibold">{details.name}</p>
-          </div>{" "}
-          <Badge
-            variant={
-              isMaxed ? "destructive" : cantAfford ? "outline" : "default"
-            }
-            className="ml-auto"
-          >
-            {itemCount < maxCount
-              ? `${itemCount} / ${maxCount === Infinity ? "Unlimited" : maxCount}`
-              : "MAX"}
-          </Badge>
-        </div>
-        <div className="mb-2 flex flex-col text-left">
-          <p className="mb-2 text-sm">{details.description}</p>
-          <div className="text-muted-foreground flex flex-wrap gap-x-6 gap-y-1 text-sm">
-            {isPrestigeUpgrade ? (
-              <div className="flex items-center">
-                <LucideTrendingUp className="mr-1 size-4 text-blue-500" />
-                <span>
+      <article className="w-full border-b border-dashed px-4 py-3">
+        <header className="flex items-center justify-between">
+          <div>
+            <h3 className="flex items-center gap-2">
+              <Icon className="size-4" aria-hidden="true" />
+              <span className="truncate">{details.name}</span>
+            </h3>
+            <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm">
+              {isPrestigeUpgrade ? (
+                <dd>
                   {details.multiplier > 1
                     ? `+${((details.multiplier - 1) * 100).toFixed(0)}% boost`
                     : `${((1 - details.multiplier) * 100).toFixed(0)}% reduction`}
+                </dd>
+              ) : (
+                details.auPerSecond > 0 && (
+                  <>
+                    <dd className="font-mono">
+                      +{formatMoney(details.auPerSecond)}
+                    </dd>
+                    <dt>AU/s</dt>
+                  </>
+                )
+              )}
+            </dl>
+          </div>
+          <output
+            aria-label="Current count"
+            className="text-muted-foreground text-3xl font-bold"
+          >
+            {itemCount < maxCount ? itemCount : "MAX"}
+          </output>
+        </header>
+        <footer className="mt-3">
+          <div
+            className="flex flex-wrap gap-2"
+            role="group"
+            aria-label="Purchase options"
+          >
+            <div className="flex flex-1 flex-col items-center gap-1">
+              <span className="text-muted-foreground text-xs font-semibold">
+                1x
+              </span>
+              <Button
+                size="sm"
+                variant="default"
+                className="h-8 w-full px-0.5 text-xs"
+                disabled={!canAcquire}
+                onClick={() => handlePurchase(1)}
+              >
+                {formatMoney(cost1)} {currency.name}
+              </Button>
+            </div>
+            {maxCount >= 10 && (
+              <div className="flex flex-1 flex-col items-center gap-1">
+                <span className="text-muted-foreground text-xs font-semibold">
+                  10x
                 </span>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  disabled={!canBuy10}
+                  onClick={() => handlePurchase(10)}
+                  title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
+                >
+                  {formatMoney(cost10)} {currency.name}
+                </Button>
               </div>
-            ) : (
-              details.auPerSecond > 0 && (
-                <div className="flex items-center gap-1">
-                  <LucideTrendingUp className="mr-1 size-4 text-green-500" />
-                  <span className="font-mono">
-                    +{formatMoney(details.auPerSecond)}
-                  </span>{" "}
-                  AU/s
-                </div>
-              )
+            )}
+            {maxCount >= 20 && (
+              <div className="flex flex-1 flex-col items-center gap-1">
+                <span className="text-muted-foreground text-xs font-semibold">
+                  20x
+                </span>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  disabled={!canBuy20}
+                  onClick={() => handlePurchase(20)}
+                  title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
+                >
+                  {formatMoney(cost20)} {currency.name}
+                </Button>
+              </div>
+            )}
+            {maxCount >= 50 && (
+              <div className="flex flex-1 flex-col items-center gap-1">
+                <span className="text-muted-foreground text-xs font-semibold">
+                  50x
+                </span>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  disabled={!canBuy50}
+                  onClick={() => handlePurchase(50)}
+                  title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
+                >
+                  {formatMoney(cost50)} {currency.name}
+                </Button>
+              </div>
             )}
           </div>
-        </div>
-        <div className="flex items-center justify-between pt-2 text-sm">
-          <p className="font-medium">Current cost:</p>
-          <p>
-            <span className="font-mono">{formatMoney(cost1)}</span>{" "}
-            {currency.name}
-          </p>
-        </div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <Button
-            size="sm"
-            variant="default"
-            className="flex-1"
-            disabled={!canAcquire}
-            onClick={() => handlePurchase(1)}
-          >
-            Buy 1
-          </Button>
-          {maxCount >= 10 && (
-            <Button
-              size="sm"
-              variant="secondary"
-              className="flex-1"
-              disabled={!canBuy10}
-              onClick={() => handlePurchase(10)}
-              title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
-            >
-              Buy 10
-            </Button>
-          )}
-          {maxCount >= 20 && (
-            <Button
-              size="sm"
-              variant="secondary"
-              className="flex-1"
-              disabled={!canBuy20}
-              onClick={() => handlePurchase(20)}
-              title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
-            >
-              Buy 20
-            </Button>
-          )}
-          {maxCount >= 50 && (
-            <Button
-              size="sm"
-              variant="secondary"
-              className="flex-1"
-              disabled={!canBuy50}
-              onClick={() => handlePurchase(50)}
-              title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
-            >
-              Buy 50
-            </Button>
-          )}
-        </div>
-      </div>
+        </footer>
+      </article>
     );
   } else if (next === elementKey) {
     return (
-      <div className="w-full overflow-hidden border-b px-4 py-3">
-        <div className="flex-1 space-y-2 text-left">
+      <article
+        aria-busy="true"
+        aria-label="Loading shop item"
+        className="w-full overflow-hidden border-b px-4 py-3"
+      >
+        <header className="space-y-2 text-left">
           <Skeleton className="h-8 w-48" />
           <Skeleton className="h-6 w-full" />
           <Skeleton className="h-4 w-32" />
-        </div>
-      </div>
+        </header>
+      </article>
     );
   }
 

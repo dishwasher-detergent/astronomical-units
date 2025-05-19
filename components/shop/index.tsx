@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { PrestigeItem } from "@/components/shop/item/PrestigeItem";
 import { CrewItem } from "@/components/shop/item/CrewItem";
-import { ShopDisplay } from "@/components/shop/item/ShopDisplay";
+import { EquipmentItem } from "@/components/shop/item/EquipmentItem";
 
 export function Shop() {
   return (
@@ -31,13 +31,11 @@ export function Shop() {
           </TabsList>
         </div>
         <TabsContent value="general" className="mt-0">
-          <div className="w-full">
-            <CrewItem />
-            {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
-              if (value.equipment === false) return null;
-              return <ShopDisplay key={key} elementKey={key} />;
-            })}
-          </div>
+          <CrewItem />
+          {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
+            if (value.equipment === false) return null;
+            return <EquipmentItem key={key} elementKey={key} />;
+          })}
         </TabsContent>
         <TabsContent value="prestige" className="mt-0">
           {Object.entries(PRESTIGE_UPGRADES).map(([key]) => {

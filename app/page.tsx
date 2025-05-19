@@ -108,15 +108,14 @@ export default function Home() {
           <ClickArea />
         </div>
         <div className="sticky top-0 overflow-y-auto md:w-96 md:border-r">
-          {" "}
           <div className="flex flex-row items-center justify-between border-b p-2">
             <PrestigeLevelIndicator />
           </div>
           <Statistics />
         </div>
       </div>
-      <div className="flex h-full flex-1 flex-row">
-        <div className="relative h-full w-96 overflow-y-auto border-r">
+      <div className="flex h-full flex-1 flex-row overflow-hidden">
+        <div className="relative w-96 overflow-y-auto border-r">
           <Shop />
         </div>
         <div className="relative flex-1 overflow-y-auto">
