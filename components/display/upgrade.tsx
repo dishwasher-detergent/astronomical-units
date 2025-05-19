@@ -44,7 +44,7 @@ export const DisplayUpgrade = memo(
 
     return (
       <>
-        <div className="mb-2">
+        <div>
           <div className="mb-1 flex flex-row items-center gap-1">
             <p className="text-sm font-semibold">Upgrades</p>
             <Tip content="Unlock upgrades by purchasing more of this type of equipment.">

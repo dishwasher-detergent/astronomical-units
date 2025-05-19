@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { DyanmicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { formatMoney } from "@/lib/utils";
 
 export function BaseUpgrade({
   atom,
@@ -106,9 +107,7 @@ export function BaseUpgrade({
                 </p>
               </div>
               <div>
-                <Badge>
-                  {element.cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} AU
-                </Badge>
+                <Badge>{formatMoney(element.cost)} AU</Badge>
               </div>
             </div>
           </TooltipContent>

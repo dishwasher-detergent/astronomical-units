@@ -14,6 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { LucidePlus, LucideTrendingUp } from "lucide-react";
 import { Equipment } from "@/types";
 import { Card } from "@/components/ui/card";
+import { formatMoney } from "@/lib/utils";
 
 interface ShopItemProps {
   elementKey: string;
@@ -64,7 +65,7 @@ export function ShopItem({
       );
       currency.update((current) => current - cost);
       toast.success(
-        `Purchased ${details.name} for ${cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} ${currency.name}`,
+        `Purchased ${details.name} for ${formatMoney(cost)} ${currency.name}`,
       );
       onPurchase?.();
     }
@@ -90,12 +91,12 @@ export function ShopItem({
           </div>
           <Badge
             variant={
-              isMaxed ? "destructive" : cantAfford ? "outline-solid" : "default"
+              isMaxed ? "destructive" : cantAfford ? "outline" : "default"
             }
             className="ml-auto"
           >
             {itemCount < maxCount
-              ? `${itemCount} / ${maxCount === Infinity ? "∞" : maxCount}`
+              ? `${itemCount} / ${maxCount === Infinity ? "Unlimited" : maxCount}`
               : "MAX"}
           </Badge>
         </div>
@@ -114,20 +115,22 @@ export function ShopItem({
             ) : (
               details.auPerSecond > 0 && (
                 <div className="flex items-center">
-                  <LucideTrendingUp className="mr-1 size-4 text-green-500" />
-                  <span>
-                    +
-                    {details.auPerSecond.toLocaleString(LOCALE, NUMBER_OPTIONS)}{" "}
-                    AU/s
-                  </span>
+                  <LucideTrendingUp className="mr-1 size-4 text-green-500" />+
+                  <span className="font-mono">
+                    {formatMoney(details.auPerSecond)}
+                  </span>{" "}
+                  AU/s
                 </div>
               )
             )}
           </div>
         </div>
         <div className="flex items-center justify-between pt-2 text-sm">
-          <span className="font-medium">Current cost:</span>
-          {cost.toLocaleString(LOCALE, NUMBER_OPTIONS)} {currency.name}
+          <p className="font-medium">Current cost:</p>
+          <p>
+            <span className="font-mono">{formatMoney(cost)}</span>{" "}
+            {currency.name}
+          </p>
         </div>
       </button>
     );

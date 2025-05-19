@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fredoka, Space_Grotesk } from "next/font/google";
+import { Fredoka, IBM_Plex_Mono } from "next/font/google";
 import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
 import { LucideGithub } from "lucide-react";
@@ -16,6 +16,11 @@ import { Backup } from "@/components/backup";
 import { Logo } from "@/components/logo";
 
 const font = Fredoka({ subsets: ["latin"] });
+const mono = IBM_Plex_Mono({
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   applicationName: APP_SHORT_NAME,
@@ -250,7 +255,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`pb-safe flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className}`}
+        className={`pb-safe flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className} ${mono.variable}`}
       >
         <ThemeProvider
           attribute="class"

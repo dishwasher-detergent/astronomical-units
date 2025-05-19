@@ -4,10 +4,9 @@ import { useAtomValue } from "jotai";
 import { useMemo } from "react";
 
 import { Stats } from "@/components/ui/stats";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { calculateUpgradeMultiplier, formatMoney } from "@/lib/utils";
 import { prestigeMultiplier } from "@/atoms/prestige";
 
 export function AusPerSecond() {
@@ -31,9 +30,6 @@ export function AusPerSecond() {
   }, [equip, presMultiplier]);
 
   return (
-    <Stats
-      label="Passive AUs per second"
-      value={auPerSecond?.toLocaleString(LOCALE, NUMBER_OPTIONS)}
-    />
+    <Stats label="Passive AUs per second" value={formatMoney(auPerSecond)} />
   );
 }

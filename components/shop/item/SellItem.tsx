@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { LucideHandCoins } from "lucide-react";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { formatMoney } from "@/lib/utils";
 
 interface SellItemProps {
   elementKey: string;
@@ -50,7 +51,7 @@ export function SellItem({
 
   const SellContent = () => (
     <Button variant="destructive" onClick={handleSell} className="w-full">
-      Sell For {sellPrice.toLocaleString(LOCALE, NUMBER_OPTIONS)}{" "}
+      Sell For <span className="font-mono">{formatMoney(sellPrice)}</span>{" "}
       {currency.name}
     </Button>
   );
