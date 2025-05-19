@@ -29,10 +29,7 @@ export function ClickArea() {
           <span className="text-xl font-semibold">
             +{(crewAtom.value * multiplier + 1).toLocaleString(LOCALE)} AU
           </span>
-        </div>
-        <div className="animate-blob absolute left-3/5 h-72 w-72 rounded-full bg-green-300 opacity-40 blur-xl filter dark:bg-green-500"></div>
-        <div className="animation-delay-2000 animate-blob absolute left-4/5 h-72 w-72 rounded-full bg-yellow-300 opacity-40 blur-xl filter dark:bg-yellow-500"></div>
-        <div className="animation-delay-4000 animate-blob absolute left-1/5 h-72 w-72 rounded-full bg-pink-300 opacity-40 blur-xl filter dark:bg-pink-500"></div>
+        </div>{" "}
       </Button>
     </>
   );

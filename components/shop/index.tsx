@@ -14,17 +14,17 @@ export function Shop() {
         Store
       </p>
       <Tabs defaultValue="general" className="w-full">
-        <div className="sticky top-0 z-10 border-b md:top-10">
-          <TabsList className="bg-background w-full rounded-none">
+        <div className="sticky top-0 z-10 border-y md:top-10">
+          <TabsList className="bg-background h-full w-full rounded-none p-0">
             <TabsTrigger
               value="general"
-              className="data-[state=active]:bg-muted flex-1"
+              className="data-[state=active]:bg-muted flex-1 rounded-none"
             >
               General
             </TabsTrigger>
             <TabsTrigger
               value="prestige"
-              className="data-[state=active]:bg-muted flex-1"
+              className="data-[state=active]:bg-muted flex-1 rounded-none"
             >
               Prestige
             </TabsTrigger>

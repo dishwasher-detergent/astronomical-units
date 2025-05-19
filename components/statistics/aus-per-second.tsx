@@ -29,7 +29,5 @@ export function AusPerSecond() {
       .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0);
   }, [equip, presMultiplier]);
 
-  return (
-    <Stats label="Passive AUs per second" value={formatMoney(auPerSecond)} />
-  );
+  return <Stats label="AU/s" value={formatMoney(auPerSecond)} />;
 }

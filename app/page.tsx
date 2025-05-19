@@ -30,11 +30,11 @@ export default function Home() {
     return (
       <>
         <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-14">
+          <div className="border-b p-2">
+            <PrestigeLevelIndicator />
+          </div>
           <div className="w-full flex-1">
             <ClickArea />
-          </div>
-          <div className="flex flex-none flex-row items-center justify-between border-b p-2">
-            <PrestigeLevelIndicator />
           </div>
           <Statistics />
         </div>

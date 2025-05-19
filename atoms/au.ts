@@ -28,7 +28,7 @@ export const clickValueAtom = atom((get) => {
   const multiplier = calculateUpgradeMultiplier(crewAtom, item, presMultiplier);
 
   return Math.max(
-    item.auPerSecond * multiplier * crewAtom.value,
+    item.auPerSecond * multiplier * (crewAtom.value + 1),
     1 * presMultiplier,
   );
 });
