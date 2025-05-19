@@ -54,7 +54,7 @@ export function DyanmicDrawer({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{button}</DrawerTrigger>
       <DrawerContent className="mb-4 p-4">
-        <DrawerHeader className="mb-4 p-0 text-left">
+        <DrawerHeader className="mb-4 px-0 pb-0 text-left">
           <DrawerTitle className="truncate">{title}</DrawerTitle>
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>

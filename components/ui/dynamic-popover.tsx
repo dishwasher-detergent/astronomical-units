@@ -3,6 +3,7 @@
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -16,12 +17,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export function DyanmicPopover({
   title,
+  description,
   button,
   children,
   setOpen,
   open,
 }: {
-  title: string;
+  title?: string;
+  description?: string;
   button: string | React.ReactNode;
   children: React.ReactNode;
   setOpen: (e: boolean) => void;
@@ -44,8 +47,9 @@ export function DyanmicPopover({
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{button}</DrawerTrigger>
       <DrawerContent className="mb-4 p-4">
-        <DrawerHeader className="mb-4 p-0 text-left">
-          <DrawerTitle className="truncate">{title}</DrawerTitle>
+        <DrawerHeader className="mb-4 px-0 pb-0 text-left">
+          {title && <DrawerTitle className="truncate">{title}</DrawerTitle>}
+          {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         {children}
       </DrawerContent>

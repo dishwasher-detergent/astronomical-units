@@ -47,25 +47,22 @@ export function BaseUpgrade({
     if (isMobile) {
       return (
         <DyanmicPopover
-          title={element.name}
           open={open}
           setOpen={setOpen}
+          title={element.name}
+          description={element.description}
           button={
             <Button className="size-8" size="icon" variant="outline">
               <Icon className="size-4" />
             </Button>
           }
         >
-          <div className="mb-2 flex w-full flex-row gap-2">
-            <div className="flex-1">
-              <p className="text-sm font-semibold">{element.name}</p>
-              <p className="mb-2">{element.description}</p>
-              <p>
-                {rankValue ?? 0}/{element.maxCount} Owned
-              </p>
-            </div>
-            <div>
-              <Badge>{formatMoney(element.cost)} AU</Badge>
+          <div className="mb-6 flex w-full flex-col gap-2">
+            <div className="flex flex-row gap-2">
+              <Badge variant="outline">{formatMoney(element.cost)} AU</Badge>
+              <Badge variant="outline">
+                Qty: {rankValue ?? 0}/{element.maxCount}
+              </Badge>
             </div>
           </div>
           <UpgradeButton
