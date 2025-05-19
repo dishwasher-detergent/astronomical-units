@@ -19,8 +19,10 @@ import {
 } from "@/components/ui/drawer";
 import { Balance } from "@/components/balance";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useInstallDetection } from "@/hooks/useInstallDetection";
 
 export default function Home() {
+  const { isIOS, isStandalone } = useInstallDetection();
   const isMobile = useIsMobile();
 
   if (isMobile == null) {
@@ -29,7 +31,9 @@ export default function Home() {
 
   if (isMobile) {
     return (
-      <div className="flex h-full w-full flex-col overflow-hidden pb-6">
+      <div
+        className={`flex h-full w-full flex-col overflow-hidden ${isIOS ? "pb-6" : ""}`}
+      >
         <div className="flex w-full flex-1 flex-col overflow-y-auto">
           <div className="border-b p-2">
             <PrestigeLevelIndicator />
@@ -39,7 +43,7 @@ export default function Home() {
           </div>
           <Statistics />
         </div>
-        <nav className="mb-safe bg-background z-40 flex w-full flex-none items-center justify-center gap-4 p-2">
+        <nav className="bg-background z-40 flex w-full flex-none items-center justify-center gap-4 p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">

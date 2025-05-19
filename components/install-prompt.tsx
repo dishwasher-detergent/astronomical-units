@@ -1,19 +1,10 @@
 "use client";
 
 import { LucideShare } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useInstallDetection } from "../hooks/useInstallDetection";
 
 export function InstallPrompt() {
-  const [isIOS, setIsIOS] = useState(false);
-  const [isStandalone, setIsStandalone] = useState(false);
-
-  useEffect(() => {
-    setIsIOS(
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
-    );
-
-    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
-  }, []);
+  const { isIOS, isStandalone } = useInstallDetection();
 
   if (isStandalone) {
     return null;
