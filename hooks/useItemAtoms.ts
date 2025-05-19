@@ -1,7 +1,7 @@
 import { equipment } from "@/atoms/equipment";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { handleEquipmentThresholds } from "@/lib/utils";
+import { handleEquipmentThresholds } from "@/lib/equipment";
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 

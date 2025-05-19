@@ -10,7 +10,7 @@ import {
   lifetimePrestigePoints,
   potentialPrestigePoints,
 } from "@/atoms/prestige";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export function PrestigeStats() {
   const points = useAtomValue(prestigePoints) || 0;

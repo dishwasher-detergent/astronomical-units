@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { au } from "@/atoms/au";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export function UpgradeButton({
   cost,

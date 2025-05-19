@@ -5,7 +5,7 @@ import { useMemo } from "react";
 
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { DisplayItem } from "@/components/display/item";
 
 export function EquipmentDisplay() {
@@ -33,8 +33,8 @@ export function EquipmentDisplay() {
 
   if (activeEquipment.length === 0) {
     return (
-      <div className="rounded-lg bg-muted/20 p-4">
-        <p className="text-center text-muted-foreground">
+      <div className="bg-muted/20 rounded-lg p-4">
+        <p className="text-muted-foreground text-center">
           Earn Astronomical Units <span className="font-semibold">(AU)</span> to
           buy equipment.
         </p>

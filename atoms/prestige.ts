@@ -8,11 +8,12 @@ import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
+import { generateEquipmentObject } from "@/lib/equipment";
+import { formatMoney } from "@/lib/formatters";
 import {
   calculateNextLevelProgress,
   calculatePrestigeLevel,
 } from "@/lib/prestige";
-import { formatMoney, generateEquipmentObject } from "@/lib/utils";
 
 /**
  * Focus atoms for accessing prestige data directly

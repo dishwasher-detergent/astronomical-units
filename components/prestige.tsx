@@ -5,40 +5,35 @@ import { LucideCrown } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { PRESTIGE_LEVEL_REQUIREMENTS } from "@/constants/GLOBAL";
-import { totalAu, lifetimeIncome } from "@/atoms/au";
+import { lifetimeIncome } from "@/atoms/au";
 import {
   canPrestige,
   performPrestige,
-  potentialPrestigePoints,
   prestigeLevel,
   prestigeMultiplier,
-  prestigePoints,
-  calculatePrestigeMultiplier,
   currentLifetimeLevel,
   lifetimeLevelProgress,
 } from "@/atoms/prestige";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
+import { getNextLevelRequirement } from "@/lib/prestige";
 
 export function Prestige() {
   const [open, setOpen] = useState(false);
-  const totalAuValue = useAtomValue(totalAu);
   const canPerformPrestige = useAtomValue(canPrestige);
-  const potentialPoints = useAtomValue(potentialPrestigePoints);
   const level = useAtomValue(prestigeLevel) || 0;
-  const points = useAtomValue(prestigePoints) || 0;
   const multiplier = useAtomValue(prestigeMultiplier) || 1;
   const doPrestige = useSetAtom(performPrestige);
 
   const currentLifetimeIncomeValue = useAtomValue(lifetimeIncome);
   const lifetimeLevel = useAtomValue(currentLifetimeLevel);
   const levelProgress = useAtomValue(lifetimeLevelProgress);
+  const currentPrestigeLevel = useAtomValue(prestigeLevel) || 0;
 
-  const nextLevelRequirement =
-    lifetimeLevel < PRESTIGE_LEVEL_REQUIREMENTS.length - 1
-      ? PRESTIGE_LEVEL_REQUIREMENTS[lifetimeLevel + 1]
-      : null;
+  const nextLevelRequirement = getNextLevelRequirement(
+    lifetimeLevel,
+    currentPrestigeLevel,
+  );
 
   return (
     <DyanmicDrawer

@@ -6,7 +6,7 @@ import { auIncrement } from "@/atoms/au";
 import { Button } from "@/components/ui/button";
 import { crew } from "@/atoms/crew";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { LOCALE } from "@/constants/GLOBAL";
 
 export function ClickArea() {

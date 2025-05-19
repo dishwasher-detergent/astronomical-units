@@ -22,7 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { showElement } from "@/atoms/show";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export function DevMode() {
   if (process.env.NODE_ENV === "production") {

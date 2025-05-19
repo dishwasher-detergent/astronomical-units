@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export const DisplayItem = memo(
   ({

@@ -6,7 +6,8 @@ import { useMemo } from "react";
 import { Stats } from "@/components/ui/stats";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { calculateUpgradeMultiplier, formatMoney } from "@/lib/utils";
+import { calculateUpgradeMultiplier } from "@/lib/equipment";
+import { formatMoney } from "@/lib/formatters";
 import { prestigeMultiplier } from "@/atoms/prestige";
 
 export function AusPerSecond() {

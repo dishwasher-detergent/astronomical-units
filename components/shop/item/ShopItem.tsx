@@ -11,7 +11,7 @@ import { showElement } from "@/atoms/show";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LucidePlus, LucideTrendingUp } from "lucide-react";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 import { calculateBulkCost, useBulkCosts } from "@/hooks/useItemCost";
 import { prestigeUpgrades } from "@/atoms/prestige";
 

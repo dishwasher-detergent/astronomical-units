@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 
 import { au } from "@/atoms/au";
 import { Stats } from "@/components/ui/stats";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export function ClickTotalCount() {
   const auValue = useAtomValue(au);

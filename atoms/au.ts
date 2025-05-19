@@ -7,7 +7,7 @@ import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { calculateUpgradeMultiplier } from "@/lib/utils";
+import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { gameData } from "./global";
 
 export const totalAu = focusAtom(gameData, (optic) =>

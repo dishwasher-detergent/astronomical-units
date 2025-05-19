@@ -7,7 +7,8 @@ import { atomWithStorage } from "jotai/utils";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { AU } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { generateEquipmentObject, mergeNestedObjects } from "@/lib/utils";
+import { mergeNestedObjects } from "@/lib/common";
+import { generateEquipmentObject } from "@/lib/equipment";
 import { GameData } from "@/types";
 
 /**

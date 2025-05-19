@@ -9,7 +9,8 @@ import { lastUpdated } from "@/atoms/global";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { calculateUpgradeMultiplier, formatMoney } from "@/lib/utils";
+import { calculateUpgradeMultiplier } from "@/lib/equipment";
+import { formatMoney } from "@/lib/formatters";
 import { useAnimation } from "@/hooks/useAnimation";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 

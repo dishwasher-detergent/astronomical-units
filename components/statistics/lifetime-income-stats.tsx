@@ -2,7 +2,7 @@
 
 import { useAtomValue } from "jotai";
 import { lifetimeIncome } from "@/atoms/au";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 import { Stats } from "@/components/ui/stats";
 
 export function LifetimeIncomeStats() {

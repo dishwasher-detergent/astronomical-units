@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LucideHandCoins } from "lucide-react";
 import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 interface SellItemProps {
   elementKey: string;

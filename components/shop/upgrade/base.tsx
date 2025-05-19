@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { DyanmicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { formatMoney } from "@/lib/utils";
+import { formatMoney } from "@/lib/formatters";
 
 export function BaseUpgrade({
   atom,

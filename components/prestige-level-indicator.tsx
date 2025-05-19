@@ -1,23 +1,26 @@
 "use client";
 
 import { useAtomValue } from "jotai";
-import { LucideTrophy } from "lucide-react";
 
-import { lifetimeIncome } from "@/atoms/au";
-import { currentLifetimeLevel, lifetimeLevelProgress } from "@/atoms/prestige";
-import { PRESTIGE_LEVEL_REQUIREMENTS } from "@/constants/GLOBAL";
-import { formatMoney } from "@/lib/utils";
-import { Progress } from "./ui/progress";
-import { Prestige } from "./prestige";
+import {
+  currentLifetimeLevel,
+  lifetimeLevelProgress,
+  prestigeLevel,
+} from "@/atoms/prestige";
+import { formatMoney } from "@/lib/formatters";
+import { getNextLevelRequirement } from "@/lib/prestige";
+import { Progress } from "@/components/ui/progress";
+import { Prestige } from "@/components/prestige";
 
 export function PrestigeLevelIndicator() {
   const lifetimeLevel = useAtomValue(currentLifetimeLevel);
   const levelProgress = useAtomValue(lifetimeLevelProgress);
+  const currentPrestigeLevel = useAtomValue(prestigeLevel) || 0;
 
-  const nextLevelRequirement =
-    lifetimeLevel < PRESTIGE_LEVEL_REQUIREMENTS.length - 1
-      ? PRESTIGE_LEVEL_REQUIREMENTS[lifetimeLevel + 1]
-      : null;
+  const nextLevelRequirement = getNextLevelRequirement(
+    lifetimeLevel,
+    currentPrestigeLevel,
+  );
 
   return (
     <div className="flex w-full flex-col items-center gap-1">
