@@ -55,7 +55,6 @@ export {
   show,
   showElement,
   showUpgrade,
-  themePreference,
 } from "./ui";
 
 // Upgrade navigation

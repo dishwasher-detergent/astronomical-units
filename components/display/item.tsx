@@ -1,12 +1,10 @@
 "use client";
 
-import { useAtomValue } from "jotai";
-import { SellBaseEquipment } from "@/components/shop/equipment/sell-base";
 import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
-import { prestigeMultiplier } from "@/atoms/prestige";
+import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 
 export function DisplayItem({
   auPerSecond,
@@ -45,7 +43,7 @@ export function DisplayItem({
         equipment={equipment}
         primaryKey={elementKey}
       />
-      <SellBaseEquipment elementKey={elementKey} />
+      <SellEquipmentItem elementKey={elementKey} />
     </div>
   );
 }

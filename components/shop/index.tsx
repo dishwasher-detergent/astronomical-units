@@ -1,18 +1,16 @@
 "use client";
 
-import { Astronaut } from "@/components/shop/astronaut";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { BaseEquipment } from "@/components/shop/equipment/base";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { BasePrestigeUpgrade } from "@/components/shop/prestige/base";
+import { PrestigeItem } from "@/components/shop/item/PrestigeItem";
+import { CrewItem } from "@/components/shop/item/CrewItem";
+import { ShopDisplay } from "@/components/shop/item/ShopDisplay";
 
 export function Shop() {
   return (
-    <div className="relative bg-background md:border-b">
-      <p className="hidden bg-background px-4 py-2 font-semibold md:block">
-        Store
-      </p>
+    <div className="relative">
+      <p className="hidden px-4 py-2 font-semibold md:block">Store</p>
       <Tabs defaultValue="general" className="w-full">
         <div className="sticky top-0 z-10 border-b">
           <TabsList className="w-full rounded-none bg-background">
@@ -30,19 +28,18 @@ export function Shop() {
             </TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value="general">
+        <TabsContent value="general" className="mt-0">
           <div className="w-full">
-            <Astronaut />
+            <CrewItem />
             {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
               if (value.equipment === false) return null;
-
-              return <BaseEquipment key={key} elementKey={key} />;
+              return <ShopDisplay key={key} elementKey={key} />;
             })}
           </div>
         </TabsContent>
-        <TabsContent value="prestige">
-          {Object.entries(PRESTIGE_UPGRADES).map(([key, value]) => {
-            return <BasePrestigeUpgrade key={key} upgradeKey={key} />;
+        <TabsContent value="prestige" className="mt-0">
+          {Object.entries(PRESTIGE_UPGRADES).map(([key]) => {
+            return <PrestigeItem key={key} upgradeKey={key} />;
           })}
         </TabsContent>
       </Tabs>
