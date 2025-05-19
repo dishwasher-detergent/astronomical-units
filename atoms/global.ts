@@ -28,10 +28,7 @@ const initPrestigeUpgrades = () => {
  * Initial game state data
  */
 const initialGameData: GameData = {
-  income: {
-    ...AU,
-    lifetime: 0, // Track total income earned across all prestiges
-  },
+  income: AU,
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
   show: {},
   last_updated: 0,

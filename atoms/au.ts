@@ -15,7 +15,7 @@ export const totalAu = focusAtom(gameData, (optic) =>
 );
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
 export const lifetimeIncome = focusAtom(gameData, (optic) =>
-  optic.path("income.lifetime"),
+  optic.path("income.total"),
 );
 
 /**
