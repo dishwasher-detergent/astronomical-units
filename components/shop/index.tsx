@@ -14,7 +14,7 @@ export function Shop() {
         Store
       </p>
       <Tabs defaultValue="general" className="w-full">
-        <div className="sticky top-0 z-10 border-b pt-4 md:pt-0">
+        <div className="sticky top-0 z-10 border-b">
           <TabsList className="w-full rounded-none bg-background">
             <TabsTrigger
               value="general"
