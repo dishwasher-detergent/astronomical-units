@@ -90,10 +90,15 @@ export const equipmentProductionRates = atom((get) => {
 
       if (!item || item.equipment === false) return;
 
-      const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
-      const baseRate = item.auPerSecond * multiplier * eq.value;
+      // Equipment only produces if it's fully built
+      const buildingItems = eq.building ? Object.keys(eq.building).length : 0;
+      const completedItems = eq.value - buildingItems;
 
-      rates.set(key, baseRate);
+      if (completedItems > 0) {
+        const multiplier = calculateUpgradeMultiplier(eq, item, presMultiplier);
+        const baseRate = item.auPerSecond * multiplier * completedItems;
+        rates.set(key, baseRate);
+      }
     }
   });
 

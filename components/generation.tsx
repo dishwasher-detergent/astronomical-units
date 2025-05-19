@@ -25,6 +25,46 @@ export function Generation() {
   useAnimation((deltaTime) => {
     setDelta((current) => current + deltaTime);
   }, !show);
+  // Check for completed buildings
+  useEffect(() => {
+    const checkBuildingCompletion = () => {
+      const now = Date.now();
+      let hasUpdates = false;
+
+      // Create a copy of the equipment state to modify
+      const updatedEquipment = { ...equipmentValue };
+
+      Object.entries(equipmentValue).forEach(([key, item]) => {
+        if (item.building && Object.keys(item.building).length > 0) {
+          const newBuilding = { ...item.building };
+          let completedCount = 0;
+
+          Object.entries(item.building).forEach(([completionTime, count]) => {
+            if (parseInt(completionTime) <= now) {
+              completedCount += count;
+              delete newBuilding[completionTime];
+              hasUpdates = true;
+            }
+          });
+
+          if (completedCount > 0) {
+            updatedEquipment[key] = {
+              ...item,
+              building: newBuilding,
+            };
+          }
+        }
+      });
+
+      if (hasUpdates) {
+        setEquipment(updatedEquipment);
+      }
+    };
+
+    // Check every 500ms for completed buildings
+    const interval = setInterval(checkBuildingCompletion, 500);
+    return () => clearInterval(interval);
+  }, [equipmentValue, setEquipment]);
 
   useEffect(() => {
     if (delta >= equipmentRateValue) {

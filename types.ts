@@ -21,6 +21,7 @@ export type Equipment = {
   threshold: number;
   icon: any;
   equipment?: boolean;
+  buildTime?: number; // Time in seconds to build the equipment
   upgrades?: Upgrades;
 };
 
@@ -31,6 +32,7 @@ export type EquipmentObject = {
 export type EquipmentItem = {
   value: number;
   upgrades?: Record<string, number>;
+  building?: Record<string, number>; // Map of timestamp when building will be complete
 };
 
 export type GameData = {

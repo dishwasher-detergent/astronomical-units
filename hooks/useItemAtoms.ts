@@ -19,11 +19,28 @@ export function createEquipmentAtom(elementKey: string) {
       (get, set, quantity: number = 1) => {
         const currentVal = get(item).value;
         const newVal = currentVal + quantity;
+        const buildTime = EQUIPMENT_LIST[elementKey].buildTime || 0;
 
-        set(item, (current) => ({
-          ...current,
-          value: newVal,
-        }));
+        // If build time is specified, set up the building process
+        if (buildTime > 0) {
+          const now = Date.now();
+          const completionTime = now + buildTime * 1000; // Convert seconds to milliseconds
+
+          set(item, (current) => ({
+            ...current,
+            value: newVal, // Increment value immediately, but item won't produce until completion
+            building: {
+              ...current.building,
+              [completionTime]: quantity, // Store how many items will complete at this time
+            },
+          }));
+        } else {
+          // No build time, instant completion
+          set(item, (current) => ({
+            ...current,
+            value: newVal,
+          }));
+        }
 
         // Use the shared function to handle threshold checks
         handleEquipmentThresholds(

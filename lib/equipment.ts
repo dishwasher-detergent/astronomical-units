@@ -30,6 +30,7 @@ export function generateEquipmentObject(
     newObject[key] = {
       value: 0,
       upgrades: generateEquipmentUpgradesObject(value),
+      building: {}, // Initialize empty building object
     };
   });
 

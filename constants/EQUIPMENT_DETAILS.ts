@@ -70,6 +70,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.12,
     auPerSecond: 1,
     threshold: 20,
+    buildTime: 3, // 3 seconds to build (crew members join quickly)
     equipment: false,
     icon: LucidePersonStanding,
     upgrades: {
@@ -120,6 +121,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13,
     auPerSecond: 6,
     threshold: 50,
+    buildTime: 5, // 5 seconds to build
     icon: LucidePlaneTakeoff,
     upgrades: {
       seats: {
@@ -167,6 +169,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13,
     auPerSecond: 10,
     threshold: 500,
+    buildTime: 12, // 12 seconds to build mining equipment
     icon: LucidePickaxe,
     upgrades: {
       cargo_capacity: {
@@ -215,6 +218,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13,
     auPerSecond: 15,
     threshold: 2500,
+    buildTime: 20, // 20 seconds to build
     icon: LucideSatelliteDish,
     upgrades: {
       solarPanels: {
@@ -263,6 +267,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 18,
     threshold: 1500,
     icon: LucideRocket,
+    buildTime: 18, // 18 seconds to prepare exploration mission
     upgrades: {
       boosters: {
         name: "Rocket Boosters",
@@ -310,6 +315,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13,
     auPerSecond: 30,
     threshold: 10000,
+    buildTime: 30, // 30 seconds to build
     icon: LucideBuilding2,
     upgrades: {
       livingQuarters: {
@@ -360,6 +366,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 50,
     threshold: 25000,
     icon: LucideMountain,
+    buildTime: 45, // 45 seconds to build
     upgrades: {
       atmosphereGenerators: {
         name: "Atmosphere Generators",
@@ -408,6 +415,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 90,
     threshold: 50000,
     icon: LucideTentTree,
+    buildTime: 60, // 60 seconds to build
     upgrades: {
       buildings: {
         name: "Buildings",
@@ -474,6 +482,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 150,
     threshold: 75000,
     icon: LucideCableCar,
+    buildTime: 90, // 90 seconds to build
     upgrades: {
       cableMaterial: {
         name: "Advanced Cable Materials",
@@ -523,6 +532,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13,
     auPerSecond: 300,
     threshold: 250000,
+    buildTime: 100, // 100 seconds to build advanced FTL technology
     icon: LucideBolt,
     upgrades: {
       energySource: {
@@ -574,6 +584,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 500,
     threshold: 750000,
     icon: LucideCircleDot,
+    buildTime: 120, // 120 seconds to build massive orbital structure
     upgrades: {
       constructionMaterials: {
         name: "Advanced Construction Materials",
@@ -622,6 +633,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 650,
     threshold: 1500000,
     icon: LucideCpu,
+    buildTime: 110, // 110 seconds to set up quantum computing infrastructure
     upgrades: {
       qubits: {
         name: "Qubit Expansion",
@@ -670,6 +682,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 900,
     threshold: 3000000,
     icon: LucideDoorOpen,
+    buildTime: 110, // 110 seconds to build complex interstellar gateway
     upgrades: {
       portalStabilization: {
         name: "Portal Stabilization",
@@ -714,10 +727,11 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     name: "Fusion Reactor",
     description:
       "Harness the power of fusion to generate vast amounts of energy.",
-    baseCost: 20000000, // Reduced from 25000000
-    costMultiplier: 1.13, // Reduced from 1.15
-    auPerSecond: 1100, // Increased from 850
+    baseCost: 20000000,
+    costMultiplier: 1.13,
+    auPerSecond: 1100,
     threshold: 5000000,
+    buildTime: 130, // 130 seconds to construct fusion containment facility
     icon: LucideAtom,
     upgrades: {
       fuelEfficiency: {
@@ -763,11 +777,12 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   starshipFleet: {
     name: "Starship Fleet",
     description: "Assemble a fleet of starships for exploration and defense.",
-    baseCost: 40000000, // Reduced from 50000000
-    costMultiplier: 1.13, // Reduced from 1.15
-    auPerSecond: 1300, // Increased from 1000
+    baseCost: 40000000,
+    costMultiplier: 1.13,
+    auPerSecond: 1300,
     threshold: 10000000,
     icon: LucideShip,
+    buildTime: 180, // 180 seconds to build and deploy an entire fleet
     upgrades: {
       fleetSize: {
         name: "Expand Fleet Size",
@@ -811,11 +826,12 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   wormholeGenerator: {
     name: "Wormhole Generator",
     description: "Create wormholes to traverse vast distances instantly.",
-    baseCost: 60000000, // Reduced from 75000000
-    costMultiplier: 1.13, // Reduced from 1.15
-    auPerSecond: 2000, // Increased from 1500
+    baseCost: 60000000,
+    costMultiplier: 1.13,
+    auPerSecond: 2000,
     threshold: 20000000,
     icon: LucideHouse,
+    buildTime: 210, // 210 seconds to stabilize spacetime for wormhole creation
     upgrades: {
       generatorStability: {
         name: "Generator Stability",
@@ -859,11 +875,12 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   orbitalCity: {
     name: "Orbital City",
     description: "Construct a city in orbit to house millions of people.",
-    baseCost: 80000000, // Reduced from 100000000
-    costMultiplier: 1.13, // Reduced from 1.15
-    auPerSecond: 2500, // Increased from 2000
+    baseCost: 80000000,
+    costMultiplier: 1.13,
+    auPerSecond: 2500,
     threshold: 25000000,
     icon: LucideCastle,
+    buildTime: 230, // 230 seconds for massive orbital city construction
     upgrades: {
       populationCapacity: {
         name: "Expand Population Capacity",
@@ -907,11 +924,12 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   intergalacticProbe: {
     name: "Intergalactic Probe",
     description: "Launch a probe to explore other galaxies.",
-    baseCost: 120000000, // Reduced from 150000000
-    costMultiplier: 1.13, // Reduced from 1.15
-    auPerSecond: 3000, // Increased from 2500
+    baseCost: 120000000,
+    costMultiplier: 1.13,
+    auPerSecond: 3000,
     threshold: 50000000,
     icon: LucideCompass,
+    buildTime: 250, // 250 seconds to build advanced intergalactic probe
     upgrades: {
       sensorArray: {
         name: "Advanced Sensor Array",
@@ -960,6 +978,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 3800, // Increased from 3000
     threshold: 75000000,
     icon: LucideAnvil,
+    buildTime: 280, // 280 seconds to construct matter conversion technology
     upgrades: {
       energyConversion: {
         name: "Energy Conversion Efficiency",
@@ -1008,6 +1027,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 4500, // Increased from 3500
     threshold: 100000000,
     icon: LucideClock,
+    buildTime: 320, // 320 seconds to construct time manipulation device
     upgrades: {
       temporalStability: {
         name: "Temporal Stability",
@@ -1055,6 +1075,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.13, // Reduced from 1.15
     auPerSecond: 6500, // Increased from 5000
     threshold: 200000000,
+    buildTime: 360, // 360 seconds (6 minutes) to construct megastructure around star
     icon: LucideSun,
     upgrades: {
       solarCollectors: {
