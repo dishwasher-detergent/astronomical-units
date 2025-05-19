@@ -158,10 +158,10 @@ export function ShopItem({
               </div>
             ) : (
               details.auPerSecond > 0 && (
-                <div className="flex items-center">
-                  <LucideTrendingUp className="mr-1 size-4 text-green-500" />+
+                <div className="flex items-center gap-1">
+                  <LucideTrendingUp className="mr-1 size-4 text-green-500" />
                   <span className="font-mono">
-                    {formatMoney(details.auPerSecond)}
+                    +{formatMoney(details.auPerSecond)}
                   </span>{" "}
                   AU/s
                 </div>
