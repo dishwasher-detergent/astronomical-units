@@ -5,15 +5,13 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { auIncrement } from "@/atoms/au";
 import { Button } from "@/components/ui/button";
 import { crew } from "@/atoms/crew";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { LOCALE } from "@/constants/GLOBAL";
+import { prestigeMultiplier } from "@/atoms/prestige";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
+  const multiplier = useAtomValue(prestigeMultiplier);
   const crewAtom = useAtomValue(crew);
-  const item = EQUIPMENT_LIST.crew;
-  const multiplier = calculateUpgradeMultiplier(crewAtom, item);
 
   return (
     <>
@@ -26,7 +24,7 @@ export function ClickArea() {
         <div className="text-primary z-10 flex flex-col items-center">
           <span>Tap Here</span>
           <span className="text-xl font-semibold">
-            +{(crewAtom.value * multiplier + 1).toLocaleString(LOCALE)} AU
+            +{((crewAtom.value + 1) * multiplier).toLocaleString(LOCALE)} AU
           </span>
         </div>{" "}
       </Button>
