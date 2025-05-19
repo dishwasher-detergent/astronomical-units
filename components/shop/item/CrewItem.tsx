@@ -24,7 +24,6 @@ export function CrewItem() {
         update: setAu,
         name: "AU",
       }}
-      getCost={useAcquireCost}
       nextUpgrade={nextUpgrade}
     />
   );
