@@ -20,12 +20,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { toast } from "sonner";
 import { RESET } from "jotai/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Backup() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const data = useAtomValue(gameData);
   const setGameData = useSetAtom(gameData);
@@ -70,7 +70,7 @@ export function Backup() {
     fileInputRef.current?.click();
   };
 
-  if (!isDesktop) {
+  if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>

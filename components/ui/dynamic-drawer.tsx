@@ -16,7 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function DyanmicDrawer({
   title,
@@ -33,9 +33,9 @@ export function DyanmicDrawer({
   setOpen: (e: boolean) => void;
   open: boolean;
 }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
 
-  if (isDesktop) {
+  if (!isMobile) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{button}</DialogTrigger>

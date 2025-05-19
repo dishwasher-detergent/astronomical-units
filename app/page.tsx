@@ -9,7 +9,6 @@ import { Statistics } from "@/components/statistics";
 import { EquipmentDisplay } from "@/components/display";
 import { Prestige } from "@/components/prestige";
 import { DevMode } from "@/components/dev-mode";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -19,15 +18,16 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Balance } from "@/components/balance";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
 
-  if (isDesktop == null) {
+  if (isMobile == null) {
     return null;
   }
 
-  if (!isDesktop) {
+  if (isMobile) {
     return (
       <>
         <div className="flex h-full w-full flex-none flex-col overflow-y-auto pb-14">

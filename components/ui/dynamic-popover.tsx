@@ -12,7 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function DyanmicPopover({
   title,
@@ -27,9 +27,9 @@ export function DyanmicPopover({
   setOpen: (e: boolean) => void;
   open: boolean;
 }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
 
-  if (isDesktop) {
+  if (!isMobile) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>{button}</PopoverTrigger>

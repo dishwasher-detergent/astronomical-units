@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtomValue } from "jotai";
+import { useMemo } from "react";
 
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
@@ -10,13 +11,31 @@ import { DisplayItem } from "@/components/display/item";
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);
 
-  if (
-    Object.entries(items).filter(([_, value]) => value.value > 0).length === 0
-  ) {
+  const activeEquipment = useMemo(() => {
+    return Object.entries(items)
+      .filter(([key, value]) => {
+        const item = EQUIPMENT_LIST[key];
+        return value.value > 0 && item && item.equipment !== false;
+      })
+      .map(([key, equipment]) => {
+        const item = EQUIPMENT_LIST[key];
+        const multiplier = calculateUpgradeMultiplier(equipment, item);
+        const auPerSecond = item.auPerSecond * multiplier * equipment.value;
+
+        return {
+          key,
+          item,
+          equipment,
+          auPerSecond,
+        };
+      });
+  }, [items]);
+
+  if (activeEquipment.length === 0) {
     return (
-      <div className="p-4">
-        <p className="text-muted-foreground">
-          Earn Austonomical Units <span className="font-semibold">(AU)</span> to
+      <div className="rounded-lg bg-muted/20 p-4">
+        <p className="text-center text-muted-foreground">
+          Earn Astronomical Units <span className="font-semibold">(AU)</span> to
           buy equipment.
         </p>
       </div>
@@ -25,24 +44,15 @@ export function EquipmentDisplay() {
 
   return (
     <div className="space-y-2">
-      {Object.entries(items).map(([key, equipment]) => {
-        if (equipment.value == 0) return;
-        const item = EQUIPMENT_LIST[key];
-
-        if (!item || item.equipment === false) return;
-
-        const multiplier = calculateUpgradeMultiplier(equipment, item);
-        const auPerSecond = item.auPerSecond * multiplier * equipment.value;
-        return (
-          <DisplayItem
-            key={key}
-            item={item}
-            equipment={equipment}
-            auPerSecond={auPerSecond}
-            elementKey={key}
-          />
-        );
-      })}
+      {activeEquipment.map(({ key, item, equipment, auPerSecond }) => (
+        <DisplayItem
+          key={key}
+          item={item}
+          equipment={equipment}
+          auPerSecond={auPerSecond}
+          elementKey={key}
+        />
+      ))}
     </div>
   );
 }

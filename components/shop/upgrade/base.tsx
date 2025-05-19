@@ -16,10 +16,10 @@ import {
 import { au } from "@/atoms/au";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Button } from "@/components/ui/button";
 import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { DyanmicPopover } from "@/components/ui/dynamic-popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function BaseUpgrade({
   atom,
@@ -34,16 +34,16 @@ export function BaseUpgrade({
   const showElementValue = useAtomValue(showElement);
   const [rankValue, setRank] = useAtom(atom);
   const auValue = useAtomValue(au);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
 
   const isShowing = showElementValue[`${parentKey}_${elementKey}`];
   const element = EQUIPMENT_LIST[parentKey].upgrades?.[elementKey];
   const Icon = element?.icon || LucidePlus;
 
-  if (isShowing && element && isDesktop != null) {
+  if (isShowing && element && !isMobile != null) {
     const canAquire = element.cost <= auValue && rankValue < element.maxCount;
 
-    if (!isDesktop) {
+    if (isMobile) {
       return (
         <DyanmicPopover
           title={element.name}

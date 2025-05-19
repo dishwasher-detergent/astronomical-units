@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
   Popover,
   PopoverContent,
@@ -10,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Tip({
   children,
@@ -18,9 +18,9 @@ export function Tip({
   children: React.ReactNode;
   content: React.ReactNode | string;
 }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile();
 
-  if (!isDesktop) {
+  if (isMobile) {
     return (
       <Popover>
         <PopoverTrigger asChild>
