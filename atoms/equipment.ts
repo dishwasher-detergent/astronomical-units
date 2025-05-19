@@ -14,7 +14,6 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { EquipmentItem } from "@/types";
 import { gameData } from "./global";
 
-// Main equipment focus atom - direct access to all equipment
 export const equipment = focusAtom(gameData, (optic) =>
   optic.prop("equipment"),
 );
@@ -33,7 +32,6 @@ export const equipmentItemFamily = atomFamily((key: string) =>
         [key]: newValue,
       }));
 
-      // Show appropriate upgrades based on equipment value
       const equip = EQUIPMENT_LIST[key]?.upgrades;
       if (equip) {
         Object.entries(equip).forEach(([upgradeKey, value]: any) => {

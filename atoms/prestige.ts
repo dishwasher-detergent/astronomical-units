@@ -153,28 +153,19 @@ export const performPrestige = atom(null, (get, set) => {
     return;
   }
 
-  // Fixed prestige points reward
   const prestigePointsReward = 5;
-
-  // Get all current values in one batch to avoid multiple reads
   const currentLevel = get(prestigeLevel) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
   const currentPoints = get(prestigePoints) || 0;
-  const currentLifetimeIncome = get(lifetimeIncome) || 0;
   const newCurrentPoints = currentPoints + prestigePointsReward;
-
-  // Calculate new multiplier
   const newMultiplier = calculatePrestigeMultiplier(newCurrentPoints);
 
-  // Calculate lifetime level based on current lifetime income
-  const lifetimeLevel = calculatePrestigeLevel(currentLifetimeIncome);
-  // Batch update prestige data
   set(gameData, (prev) => ({
     ...prev,
     income: {
       total: 0,
       current: 0,
-      lifetime: 0, // Reset lifetime income to start back at level 1
+      lifetime: 0,
     },
     equipment: generateEquipmentObject(EQUIPMENT_LIST),
     show: {},
@@ -187,15 +178,13 @@ export const performPrestige = atom(null, (get, set) => {
     },
   }));
 
-  // Show upgrades based on new points
   Object.entries(PRESTIGE_UPGRADES).forEach(([key, value]: any) => {
     if (newCurrentPoints >= value.threshold) {
       set(show, key);
     }
   });
 
-  // Force save after prestige
-  set(saveGameState); // Show success notification
+  set(saveGameState);
   toast.success(`Prestige complete! You've gained 5 prestige points.`, {
     description: `Your production multiplier is now ${formatMoney(newMultiplier)}x. You've been reset to Level 1 (Prestige ${currentLevel + 1}).`,
     duration: 5000,
@@ -206,14 +195,10 @@ export const performPrestige = atom(null, (get, set) => {
  * Helper to add prestige points directly (for development or cheats)
  */
 export const addPrestigePoints = atom(null, (get, set, amount: number) => {
-  // Get current values in one batch
   const currentPoints = get(prestigePoints) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
-
-  // Calculate new values
   const newPoints = currentPoints + amount;
 
-  // Update values in batch
   set(gameData, (prev) => ({
     ...prev,
     prestige: {
@@ -224,7 +209,6 @@ export const addPrestigePoints = atom(null, (get, set, amount: number) => {
     },
   }));
 
-  // Force save
   set(saveGameState);
 });
 
@@ -235,7 +219,6 @@ export const setPrestigeMultiplier = atom(
   null,
   (get, set, multiplier: number) => {
     set(prestigeMultiplier, multiplier);
-    // Force save
     set(saveGameState);
   },
 );

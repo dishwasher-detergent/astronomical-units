@@ -24,7 +24,7 @@ const initPrestigeUpgrades = () => {
  * Initial game state
  */
 const initialGameData: GameData = {
-  income: AU,
+  income: { ...AU, lifetime: 0 },
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
   show: {},
   last_updated: 0,
@@ -54,25 +54,18 @@ export const gameData = atomWithStorage(
       try {
         const savedData = JSON.parse(storedValue);
 
-        // Generate fresh equipment object to ensure we have all the latest equipment
         const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
-        // Initialize fresh prestige upgrades
         const newPrestigeUpgrades = initPrestigeUpgrades();
-
-        // Merge saved equipment with new equipment structure
         const mergedEquipment = mergeNestedObjects(
           savedData.equipment || {},
           newEquipment,
         );
-
-        // Ensure prestige upgrades structure is up to date
         const existingPrestigeUpgrades = savedData.prestige?.upgrades || {};
         const mergedPrestigeUpgrades = mergeNestedObjects(
           existingPrestigeUpgrades,
           newPrestigeUpgrades,
         );
 
-        // Create the final data structure
         return {
           ...initialValue,
           ...savedData,
@@ -97,12 +90,10 @@ export const gameData = atomWithStorage(
   { getOnInit: true },
 );
 
-// Last updated timestamp focus atom
 export const lastUpdated = focusAtom(gameData, (optic) =>
   optic.prop("last_updated"),
 );
 
-// Debug labels
 if (process.env.NODE_ENV !== "production") {
   gameData.debugLabel = "GameData";
   lastUpdated.debugLabel = "LastUpdated";

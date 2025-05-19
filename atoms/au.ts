@@ -39,7 +39,6 @@ export const auIncrement = atom(null, (get, set) => {
 
   let valuePerClick = baseClickValue;
 
-  // Apply precious finds upgrade effect
   const preciousFindsLevel = allUpgrades.preciousFinds || 0;
   if (preciousFindsLevel > 0) {
     const bonusChance = preciousFindsLevel * 0.07;
@@ -55,7 +54,7 @@ export const auIncrement = atom(null, (get, set) => {
       });
     }
   }
-  // Update AU values efficiently by reading current values only once
+
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
   const currentLifetimeIncome = get(lifetimeIncome);
@@ -67,7 +66,6 @@ export const auIncrement = atom(null, (get, set) => {
   set(totalAu, newTotalAu);
   set(lifetimeIncome, newLifetimeIncome);
 
-  // Check for equipment unlocks
   Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
     if (newTotalAu >= value.threshold) {
       set(show, key);
@@ -106,7 +104,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const productionRates = get(equipmentProductionRates);
   const allUpgrades = get(prestigeUpgrades) || {};
 
-  // Calculate upgrade bonuses
   const resourceMagnetismLevel = allUpgrades.resourceMagnetism || 0;
   const resourceMagnetismBonus =
     resourceMagnetismLevel > 0
@@ -116,11 +113,9 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
         )
       : 1;
 
-  // Critical production calculation
   const criticalProductionLevel = allUpgrades.criticalProduction || 0;
   const criticalChance = criticalProductionLevel * 0.05; // 5% per level
   const criticalMultiplier = Math.random() < criticalChance ? 2 : 1; // Double production on critical
-  // Sum up all production with bonuses applied
   let totalEarned = 0;
   productionRates.forEach((baseRate) => {
     totalEarned +=
@@ -128,7 +123,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   });
 
   if (totalEarned > 0) {
-    // Read current values only once
     const currentAu = get(au);
     const currentTotalAu = get(totalAu);
     const currentLifetimeIncome = get(lifetimeIncome);
@@ -137,7 +131,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     const newTotalAu = currentTotalAu + totalEarned;
     const newLifetimeIncome = currentLifetimeIncome + totalEarned;
 
-    // Update values
     set(au, newAu);
     set(totalAu, newTotalAu);
     set(lifetimeIncome, newLifetimeIncome);

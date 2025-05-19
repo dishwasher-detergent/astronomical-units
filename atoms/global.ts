@@ -58,27 +58,20 @@ export const gameData = atomWithStorage(
       if (!storedValue) return initialValue;
 
       try {
-        // Generate fresh objects with latest structure
         const newEquipment = generateEquipmentObject(EQUIPMENT_LIST);
         const newPrestigeUpgrades = initPrestigeUpgrades();
-
-        // Parse saved data
         const savedData = JSON.parse(storedValue);
-
-        // Merge equipment data to ensure new items are included
         const mergedEquipment = mergeNestedObjects(
           savedData.equipment || {},
           newEquipment,
         );
 
-        // Ensure prestige upgrades structure is up to date
         const existingPrestigeUpgrades = savedData.prestige?.upgrades || {};
         const mergedPrestigeUpgrades = mergeNestedObjects(
           existingPrestigeUpgrades,
           newPrestigeUpgrades,
         );
 
-        // Create the final merged data structure
         return {
           ...initialValue,
           ...savedData,
@@ -87,7 +80,6 @@ export const gameData = atomWithStorage(
             ...(savedData.prestige || initialValue.prestige),
             upgrades: mergedPrestigeUpgrades,
           },
-          // Always ensure last_updated field exists
           last_updated: savedData.last_updated || Date.now(),
         };
       } catch (error) {
@@ -96,7 +88,6 @@ export const gameData = atomWithStorage(
       }
     },
     setItem(key, value) {
-      // Update the last_updated timestamp when saving
       const dataToSave = {
         ...value,
         last_updated: Date.now(),
@@ -123,7 +114,6 @@ export const lastUpdated = focusAtom(gameData, (optic) =>
  * Useful for ensuring critical state changes are persisted
  */
 export const saveGameState = atom(null, (get, set) => {
-  // Reading the gameData will trigger storage
   const currentData = get(gameData);
   set(gameData, {
     ...currentData,

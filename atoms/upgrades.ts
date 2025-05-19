@@ -19,12 +19,10 @@ export const upgradeIndex = atomWithStorage("UPGRADE_INDEX", 0);
  * Get/cycle through next available upgrade
  */
 export const nextUpgrade = atom(
-  // Get the current upgrade based on index
   (get) => {
     const index = get(upgradeIndex);
     return EQUIPMENT_KEYS[index % EQUIPMENT_KEYS.length];
   },
-  // Cycle to the next upgrade
   (_, set) => {
     set(upgradeIndex, (current) => {
       const nextIndex = current + 2; // Skip by 2 for variety
@@ -45,15 +43,13 @@ export const prestigeUpgradeIndex = atomWithStorage(
  * Get/cycle through next available prestige upgrade
  */
 export const nextPrestigeUpgrade = atom(
-  // Get the current prestige upgrade based on index
   (get) => {
     const index = get(prestigeUpgradeIndex);
     return PRESTIGE_UPGRADE_KEYS[index % PRESTIGE_UPGRADE_KEYS.length];
   },
-  // Cycle to the next prestige upgrade
   (_, set) => {
     set(prestigeUpgradeIndex, (current) => {
-      const nextIndex = current + 2; // Skip by 2 for variety
+      const nextIndex = current + 2;
       return nextIndex >= PRESTIGE_UPGRADE_KEYS.length ? 0 : nextIndex;
     });
   },

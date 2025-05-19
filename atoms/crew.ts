@@ -27,17 +27,14 @@ export const crewValue = atom((get) => get(crew).value);
 export const crewCurrent = atom(
   (get) => get(crewValue),
   (get, set) => {
-    // Get the crew item using the equipment family pattern
     const crewItem = get(equipmentItemFamily("crew"));
     const newVal = crewItem.value + 1;
 
-    // Update using the equipment family
     set(equipmentItemFamily("crew"), {
       ...crewItem,
       value: newVal,
     });
 
-    // Check for upgrade unlocks
     const equip = EQUIPMENT_LIST.crew?.upgrades;
     if (equip) {
       Object.entries(equip).forEach(([key, value]: any) => {
@@ -47,7 +44,6 @@ export const crewCurrent = atom(
       });
     }
 
-    // Force save on important changes
     set(saveGameState);
   },
 );
