@@ -39,7 +39,6 @@ function DevModeContent() {
   const level = useAtomValue(prestigeLevel);
   const points = useAtomValue(prestigePoints);
   const multiplier = useAtomValue(prestigeMultiplier);
-  const doPrestige = useSetAtom(performPrestige);
   const setAuAmountDirectly = useSetAtom(setAuDirectly);
   const addAuAmount = useSetAtom(addAu);
   const addEquipmentAmount = useSetAtom(addEquipment);
@@ -68,9 +67,6 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     addPrestigeAmount(amount);
-  };
-  const forcedPrestige = () => {
-    doPrestige();
   };
 
   const handleAddEquipment = () => {
@@ -152,9 +148,6 @@ function DevModeContent() {
               />
             </div>
             <Button onClick={handleAddPrestigePoints}>Add Points</Button>
-            <Button onClick={forcedPrestige} variant="outline">
-              Force Prestige
-            </Button>
           </div>
         </TabsContent>
         <TabsContent value="equipment" className="space-y-4 py-4">
