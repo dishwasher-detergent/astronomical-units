@@ -104,19 +104,14 @@ export function LastUpdated() {
   return (
     <DyanmicDrawer
       title="Welcome Back!"
-      description="You have been away for a while, here is what you have earned while you were gone!"
+      description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were
+          away!${bonusMessage}`}
       setOpen={setDialogOpen}
       open={dialogOpen}
     >
-      <>
-        <p className="text-lg font-medium">
-          You&apos;ve earned {formatMoney(offlineEarnings)} AUs while you were
-          away!{bonusMessage}
-        </p>
-        <Button size="sm" className="w-full" onClick={claimOfflineEarnings}>
-          Claim Earnings
-        </Button>
-      </>
+      <Button size="sm" className="w-full" onClick={claimOfflineEarnings}>
+        Claim Earnings
+      </Button>
     </DyanmicDrawer>
   );
 }
