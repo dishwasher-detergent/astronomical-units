@@ -14,6 +14,7 @@ import { InstallPrompt } from "@/components/install-prompt";
 import { Backup } from "@/components/backup";
 import { Logo } from "@/components/logo";
 import { DevMode } from "@/components/dev-mode";
+import { UpdateNotification } from "@/components/update-notification";
 
 const font = Fredoka({ subsets: ["latin"] });
 const mono = IBM_Plex_Mono({
@@ -263,7 +264,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {" "}
           <InstallPrompt />
+          <UpdateNotification />
           <nav className="bg-background sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b px-4 font-semibold">
             <div className="flex flex-row items-center gap-1">
               <Logo />

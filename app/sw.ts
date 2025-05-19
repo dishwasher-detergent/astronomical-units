@@ -16,18 +16,16 @@ declare const self: ServiceWorkerGlobalScope;
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
-  skipWaiting: true,
+  skipWaiting: false,
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: defaultCache,
 });
 
-self.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "visible") {
-    console.log("APP resumed");
-
-    // Reload the page to get the latest content
-    window.location.reload();
+// Listen for messages from the client
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
   }
 });
 
