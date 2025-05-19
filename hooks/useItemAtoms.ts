@@ -1,11 +1,14 @@
 import { equipment } from "@/atoms/equipment";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { handleEquipmentThresholds } from "@/lib/utils";
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 /**
- * Creates atom for equipment handling with proper update logic
+ * Function to create an atom for a specific equipment item
+ * @param elementKey - The key of the equipment item
+ * @returns An object containing purchase and sell atoms
  */
 export function createEquipmentAtom(elementKey: string) {
   const item = focusAtom(equipment, (optic) => optic.prop(elementKey));
@@ -14,7 +17,6 @@ export function createEquipmentAtom(elementKey: string) {
     purchase: atom(
       (get) => get(item),
       (get, set, quantity: number = 1) => {
-        const equip = EQUIPMENT_LIST[elementKey].upgrades;
         const currentVal = get(item).value;
         const newVal = currentVal + quantity;
 
@@ -23,13 +25,14 @@ export function createEquipmentAtom(elementKey: string) {
           value: newVal,
         }));
 
-        if (equip) {
-          Object.entries(equip).forEach(([key, value]: any) => {
-            if (newVal >= value.threshold && currentVal < value.threshold) {
-              set(show, `${elementKey}_${key}`);
-            }
-          });
-        }
+        // Use the shared function to handle threshold checks
+        handleEquipmentThresholds(
+          elementKey,
+          currentVal,
+          newVal,
+          (key) => set(show, key),
+          EQUIPMENT_LIST,
+        );
       },
     ),
 

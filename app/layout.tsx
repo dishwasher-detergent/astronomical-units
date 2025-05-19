@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fredoka, IBM_Plex_Mono } from "next/font/google";
-import { Dev } from "@/providers/jotai-devtools";
 import { ThemeProvider } from "next-themes";
 import { LucideGithub } from "lucide-react";
 

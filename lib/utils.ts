@@ -124,7 +124,11 @@ export class MemoizedCalculator {
 const upgradeMultiplierCalc = new MemoizedCalculator();
 
 /**
- * Optimized version of calculateUpgradeMultiplier with memoization
+ * Optimized function to calculate upgrade multipliers using memoization
+ * @param equipment - The equipment item
+ * @param item - The equipment object
+ * @param prestigeMultiplier - The prestige multiplier (default: 1)
+ * @returns Calculated upgrade multiplier
  */
 export function calculateUpgradeMultiplierOptimized(
   equipment: EquipmentItem,
@@ -200,4 +204,47 @@ export function formatMoney(
   } else {
     return Math.floor(scaled) + suffix;
   }
+}
+
+/**
+ * Helper function to handle all logic related to checking and showing equipment thresholds
+ * @param key - The equipment key being updated
+ * @param currentVal - The current value of the equipment
+ * @param newVal - The new value after update
+ * @param showFunc - Function to update the show state
+ * @param equipmentList - The list of all equipment
+ */
+export function handleEquipmentThresholds(
+  key: string,
+  currentVal: number,
+  newVal: number,
+  showFunc: (key: string) => void,
+  equipmentList: Record<string, Equipment>,
+) {
+  // Show upgrades for this equipment when reaching threshold
+  const equip = equipmentList[key]?.upgrades;
+  if (equip) {
+    Object.entries(equip).forEach(([upgradeKey, value]: [string, any]) => {
+      // Show upgrade if we're at or past the threshold
+      if (newVal >= value.threshold) {
+        // If we just crossed the threshold, or we're checking initial state
+        if (currentVal < value.threshold || currentVal === 0) {
+          showFunc(`${key}_${upgradeKey}`);
+        }
+      }
+    });
+  }
+
+  // Check for next equipment that should be revealed
+  Object.entries(equipmentList).forEach(([equipKey, equipDetails]) => {
+    if (
+      equipKey !== key && // Don't check the same equipment we're updating
+      newVal >= equipDetails.threshold // Check if we've met the threshold
+    ) {
+      // If we just crossed the threshold, or we're checking initial state
+      if (currentVal < equipDetails.threshold || currentVal === 0) {
+        showFunc(equipKey);
+      }
+    }
+  });
 }

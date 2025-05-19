@@ -101,6 +101,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideBolt,
       },
+      automation: {
+        name: "Crew Automation",
+        description:
+          "Implement AI-assisted workflows to maximize crew productivity.",
+        cost: 20000,
+        multiplier: 0.45,
+        maxCount: 5,
+        threshold: 25,
+        icon: LucideCpu,
+      },
     },
   },
   charter: {
@@ -139,6 +149,15 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucidePresentation,
       },
+      luxury: {
+        name: "Luxury Amenities",
+        description: "Add premium features to attract higher-paying clients.",
+        cost: 5500,
+        multiplier: 0.5,
+        maxCount: 3,
+        threshold: 20,
+        icon: LucideCrown,
+      },
     },
   },
   miningRig: {
@@ -176,6 +195,15 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideDrill,
+      },
+      asteroid_detection: {
+        name: "Asteroid Detection System",
+        description: "Advanced radar system to locate resource-rich asteroids.",
+        cost: 18000,
+        multiplier: 0.55,
+        maxCount: 3,
+        threshold: 20,
+        icon: LucideRadar,
       },
     },
   },
@@ -216,6 +244,15 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideRocket,
       },
+      network_expansion: {
+        name: "Network Expansion",
+        description: "Increase your satellite coverage across space.",
+        cost: 32000,
+        multiplier: 0.6,
+        maxCount: 2,
+        threshold: 20,
+        icon: LucideNetwork,
+      },
     },
   },
   exploration: {
@@ -253,6 +290,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 4,
         threshold: 15,
         icon: LucideMicroscope,
+      },
+      fuel_efficiency: {
+        name: "Fuel Efficiency",
+        description:
+          "Optimize fuel usage allowing for longer exploration missions.",
+        cost: 25000,
+        multiplier: 0.65,
+        maxCount: 3,
+        threshold: 20,
+        icon: LucideBatteryCharging,
       },
     },
   },
@@ -293,6 +340,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideShieldAlert,
       },
+      artificial_gravity: {
+        name: "Artificial Gravity",
+        description:
+          "Install artificial gravity systems for increased comfort and efficiency.",
+        cost: 100000,
+        multiplier: 0.7,
+        maxCount: 2,
+        threshold: 20,
+        icon: LucideRotate3D,
+      },
     },
   },
   terraforming: {
@@ -330,6 +387,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideLeaf,
+      },
+      climate_control: {
+        name: "Climate Control Systems",
+        description:
+          "Advanced technology to regulate and stabilize planetary weather patterns.",
+        cost: 55000,
+        multiplier: 0.75,
+        maxCount: 2,
+        threshold: 20,
+        icon: LucideThermometer,
       },
     },
   },
@@ -377,6 +444,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 2,
         threshold: 25,
         icon: LucideChurch,
+      },
+      education: {
+        name: "Education Centers",
+        description:
+          "Build schools and universities to advance colony knowledge.",
+        cost: 350000,
+        multiplier: 0.8,
+        maxCount: 3,
+        threshold: 35,
+        icon: LucideGraduationCap,
       },
       stori: {
         name: "Stori Beans",
@@ -427,6 +504,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideShieldCheck,
       },
+      maintenance_drones: {
+        name: "Maintenance Drone Fleet",
+        description:
+          "Automated drones that continuously inspect and repair the elevator structure.",
+        cost: 650000,
+        multiplier: 0.7,
+        maxCount: 3,
+        threshold: 25,
+        icon: LucideCode,
+      },
     },
   },
   warpDrive: {
@@ -465,6 +552,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideRotate3D,
+      },
+      temporal_shielding: {
+        name: "Temporal Shielding",
+        description:
+          "Advanced technology to protect crew from time dilation effects.",
+        cost: 3000000,
+        multiplier: 0.8,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideShield,
       },
     },
   },
@@ -505,6 +602,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideShieldCheck,
       },
+      energy_stations: {
+        name: "Solar Energy Stations",
+        description:
+          "Install massive solar arrays to power both the ring and planet below.",
+        cost: 10000000,
+        multiplier: 0.75,
+        maxCount: 3,
+        threshold: 25,
+        icon: LucideSun,
+      },
     },
   },
   quantumComputer: {
@@ -543,6 +650,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideCode,
       },
+      quantum_entanglement: {
+        name: "Quantum Entanglement Network",
+        description:
+          "Harness quantum entanglement for instantaneous data transfer.",
+        cost: 25000000,
+        multiplier: 0.85,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideLink,
+      },
     },
   },
   stargate: {
@@ -580,6 +697,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideNetwork,
+      },
+      dimension_gate: {
+        name: "Dimensional Gateway",
+        description:
+          "Unlock access to parallel dimensions with untapped resources.",
+        cost: 60000000,
+        multiplier: 0.85,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideDoorOpen,
       },
     },
   },
@@ -621,6 +748,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideThermometer,
       },
+      plasma_containment: {
+        name: "Advanced Plasma Containment",
+        description:
+          "Revolutionary technology for sustaining higher energy densities.",
+        cost: 60000000,
+        multiplier: 0.8,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideShieldCheck,
+      },
     },
   },
   starshipFleet: {
@@ -658,6 +795,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideShield,
+      },
+      crew_training: {
+        name: "Elite Crew Training",
+        description:
+          "Train your fleet crews in advanced tactics and operations.",
+        cost: 150000000,
+        multiplier: 0.8,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideGraduationCap,
       },
     },
   },
@@ -697,6 +844,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideBatteryCharging,
       },
+      wormhole_network: {
+        name: "Wormhole Network",
+        description:
+          "Create multiple interconnected wormholes for a transportation network.",
+        cost: 200000000,
+        multiplier: 0.85,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideNetwork,
+      },
     },
   },
   orbitalCity: {
@@ -734,6 +891,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideTrain,
+      },
+      life_support: {
+        name: "Advanced Life Support Systems",
+        description:
+          "Cutting-edge technology to maintain perfect living conditions.",
+        cost: 300000000,
+        multiplier: 0.9,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideDroplet,
       },
     },
   },
@@ -773,6 +940,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideSignal,
       },
+      ai_navigation: {
+        name: "AI Navigation System",
+        description:
+          "Self-learning AI that discovers optimal exploration paths.",
+        cost: 500000000,
+        multiplier: 0.9,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideCode,
+      },
     },
   },
   matterSynthesizer: {
@@ -810,6 +987,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideClock,
+      },
+      nano_assembly: {
+        name: "Nano-Scale Assembly",
+        description:
+          "Molecular fabrication technology for perfect atomic structure.",
+        cost: 500000000,
+        multiplier: 0.95,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideLayers,
       },
     },
   },
@@ -849,6 +1036,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         threshold: 15,
         icon: LucideBattery,
       },
+      time_loop: {
+        name: "Temporal Loop System",
+        description:
+          "Create localized time loops for exponential productivity gains.",
+        cost: 800000000,
+        multiplier: 1.0,
+        maxCount: 2,
+        threshold: 25,
+        icon: LucideRotate3D,
+      },
     },
   },
   DysonSphere: {
@@ -886,6 +1083,16 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
         maxCount: 3,
         threshold: 15,
         icon: LucideTableCellsSplit,
+      },
+      matrioshka_brain: {
+        name: "Matrioshka Brain",
+        description:
+          "Add computational layers to transform your Dyson Sphere into a massive computer.",
+        cost: 1200000000,
+        multiplier: 1.2,
+        maxCount: 1,
+        threshold: 30,
+        icon: LucideCpu,
       },
     },
   },

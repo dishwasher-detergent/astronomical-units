@@ -11,6 +11,7 @@ import {
   EQUIPMENT_RATE_REDUCTION_DELTA,
 } from "@/constants/EQUIPMENT";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { handleEquipmentThresholds } from "@/lib/utils";
 import { EquipmentItem } from "@/types";
 import { gameData } from "./global";
 
@@ -27,19 +28,21 @@ export const equipmentItemFamily = atomFamily((key: string) =>
   atom(
     (get) => get(equipment)[key] || { value: 0, upgrades: {} },
     (get, set, newValue: EquipmentItem) => {
+      const currentVal = get(equipment)[key]?.value || 0;
+
       set(equipment, (current) => ({
         ...current,
         [key]: newValue,
       }));
 
-      const equip = EQUIPMENT_LIST[key]?.upgrades;
-      if (equip) {
-        Object.entries(equip).forEach(([upgradeKey, value]: any) => {
-          if (newValue.value >= value.threshold) {
-            set(show, `${key}_${upgradeKey}`);
-          }
-        });
-      }
+      // Use the shared function to handle threshold checks
+      handleEquipmentThresholds(
+        key,
+        currentVal,
+        newValue.value,
+        (key) => set(show, key),
+        EQUIPMENT_LIST,
+      );
     },
   ),
 );
@@ -60,9 +63,6 @@ export const equipmentRateReduction = atomWithReducer(
   (current) => current + EQUIPMENT_RATE_REDUCTION_DELTA,
 );
 
-/**
- * Helper function to increment an equipment item's value
- */
 export const incrementEquipment = atom(null, (get, set, key: string) => {
   const currentItem = get(equipmentItemFamily(key));
   set(equipmentItemFamily(key), {
@@ -81,12 +81,23 @@ export const addEquipment = atom<null, [{ key: string; amount: number }], void>(
     }
 
     const currentItem = get(equipmentItemFamily(key));
+    const newValue = currentItem.value + amount;
+
     set(equipmentItemFamily(key), {
       ...currentItem,
-      value: currentItem.value + amount,
+      value: newValue,
     });
 
     set(show, key);
+
+    // Use the shared function to handle threshold checks
+    handleEquipmentThresholds(
+      key,
+      currentItem.value,
+      newValue,
+      (key) => set(show, key),
+      EQUIPMENT_LIST,
+    );
   },
 );
 
