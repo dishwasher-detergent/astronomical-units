@@ -1,6 +1,8 @@
 import { equipment } from "@/atoms/equipment";
+import { prestigeUpgrades } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { handleEquipmentThresholds } from "@/lib/equipment";
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
@@ -19,7 +21,22 @@ export function createEquipmentAtom(elementKey: string) {
       (get, set, quantity: number = 1) => {
         const currentVal = get(item).value;
         const newVal = currentVal + quantity;
-        const buildTime = EQUIPMENT_LIST[elementKey].buildTime || 0;
+        const baseBuildTime = EQUIPMENT_LIST[elementKey].buildTime || 0;
+
+        // Apply Rapid Construction prestige upgrade effect if available
+        const allUpgrades = get(prestigeUpgrades) || {};
+        const rapidConstructionLevel = allUpgrades.rapidConstruction || 0;
+        let buildTimeMultiplier = 1;
+
+        if (rapidConstructionLevel > 0 && baseBuildTime > 0) {
+          // Apply multiplicative reduction (0.9^level)
+          buildTimeMultiplier = Math.pow(
+            PRESTIGE_UPGRADES.rapidConstruction.multiplier || 0.9,
+            rapidConstructionLevel,
+          );
+        }
+
+        const buildTime = baseBuildTime * buildTimeMultiplier;
 
         // If build time is specified, set up the building process
         if (buildTime > 0) {

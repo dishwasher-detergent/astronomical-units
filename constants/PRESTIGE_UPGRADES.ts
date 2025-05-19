@@ -2,6 +2,7 @@ import { Upgrade } from "@/types";
 import {
   Activity,
   ArrowUp,
+  Clock,
   LucideGem,
   LucideMagnet,
   Percent,
@@ -64,5 +65,14 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     multiplier: 1.07,
     threshold: 5,
     icon: LucideGem,
+  },
+  rapidConstruction: {
+    name: "Rapid Construction",
+    description: "Reduces building time for all equipment by 10% per level",
+    cost: 15,
+    maxCount: 5,
+    multiplier: 0.9, // 10% reduction per level (multiplies by 0.9, 0.81, 0.729, etc.)
+    threshold: 6,
+    icon: Clock,
   },
 };

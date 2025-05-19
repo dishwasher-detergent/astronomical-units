@@ -7,6 +7,7 @@ import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 import { formatMoney } from "@/lib/formatters";
+import { useBuildTimeReduction } from "@/hooks/useBuildTimeReduction";
 
 export const DisplayItem = memo(
   ({
@@ -25,6 +26,8 @@ export const DisplayItem = memo(
       [key: string]: { count: number; timeLeft: number; progress: number };
     }>({});
     const [now, setNow] = useState(Date.now());
+    const { multiplier: buildTimeMultiplier, reduction: buildTimeReduction } =
+      useBuildTimeReduction();
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -43,14 +46,15 @@ export const DisplayItem = memo(
       const updatedBuildingItems: {
         [key: string]: { count: number; timeLeft: number; progress: number };
       } = {};
-      const buildTime = item.buildTime || 0;
+      const baseBuildTime = item.buildTime || 0;
+      const actualBuildTime = baseBuildTime * buildTimeMultiplier;
 
       Object.entries(equipment.building).forEach(([completionTime, count]) => {
         const timeLeft = Math.max(0, parseInt(completionTime) - now) / 1000; // Convert to seconds
-        const elapsed = buildTime - timeLeft;
+        const elapsed = actualBuildTime - timeLeft;
         const progress = Math.min(
           100,
-          Math.max(0, (elapsed / buildTime) * 100),
+          Math.max(0, (elapsed / actualBuildTime) * 100),
         );
 
         updatedBuildingItems[completionTime] = {

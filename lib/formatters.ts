@@ -25,9 +25,8 @@ export function formatMoney(
     "Dc",
   ];
   const tier = Math.floor(Math.log10(Math.abs(value)) / 3);
-
   if (tier === 0) {
-    return value % 1 === 0 ? value.toString() : value.toFixed(2);
+    return value.toFixed(2);
   }
 
   if (tier >= suffixes.length) {
@@ -38,9 +37,5 @@ export function formatMoney(
   const scaled = value / scale;
   const suffix = suffixes[tier];
 
-  if (tier === 1 && showDecimalsUnderMillion) {
-    return scaled.toFixed(2) + suffix;
-  } else {
-    return Math.floor(scaled) + suffix;
-  }
+  return scaled.toFixed(2) + suffix;
 }
