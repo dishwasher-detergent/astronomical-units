@@ -1,6 +1,6 @@
 export function Logo() {
   return (
-    <div className="size-8 text-foreground">
+    <div className="text-foreground size-8">
       <svg
         className="h-full w-full"
         width="192"
@@ -21,30 +21,30 @@ export function Logo() {
           cy="96.6949"
           r="31.1782"
           stroke="currentColor"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="16 14"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="16 14"
         />
         <circle
           cx="95.6949"
           cy="96.3051"
           r="47.1571"
           stroke="currentColor"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="16 14"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="16 14"
         />
         <circle
           cx="95.5"
           cy="96.5"
           r="64.5"
           stroke="currentColor"
-          stroke-width="6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="16 14"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="16 14"
         />
         <circle cx="152.353" cy="128.353" r="8.57402" fill="#2563EB" />
       </svg>
