@@ -45,13 +45,6 @@ export const auIncrement = atom(null, (get, set) => {
     if (Math.random() < bonusChance) {
       const bonusValue = valuePerClick * 0.5;
       valuePerClick += bonusValue;
-
-      import("sonner").then(({ toast }) => {
-        toast.success("Precious Find!", {
-          description: `Found bonus AUs! (+${Math.round(bonusValue)})`,
-          duration: 2000,
-        });
-      });
     }
   }
 

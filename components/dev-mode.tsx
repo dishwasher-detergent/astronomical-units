@@ -15,8 +15,6 @@ import {
 } from "@/atoms/prestige";
 import { addEquipment, unlockAllEquipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
-import { toast } from "sonner";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -56,7 +54,6 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     addAuAmount(amount);
-    toast.success(`Added ${formatMoney(amount)} AU`);
   };
 
   const handleSetAu = () => {
@@ -64,7 +61,6 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     setAuAmountDirectly(amount);
-    toast.success(`Set AU to ${formatMoney(amount)}`);
   };
 
   const handleAddPrestigePoints = () => {
@@ -72,7 +68,6 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     addPrestigeAmount(amount);
-    toast.success(`Added ${amount} prestige points`);
   };
   const forcedPrestige = () => {
     doPrestige();
@@ -83,14 +78,12 @@ function DevModeContent() {
     if (isNaN(amount) || amount < 1) return;
 
     addEquipmentAmount({ key: selectedEquipment, amount });
-    toast.success(`Added ${amount} ${EQUIPMENT_LIST[selectedEquipment].name}`);
   };
 
   const unlockAllEquipmentItems = useSetAtom(unlockAllEquipment);
 
   const handleUnlockAllEquipment = () => {
     unlockAllEquipmentItems();
-    toast.success("All equipment unlocked in the UI");
   };
 
   return (

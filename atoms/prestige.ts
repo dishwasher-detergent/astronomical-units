@@ -97,7 +97,6 @@ export const performPrestige = atom(null, (get, set) => {
   const level = get(currentLifetimeLevel);
 
   if (level < 100) {
-    toast.error("You need to reach Level 100 to prestige!");
     return;
   }
 

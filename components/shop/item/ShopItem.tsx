@@ -2,7 +2,6 @@
 
 import { atom, useAtom, useAtomValue } from "jotai";
 import { WritableAtom } from "jotai";
-import { toast } from "sonner";
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -109,10 +108,6 @@ export function ShopItem({
     }
 
     currency.update((current) => current - actualCost);
-
-    toast.success(
-      `Purchased ${actualQuantity} ${details.name} for ${formatMoney(actualCost)} ${currency.name}`,
-    );
 
     onPurchase?.();
   };

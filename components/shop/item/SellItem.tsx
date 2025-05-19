@@ -2,7 +2,6 @@
 
 import { useAtom } from "jotai";
 import { WritableAtom } from "jotai";
-import { toast } from "sonner";
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -42,9 +41,6 @@ export function SellItem({
 
     setItemValue(newValue);
     currency.update((current) => current + sellPrice);
-    toast.error(
-      `Sold ${details.name} for ${formatMoney(sellPrice)} ${currency.name}`,
-    );
     onSell?.();
   };
 
