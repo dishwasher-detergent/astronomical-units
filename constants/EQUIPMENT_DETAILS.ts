@@ -471,7 +471,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   orbitalRing: {
     name: "Orbital Ring",
     description:
-      "Construct an orbital ring around the planet for enhanced logistics.",
+      "Construct an orbital ring-3 around the planet for enhanced logistics.",
     baseCost: 2400000,
     costMultiplier: 1.13,
     auPerSecond: 500,
@@ -498,7 +498,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
       },
       defenseGrid: {
         name: "Orbital Defense Grid",
-        description: "Protect the ring from potential threats.",
+        description: "Protect the ring-3 from potential threats.",
         cost: 8000000,
         multiplier: 0.6,
         maxCount: 3,

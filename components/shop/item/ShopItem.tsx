@@ -90,7 +90,7 @@ export function ShopItem({
           </div>
           <Badge
             variant={
-              isMaxed ? "destructive" : cantAfford ? "outline" : "default"
+              isMaxed ? "destructive" : cantAfford ? "outline-solid" : "default"
             }
             className="ml-auto"
           >
