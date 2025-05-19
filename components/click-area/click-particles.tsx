@@ -15,6 +15,7 @@ interface Particle {
   velocityY: number;
   rotation: number;
   rotationSpeed: number;
+  isPassive?: boolean;
 }
 
 export function useClickParticles() {
@@ -45,6 +46,34 @@ export function useClickParticles() {
 
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
+
+  const addPassiveParticle = (
+    containerWidth: number,
+    bottomY: number,
+    value: number,
+  ) => {
+    const id = Date.now() + Math.random();
+    const x = Math.random() * containerWidth;
+
+    setParticles((prev) => [
+      ...prev,
+      {
+        id,
+        x,
+        y: bottomY,
+        value,
+        opacity: 1,
+        scale: 0.7,
+        isBonus: false,
+        isPassive: true,
+        velocityX: (Math.random() * 2 - 1) * 0.5,
+        velocityY: -2 - Math.random() * 1,
+        rotation: Math.random() * 10 - 5,
+        rotationSpeed: (Math.random() * 2 - 1) * 0.2,
+      },
+    ]);
+  };
+
   const addParticle = (
     x: number,
     y: number,
@@ -84,7 +113,6 @@ export function useClickParticles() {
 
     setParticles((prev) => [...prev, ...newParticles]);
   };
-
   const renderParticles = () => (
     <div className="pointer-events-none absolute inset-0 z-50 overflow-hidden">
       {particles.map((particle) => (
@@ -93,9 +121,11 @@ export function useClickParticles() {
           className={`absolute font-bold ${
             particle.isBonus
               ? "text-2xl text-yellow-400 drop-shadow-[0_0_4px_rgba(253,224,71,0.7)]"
-              : particle.value > 0
-                ? "text-xl text-green-500"
-                : "text-xl text-red-500"
+              : particle.isPassive
+                ? "text-sm text-blue-400"
+                : particle.value > 0
+                  ? "text-xl text-green-500"
+                  : "text-xl text-red-500"
           } ${particle.isBonus && !particle.value ? "text-[10px] opacity-80" : ""}`}
           style={{
             left: `${particle.x}px`,
@@ -106,11 +136,13 @@ export function useClickParticles() {
         >
           {particle.value && particle.isBonus
             ? `+${formatMoney(particle.value)} BONUS!`
-            : particle.value
-              ? `+${formatMoney(particle.value)}`
-              : particle.isBonus
-                ? "✨"
-                : ""}
+            : particle.isPassive && particle.value
+              ? `+${formatMoney(particle.value)}/s`
+              : particle.value
+                ? `+${formatMoney(particle.value)}`
+                : particle.isBonus
+                  ? "✨"
+                  : ""}
         </div>
       ))}
     </div>
@@ -120,5 +152,6 @@ export function useClickParticles() {
     particles,
     renderParticles,
     addParticle,
+    addPassiveParticle,
   };
 }

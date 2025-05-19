@@ -1,9 +1,14 @@
 "use client";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
-import { addAu, auIncrement, clickValueAtom } from "@/atoms/au";
+import {
+  addAu,
+  auIncrement,
+  clickValueAtom,
+  equipmentProductionRates,
+} from "@/atoms/au";
 import { Button } from "@/components/ui/button";
 import { crew } from "@/atoms/crew";
 import { LOCALE } from "@/constants/GLOBAL";
@@ -19,8 +24,12 @@ export function ClickArea() {
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
   const showAnimations = useAtomValue(animationsEnabled);
   const containerRef = useRef<HTMLDivElement>(null);
+  const productionRates = useAtomValue(equipmentProductionRates);
 
-  const { renderParticles, addParticle } = useClickParticles();
+  const auPerSecond = [...productionRates.values()].reduce((a, b) => a + b, 0);
+
+  const { renderParticles, addParticle, addPassiveParticle } =
+    useClickParticles();
 
   const handleClick = (e: React.MouseEvent) => {
     if (showAnimations) {
@@ -33,6 +42,21 @@ export function ClickArea() {
 
     setClicks();
   };
+
+  useEffect(() => {
+    if (!showAnimations || auPerSecond <= 0) return;
+
+    const containerWidth = containerRef.current?.clientWidth || 0;
+    const containerHeight = containerRef.current?.clientHeight || 0;
+
+    if (containerWidth === 0 || containerHeight === 0) return;
+
+    const interval = setInterval(() => {
+      addPassiveParticle(containerWidth, containerHeight, auPerSecond / 2);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [auPerSecond]);
 
   return (
     <div ref={containerRef} className="relative h-full min-h-48 w-full">
