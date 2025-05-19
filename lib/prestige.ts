@@ -4,13 +4,13 @@ import {
 } from "@/constants/GLOBAL";
 
 /**
- * Calculate the prestige level based on lifetime income
- * @param lifetimeIncome Total lifetime income earned across all prestiges
+ * Calculate the prestige level based on prestige income
+ * @param prestigeIncome Prestige income earned in current prestige cycle
  * @param currentPrestigeLevel Current prestige level (for scaling requirements)
  * @returns The prestige level
  */
 export function calculatePrestigeLevel(
-  lifetimeIncome: number,
+  prestigeIncome: number,
   currentPrestigeLevel: number = 0,
 ): number {
   let level = 0;
@@ -21,7 +21,7 @@ export function calculatePrestigeLevel(
       : getLevelRequirements(currentPrestigeLevel);
 
   for (let i = 0; i < requirements.length; i++) {
-    if (lifetimeIncome >= requirements[i]) {
+    if (prestigeIncome >= requirements[i]) {
       level = i;
     } else {
       break;
@@ -33,16 +33,16 @@ export function calculatePrestigeLevel(
 
 /**
  * Calculate progress to the next prestige level
- * @param lifetimeIncome Total lifetime income earned
+ * @param prestigeIncome Prestige income earned in current prestige cycle
  * @param currentPrestigeLevel Current prestige level (for scaling requirements)
  * @returns Progress percentage (0-100) to the next level
  */
 export function calculateNextLevelProgress(
-  lifetimeIncome: number,
+  prestigeIncome: number,
   currentPrestigeLevel: number = 0,
 ): number {
   const currentLevel = calculatePrestigeLevel(
-    lifetimeIncome,
+    prestigeIncome,
     currentPrestigeLevel,
   );
 
@@ -59,7 +59,7 @@ export function calculateNextLevelProgress(
   const nextThreshold = requirements[currentLevel + 1];
 
   const progress =
-    ((lifetimeIncome - currentThreshold) / (nextThreshold - currentThreshold)) *
+    ((prestigeIncome - currentThreshold) / (nextThreshold - currentThreshold)) *
     100;
 
   return Math.min(Math.max(0, progress), 100);

@@ -42,6 +42,7 @@ export type GameData = {
   show: Record<string, boolean>;
   last_updated: number;
   prestige: {
+    income: number;
     level: number;
     points: number;
     multiplier: number;

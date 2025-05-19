@@ -14,8 +14,8 @@ export const totalAu = focusAtom(gameData, (optic) =>
   optic.path("income.total"),
 );
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
-export const lifetimeIncome = focusAtom(gameData, (optic) =>
-  optic.path("income.total"),
+export const prestigeIncome = focusAtom(gameData, (optic) =>
+  optic.path("prestige.income"),
 );
 
 /**
@@ -57,14 +57,14 @@ export const auIncrement = atom(null, (get, set) => {
 
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
-  const currentLifetimeIncome = get(lifetimeIncome);
+  const currentPrestigeIncome = get(prestigeIncome);
   const newAu = currentAu + valuePerClick;
   const newTotalAu = currentTotalAu + valuePerClick;
-  const newLifetimeIncome = currentLifetimeIncome + valuePerClick;
+  const newPrestigeIncome = currentPrestigeIncome + valuePerClick;
 
   set(au, newAu);
   set(totalAu, newTotalAu);
-  set(lifetimeIncome, newLifetimeIncome);
+  set(prestigeIncome, newPrestigeIncome);
 
   Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
     if (newTotalAu >= value.threshold) {
@@ -121,19 +121,17 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
     totalEarned +=
       baseRate * seconds * resourceMagnetismBonus * criticalMultiplier;
   });
-
   if (totalEarned > 0) {
     const currentAu = get(au);
     const currentTotalAu = get(totalAu);
-    const currentLifetimeIncome = get(lifetimeIncome);
-
+    const currentPrestigeIncome = get(prestigeIncome);
     const newAu = currentAu + totalEarned;
     const newTotalAu = currentTotalAu + totalEarned;
-    const newLifetimeIncome = currentLifetimeIncome + totalEarned;
+    const newPrestigeIncome = currentPrestigeIncome + totalEarned;
 
     set(au, newAu);
     set(totalAu, newTotalAu);
-    set(lifetimeIncome, newLifetimeIncome);
+    set(prestigeIncome, newPrestigeIncome);
 
     Object.entries(EQUIPMENT_LIST).forEach(([key, value]: any) => {
       if (newTotalAu >= value.threshold) {
@@ -149,11 +147,11 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
 export const addAu = atom(null, (get, set, amount: number) => {
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
-  const currentLifetimeIncome = get(lifetimeIncome);
+  const currentPrestigeIncome = get(prestigeIncome);
 
   set(au, currentAu + amount);
   set(totalAu, currentTotalAu + amount);
-  set(lifetimeIncome, currentLifetimeIncome + amount);
+  set(prestigeIncome, currentPrestigeIncome + amount);
 });
 
 /**
@@ -162,7 +160,7 @@ export const addAu = atom(null, (get, set, amount: number) => {
 export const setAuDirectly = atom(null, (get, set, amount: number) => {
   set(au, amount);
   set(totalAu, amount);
-  set(lifetimeIncome, amount);
+  set(prestigeIncome, amount);
 });
 
 if (process.env.NODE_ENV !== "production") {

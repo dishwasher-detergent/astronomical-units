@@ -5,7 +5,7 @@ import { LucideCrown } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { lifetimeIncome } from "@/atoms/au";
+import { totalAu } from "@/atoms/au";
 import {
   canPrestige,
   performPrestige,
@@ -25,7 +25,7 @@ export function Prestige() {
   const multiplier = useAtomValue(prestigeMultiplier) || 1;
   const doPrestige = useSetAtom(performPrestige);
 
-  const currentLifetimeIncomeValue = useAtomValue(lifetimeIncome);
+  const currentLifetimeIncomeValue = useAtomValue(totalAu);
   const lifetimeLevel = useAtomValue(currentLifetimeLevel);
   const levelProgress = useAtomValue(lifetimeLevelProgress);
   const currentPrestigeLevel = useAtomValue(prestigeLevel) || 0;
