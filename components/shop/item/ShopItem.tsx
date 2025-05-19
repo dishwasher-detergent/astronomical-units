@@ -175,7 +175,7 @@ export function ShopItem({
             <span className="font-mono">{formatMoney(cost1)}</span>{" "}
             {currency.name}
           </p>
-        </div>{" "}
+        </div>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button
             size="sm"

@@ -43,7 +43,7 @@ export default function Home() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
-                <LucideStore className="size-6" />
+                <LucideStore />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
@@ -63,7 +63,7 @@ export default function Home() {
           <Drawer>
             <DrawerTrigger asChild>
               <Button size="icon" variant="ghost">
-                <LucideSatellite className="size-6" />
+                <LucideSatellite />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
