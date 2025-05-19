@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { showElement } from "@/atoms/show";
-import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/formatters";
 
 export function DevMode() {
@@ -87,7 +87,7 @@ function DevModeContent() {
   };
 
   return (
-    <DyanmicDrawer
+    <DynamicDrawer
       title="Developer Mode"
       description="Debug tools for development environment only"
       open={open}
@@ -193,6 +193,6 @@ function DevModeContent() {
           </div>
         </TabsContent>
       </Tabs>
-    </DyanmicDrawer>
+    </DynamicDrawer>
   );
 }

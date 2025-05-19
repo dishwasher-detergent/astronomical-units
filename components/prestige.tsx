@@ -14,7 +14,7 @@ import {
   currentLifetimeLevel,
   lifetimeLevelProgress,
 } from "@/atoms/prestige";
-import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/formatters";
 import { getNextLevelRequirement } from "@/lib/prestige";
 
@@ -36,7 +36,7 @@ export function Prestige() {
   );
 
   return (
-    <DyanmicDrawer
+    <DynamicDrawer
       title="Prestige System"
       description="Reset your progress to gain prestige points."
       open={open}
@@ -116,6 +116,6 @@ export function Prestige() {
           </Button>
         </footer>
       </div>
-    </DyanmicDrawer>
+    </DynamicDrawer>
   );
 }

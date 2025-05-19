@@ -13,7 +13,7 @@ import { formatMoney } from "@/lib/formatters";
 import { useAnimation } from "@/hooks/useAnimation";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { Button } from "@/components/ui/button";
-import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 
 export function LastUpdated() {
   const last = useAtomValue(lastUpdated);
@@ -102,7 +102,7 @@ export function LastUpdated() {
   }, [delta]);
 
   return (
-    <DyanmicDrawer
+    <DynamicDrawer
       title="Welcome Back!"
       description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were
           away!${bonusMessage}`}
@@ -112,6 +112,6 @@ export function LastUpdated() {
       <Button size="sm" className="w-full" onClick={claimOfflineEarnings}>
         Claim Earnings
       </Button>
-    </DyanmicDrawer>
+    </DynamicDrawer>
   );
 }

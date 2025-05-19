@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export function DyanmicDrawer({
+export function DynamicDrawer({
   title,
   description,
   button,

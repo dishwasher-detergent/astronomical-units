@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideSatellite, LucideStore } from "lucide-react";
+import { LucideStore, LucideTelescope } from "lucide-react";
 
 import { ClickArea } from "@/components/click-area";
 import { Shop } from "@/components/shop";
@@ -46,7 +46,11 @@ export default function Home() {
         <nav className="bg-background z-40 flex w-full flex-none items-center justify-center gap-4 p-2">
           <Drawer>
             <DrawerTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="size-10 [&_svg]:size-5"
+              >
                 <LucideStore />
               </Button>
             </DrawerTrigger>
@@ -58,7 +62,7 @@ export default function Home() {
                     <Balance />
                   </DrawerDescription>
                 </DrawerHeader>
-                <div className="mb-8 flex-1 overflow-y-auto pb-4">
+                <div className="flex-1 overflow-y-auto pb-4">
                   <Shop />
                 </div>
               </div>
@@ -66,8 +70,12 @@ export default function Home() {
           </Drawer>
           <Drawer>
             <DrawerTrigger asChild>
-              <Button size="icon" variant="ghost">
-                <LucideSatellite />
+              <Button
+                size="icon"
+                variant="ghost"
+                className="size-10 [&_svg]:size-5"
+              >
+                <LucideTelescope />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
@@ -78,7 +86,7 @@ export default function Home() {
                     <Balance />
                   </DrawerDescription>
                 </DrawerHeader>
-                <div className="mb-8 flex-1 overflow-y-auto pb-4">
+                <div className="flex-1 overflow-y-auto pb-4">
                   <Crew />
                   <nav className="bg-background sticky top-0 z-10 flex h-12 items-center justify-between border-t px-4 font-semibold">
                     <p>Equipment</p>

@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export function DyanmicPopover({
+export function DynamicPopover({
   title,
   description,
   button,

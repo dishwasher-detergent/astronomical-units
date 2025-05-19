@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { LucideHandCoins } from "lucide-react";
-import { DyanmicDrawer } from "@/components/ui/dynamic-drawer";
+import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/formatters";
 
 interface SellItemProps {
@@ -52,7 +52,7 @@ export function SellItem({
   );
 
   return (
-    <DyanmicDrawer
+    <DynamicDrawer
       title={`Are you sure you want to sell ${details.name}?`}
       description="Equipment is sold at 30% the buy price, if you sell your last
               equipment you lose all upgrades."
@@ -66,6 +66,6 @@ export function SellItem({
       }
     >
       <SellContent />
-    </DyanmicDrawer>
+    </DynamicDrawer>
   );
 }

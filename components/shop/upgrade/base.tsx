@@ -17,8 +17,7 @@ import { au } from "@/atoms/au";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { LOCALE, NUMBER_OPTIONS } from "@/constants/GLOBAL";
-import { DyanmicPopover } from "@/components/ui/dynamic-popover";
+import { DynamicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { formatMoney } from "@/lib/formatters";
 
@@ -46,7 +45,7 @@ export function BaseUpgrade({
 
     if (isMobile) {
       return (
-        <DyanmicPopover
+        <DynamicPopover
           open={open}
           setOpen={setOpen}
           title={element.name}
@@ -73,7 +72,7 @@ export function BaseUpgrade({
           >
             Upgrade
           </UpgradeButton>
-        </DyanmicPopover>
+        </DynamicPopover>
       );
     }
 
