@@ -30,6 +30,7 @@ const initialGameData: GameData = {
   show: {},
   last_updated: 0,
   prestige: {
+    income: 0,
     level: 0,
     points: 0,
     multiplier: 1,
