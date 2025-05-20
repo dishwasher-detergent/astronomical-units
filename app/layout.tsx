@@ -15,6 +15,7 @@ import { Backup } from "@/components/backup";
 import { Logo } from "@/components/logo";
 import { DevMode } from "@/components/dev-mode";
 import { UpdateNotification } from "@/components/update-notification";
+import { UpdateTimestamp } from "@/components/update-timestamp";
 
 const font = Nunito({ subsets: ["latin"] });
 const mono = IBM_Plex_Mono({
@@ -288,9 +289,9 @@ export default function RootLayout({
           </nav>
           <main className="relative w-full flex-1 overflow-hidden">
             {children}
-            {/* <Dev /> */}
             <Generation />
             <LastUpdated />
+            <UpdateTimestamp />
             <Toaster position="top-right" richColors />
           </main>
         </ThemeProvider>

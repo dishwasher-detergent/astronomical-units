@@ -36,12 +36,14 @@ export function LastUpdated() {
     setCurrentAu((current) => current + offlineEarnings);
     setDialogOpen(false);
   };
-
   useEffect(() => {
+    const MIN_OFFLINE_TIME = 60000;
+    const MAX_OFFLINE_SECONDS = 14400;
+
     const checkOfflineEarnings = () => {
       const now = Date.now();
 
-      if (last <= now - 60000) {
+      if (last <= now - MIN_OFFLINE_TIME) {
         const offlineProductionCount = allUpgrades.offlineProduction || 0;
         const offlineMultiplier =
           offlineProductionCount > 0
@@ -51,7 +53,7 @@ export function LastUpdated() {
               )
             : 1;
 
-        const diff = Math.min((now - last) / 1000, 14400);
+        const diff = Math.min((now - last) / 1000, MAX_OFFLINE_SECONDS);
         update(diff as number);
         let earned = 0;
 
@@ -93,6 +95,29 @@ export function LastUpdated() {
       initialized.current = true;
       checkOfflineEarnings();
     }
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        checkOfflineEarnings();
+      } else if (document.visibilityState === "hidden") {
+        update(0);
+      }
+    };
+
+    const handleFocus = () => {
+      checkOfflineEarnings();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    const checkInterval = setInterval(checkOfflineEarnings, 60000); // Check every minute
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+      clearInterval(checkInterval);
+    };
   }, [last, equip, update, presMultiplier, allUpgrades]);
 
   useEffect(() => {
