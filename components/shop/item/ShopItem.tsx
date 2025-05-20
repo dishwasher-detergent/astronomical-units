@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { showElement } from "@/atoms/show";
 import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LucidePlus } from "lucide-react";
+import { LucideLock, LucidePlus } from "lucide-react";
 import { formatMoney } from "@/lib/formatters";
 import { calculateBulkCost, useBulkCosts } from "@/hooks/useItemCost";
 import { prestigeUpgrades } from "@/atoms/prestige";
@@ -120,7 +120,7 @@ export function ShopItem({
 
     return (
       <article className="w-full border-b border-dashed px-4 py-3">
-        <header className="flex items-center justify-between">
+        <header className="flex items-start justify-between">
           <div>
             <h3 className="flex items-center gap-2">
               <Icon className="size-4" aria-hidden="true" />
@@ -235,7 +235,10 @@ export function ShopItem({
         className="w-full overflow-hidden border-b px-4 py-3"
       >
         <header className="space-y-2 text-left">
-          <Skeleton className="h-8 w-48" />
+          <div className="flex flex-row items-center gap-2">
+            <LucideLock className="size-4" />
+            <Skeleton className="h-8 w-48" />
+          </div>
           <Skeleton className="h-6 w-full" />
           <Skeleton className="h-4 w-32" />
         </header>
