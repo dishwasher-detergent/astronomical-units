@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom, useAtomValue, WritableAtom } from "jotai";
-import { LucidePlus } from "lucide-react";
+import { LucideLock, LucidePlus } from "lucide-react";
 import { useState } from "react";
 
 import { showElement } from "@/atoms/show";
@@ -113,6 +113,15 @@ export function BaseUpgrade({
       </TooltipProvider>
     );
   } else {
-    return <Skeleton className="size-8" />;
+    return (
+      <Button
+        variant="secondary"
+        disabled
+        size="icon"
+        className="h-8 w-8 md:p-0"
+      >
+        <LucideLock />
+      </Button>
+    );
   }
 }
