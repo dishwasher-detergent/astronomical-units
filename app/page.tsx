@@ -102,6 +102,9 @@ export default function Home() {
       </div>
       <div className="flex flex-1 flex-col overflow-hidden xl:flex-row">
         <div className="w-full border-b lg:border-r xl:w-96">
+          <div className="grid h-12 place-items-center border-b p-2">
+            <PrestigeLevelIndicator />
+          </div>
           <Statistics />
         </div>
         <div className="flex flex-1 flex-row overflow-hidden">

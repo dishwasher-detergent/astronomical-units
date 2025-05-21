@@ -46,7 +46,7 @@ export function Prestige() {
           size="sm"
           variant={canPerformPrestige ? "default" : "ghost"}
           disabled={!canPerformPrestige}
-          className="w-full"
+          className="h-8 w-full"
         >
           <LucideCrown className="size-6" />
           Prestige
