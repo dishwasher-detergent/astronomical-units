@@ -113,7 +113,7 @@ export default function Home() {
           </div>
           <div className="flex-1 overflow-y-auto">
             <Crew />
-            <nav className="bg-background sticky top-0 z-50 flex h-12 items-center justify-between border-b px-4 font-semibold">
+            <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b px-4 py-2 font-semibold">
               <p>Equipment</p>
             </nav>
             <EquipmentDisplay />
