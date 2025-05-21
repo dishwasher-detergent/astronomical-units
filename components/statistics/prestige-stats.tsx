@@ -30,11 +30,11 @@ export function PrestigeStats() {
   return (
     <>
       <Stats label="Prestige Level" value={level.toString()} />
-      <Stats label="Current Prestige Points" value={points.toString()} />
+      <Stats label="Prestige Points (PP)" value={points.toString()} />
       <Stats
-        label="Lifetime Prestige Points"
+        label="Lifetime PP"
         value={lifetime.toString()}
-      />{" "}
+      />
       <Stats
         label="Production Multiplier"
         value={`${formatMoney(multiplier)}x`}
@@ -44,7 +44,7 @@ export function PrestigeStats() {
       )}
       {potential > 0 && (
         <Stats
-          label="Potential Prestige Points"
+          label="Potential PP"
           value={`+${potential}`}
           variant="highlight"
         />

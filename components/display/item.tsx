@@ -85,48 +85,39 @@ export const DisplayItem = memo(
     );
     const completedItemCount = equipment.value - buildingItemCount;
     return (
-      <div
-        ref={itemRef}
-        className="md:bg-background space-y-3 border-dashed transition-all lg:border-b lg:p-4"
-        data-equipment-key={elementKey}
-      >
-        <div>
-          <div className="flex items-center gap-2">
-            <Icon className="text-primary size-4 flex-none" />
-            <h3 className="flex items-center font-semibold">{item.name}</h3>
+      <article className="w-full border-b border-dashed px-4 py-3">
+        <header className="flex items-start justify-between">
+          <div>
+            <h3 className="flex items-center gap-2">
+              <Icon className="size-4" aria-hidden="true" />
+              <span className="truncate">{item.name}</span>
+            </h3>
+            <p className="text-muted-foreground mb-2 text-sm">
+              {item.description}
+            </p>
+            <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm">
+              <dd className="font-mono">
+                +{formatMoney(auPerSecond)}
+              </dd>
+              <dt>AU/s</dt>
+            </dl>
+            <DisplayUpgrade
+              item={item}
+              equipment={equipment}
+              primaryKey={elementKey}
+            />
           </div>
-          <p className="text-muted-foreground mb-2 text-sm">
-            {item.description}
-          </p>
-          <div className="flex gap-2">
-            <Badge variant="outline">{formatMoney(auPerSecond)} AU/s</Badge>
-            <Badge variant="outline">
-              Qty: {completedItemCount}
-              {buildingItemCount > 0 ? ` (${buildingItemCount} building)` : ""}
-            </Badge>
-          </div>
-        </div>
-        {Object.entries(buildingItems).length > 0 && (
-          <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
-            {Object.entries(buildingItems).map(([time, data]) => (
-              <div
-                key={time}
-                className="grid size-5 place-items-center rounded-xl"
-              >
-                <p className="text-xs font-semibold">
-                  {Math.ceil(data.timeLeft)}s
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-        <DisplayUpgrade
-          item={item}
-          equipment={equipment}
-          primaryKey={elementKey}
-        />
-        <SellEquipmentItem elementKey={elementKey} />
-      </div>
+          <output
+            aria-label="Current count"
+            className="text-muted-foreground text-3xl font-bold"
+          >
+            {completedItemCount}
+          </output>
+        </header>
+        <footer className="mt-3">
+          <SellEquipmentItem elementKey={elementKey} />
+        </footer>
+      </article>
     );
   },
 );
