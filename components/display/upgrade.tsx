@@ -42,24 +42,21 @@ export const DisplayUpgrade = memo(
 
     return (
       <>
-        <div>
-          <div className="mb-1 flex flex-row items-center gap-1">
-            <p className="text-sm font-semibold">Upgrades</p>
-            <Tip content="Unlock upgrades by purchasing more of this type of equipment.">
-              <LucideInfo className="text-muted-foreground size-3" />
-            </Tip>
-          </div>
-          <div className="flex flex-row gap-1">
-            {Object.keys(item.upgrades).map((upgradeKey) => (
-              <Upgrade
-                key={`${primaryKey}_${upgradeKey}`}
-                parentKey={primaryKey}
-                elementKey={upgradeKey}
-              />
-            ))}
-          </div>
+        <div className="mb-1 flex flex-row items-center gap-1">
+          <p className="text-sm font-semibold">Upgrades</p>
+          <Tip content="Unlock upgrades by purchasing more of this type of equipment.">
+            <LucideInfo className="text-muted-foreground size-3" />
+          </Tip>
         </div>
-
+        <div className="flex flex-row gap-1">
+          {Object.keys(item.upgrades).map((upgradeKey) => (
+            <Upgrade
+              key={`${primaryKey}_${upgradeKey}`}
+              parentKey={primaryKey}
+              elementKey={upgradeKey}
+            />
+          ))}
+        </div>
         {hasEquippedUpgrades && (
           <div>
             <p className="mb-1 text-sm font-semibold">Equipped Upgrades</p>

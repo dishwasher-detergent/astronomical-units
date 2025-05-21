@@ -87,15 +87,17 @@ export const DisplayItem = memo(
     return (
       <article className="w-full border-b border-dashed px-4 py-3">
         <header className="flex items-start justify-between">
-          <div>
-            <h3 className="flex items-center gap-2">
-              <Icon className="size-4" aria-hidden="true" />
-              <span className="truncate">{item.name}</span>
-            </h3>
-            <p className="text-muted-foreground mb-2 text-sm">
-              {item.description}
-            </p>
-            <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm mb-2">
+          <div className="space-y-2">
+            <div>
+              <h3 className="flex items-center gap-2">
+                <Icon className="size-4" aria-hidden="true" />
+                <span className="truncate">{item.name}</span>
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                {item.description}
+              </p>
+            </div>
+            <dl className="text-muted-foregroun flex items-center gap-1 text-sm">
               <dd className="font-mono">
                 +{formatMoney(auPerSecond)}
               </dd>
