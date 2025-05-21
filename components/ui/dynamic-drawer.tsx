@@ -53,9 +53,9 @@ export function DynamicDrawer({
         {button && <DialogTrigger asChild>{button}</DialogTrigger>}
         <DialogContent className="flex max-h-[60vh] flex-col overflow-hidden p-4">
           <DialogHeader className="flex-none p-0">
-            {title && (
-              <DialogTitle className="truncate pr-8">{title}</DialogTitle>
-            )}
+            <DialogTitle className={`truncate pr-8 ${title ? "" : "hidden"}`}>
+              {title}
+            </DialogTitle>
             {description && (
               <DialogDescription>{description}</DialogDescription>
             )}
@@ -71,7 +71,9 @@ export function DynamicDrawer({
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
       <DrawerContent className="mb-4 p-4">
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
-          {title && <DrawerTitle className="truncate">{title}</DrawerTitle>}
+          <DrawerTitle className={`truncate ${title ? "" : "hidden"}`}>
+            {title}
+          </DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         {children}
