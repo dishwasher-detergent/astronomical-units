@@ -237,7 +237,7 @@ export function ShopItem({
         <header className="space-y-2 text-left">
           <div className="flex flex-row items-center gap-2">
             <LucideLock className="size-4" />
-            <p>Unlocked After Earning {details.threshold} {currency}</p>
+            <p>Unlocked After Earning {details.threshold} {currency.name}</p>
           </div>
           <Skeleton className="h-6 w-full" />
           <Skeleton className="h-4 w-32" />
