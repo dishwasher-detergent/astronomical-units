@@ -20,6 +20,7 @@ import {
 import { Balance } from "@/components/balance";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useInstallDetection } from "@/hooks/useInstallDetection";
+import { Map } from "@/components/map";
 
 export default function Home() {
   const { isStandalone } = useInstallDetection();
@@ -38,12 +39,12 @@ export default function Home() {
           <div className="border-b p-2">
             <PrestigeLevelIndicator />
           </div>
-          <div className="w-full flex-1">
+          <div className="w-full flex-1 border-b">
             <ClickArea />
           </div>
           <Statistics />
         </div>
-        <nav className="bg-background z-40 flex w-full flex-none items-center justify-center gap-4 p-2">
+        <nav className="bg-background z-40 flex w-full flex-none items-center justify-center gap-4 border-t p-2">
           <Drawer>
             <DrawerTrigger asChild>
               <Button
@@ -79,20 +80,8 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
-                <DrawerHeader className="flex-none">
-                  <DrawerTitle>Equipment</DrawerTitle>
-                  <DrawerDescription>
-                    <Balance />
-                  </DrawerDescription>
-                </DrawerHeader>
-                <div className="flex-1 overflow-y-auto pb-4">
-                  <Crew />
-                  <nav className="bg-background sticky top-0 z-10 flex h-12 items-center justify-between border-t px-4 font-semibold">
-                    <p>Equipment</p>
-                  </nav>
-                  <EquipmentDisplay />
-                </div>
+              <div className="mx-4 mt-4 h-96 overflow-hidden rounded-xl">
+                <Map />
               </div>
             </DrawerContent>
           </Drawer>
@@ -102,28 +91,30 @@ export default function Home() {
   }
 
   return (
-    <section className="flex h-full w-full flex-col flex-nowrap overflow-hidden lg:flex-row">
-      <div className="flex w-full flex-none flex-row-reverse overflow-hidden lg:h-full lg:w-96 lg:flex-col lg:border-r">
-        <div className="w-full flex-1">
+    <section className="flex h-full w-full flex-col">
+      <div className="flex h-96 w-full flex-none flex-row border-b">
+        <div className="w-1/2 flex-none border-r xl:w-96">
           <ClickArea />
         </div>
-        <div className="sticky top-0 overflow-y-auto md:w-96 md:border-r">
-          <div className="flex flex-row items-center justify-between border-b p-2">
-            <PrestigeLevelIndicator />
-          </div>
-          <Statistics />
+        <div className="w-1/2 xl:w-full">
+          <Map />
         </div>
       </div>
-      <div className="flex h-full flex-1 flex-row overflow-hidden">
-        <div className="relative w-96 overflow-y-auto border-r">
-          <Shop />
+      <div className="flex flex-1 flex-col overflow-hidden xl:flex-row">
+        <div className="w-full border-b lg:border-r xl:w-96">
+          <Statistics />
         </div>
-        <div className="relative flex-1 overflow-y-auto">
-          <Crew />
-          <nav className="bg-background sticky top-0 z-50 flex h-12 items-center justify-between px-4 font-semibold">
-            <p>Equipment</p>
-          </nav>
-          <EquipmentDisplay />
+        <div className="flex flex-1 flex-row overflow-hidden">
+          <div className="w-96 flex-none overflow-y-auto border-r">
+            <Shop />
+          </div>
+          <div className="flex-1 overflow-y-auto">
+            <Crew />
+            <nav className="bg-background sticky top-0 z-50 flex h-12 items-center justify-between border-b px-4 font-semibold">
+              <p>Equipment</p>
+            </nav>
+            <EquipmentDisplay />
+          </div>
         </div>
       </div>
     </section>

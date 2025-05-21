@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -26,23 +28,37 @@ export function DynamicDrawer({
   setOpen,
   open,
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   button?: string | React.ReactNode;
   children: React.ReactNode;
-  setOpen: (e: boolean) => void;
-  open: boolean;
+  setOpen?: (e: boolean) => void;
+  open?: boolean;
 }) {
   const isMobile = useIsMobile();
+  const [internalOpen, setInternalOpen] = useState(false);
 
+  // Use provided state or internal state
+  const isOpen = open !== undefined ? open : internalOpen;
+  const handleOpenChange = (value: boolean) => {
+    if (setOpen) {
+      setOpen(value);
+    } else {
+      setInternalOpen(value);
+    }
+  };
   if (!isMobile) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={isOpen} onOpenChange={handleOpenChange}>
         {button && <DialogTrigger asChild>{button}</DialogTrigger>}
         <DialogContent className="flex max-h-[60vh] flex-col overflow-hidden p-4">
           <DialogHeader className="flex-none p-0">
-            <DialogTitle className="truncate pr-8">{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
+            {title && (
+              <DialogTitle className="truncate pr-8">{title}</DialogTitle>
+            )}
+            {description && (
+              <DialogDescription>{description}</DialogDescription>
+            )}
           </DialogHeader>
           {children}
         </DialogContent>
@@ -51,12 +67,12 @@ export function DynamicDrawer({
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={isOpen} onOpenChange={handleOpenChange}>
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
       <DrawerContent className="mb-4 p-4">
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
-          <DrawerTitle className="truncate">{title}</DrawerTitle>
-          <DrawerDescription>{description}</DrawerDescription>
+          {title && <DrawerTitle className="truncate">{title}</DrawerTitle>}
+          {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         {children}
       </DrawerContent>

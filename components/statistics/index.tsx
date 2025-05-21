@@ -7,7 +7,7 @@ import { LifetimeIncomeStats } from "@/components/statistics/lifetime-income-sta
 
 export function Statistics() {
   return (
-    <div className="bg-background grid flex-none grid-cols-2 gap-4 space-y-2 border-b p-4">
+    <div className="bg-background grid flex-none grid-cols-4 gap-4 space-y-2 p-4 xl:grid-cols-2">
       <AusPerSecond />
       <ClickTotalCount />
       <LifetimeIncomeStats />

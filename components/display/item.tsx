@@ -1,6 +1,7 @@
 "use client";
 
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useRef } from "react";
+import { useAtomValue } from "jotai";
 
 import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/upgrade";
@@ -8,6 +9,7 @@ import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 import { formatMoney } from "@/lib/formatters";
 import { useBuildTimeReduction } from "@/hooks/useBuildTimeReduction";
+import { scrollToEquipmentAtom } from "@/atoms/scrollTo";
 
 export const DisplayItem = memo(
   ({
@@ -22,13 +24,14 @@ export const DisplayItem = memo(
     elementKey: string;
   }) => {
     const Icon = item.icon;
+    const itemRef = useRef<HTMLDivElement>(null);
+    const scrollToEquipment = useAtomValue(scrollToEquipmentAtom);
     const [buildingItems, setBuildingItems] = useState<{
       [key: string]: { count: number; timeLeft: number; progress: number };
     }>({});
     const [now, setNow] = useState(Date.now());
     const { multiplier: buildTimeMultiplier, reduction: buildTimeReduction } =
       useBuildTimeReduction();
-
     useEffect(() => {
       const interval = setInterval(() => {
         setNow(Date.now());
@@ -36,6 +39,15 @@ export const DisplayItem = memo(
 
       return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+      if (scrollToEquipment === elementKey && itemRef.current) {
+        itemRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, [scrollToEquipment, elementKey]);
 
     useEffect(() => {
       if (!equipment.building || Object.keys(equipment.building).length === 0) {
@@ -50,7 +62,7 @@ export const DisplayItem = memo(
       const actualBuildTime = baseBuildTime * buildTimeMultiplier;
 
       Object.entries(equipment.building).forEach(([completionTime, count]) => {
-        const timeLeft = Math.max(0, parseInt(completionTime) - now) / 1000; // Convert to seconds
+        const timeLeft = Math.max(0, parseInt(completionTime) - now) / 1000;
         const elapsed = actualBuildTime - timeLeft;
         const progress = Math.min(
           100,
@@ -72,33 +84,31 @@ export const DisplayItem = memo(
       0,
     );
     const completedItemCount = equipment.value - buildingItemCount;
-
     return (
-      <div className="hover:bg-muted/30 md:bg-background space-y-3 border-b border-dashed p-4 transition-colors">
+      <div
+        ref={itemRef}
+        className="md:bg-background space-y-3 border-dashed transition-all lg:border-b lg:p-4"
+        data-equipment-key={elementKey}
+      >
         <div>
-          <div className="flex items-start justify-between">
-            <div className="flex items-start gap-2">
-              <Icon className="text-primary size-5 flex-none" />
-              <h3 className="flex items-center font-semibold">{item.name}</h3>
-            </div>
-            <div className="flex gap-2">
-              <Badge variant="outline">{formatMoney(auPerSecond)} AU/s</Badge>
-              <Badge variant="outline">
-                Qty: {completedItemCount}
-                {buildingItemCount > 0
-                  ? ` (${buildingItemCount} building)`
-                  : ""}
-              </Badge>
-            </div>
+          <div className="flex items-center gap-2">
+            <Icon className="text-primary size-4 flex-none" />
+            <h3 className="flex items-center font-semibold">{item.name}</h3>
           </div>
-          <p className="text-muted-foreground text-sm">{item.description}</p>
+          <p className="text-muted-foreground mb-2 text-sm">
+            {item.description}
+          </p>
+          <div className="flex gap-2">
+            <Badge variant="outline">{formatMoney(auPerSecond)} AU/s</Badge>
+            <Badge variant="outline">
+              Qty: {completedItemCount}
+              {buildingItemCount > 0 ? ` (${buildingItemCount} building)` : ""}
+            </Badge>
+          </div>
         </div>
-        <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
-          {Array.from({ length: completedItemCount }, (_, i) => (
-            <Icon key={i} className="text-primary size-4 flex-none" />
-          ))}
-          {Object.entries(buildingItems).length > 0 &&
-            Object.entries(buildingItems).map(([time, data]) => (
+        {Object.entries(buildingItems).length > 0 && (
+          <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
+            {Object.entries(buildingItems).map(([time, data]) => (
               <div
                 key={time}
                 className="grid size-5 place-items-center rounded-xl"
@@ -108,7 +118,8 @@ export const DisplayItem = memo(
                 </p>
               </div>
             ))}
-        </div>
+          </div>
+        )}
         <DisplayUpgrade
           item={item}
           equipment={equipment}

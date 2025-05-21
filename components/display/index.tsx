@@ -33,7 +33,7 @@ export function EquipmentDisplay() {
 
   if (activeEquipment.length === 0) {
     return (
-      <div className="bg-muted/20 rounded-lg p-4">
+      <div className="bg-muted/20 m-4 rounded-lg p-4">
         <p className="text-muted-foreground text-center">
           Earn Astronomical Units <span className="font-semibold">(AU)</span> to
           buy equipment.
@@ -43,7 +43,7 @@ export function EquipmentDisplay() {
   }
 
   return (
-    <div className="space-y-2">
+    <div>
       {activeEquipment.map(({ key, item, equipment, auPerSecond }) => (
         <DisplayItem
           key={key}

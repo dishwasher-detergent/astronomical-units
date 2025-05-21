@@ -10,11 +10,11 @@ import { EquipmentItem } from "@/components/shop/item/EquipmentItem";
 export function Shop() {
   return (
     <div className="relative">
-      <p className="bg-background sticky top-0 z-10 hidden px-4 py-2 font-semibold md:block">
+      <p className="bg-background sticky top-0 z-10 hidden h-12 items-center px-4 font-semibold md:flex">
         Store
       </p>
       <Tabs defaultValue="general" className="w-full">
-        <div className="sticky top-0 z-10 border-y md:top-10">
+        <div className="sticky top-0 z-10 border-y md:top-12">
           <TabsList className="bg-background h-full w-full rounded-none p-0">
             <TabsTrigger
               value="general"

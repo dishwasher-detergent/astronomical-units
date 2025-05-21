@@ -73,6 +73,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 3, // 3 seconds to build (crew members join quickly)
     equipment: false,
     icon: LucidePersonStanding,
+    mapPosition: {
+      x: 20,
+      y: 15,
+    },
     upgrades: {
       training: {
         name: "Training",
@@ -123,6 +127,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 50,
     buildTime: 5, // 5 seconds to build
     icon: LucidePlaneTakeoff,
+    mapPosition: {
+      x: 35,
+      y: 25,
+    },
     upgrades: {
       seats: {
         name: "Additional Seats",
@@ -171,6 +179,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 500,
     buildTime: 12, // 12 seconds to build mining equipment
     icon: LucidePickaxe,
+    mapPosition: {
+      x: 60,
+      y: 30,
+    },
     upgrades: {
       cargo_capacity: {
         name: "Cargo Capacity",
@@ -220,6 +232,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 2500,
     buildTime: 20, // 20 seconds to build
     icon: LucideSatelliteDish,
+    mapPosition: {
+      x: 80,
+      y: 15,
+    },
     upgrades: {
       solarPanels: {
         name: "Solar Panels",
@@ -268,6 +284,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 1500,
     icon: LucideRocket,
     buildTime: 18, // 18 seconds to prepare exploration mission
+    mapPosition: {
+      x: 45,
+      y: 70,
+    },
     upgrades: {
       boosters: {
         name: "Rocket Boosters",
@@ -317,6 +337,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 10000,
     buildTime: 30, // 30 seconds to build
     icon: LucideBuilding2,
+    mapPosition: {
+      x: 55,
+      y: 25,
+    },
     upgrades: {
       livingQuarters: {
         name: "Living Quarters",
@@ -367,6 +391,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 25000,
     icon: LucideMountain,
     buildTime: 45, // 45 seconds to build
+    mapPosition: {
+      x: 10,
+      y: 50,
+    },
     upgrades: {
       atmosphereGenerators: {
         name: "Atmosphere Generators",
@@ -416,6 +444,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 50000,
     icon: LucideTentTree,
     buildTime: 60, // 60 seconds to build
+    mapPosition: {
+      x: 35,
+      y: 65,
+    },
     upgrades: {
       buildings: {
         name: "Buildings",
@@ -483,6 +515,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 75000,
     icon: LucideCableCar,
     buildTime: 90, // 90 seconds to build
+    mapPosition: {
+      x: 25,
+      y: 80,
+    },
     upgrades: {
       cableMaterial: {
         name: "Advanced Cable Materials",
@@ -534,6 +570,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 250000,
     buildTime: 100, // 100 seconds to build advanced FTL technology
     icon: LucideBolt,
+    mapPosition: {
+      x: 75,
+      y: 40,
+    },
     upgrades: {
       energySource: {
         name: "Advanced Energy Source",
@@ -585,6 +625,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 750000,
     icon: LucideCircleDot,
     buildTime: 120, // 120 seconds to build massive orbital structure
+    mapPosition: {
+      x: 65,
+      y: 75,
+    },
     upgrades: {
       constructionMaterials: {
         name: "Advanced Construction Materials",
@@ -634,6 +678,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 1500000,
     icon: LucideCpu,
     buildTime: 110, // 110 seconds to set up quantum computing infrastructure
+    mapPosition: {
+      x: 85,
+      y: 55,
+    },
     upgrades: {
       qubits: {
         name: "Qubit Expansion",
@@ -683,6 +731,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 3000000,
     icon: LucideDoorOpen,
     buildTime: 110, // 110 seconds to build complex interstellar gateway
+    mapPosition: {
+      x: 85,
+      y: 30,
+    },
     upgrades: {
       portalStabilization: {
         name: "Portal Stabilization",
@@ -733,6 +785,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 5000000,
     buildTime: 130, // 130 seconds to construct fusion containment facility
     icon: LucideAtom,
+    mapPosition: {
+      x: 50,
+      y: 45,
+    },
     upgrades: {
       fuelEfficiency: {
         name: "Fuel Efficiency",
@@ -783,6 +839,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 10000000,
     icon: LucideShip,
     buildTime: 180, // 180 seconds to build and deploy an entire fleet
+    mapPosition: {
+      x: 65,
+      y: 55,
+    },
     upgrades: {
       fleetSize: {
         name: "Expand Fleet Size",
@@ -832,6 +892,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 20000000,
     icon: LucideHouse,
     buildTime: 210, // 210 seconds to stabilize spacetime for wormhole creation
+    mapPosition: {
+      x: 75,
+      y: 65,
+    },
     upgrades: {
       generatorStability: {
         name: "Generator Stability",
@@ -881,6 +945,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 25000000,
     icon: LucideCastle,
     buildTime: 230, // 230 seconds for massive orbital city construction
+    mapPosition: {
+      x: 20,
+      y: 60,
+    },
     upgrades: {
       populationCapacity: {
         name: "Expand Population Capacity",
@@ -930,6 +998,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 50000000,
     icon: LucideCompass,
     buildTime: 250, // 250 seconds to build advanced intergalactic probe
+    mapPosition: {
+      x: 10,
+      y: 85,
+    },
     upgrades: {
       sensorArray: {
         name: "Advanced Sensor Array",
@@ -979,6 +1051,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 75000000,
     icon: LucideAnvil,
     buildTime: 280, // 280 seconds to construct matter conversion technology
+    mapPosition: {
+      x: 45,
+      y: 15,
+    },
     upgrades: {
       energyConversion: {
         name: "Energy Conversion Efficiency",
@@ -1028,6 +1104,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 100000000,
     icon: LucideClock,
     buildTime: 320, // 320 seconds to construct time manipulation device
+    mapPosition: {
+      x: 55,
+      y: 80,
+    },
     upgrades: {
       temporalStability: {
         name: "Temporal Stability",
@@ -1077,6 +1157,10 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     threshold: 200000000,
     buildTime: 360, // 360 seconds (6 minutes) to construct megastructure around star
     icon: LucideSun,
+    mapPosition: {
+      x: 80,
+      y: 40,
+    },
     upgrades: {
       solarCollectors: {
         name: "Advanced Solar Collectors",
