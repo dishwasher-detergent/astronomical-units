@@ -12,6 +12,11 @@ export type Upgrade = {
 
 export type Upgrades = Record<string, Upgrade>;
 
+export type MapPosition = {
+  x: number;
+  y: number;
+};
+
 export type Equipment = {
   name: string;
   description: string;
@@ -20,8 +25,9 @@ export type Equipment = {
   auPerSecond: number;
   threshold: number;
   icon: any;
+  mapPosition: MapPosition;
   equipment?: boolean;
-  buildTime?: number; // Time in seconds to build the equipment
+  buildTime?: number;
   upgrades?: Upgrades;
 };
 
