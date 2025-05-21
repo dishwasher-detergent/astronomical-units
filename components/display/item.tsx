@@ -95,7 +95,7 @@ export const DisplayItem = memo(
             <p className="text-muted-foreground mb-2 text-sm">
               {item.description}
             </p>
-            <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm">
+            <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm mb-2">
               <dd className="font-mono">
                 +{formatMoney(auPerSecond)}
               </dd>
