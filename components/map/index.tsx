@@ -74,9 +74,9 @@ export function Map() {
         ({ key, item, position, count, equipmentItem, auPerSecond }) =>
           isMobile ? (
             <DynamicDrawer
+              key={key}
               button={
                 <Button
-                  key={key}
                   size="icon"
                   variant="ghost"
                   className="absolute h-fit w-fit p-2 transition-all hover:scale-110"
