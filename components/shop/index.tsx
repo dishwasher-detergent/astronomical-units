@@ -10,11 +10,9 @@ import { EquipmentItem } from "@/components/shop/item/EquipmentItem";
 export function Shop() {
   return (
     <div className="relative">
-      <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b px-4 py-2 font-semibold">
-        <p>Shop</p>
-      </nav>
       <Tabs defaultValue="general" className="w-full">
-        <div className="sticky top-0 z-10 border-y md:top-12">
+        <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b font-semibold">
+          <p className="px-4 py-2 border-b">Shop</p>
           <TabsList className="bg-background h-full w-full rounded-none p-0">
             <TabsTrigger
               value="general"
@@ -29,7 +27,7 @@ export function Shop() {
               Prestige
             </TabsTrigger>
           </TabsList>
-        </div>
+        </nav>
         <TabsContent value="general" className="mt-0">
           <CrewItem />
           {Object.entries(EQUIPMENT_LIST).map(([key, value]) => {
