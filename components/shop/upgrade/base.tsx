@@ -100,10 +100,10 @@ export function BaseUpgrade({
               <div className="flex w-full flex-col gap-2">
                 <div className="flex flex-row gap-2">
                   <Badge variant="outline">
-                    {formatMoney(element.cost)} AU
+                    Qty: {rankValue ?? 0}/{element.maxCount}
                   </Badge>
                   <Badge variant="outline">
-                    Qty: {rankValue ?? 0}/{element.maxCount}
+                    {formatMoney(element.cost)} AU
                   </Badge>
                 </div>
               </div>

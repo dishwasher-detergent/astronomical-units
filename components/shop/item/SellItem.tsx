@@ -59,7 +59,7 @@ export function SellItem({
       open={open}
       setOpen={setOpen}
       button={
-        <Button variant="secondary" size="sm">
+        <Button variant="secondary" size="sm" className="w-full md:w-auto">
           <LucideHandCoins className="size-4" />
           Sell
         </Button>
