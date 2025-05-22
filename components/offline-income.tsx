@@ -10,7 +10,6 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";
-import { useAnimation } from "@/hooks/useAnimation";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
@@ -18,134 +17,127 @@ import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 export function OfflineIncome() {
   const last = useAtomValue(lastUpdated);
   const equip = useAtomValue(equipment);
-  const update = useSetAtom(autoIncrement);
   const presMultiplier = useAtomValue(prestigeMultiplier) || 1;
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
+  const update = useSetAtom(autoIncrement);
+  const setCurrentAu = useSetAtom(au);
+
   const initialized = useRef(false);
-  const [delta, setDelta] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [offlineEarnings, setOfflineEarnings] = useState(0);
-  const [bonusMessage, setBonusMessage] = useState("");
   const [offlineTime, setOfflineTime] = useState("");
-  const [currentAu, setCurrentAu] = useAtom(au);
+  const [bonusMessage, setBonusMessage] = useState("");
 
-  useAnimation((deltaTime) => {
-    setDelta((current) => current + deltaTime);
-  }, false);
+  const MIN_OFFLINE_MS = 1000;
+  const MAX_OFFLINE_MS = 14400000;
 
   const claimOfflineEarnings = () => {
     setCurrentAu((current) => current + offlineEarnings);
     setDialogOpen(false);
   };
 
-  useEffect(() => {
-    const MIN_OFFLINE = 60000;
-    const MAX_OFFLINE = 144000;
+  const formatTimeString = (timeMs: number): string => {
+    const totalSeconds = Math.floor(timeMs / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
 
-    const checkOfflineEarnings = () => {
-      const now = Date.now();
+    if (hours > 0) {
+      return `${hours}h ${minutes}m ${seconds}s`;
+    } else if (minutes > 0) {
+      return `${minutes}m ${seconds}s`;
+    }
+    return `${seconds}s`;
+  };
 
-      if (last <= now - MIN_OFFLINE) {
-        const offlineProductionCount = allUpgrades.offlineProduction || 0;
-        const offlineMultiplier =
-          offlineProductionCount > 0
-            ? Math.pow(
-                PRESTIGE_UPGRADES.offlineProduction.multiplier ?? 1,
-                offlineProductionCount,
-              )
-            : 1;
-        const offlineDurationMs = Math.min(now - last, MAX_OFFLINE);
-        const offlineDurationSeconds = offlineDurationMs / 1000;
+  const calculateOfflineEarnings = () => {
+    const now = Date.now();
 
-        let offlineTimeStr = "";
-        const offlineHours = Math.floor(offlineDurationSeconds / 3600);
-        const offlineMinutes = Math.floor((offlineDurationSeconds % 3600) / 60);
-        const offlineSeconds = Math.floor(offlineDurationSeconds % 60);
+    if (last <= 0 || last > now || now - last < MIN_OFFLINE_MS) {
+      return;
+    }
 
-        if (offlineHours > 0) {
-          offlineTimeStr = `${offlineHours}h ${offlineMinutes}m ${offlineSeconds}s`;
-        } else if (offlineMinutes > 0) {
-          offlineTimeStr = `${offlineMinutes}m ${offlineSeconds}s`;
-        } else {
-          offlineTimeStr = `${offlineSeconds}s`;
-        }
-        update(offlineDurationSeconds as number);
-        let earned = 0;
+    const offlineDurationMs = Math.min(now - last, MAX_OFFLINE_MS);
+    const offlineDurationSeconds = offlineDurationMs / 1000;
 
-        Object.entries(equip).forEach(([key, eq]: any) => {
-          if (eq.value > 0) {
-            const item = EQUIPMENT_LIST[key];
+    const offlineProductionLevel = allUpgrades.offlineProduction || 0;
+    const offlineMultiplier =
+      offlineProductionLevel > 0
+        ? Math.pow(
+            PRESTIGE_UPGRADES.offlineProduction.multiplier ?? 1,
+            offlineProductionLevel,
+          )
+        : 1;
 
-            if (!item || item.equipment === false) return;
+    const offlineTimeStr = formatTimeString(offlineDurationMs);
 
-            const multiplier = calculateUpgradeMultiplier(
-              eq,
-              item,
-              presMultiplier,
-            );
+    update(offlineDurationSeconds);
 
-            earned +=
-              item.auPerSecond *
-              multiplier *
-              eq.value *
-              offlineDurationSeconds *
-              offlineMultiplier;
-          }
-        });
+    let earned = 0;
 
-        if (earned > 0) {
-          const bonusMsg =
-            offlineProductionCount > 0
-              ? ` (includes ${((offlineMultiplier - 1) * 100).toFixed(0)}% offline production bonus)`
-              : "";
+    Object.entries(equip).forEach(([key, eq]: any) => {
+      if (eq.value > 0) {
+        const item = EQUIPMENT_LIST[key];
 
-          setOfflineEarnings(earned);
-          setBonusMessage(bonusMsg);
-          setOfflineTime(offlineTimeStr);
-          setDialogOpen(true);
-        }
+        if (!item || item.equipment === false) return;
+
+        const equipMultiplier = calculateUpgradeMultiplier(
+          eq,
+          item,
+          presMultiplier,
+        );
+
+        earned +=
+          item.auPerSecond *
+          equipMultiplier *
+          eq.value *
+          offlineDurationSeconds *
+          offlineMultiplier;
       }
-    };
+    });
 
+    if (earned > 0) {
+      const bonusMsg =
+        offlineProductionLevel > 0
+          ? ` (includes ${((offlineMultiplier - 1) * 100).toFixed(0)}% offline production bonus)`
+          : "";
+
+      setOfflineEarnings(earned);
+      setOfflineTime(offlineTimeStr);
+      setBonusMessage(bonusMsg);
+      setDialogOpen(true);
+    }
+  };
+
+  useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
-      checkOfflineEarnings();
+      calculateOfflineEarnings();
     }
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        checkOfflineEarnings();
-      } else if (document.visibilityState === "hidden") {
-        update(0);
+        calculateOfflineEarnings();
       }
     };
 
     const handleFocus = () => {
-      checkOfflineEarnings();
+      calculateOfflineEarnings();
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("focus", handleFocus);
 
-    const checkInterval = setInterval(checkOfflineEarnings, 60000);
-
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
-      clearInterval(checkInterval);
     };
   }, [last, equip, update, presMultiplier, allUpgrades]);
 
-  useEffect(() => {
-    if (delta >= 1000) {
-      setDelta(0);
-    }
-  }, [delta]);
   return (
     <DynamicDrawer
       title="Welcome Back!"
-      description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were
-          away for ${offlineTime}!${bonusMessage}`}
+      description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were away for ${offlineTime}!${bonusMessage}`}
       setOpen={setDialogOpen}
       open={dialogOpen}
     >
