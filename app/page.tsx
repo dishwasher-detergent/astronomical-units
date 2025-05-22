@@ -80,7 +80,10 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <div className="mx-4 mt-4 h-96 overflow-hidden rounded-xl">
+              <DrawerHeader>
+                <DrawerTitle>Equipment Map</DrawerTitle>
+              </DrawerHeader>
+              <div className="mx-4 h-96 overflow-hidden rounded-xl border">
                 <Map />
               </div>
             </DrawerContent>

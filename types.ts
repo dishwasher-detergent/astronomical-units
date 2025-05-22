@@ -31,6 +31,15 @@ export type Equipment = {
   upgrades?: Upgrades;
 };
 
+export type EquipmentWithPosition = {
+  key: string;
+  item: Equipment;
+  equipmentItem: EquipmentItem;
+  position: MapPosition;
+  count: number;
+  auPerSecond: number;
+};
+
 export type EquipmentObject = {
   [key: string]: EquipmentItem;
 };

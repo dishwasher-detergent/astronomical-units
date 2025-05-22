@@ -30,8 +30,8 @@ export const DisplayItem = memo(
       [key: string]: { count: number; timeLeft: number; progress: number };
     }>({});
     const [now, setNow] = useState(Date.now());
-    const { multiplier: buildTimeMultiplier, reduction: buildTimeReduction } =
-      useBuildTimeReduction();
+    const { multiplier: buildTimeMultiplier } = useBuildTimeReduction();
+
     useEffect(() => {
       const interval = setInterval(() => {
         setNow(Date.now());
@@ -83,31 +83,21 @@ export const DisplayItem = memo(
       (sum, item) => sum + item.count,
       0,
     );
+
     const completedItemCount = equipment.value - buildingItemCount;
+
     return (
-      <article className="w-full border-b border-dashed px-4 py-3">
-        <header className="flex items-start justify-between">
-          <div className="space-y-2">
-            <div>
-              <h3 className="flex items-center gap-2">
-                <Icon className="size-4" aria-hidden="true" />
-                <span className="truncate">{item.name}</span>
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                {item.description}
-              </p>
-            </div>
-            <dl className="text-muted-foregroun flex items-center gap-1 text-sm">
-              <dd className="font-mono">
-                +{formatMoney(auPerSecond)}
-              </dd>
-              <dt>AU/s</dt>
-            </dl>
-            <DisplayUpgrade
-              item={item}
-              equipment={equipment}
-              primaryKey={elementKey}
-            />
+      <article
+        ref={itemRef}
+        className="w-full space-y-2 border-dashed md:border-b md:px-4 md:py-3"
+      >
+        <header className="flex items-start justify-between gap-6">
+          <div>
+            <h3 className="flex items-center gap-2">
+              <Icon className="size-4" aria-hidden="true" />
+              <span className="truncate">{item.name}</span>
+            </h3>
+            <p className="text-muted-foreground text-sm">{item.description}</p>
           </div>
           <output
             aria-label="Current count"
@@ -116,6 +106,15 @@ export const DisplayItem = memo(
             {completedItemCount}
           </output>
         </header>
+        <dl className="text-muted-foregroun flex items-center gap-1 text-sm">
+          <dd className="font-mono">+{formatMoney(auPerSecond)}</dd>
+          <dt>AU/s</dt>
+        </dl>
+        <DisplayUpgrade
+          item={item}
+          equipment={equipment}
+          primaryKey={elementKey}
+        />
         <footer className="mt-3">
           <SellEquipmentItem elementKey={elementKey} />
         </footer>

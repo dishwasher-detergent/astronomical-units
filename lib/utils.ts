@@ -24,4 +24,4 @@ export { calculateUpgradeMultiplierOptimized } from "./calculator";
 // Formatting utilities
 export { formatMoney } from "./formatters";
 
-// Function moved to equipment.ts
+export { getIconColorClass } from "./map";
