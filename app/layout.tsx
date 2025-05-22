@@ -28,7 +28,6 @@ export const metadata: Metadata = {
   applicationName: APP_SHORT_NAME,
   title: APP_NAME,
   description: APP_DESCRIPTION,
-  favicon: "/icons/icon-192.png",
   icons: {
     icon: "/icons/icon-192.png",
   },
