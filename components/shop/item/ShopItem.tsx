@@ -6,7 +6,6 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { showElement } from "@/atoms/show";
-import { useNextUpgrade } from "@/hooks/useNextUpgrade";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LucideLock, LucidePlus } from "lucide-react";
 import { formatMoney } from "@/lib/formatters";
@@ -22,9 +21,8 @@ interface ShopItemProps {
     update: (update: (current: number) => number) => void;
     name: string;
   };
+  next?: string;
   onPurchase?: () => void;
-  nextUpgrade?: WritableAtom<string, [], void>;
-  useNextHook?: (isShowing: boolean) => void;
   maxCount?: number;
 }
 
@@ -34,12 +32,10 @@ export function ShopItem({
   details,
   currency,
   onPurchase,
-  nextUpgrade,
-  useNextHook = useNextUpgrade,
+  next,
   maxCount = Infinity,
 }: ShopItemProps) {
   const showElementValue = useAtomValue(showElement);
-  const next = useAtomValue(nextUpgrade ?? atom(""));
   const [itemValue, setItemValue] = useAtom(itemAtom);
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
 
@@ -49,7 +45,6 @@ export function ShopItem({
   const Icon = details?.icon || LucidePlus;
   const canAcquire = cost1 <= currency.value && itemCount < maxCount;
 
-  useNextHook?.(isShowing);
   const handlePurchase = (quantity: number = 1) => {
     if (!canAcquire && quantity === 1) return;
 
@@ -237,7 +232,9 @@ export function ShopItem({
         <header className="space-y-2 text-left">
           <div className="flex flex-row items-center gap-2">
             <LucideLock className="size-4" />
-            <p>Unlocked After Earning {details.threshold} {currency.name}</p>
+            <p>
+              Unlocked After Earning {details.threshold} {currency.name}
+            </p>
           </div>
           <Skeleton className="h-6 w-full" />
           <Skeleton className="h-4 w-32" />

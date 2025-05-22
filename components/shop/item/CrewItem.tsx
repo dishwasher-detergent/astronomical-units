@@ -6,7 +6,6 @@ import { useMemo } from "react";
 import { ShopItem } from "@/components/shop/item/ShopItem";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
 import { au } from "@/atoms/au";
-import { nextUpgrade } from "@/atoms/upgrades";
 import { createEquipmentAtom } from "@/hooks/useItemAtoms";
 
 export function CrewItem() {
@@ -23,7 +22,7 @@ export function CrewItem() {
         update: setAu,
         name: "AU",
       }}
-      nextUpgrade={nextUpgrade}
+      next={"crew"}
     />
   );
 }
