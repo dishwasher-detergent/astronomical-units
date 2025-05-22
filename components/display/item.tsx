@@ -110,6 +110,20 @@ export const DisplayItem = memo(
           <dd className="font-mono">+{formatMoney(auPerSecond)}</dd>
           <dt>AU/s</dt>
         </dl>
+        {Object.entries(buildingItems).length > 0 && (
+          <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
+            {Object.entries(buildingItems).map(([time, data]) => (
+              <div
+                key={time}
+                className="grid size-5 place-items-center rounded-xl"
+              >
+                <p className="text-xs font-semibold">
+                  {Math.ceil(data.timeLeft)}s
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
         <DisplayUpgrade
           item={item}
           equipment={equipment}
