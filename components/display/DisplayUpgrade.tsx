@@ -1,9 +1,7 @@
 "use client";
 
-import { LucideInfo } from "lucide-react";
 import { memo } from "react";
 
-import { Tip } from "@/components/ui/tip";
 import { Upgrade } from "@/components/shop/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
 
