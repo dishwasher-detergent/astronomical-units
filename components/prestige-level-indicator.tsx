@@ -25,7 +25,7 @@ export function PrestigeLevelIndicator() {
   return (
     <div className="flex w-full">
       <div className="flex w-full flex-col items-start gap-1">
-        <p className="font-bold whitespace-nowrap">Lvl {lifetimeLevel}</p>
+        <p className="font-semibold whitespace-nowrap">Lvl {lifetimeLevel}</p>
         <div className="w-full">
           {lifetimeLevel < 100 ? (
             <>

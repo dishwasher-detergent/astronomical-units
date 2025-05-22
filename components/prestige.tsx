@@ -43,10 +43,9 @@ export function Prestige() {
       setOpen={setOpen}
       button={
         <Button
-          size="sm"
           variant={canPerformPrestige ? "default" : "ghost"}
           disabled={!canPerformPrestige}
-          className="h-8 w-full"
+          className="w-full md:h-8"
         >
           <LucideCrown className="size-6" />
           Prestige
@@ -58,7 +57,7 @@ export function Prestige() {
           <p className="mb-2 font-medium">Level Progress</p>
           <div className="flex items-center gap-2">
             <p className="text-muted-foreground text-sm">Current Level:</p>
-            <p className="text-xl font-bold">{lifetimeLevel}/100</p>
+            <p className="text-xl font-semibold">{lifetimeLevel}/100</p>
           </div>
 
           {lifetimeLevel < 100 && nextLevelRequirement && (

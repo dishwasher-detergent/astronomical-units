@@ -23,7 +23,7 @@ export function UpgradeButton({
 
   return (
     <Button
-      className="h-8 md:w-8 md:p-0"
+      className="size-8 md:p-0"
       variant="default"
       disabled={disabled}
       onClick={() => {

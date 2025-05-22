@@ -4,7 +4,7 @@ import { memo, useState, useEffect, useRef } from "react";
 import { useAtomValue } from "jotai";
 
 import { Badge } from "@/components/ui/badge";
-import { DisplayUpgrade } from "@/components/display/upgrade";
+import { DisplayUpgrade } from "@/components/display/DisplayUpgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 import { formatMoney } from "@/lib/formatters";

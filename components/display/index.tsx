@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
-import { DisplayItem } from "@/components/display/item";
+import { DisplayItem } from "@/components/display/DisplayItem";
 
 export function EquipmentDisplay() {
   const items = useAtomValue(equipment);

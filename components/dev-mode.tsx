@@ -89,8 +89,9 @@ function DevModeContent() {
       open={open}
       setOpen={setOpen}
       button={
-        <Button variant="outline" size="icon" className="size-8">
+        <Button variant="secondary">
           <LucideCode2 className="size-6" />
+          Dev Mode
         </Button>
       }
     >

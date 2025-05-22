@@ -1,7 +1,8 @@
 "use client";
 
 import { LucideShare } from "lucide-react";
-import { useInstallDetection } from "../hooks/useInstallDetection";
+
+import { useInstallDetection } from "@/hooks/useInstallDetection";
 
 export function InstallPrompt() {
   const { isIOS, isStandalone } = useInstallDetection();

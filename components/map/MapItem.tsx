@@ -18,7 +18,7 @@ export function MapItem({ item, position, count, onItemClick }: MapItemProps) {
     <Button
       size="icon"
       variant="ghost"
-      className="absolute h-fit w-fit p-2 transition-all hover:scale-110"
+      className="absolute h-fit w-fit p-2"
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,

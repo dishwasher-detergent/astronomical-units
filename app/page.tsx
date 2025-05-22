@@ -21,6 +21,7 @@ import { Balance } from "@/components/balance";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useInstallDetection } from "@/hooks/useInstallDetection";
 import { Map } from "@/components/map";
+import { Settings } from "@/components/settings";
 
 export default function Home() {
   const { isStandalone } = useInstallDetection();
@@ -82,12 +83,16 @@ export default function Home() {
             <DrawerContent>
               <DrawerHeader>
                 <DrawerTitle>Equipment Map</DrawerTitle>
+                <DrawerDescription>
+                  Click on the map to view equipment.
+                </DrawerDescription>
               </DrawerHeader>
               <div className="mx-4 h-96 overflow-hidden rounded-xl border">
                 <Map />
               </div>
             </DrawerContent>
           </Drawer>
+          <Settings />
         </nav>
       </div>
     );
@@ -104,11 +109,16 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-1 flex-col overflow-hidden xl:flex-row">
-        <div className="w-full border-b lg:border-r xl:w-96">
+        <div className="flex w-full flex-col border-b lg:border-r xl:w-96">
           <div className="grid h-20 place-items-center border-b p-2">
             <PrestigeLevelIndicator />
           </div>
-          <Statistics />
+          <div className="flex-1">
+            <Statistics />
+          </div>
+          <div className="w-full border-t p-2">
+            <Settings />
+          </div>
         </div>
         <div className="flex flex-1 flex-row overflow-hidden">
           <div className="w-96 flex-none overflow-y-auto border-r">

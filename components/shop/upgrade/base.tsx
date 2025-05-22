@@ -14,8 +14,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { au } from "@/atoms/au";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { DynamicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -52,7 +50,7 @@ export function BaseUpgrade({
           title={element.name}
           description={element.description}
           button={
-            <Button className="size-8" size="icon" variant="outline">
+            <Button className="size-8" size="icon">
               <Icon className="size-4" />
             </Button>
           }
@@ -92,7 +90,7 @@ export function BaseUpgrade({
           <TooltipContent side="bottom" align="start" className="z-9999">
             <div className="flex max-w-sm flex-col">
               <div className="flex-1">
-                <p className="font-bold">{element.name}</p>
+                <p className="font-semibold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
               </div>
               <p>
@@ -114,7 +112,7 @@ export function BaseUpgrade({
         content={`You must have ${element.threshold} of this equipment to unlock this
               upgrade.`}
       >
-        <Button variant="secondary" size="icon" className="h-8 w-8 md:p-0">
+        <Button variant="secondary" size="icon" className="size-8 md:p-0">
           <LucideLock />
         </Button>
       </Tip>

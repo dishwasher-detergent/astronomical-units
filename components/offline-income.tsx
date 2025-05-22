@@ -141,7 +141,7 @@ export function OfflineIncome() {
       setOpen={setDialogOpen}
       open={dialogOpen}
     >
-      <Button size="sm" className="w-full" onClick={claimOfflineEarnings}>
+      <Button className="w-full" onClick={claimOfflineEarnings}>
         Claim Earnings
       </Button>
     </DynamicDrawer>

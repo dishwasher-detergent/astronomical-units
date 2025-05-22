@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
+import { equipmentItemFamily } from "@/atoms/equipment";
+import { gameData, saveGameState } from "@/atoms/global";
+import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
-import { equipmentItemFamily } from "./equipment";
-import { gameData, saveGameState } from "./global";
-import { show } from "./show";
 
 /**
  * Direct focus atom to the crew equipment

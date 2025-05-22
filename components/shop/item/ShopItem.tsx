@@ -158,7 +158,6 @@ export function ShopItem({
                 1x
               </span>
               <Button
-                size="sm"
                 variant="default"
                 className="h-8 w-full px-0.5 text-xs"
                 disabled={!canAcquire}
@@ -173,7 +172,6 @@ export function ShopItem({
                   10x
                 </span>
                 <Button
-                  size="sm"
                   variant="secondary"
                   className="h-8 w-full flex-1 px-0.5 text-xs"
                   disabled={!canBuy10}
@@ -190,7 +188,6 @@ export function ShopItem({
                   20x
                 </span>
                 <Button
-                  size="sm"
                   variant="secondary"
                   className="h-8 w-full flex-1 px-0.5 text-xs"
                   disabled={!canBuy20}
@@ -207,7 +204,6 @@ export function ShopItem({
                   50x
                 </span>
                 <Button
-                  size="sm"
                   variant="secondary"
                   className="h-8 w-full flex-1 px-0.5 text-xs"
                   disabled={!canBuy50}

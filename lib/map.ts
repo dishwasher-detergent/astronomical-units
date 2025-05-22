@@ -17,6 +17,11 @@ export function getIconColorClass(count: number, item: Equipment): string {
   const minThreshold = Math.min(...thresholds);
   const maxThreshold = Math.max(...thresholds);
 
+  const allUpgradesMaxed = Object.values(item.upgrades).every(
+    (upgrade) => count >= upgrade.threshold,
+  );
+  if (allUpgradesMaxed) return "text-emerald-400";
+
   if (count >= maxThreshold * 2) return "text-purple-400";
   if (count >= maxThreshold) return "text-amber-400";
   if (count >= minThreshold) return "text-blue-400";

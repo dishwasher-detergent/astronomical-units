@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
-import { DisplayItem } from "@/components/display/item";
+import { DisplayItem } from "@/components/display/DisplayItem";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
 import { getIconColorClass } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export function MapItemDrawer({
         <Button
           size="icon"
           variant="ghost"
-          className="absolute h-fit w-fit p-2 transition-all hover:scale-110"
+          className="absolute h-fit w-fit p-2"
           style={{
             left: `${position.x}%`,
             top: `${position.y}%`,

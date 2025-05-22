@@ -2,26 +2,14 @@
 
 import React, { useRef, useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
+import { toast } from "sonner";
+import { RESET } from "jotai/utils";
+import { LucideDatabaseBackup } from "lucide-react";
 
 import { gameData } from "@/atoms/global";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { toast } from "sonner";
-import { RESET } from "jotai/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 
 export function Backup() {
   const isMobile = useIsMobile();
@@ -69,91 +57,58 @@ export function Backup() {
     fileInputRef.current?.click();
   };
 
-  if (isMobile) {
-    return (
-      <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>
-          <Button variant="outline" size="sm" className="h-8">
-            Backup
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent>
-          <div className="mx-auto flex h-full w-full flex-col overflow-hidden p-4">
-            <DrawerHeader className="flex-none">
-              <DrawerTitle>Backup your game data</DrawerTitle>
-            </DrawerHeader>
-            <div className="flex flex-col gap-2">
-              <p className="text-center text-sm font-semibold">
-                Would you like to...
-              </p>
-              <Button onClick={handleDownload}>Download Backup</Button>
-              <Button variant="secondary" onClick={triggerFileInput}>
-                Restore from Backup
-              </Button>
-              <p className="text-center text-sm font-semibold">Or</p>
-              <Button
-                variant="destructive"
-                onClick={() => {
-                  toast.error("Game data reset successfully!");
-                  setGameData(RESET);
-                  setOpen(false);
-                }}
-              >
-                Reset Game Data
-              </Button>
-              <input
-                type="file"
-                accept="application/json"
-                ref={fileInputRef}
-                style={{ display: "none" }}
-                onChange={handleRestore}
-              />
-            </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
-    );
-  }
-
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8">
+    <DynamicDrawer
+      title="Backup"
+      description="Backup your game data"
+      button={
+        <Button variant="secondary">
+          <LucideDatabaseBackup />
           Backup
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Backup your game data</DialogTitle>
-        </DialogHeader>
-        <div className="flex flex-col gap-2">
-          <p className="text-center text-sm font-semibold">
-            Would you like to...
-          </p>
-          <Button onClick={handleDownload}>Download Backup</Button>
-          <Button variant="secondary" onClick={triggerFileInput}>
+      }
+      open={open}
+      setOpen={setOpen}
+    >
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
+          <Button className="flex-1" onClick={handleDownload}>
+            Download Backup
+          </Button>
+          <Button
+            className="flex-1"
+            variant="secondary"
+            onClick={triggerFileInput}
+          >
             Restore from Backup
           </Button>
-          <p className="text-center text-sm font-semibold">Or</p>
-          <Button
-            variant="destructive"
-            onClick={() => {
-              toast.error("Game data reset successfully!");
-              setGameData(RESET);
-              setOpen(false);
-            }}
-          >
-            Reset Game Data
-          </Button>
-          <input
-            type="file"
-            accept="application/json"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={handleRestore}
-          />
         </div>
-      </DialogContent>
-    </Dialog>
+        <div>
+          <p className="text-destructive mb-1 text-sm font-semibold">
+            Danger Zone
+          </p>
+          <div className="border-destructive rounded-xl border border-dashed p-2">
+            <Button
+              className="w-full"
+              variant="destructive"
+              onClick={() => {
+                toast.error("Game data reset successfully!");
+                setGameData(RESET);
+                setOpen(false);
+              }}
+            >
+              Reset Game Data
+            </Button>
+          </div>
+        </div>
+        <input
+          type="file"
+          accept="application/json"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleRestore}
+        />
+      </div>
+    </DynamicDrawer>
   );
 }

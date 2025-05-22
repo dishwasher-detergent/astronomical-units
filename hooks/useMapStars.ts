@@ -1,5 +1,5 @@
+import { Star } from "@/components/map/MapElements";
 import { useEffect, useState } from "react";
-import { Star } from "../components/map/MapElements";
 
 /**
  * Hook to generate stars for the map background

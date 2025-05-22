@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { LucideGithub } from "lucide-react";
 
 import "./globals.css";
-import { ModeToggle } from "@/components/ui/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Generation } from "@/components/generation";
 import { OfflineIncome } from "@/components/offline-income";
 import { Toaster } from "@/components/ui/sonner";
@@ -265,28 +265,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {" "}
           <InstallPrompt />
           <UpdateNotification />
-          <nav className="bg-background sticky top-0 z-50 flex h-12 flex-none items-center justify-between border-b px-4 font-semibold">
-            <div className="flex flex-row items-center gap-1">
-              <Logo />
-              <p className="hidden md:block">Astronomical Units</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <Backup />
-              <Button asChild variant="outline" size="icon" className="size-8">
-                <a
-                  target="_blank"
-                  href="https://github.com/dishwasher-detergent/astronomical-units"
-                >
-                  <LucideGithub className="size-4" />
-                </a>
-              </Button>
-              <ModeToggle />
-              <DevMode />
-            </div>
-          </nav>
           <main className="relative w-full flex-1 overflow-hidden">
             {children}
             <Generation />
