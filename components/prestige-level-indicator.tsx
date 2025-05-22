@@ -24,20 +24,22 @@ export function PrestigeLevelIndicator() {
 
   return (
     <div className="flex w-full">
-      {lifetimeLevel < 100 ? (
-        <div className="flex w-full flex-col items-start gap-1">
-          <p className="font-bold whitespace-nowrap">Lvl {lifetimeLevel}</p>
-          <div className="w-full">
-            <div className="mb-1 flex items-center justify-between text-xs">
-              <span>Next Level:</span>
-              <span>{formatMoney(nextLevelRequirement)} AU</span>
-            </div>
-            <Progress value={levelProgress} className="h-2" />
-          </div>
+      <div className="flex w-full flex-col items-start gap-1">
+        <p className="font-bold whitespace-nowrap">Lvl {lifetimeLevel}</p>
+        <div className="w-full">
+          {lifetimeLevel < 100 ? (
+            <>
+              <div className="mb-1 flex items-center justify-between text-xs">
+                <span>Next Level:</span>
+                <span>{formatMoney(nextLevelRequirement)} AU</span>
+              </div>
+              <Progress value={levelProgress} className="h-2" />
+            </>
+          ) : (
+            <Prestige />
+          )}
         </div>
-      ) : (
-        <Prestige />
-      )}
+      </div>
     </div>
   );
 }

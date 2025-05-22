@@ -83,7 +83,6 @@ export const equipmentProductionRates = atom((get) => {
 
       if (!item || item.equipment === false) return;
 
-      // Equipment only produces if it's fully built
       const buildingItems = eq.building ? Object.keys(eq.building).length : 0;
       const completedItems = eq.value - buildingItems;
 
@@ -98,6 +97,9 @@ export const equipmentProductionRates = atom((get) => {
   return rates;
 });
 
+/**
+ * Auto-increment function for AU
+ */
 export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const productionRates = get(equipmentProductionRates);
   const allUpgrades = get(prestigeUpgrades) || {};

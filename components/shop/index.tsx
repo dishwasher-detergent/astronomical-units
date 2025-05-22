@@ -11,18 +11,18 @@ export function Shop() {
   return (
     <div className="relative">
       <Tabs defaultValue="general" className="w-full">
-        <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b font-semibold flex-col">
-          <p className="px-4 py-2 border-b w-full">Shop</p>
+        <nav className="bg-background sticky top-0 z-50 flex h-20 flex-col items-center justify-between border-b font-semibold">
+          <p className="w-full border-b px-4 py-2">Shop</p>
           <TabsList className="bg-background h-full w-full rounded-none p-0">
             <TabsTrigger
               value="general"
-              className="data-[state=active]:bg-muted flex-1 rounded-none"
+              className="data-[state=active]:bg-muted h-full flex-1 rounded-none"
             >
               General
             </TabsTrigger>
             <TabsTrigger
               value="prestige"
-              className="data-[state=active]:bg-muted flex-1 rounded-none"
+              className="data-[state=active]:bg-muted h-full flex-1 rounded-none"
             >
               Prestige
             </TabsTrigger>
