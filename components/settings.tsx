@@ -26,10 +26,12 @@ export function Settings() {
           <p className="mb-1 text-sm font-semibold">Backup</p>
           <Backup />
         </div>
-        <div>
-          <p className="mb-1 text-sm font-semibold">Developer</p>
-          <DevMode />
-        </div>
+        {process.env.NODE_ENV != "production" && (
+          <div>
+            <p className="mb-1 text-sm font-semibold">Developer</p>
+            <DevMode />
+          </div>
+        )}
       </div>
     </DynamicDrawer>
   );
