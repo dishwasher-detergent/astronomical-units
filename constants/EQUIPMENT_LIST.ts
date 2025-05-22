@@ -173,7 +173,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
   miningRig: {
     name: "Asteroid Mining Rig",
     description: "Mine asteroids around the galaxy to earn AU.",
-    baseCost: 1100, // Slightly reduced from 1200
+    baseCost: 1100,
     costMultiplier: 1.1,
     auPerSecond: 12,
     threshold: 300,
@@ -283,7 +283,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 22,
     threshold: 1000,
     icon: LucideRocket,
-    buildTime: 18, // 18 seconds to prepare exploration mission
+    buildTime: 18,
     mapPosition: {
       x: 38,
       y: 67,
@@ -677,7 +677,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 700,
     threshold: 1350000,
     icon: LucideCpu,
-    buildTime: 110, // 110 seconds to set up quantum computing infrastructure
+    buildTime: 110,
     mapPosition: {
       x: 88,
       y: 63,
@@ -783,7 +783,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.12,
     auPerSecond: 1200,
     threshold: 4500000,
-    buildTime: 130, // 130 seconds to construct fusion containment facility
+    buildTime: 130,
     icon: LucideAtom,
     mapPosition: {
       x: 60,
@@ -891,7 +891,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 2200,
     threshold: 18000000,
     icon: LucideHouse,
-    buildTime: 210, // 210 seconds to stabilize spacetime for wormhole creation
+    buildTime: 210,
     mapPosition: {
       x: 70,
       y: 70,
@@ -944,7 +944,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 2700,
     threshold: 22000000,
     icon: LucideCastle,
-    buildTime: 230, // 230 seconds for massive orbital city construction
+    buildTime: 230,
     mapPosition: {
       x: 15,
       y: 30,
@@ -1050,7 +1050,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 4000,
     threshold: 68000000,
     icon: LucideAnvil,
-    buildTime: 280, // 280 seconds to construct matter conversion technology
+    buildTime: 280,
     mapPosition: {
       x: 48,
       y: 20,
@@ -1103,7 +1103,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     auPerSecond: 5000,
     threshold: 90000000,
     icon: LucideClock,
-    buildTime: 320, // 320 seconds to construct time manipulation device
+    buildTime: 320,
     mapPosition: {
       x: 40,
       y: 85,
@@ -1155,7 +1155,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.12,
     auPerSecond: 7000,
     threshold: 180000000,
-    buildTime: 360, // 360 seconds (6 minutes) to construct megastructure around star
+    buildTime: 360,
     icon: LucideSun,
     mapPosition: {
       x: 90,
