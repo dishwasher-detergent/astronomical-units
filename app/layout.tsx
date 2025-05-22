@@ -6,7 +6,7 @@ import { LucideGithub } from "lucide-react";
 import "./globals.css";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Generation } from "@/components/generation";
-import { LastUpdated } from "@/components/last-updated";
+import { OfflineIncome } from "@/components/offline-income";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { APP_DESCRIPTION, APP_NAME, APP_SHORT_NAME } from "@/constants/GLOBAL";
@@ -290,7 +290,7 @@ export default function RootLayout({
           <main className="relative w-full flex-1 overflow-hidden">
             {children}
             <Generation />
-            <LastUpdated />
+            <OfflineIncome />
             <UpdateTimestamp />
             <Toaster position="top-right" richColors />
           </main>

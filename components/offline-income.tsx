@@ -15,7 +15,7 @@ import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 
-export function LastUpdated() {
+export function OfflineIncome() {
   const last = useAtomValue(lastUpdated);
   const equip = useAtomValue(equipment);
   const update = useSetAtom(autoIncrement);
@@ -26,6 +26,7 @@ export function LastUpdated() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [offlineEarnings, setOfflineEarnings] = useState(0);
   const [bonusMessage, setBonusMessage] = useState("");
+  const [offlineTime, setOfflineTime] = useState("");
   const [currentAu, setCurrentAu] = useAtom(au);
 
   useAnimation((deltaTime) => {
@@ -37,13 +38,13 @@ export function LastUpdated() {
     setDialogOpen(false);
   };
   useEffect(() => {
-    const MIN_OFFLINE_TIME = 60000;
-    const MAX_OFFLINE_SECONDS = 14400;
+    const MIN_OFFLINE = 60000;
+    const MAX_OFFLINE = 144000;
 
     const checkOfflineEarnings = () => {
       const now = Date.now();
 
-      if (last <= now - MIN_OFFLINE_TIME) {
+      if (last <= now - MIN_OFFLINE) {
         const offlineProductionCount = allUpgrades.offlineProduction || 0;
         const offlineMultiplier =
           offlineProductionCount > 0
@@ -52,9 +53,22 @@ export function LastUpdated() {
                 offlineProductionCount,
               )
             : 1;
+        const offlineDuration = Math.min(now - last, MAX_OFFLINE);
 
-        const diff = Math.min((now - last) / 1000, MAX_OFFLINE_SECONDS);
-        update(diff as number);
+        let offlineTimeStr = "";
+        const offlineHours = Math.floor(offlineDuration / 3600);
+        const offlineMinutes = Math.floor((offlineDuration % 3600) / 60);
+        const offlineSeconds = Math.floor(offlineDuration % 60);
+
+        if (offlineHours > 0) {
+          offlineTimeStr = `${offlineHours}h ${offlineMinutes}m ${offlineSeconds}s`;
+        } else if (offlineMinutes > 0) {
+          offlineTimeStr = `${offlineMinutes}m ${offlineSeconds}s`;
+        } else {
+          offlineTimeStr = `${offlineSeconds}s`;
+        }
+
+        update(offlineDuration as number);
         let earned = 0;
 
         Object.entries(equip).forEach(([key, eq]: any) => {
@@ -73,7 +87,7 @@ export function LastUpdated() {
               item.auPerSecond *
               multiplier *
               eq.value *
-              diff *
+              offlineDuration *
               offlineMultiplier;
           }
         });
@@ -86,6 +100,8 @@ export function LastUpdated() {
 
           setOfflineEarnings(earned);
           setBonusMessage(bonusMsg);
+          // Store offline time to display in dialog
+          setOfflineTime(offlineTimeStr);
           setDialogOpen(true);
         }
       }
@@ -111,7 +127,7 @@ export function LastUpdated() {
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("focus", handleFocus);
 
-    const checkInterval = setInterval(checkOfflineEarnings, 60000); // Check every minute
+    const checkInterval = setInterval(checkOfflineEarnings, 60000);
 
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
@@ -125,12 +141,11 @@ export function LastUpdated() {
       setDelta(0);
     }
   }, [delta]);
-
   return (
     <DynamicDrawer
       title="Welcome Back!"
       description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were
-          away!${bonusMessage}`}
+          away for ${offlineTime}!${bonusMessage}`}
       setOpen={setDialogOpen}
       open={dialogOpen}
     >
