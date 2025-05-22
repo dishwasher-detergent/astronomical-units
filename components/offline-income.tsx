@@ -37,6 +37,7 @@ export function OfflineIncome() {
     setCurrentAu((current) => current + offlineEarnings);
     setDialogOpen(false);
   };
+
   useEffect(() => {
     const MIN_OFFLINE = 60000;
     const MAX_OFFLINE = 144000;
@@ -53,12 +54,13 @@ export function OfflineIncome() {
                 offlineProductionCount,
               )
             : 1;
-        const offlineDuration = Math.min(now - last, MAX_OFFLINE);
+        const offlineDurationMs = Math.min(now - last, MAX_OFFLINE);
+        const offlineDurationSeconds = offlineDurationMs / 1000;
 
         let offlineTimeStr = "";
-        const offlineHours = Math.floor(offlineDuration / 3600);
-        const offlineMinutes = Math.floor((offlineDuration % 3600) / 60);
-        const offlineSeconds = Math.floor(offlineDuration % 60);
+        const offlineHours = Math.floor(offlineDurationSeconds / 3600);
+        const offlineMinutes = Math.floor((offlineDurationSeconds % 3600) / 60);
+        const offlineSeconds = Math.floor(offlineDurationSeconds % 60);
 
         if (offlineHours > 0) {
           offlineTimeStr = `${offlineHours}h ${offlineMinutes}m ${offlineSeconds}s`;
@@ -67,8 +69,7 @@ export function OfflineIncome() {
         } else {
           offlineTimeStr = `${offlineSeconds}s`;
         }
-
-        update(offlineDuration as number);
+        update(offlineDurationSeconds as number);
         let earned = 0;
 
         Object.entries(equip).forEach(([key, eq]: any) => {
@@ -87,7 +88,7 @@ export function OfflineIncome() {
               item.auPerSecond *
               multiplier *
               eq.value *
-              offlineDuration *
+              offlineDurationSeconds *
               offlineMultiplier;
           }
         });
@@ -100,7 +101,6 @@ export function OfflineIncome() {
 
           setOfflineEarnings(earned);
           setBonusMessage(bonusMsg);
-          // Store offline time to display in dialog
           setOfflineTime(offlineTimeStr);
           setDialogOpen(true);
         }
