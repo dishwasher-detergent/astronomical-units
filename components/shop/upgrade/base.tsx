@@ -50,7 +50,7 @@ export function BaseUpgrade({
           title={element.name}
           description={element.description}
           button={
-            <Button className="size-8" size="icon">
+            <Button className="size-10" size="icon">
               <Icon className="size-4" />
             </Button>
           }
@@ -112,7 +112,11 @@ export function BaseUpgrade({
         content={`You must have ${element.threshold} of this equipment to unlock this
               upgrade.`}
       >
-        <Button variant="secondary" size="icon" className="size-8 md:p-0">
+        <Button
+          variant="secondary"
+          size="icon"
+          className="size-10 md:size-8 md:p-0"
+        >
           <LucideLock />
         </Button>
       </Tip>
