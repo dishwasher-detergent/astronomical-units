@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideStore, LucideTelescope } from "lucide-react";
+import { LucideGithub, LucideStore, LucideTelescope } from "lucide-react";
 
 import { ClickArea } from "@/components/click-area";
 import { Shop } from "@/components/shop";
@@ -116,8 +116,16 @@ export default function Home() {
           <div className="flex-1">
             <Statistics />
           </div>
-          <div className="w-full border-t p-2">
+          <div className="flex w-full flex-row gap-1 border-t p-2">
             <Settings />
+            <Button asChild size="icon" variant="ghost">
+              <a
+                target="_blank"
+                href="https://github.com/dishwasher-detergent/astronomical-units"
+              >
+                <LucideGithub className="size-4" />
+              </a>
+            </Button>
           </div>
         </div>
         <div className="flex flex-1 flex-row overflow-hidden">

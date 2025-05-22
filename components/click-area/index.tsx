@@ -15,6 +15,7 @@ import { LOCALE } from "@/constants/GLOBAL";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { useClickParticles } from "./click-particles";
 import { animationsEnabled } from "@/atoms/ui";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ClickArea() {
   const setClicks = useSetAtom(auIncrement);
@@ -25,6 +26,8 @@ export function ClickArea() {
   const showAnimations = useAtomValue(animationsEnabled);
   const containerRef = useRef<HTMLDivElement>(null);
   const productionRates = useAtomValue(equipmentProductionRates);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const isMobile = useIsMobile();
 
   const auPerSecond = [...productionRates.values()].reduce((a, b) => a + b, 0);
 
@@ -42,6 +45,31 @@ export function ClickArea() {
 
     setClicks();
   };
+
+  const triggerParticleInCenter = () => {
+    if (showAnimations && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      addParticle(centerX, centerY, clickValue, false);
+    }
+
+    setClicks();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space" || e.key === " ") {
+      e.preventDefault();
+      triggerParticleInCenter();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showAnimations, clickValue]);
 
   useEffect(() => {
     if (!showAnimations || auPerSecond <= 0) return;
@@ -62,11 +90,17 @@ export function ClickArea() {
     <div ref={containerRef} className="relative h-full min-h-48 w-full">
       {showAnimations && renderParticles()}
       <Button
+        ref={buttonRef}
         onClick={handleClick}
+        tabIndex={0}
         className="bg-muted hover:bg-muted relative flex h-full min-h-48 w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none"
       >
         <div className="text-primary z-10 flex flex-col items-center">
-          <span>Tap Here</span>
+          {isMobile ? (
+            <span>Tap Here</span>
+          ) : (
+            <span>Click Here or Press Space</span>
+          )}
           <span className="text-xl font-semibold">
             +{((crewAtom.value + 1) * multiplier).toLocaleString(LOCALE)} AU
           </span>

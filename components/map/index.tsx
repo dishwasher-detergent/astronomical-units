@@ -54,8 +54,8 @@ export function Map() {
       <ConnectionLines items={equipmentWithPositions} />
 
       {equipmentWithPositions.length === 0 && (
-        <div className="bg-background z-10 rounded-lg p-4 text-center">
-          <p className="text-muted-foreground">
+        <div className="z-10 rounded-lg p-4 text-center">
+          <p className="text-muted-foreground text-sm font-semibold">
             Purchase equipment to see items on the map
           </p>
         </div>

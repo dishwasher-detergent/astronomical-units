@@ -9,7 +9,6 @@ import {
   prestigeLevel,
   lifetimePrestigePoints,
   potentialPrestigePoints,
-  prestigeUpgrades,
 } from "@/atoms/prestige";
 import { formatMoney } from "@/lib/formatters";
 import { useBuildTimeReduction } from "@/hooks/useBuildTimeReduction";
@@ -29,25 +28,21 @@ export function PrestigeStats() {
 
   return (
     <>
-      <Stats label="Prestige Level" value={level.toString()} />
       <Stats label="Prestige Points (PP)" value={points.toString()} />
-      <Stats
-        label="Lifetime PP"
-        value={lifetime.toString()}
-      />
-      <Stats
-        label="Production Multiplier"
-        value={`${formatMoney(multiplier)}x`}
-      />
-      {buildTimeReductionLevel > 0 && (
-        <Stats label="Build Time Reduction" value={`${buildTimeReduction}%`} />
-      )}
+      <Stats label="Lifetime PP" value={lifetime.toString()} />
       {potential > 0 && (
         <Stats
           label="Potential PP"
           value={`+${potential}`}
           variant="highlight"
         />
+      )}
+      <Stats
+        label="Production Multiplier"
+        value={`${formatMoney(multiplier)}x`}
+      />
+      {buildTimeReductionLevel > 0 && (
+        <Stats label="Build Time Reduction" value={`${buildTimeReduction}%`} />
       )}
     </>
   );

@@ -33,12 +33,10 @@ export function EquipmentDisplay() {
 
   if (activeEquipment.length === 0) {
     return (
-      <div className="bg-muted/20 m-4 rounded-lg p-4">
-        <p className="text-muted-foreground text-center">
-          Earn Astronomical Units <span className="font-semibold">(AU)</span> to
-          buy equipment.
-        </p>
-      </div>
+      <p className="text-muted-foreground p-4 text-sm font-semibold">
+        Earn Astronomical Units <span className="font-semibold">(AU)</span> to
+        buy equipment.
+      </p>
     );
   }
 

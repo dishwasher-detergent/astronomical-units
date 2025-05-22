@@ -4,9 +4,9 @@ import { useAtomValue } from "jotai";
 import { useMemo } from "react";
 
 import { equipment } from "@/atoms/equipment";
-import { EquipmentWithPosition } from "@/components/map/types";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
+import { EquipmentWithPosition } from "@/types";
 
 /**
  * Hook to generate equipment items with positions for the map
