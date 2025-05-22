@@ -67,7 +67,11 @@ export function DynamicDrawer({
   }
 
   return (
-    <Drawer open={isOpen} onOpenChange={handleOpenChange}>
+    <Drawer
+      open={isOpen}
+      onOpenChange={handleOpenChange}
+      shouldScaleBackground={false}
+    >
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
       <DrawerContent className="mb-4 p-4">
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
