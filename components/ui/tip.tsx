@@ -23,9 +23,7 @@ export function Tip({
   if (isMobile) {
     return (
       <Popover>
-        <PopoverTrigger asChild>
-          <div>{children}</div>
-        </PopoverTrigger>
+        <PopoverTrigger asChild>{children}</PopoverTrigger>
         <PopoverContent side="bottom" align="start" className="max-w-sm">
           {content}
         </PopoverContent>
@@ -36,10 +34,12 @@ export function Tip({
   return (
     <TooltipProvider>
       <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>
-          <div>{children}</div>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" align="center" className="max-w-sm">
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipContent
+          side="bottom"
+          align="center"
+          className="z-[9999] max-w-sm"
+        >
           {content}
         </TooltipContent>
       </Tooltip>

@@ -5,7 +5,7 @@ import { useMemo } from "react";
 
 import { equipment } from "@/atoms/equipment";
 import { EquipmentWithPosition } from "@/components/map/types";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
 
 /**

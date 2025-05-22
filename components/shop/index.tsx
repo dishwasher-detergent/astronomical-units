@@ -1,13 +1,21 @@
 "use client";
 
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { useAtomValue } from "jotai";
+import { LucideLock } from "lucide-react";
+
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { PrestigeItem } from "@/components/shop/item/PrestigeItem";
 import { CrewItem } from "@/components/shop/item/CrewItem";
 import { EquipmentItem } from "@/components/shop/item/EquipmentItem";
+import { prestigeLevel } from "@/atoms/prestige";
+import { Tip } from "@/components/ui/tip";
 
 export function Shop() {
+  const prestigeLevelValue = useAtomValue(prestigeLevel) || 0;
+  const showPrestigeTab = prestigeLevelValue > 0;
+
   return (
     <div className="relative">
       <Tabs defaultValue="general" className="w-full">
@@ -20,12 +28,21 @@ export function Shop() {
             >
               General
             </TabsTrigger>
-            <TabsTrigger
-              value="prestige"
-              className="data-[state=active]:bg-muted h-full flex-1 rounded-none"
-            >
-              Prestige
-            </TabsTrigger>
+            {showPrestigeTab ? (
+              <TabsTrigger
+                value="prestige"
+                className="data-[state=active]:bg-muted h-full flex-1 rounded-none"
+              >
+                Prestige
+              </TabsTrigger>
+            ) : (
+              <Tip content="Must reach level 100, and prestige once to unlock this shop.">
+                <div className="flex w-1/2 items-center justify-center">
+                  <LucideLock className="mr-2 size-3" />
+                  Prestige
+                </div>
+              </Tip>
+            )}
           </TabsList>
         </nav>
         <TabsContent value="general" className="mt-0">
@@ -35,11 +52,13 @@ export function Shop() {
             return <EquipmentItem key={key} elementKey={key} />;
           })}
         </TabsContent>
-        <TabsContent value="prestige" className="mt-0">
-          {Object.entries(PRESTIGE_UPGRADES).map(([key]) => {
-            return <PrestigeItem key={key} upgradeKey={key} />;
-          })}
-        </TabsContent>
+        {showPrestigeTab && (
+          <TabsContent value="prestige" className="mt-0">
+            {Object.entries(PRESTIGE_UPGRADES).map(([key]) => {
+              return <PrestigeItem key={key} upgradeKey={key} />;
+            })}
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

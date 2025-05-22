@@ -70,7 +70,7 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     costMultiplier: 1.12,
     auPerSecond: 1,
     threshold: 20,
-    buildTime: 3, // 3 seconds to build (crew members join quickly)
+    buildTime: 3,
     equipment: false,
     icon: LucidePersonStanding,
     mapPosition: {

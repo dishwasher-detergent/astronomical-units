@@ -3,7 +3,7 @@
 import { focusAtom } from "jotai-optics";
 import { atomWithStorage } from "jotai/utils";
 
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { AU } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { mergeNestedObjects } from "@/lib/common";

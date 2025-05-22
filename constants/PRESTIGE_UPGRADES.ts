@@ -16,7 +16,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 1,
     maxCount: 20,
     multiplier: 1.15,
-    threshold: 1,
+    threshold: 5,
     icon: ArrowUp,
   },
   upgradeDiscount: {
@@ -25,7 +25,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 2,
     maxCount: 10,
     multiplier: 1.08,
-    threshold: 1,
+    threshold: 5,
     icon: Percent,
   },
   offlineProduction: {
@@ -34,7 +34,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 3,
     maxCount: 8,
     multiplier: 1.2,
-    threshold: 1,
+    threshold: 5,
     icon: Activity,
   },
   criticalProduction: {
@@ -43,7 +43,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 8,
     maxCount: 10,
     multiplier: 1.05,
-    threshold: 3,
+    threshold: 15,
     icon: Zap,
   },
   resourceMagnetism: {
@@ -53,7 +53,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 10,
     maxCount: 5,
     multiplier: 1.1,
-    threshold: 4,
+    threshold: 20,
     icon: LucideMagnet,
   },
   preciousFinds: {
@@ -63,7 +63,7 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     cost: 12,
     maxCount: 8,
     multiplier: 1.07,
-    threshold: 5,
+    threshold: 25,
     icon: LucideGem,
   },
   rapidConstruction: {
@@ -71,8 +71,8 @@ export const PRESTIGE_UPGRADES: Record<string, Upgrade> = {
     description: "Reduces building time for all equipment by 10% per level",
     cost: 15,
     maxCount: 5,
-    multiplier: 0.9, // 10% reduction per level (multiplies by 0.9, 0.81, 0.729, etc.)
-    threshold: 6,
+    multiplier: 0.9,
+    threshold: 30,
     icon: Clock,
   },
 };

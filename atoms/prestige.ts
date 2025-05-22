@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { totalAu } from "@/atoms/au";
 import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { generateEquipmentObject } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";

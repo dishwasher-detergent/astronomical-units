@@ -5,7 +5,7 @@ import { LucideLock, LucidePlus } from "lucide-react";
 import { useState } from "react";
 
 import { showElement } from "@/atoms/show";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { UpgradeButton } from "@/components/shop/upgrade/button";
 import {
   Tooltip,
@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { DynamicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { formatMoney } from "@/lib/formatters";
+import { Tip } from "@/components/ui/tip";
 
 export function BaseUpgrade({
   atom,
@@ -37,10 +38,10 @@ export function BaseUpgrade({
   const isMobile = useIsMobile();
 
   const isShowing = showElementValue[`${parentKey}_${elementKey}`];
-  const element = EQUIPMENT_LIST[parentKey].upgrades?.[elementKey];
+  const element = EQUIPMENT_LIST[parentKey].upgrades![elementKey];
   const Icon = element?.icon || LucidePlus;
 
-  if (isShowing && element && !isMobile != null) {
+  if (isShowing && !isMobile != null) {
     const canAquire = element.cost <= auValue && rankValue < element.maxCount;
 
     if (isMobile) {
@@ -56,13 +57,10 @@ export function BaseUpgrade({
             </Button>
           }
         >
-          <div className="mb-6 flex w-full flex-col gap-2">
-            <div className="flex flex-row gap-2">
-              <Badge variant="outline">{formatMoney(element.cost)} AU</Badge>
-              <Badge variant="outline">
-                Qty: {rankValue ?? 0}/{element.maxCount}
-              </Badge>
-            </div>
+          <div className="mb-6">
+            <p>
+              Quantity: {rankValue ?? 0}/{element.maxCount}
+            </p>
           </div>
           <UpgradeButton
             name={element.name}
@@ -70,7 +68,7 @@ export function BaseUpgrade({
             disabled={!canAquire}
             increment={setRank}
           >
-            Upgrade
+            {formatMoney(element.cost)} AU
           </UpgradeButton>
         </DynamicPopover>
       );
@@ -94,19 +92,17 @@ export function BaseUpgrade({
           <TooltipContent side="bottom" align="start" className="z-9999">
             <div className="flex max-w-sm flex-col">
               <div className="flex-1">
-                <p className="text-sm font-semibold">{element.name}</p>
+                <p className="font-bold">{element.name}</p>
                 <p className="mb-2">{element.description}</p>
               </div>
-              <div className="flex w-full flex-col gap-2">
-                <div className="flex flex-row gap-2">
-                  <Badge variant="outline">
-                    Qty: {rankValue ?? 0}/{element.maxCount}
-                  </Badge>
-                  <Badge variant="outline">
-                    {formatMoney(element.cost)} AU
-                  </Badge>
-                </div>
-              </div>
+              <p>
+                Cost:{" "}
+                <span className="font-mono">{formatMoney(element.cost)}</span>{" "}
+                AU
+              </p>
+              <p>
+                Quantity: {rankValue ?? 0}/{element.maxCount}
+              </p>
             </div>
           </TooltipContent>
         </Tooltip>
@@ -114,14 +110,14 @@ export function BaseUpgrade({
     );
   } else {
     return (
-      <Button
-        variant="secondary"
-        disabled
-        size="icon"
-        className="h-8 w-8 md:p-0"
+      <Tip
+        content={`You must have ${element.threshold} of this equipment to unlock this
+              upgrade.`}
       >
-        <LucideLock />
-      </Button>
+        <Button variant="secondary" size="icon" className="h-8 w-8 md:p-0">
+          <LucideLock />
+        </Button>
+      </Tip>
     );
   }
 }

@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 import { useMemo } from "react";
 
 import { equipment } from "@/atoms/equipment";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { DisplayItem } from "@/components/display/item";
 

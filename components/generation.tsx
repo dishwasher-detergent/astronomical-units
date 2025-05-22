@@ -7,7 +7,7 @@ import { equipment, equipmentRate } from "@/atoms/equipment";
 import { autoIncrement } from "@/atoms/au";
 import { useAnimation } from "@/hooks/useAnimation";
 import { generateEquipmentObject } from "@/lib/equipment";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { lastUpdated } from "@/atoms/global";
 
 export function Generation() {

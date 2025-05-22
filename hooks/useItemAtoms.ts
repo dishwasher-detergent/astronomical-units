@@ -1,7 +1,7 @@
 import { equipment } from "@/atoms/equipment";
 import { prestigeUpgrades } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { handleEquipmentThresholds } from "@/lib/equipment";
 import { atom } from "jotai";

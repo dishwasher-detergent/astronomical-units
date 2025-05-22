@@ -5,14 +5,14 @@ import { LucidePersonStanding } from "lucide-react";
 
 import { crew } from "@/atoms/crew";
 import { DisplayUpgrade } from "./display/upgrade";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 
 export function Crew() {
   const crewAtom = useAtomValue(crew);
   const item = EQUIPMENT_LIST.crew;
 
   return (
-    <div className="flex-none space-y-2 bg-background p-4 md:border-b">
+    <div className="bg-background flex-none space-y-2 p-4 md:border-b">
       <p className="font-semibold">
         {crewAtom.value + 1} Crew Member
         {crewAtom.value > 1 && "s"}

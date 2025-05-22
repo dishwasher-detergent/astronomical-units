@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { equipmentItemFamily } from "./equipment";
 import { gameData, saveGameState } from "./global";
 import { show } from "./show";

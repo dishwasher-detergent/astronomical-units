@@ -10,7 +10,7 @@ import {
   EQUIPMENT_RATE_REDUCTION,
   EQUIPMENT_RATE_REDUCTION_DELTA,
 } from "@/constants/EQUIPMENT";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { handleEquipmentThresholds } from "@/lib/equipment";
 import { EquipmentItem } from "@/types";
 import { gameData } from "./global";

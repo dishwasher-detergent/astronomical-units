@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { crewCurrent } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
 import { prestigeUpgrades } from "@/atoms/prestige";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 
 const getPrestigeCost = (key: string): number => {

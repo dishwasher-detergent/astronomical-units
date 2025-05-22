@@ -26,9 +26,9 @@ export type Equipment = {
   threshold: number;
   icon: any;
   mapPosition: MapPosition;
+  upgrades: Upgrades;
   equipment?: boolean;
   buildTime?: number;
-  upgrades?: Upgrades;
 };
 
 export type EquipmentWithPosition = {

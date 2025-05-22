@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { autoIncrement, au } from "@/atoms/au";
 import { lastUpdated } from "@/atoms/global";
 import { equipment } from "@/atoms/equipment";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";

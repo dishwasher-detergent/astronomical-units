@@ -5,7 +5,7 @@ import { crew } from "@/atoms/crew";
 import { equipment } from "@/atoms/equipment";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { show } from "@/atoms/show";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { calculateUpgradeMultiplier } from "@/lib/equipment";
 import { gameData } from "./global";

@@ -14,7 +14,7 @@ import {
   addPrestigePoints,
 } from "@/atoms/prestige";
 import { addEquipment, unlockAllEquipment } from "@/atoms/equipment";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_DETAILS";
+import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
