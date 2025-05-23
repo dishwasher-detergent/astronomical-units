@@ -1,6 +1,6 @@
 "use client";
 
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 import { ShopItem } from "@/components/shop/item/ShopItem";
