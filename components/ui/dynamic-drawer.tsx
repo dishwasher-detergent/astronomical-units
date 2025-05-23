@@ -27,18 +27,19 @@ export function DynamicDrawer({
   children,
   setOpen,
   open,
+  dismissible = true,
 }: {
   title?: string;
   description?: string;
   button?: string | React.ReactNode;
   children: React.ReactNode;
+  dismissible?: boolean;
   setOpen?: (e: boolean) => void;
   open?: boolean;
 }) {
   const isMobile = useIsMobile();
   const [internalOpen, setInternalOpen] = useState(false);
 
-  // Use provided state or internal state
   const isOpen = open !== undefined ? open : internalOpen;
   const handleOpenChange = (value: boolean) => {
     if (setOpen) {
@@ -70,7 +71,7 @@ export function DynamicDrawer({
     <Drawer
       open={isOpen}
       onOpenChange={handleOpenChange}
-      shouldScaleBackground={false}
+      dismissible={dismissible}
     >
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
       <DrawerContent className="mb-4 p-4">

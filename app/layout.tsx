@@ -252,6 +252,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`pb-safe flex h-dvh w-dvw flex-col overflow-x-hidden ${font.className} ${mono.variable}`}
+        style={{
+          bottom: "0",
+        }}
       >
         <ThemeProvider
           attribute="class"
@@ -261,7 +264,10 @@ export default function RootLayout({
         >
           <InstallPrompt />
           <UpdateNotification />
-          <main className="relative w-full flex-1 overflow-hidden">
+          <main
+            data-vaul-drawer-wrapper
+            className="bg-background relative w-full flex-1 overflow-hidden"
+          >
             {children}
             <Generation />
             <OfflineIncome />

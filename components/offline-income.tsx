@@ -140,6 +140,7 @@ export function OfflineIncome() {
       description={`You've earned ${formatMoney(offlineEarnings)} AUs while you were away for ${offlineTime}!${bonusMessage}`}
       setOpen={setDialogOpen}
       open={dialogOpen}
+      dismissible={false}
     >
       <Button className="w-full" onClick={claimOfflineEarnings}>
         Claim Earnings
