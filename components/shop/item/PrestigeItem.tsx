@@ -28,7 +28,8 @@ const findNextItemByThreshold = (currentValue: number): string => {
 };
 
 export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
-  const [ppValue, setPP] = useAtom(lifetimePrestigePoints);
+  const totalPP = useAtomValue(lifetimePrestigePoints);
+  const [ppValue, setPP] = useAtom(prestigePoints);
   const upgrade = focusAtom(prestigeUpgrades, (optic) =>
     optic.path(upgradeKey),
   );
@@ -45,7 +46,7 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
   const element = PRESTIGE_UPGRADES[upgradeKey];
   const maxCount = element.maxCount || Infinity;
 
-  const nextItem = findNextItemByThreshold(ppValue);
+  const nextItem = findNextItemByThreshold(totalPP);
 
   return (
     <ShopItem
