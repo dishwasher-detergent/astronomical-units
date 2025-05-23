@@ -41,9 +41,9 @@ export function ShopItem({
 
   const {
     cost1,
+    cost5,
     cost10,
     cost20,
-    cost50: cost5,
     itemCount,
   } = useBulkCosts(elementKey);
 
