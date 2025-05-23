@@ -114,9 +114,9 @@ export function useBulkCosts(key: string) {
 
     return {
       cost1: prestigeCost,
+      cost5: prestigeCost * 5,
       cost10: prestigeCost * 10,
       cost20: prestigeCost * 20,
-      cost50: prestigeCost * 50,
       itemCount: prestigeItemCount,
     };
   }
