@@ -50,7 +50,7 @@ export function BaseUpgrade({
           title={element.name}
           description={element.description}
           button={
-            <Button className="size-10" size="icon">
+            <Button className="size-10" size="icon" disabled={!canAquire}>
               <Icon className="size-4" />
             </Button>
           }

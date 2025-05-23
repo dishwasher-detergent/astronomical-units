@@ -1,19 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Nunito } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { LucideGithub } from "lucide-react";
 
 import "./globals.css";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Generation } from "@/components/generation";
 import { OfflineIncome } from "@/components/offline-income";
 import { Toaster } from "@/components/ui/sonner";
-import { Button } from "@/components/ui/button";
 import { APP_DESCRIPTION, APP_NAME, APP_SHORT_NAME } from "@/constants/GLOBAL";
 import { InstallPrompt } from "@/components/install-prompt";
-import { Backup } from "@/components/backup";
-import { Logo } from "@/components/logo";
-import { DevMode } from "@/components/dev-mode";
 import { UpdateNotification } from "@/components/update-notification";
 import { UpdateTimestamp } from "@/components/update-timestamp";
 
