@@ -39,7 +39,13 @@ export function ShopItem({
   const [itemValue, setItemValue] = useAtom(itemAtom);
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
 
-  const { cost1, cost10, cost20, cost50, itemCount } = useBulkCosts(elementKey);
+  const {
+    cost1,
+    cost10,
+    cost20,
+    cost50: cost5,
+    itemCount,
+  } = useBulkCosts(elementKey);
 
   const isShowing = showElementValue[elementKey];
   const Icon = details?.icon || LucidePlus;
@@ -62,7 +68,7 @@ export function ShopItem({
         totalCost = cost20;
         break;
       case 50:
-        totalCost = cost50;
+        totalCost = cost5;
         break;
       default:
         totalCost = cost1;
@@ -109,9 +115,9 @@ export function ShopItem({
     const isPrestigeUpgrade =
       details.multiplier !== undefined && details.auPerSecond === undefined;
     const remainingCount = maxCount - itemCount;
+    const canBuy5 = cost5 <= currency.value && remainingCount >= 5;
     const canBuy10 = cost10 <= currency.value && remainingCount >= 10;
     const canBuy20 = cost20 <= currency.value && remainingCount >= 20;
-    const canBuy50 = cost50 <= currency.value && remainingCount >= 50;
 
     return (
       <article className="w-full border-b border-dashed px-4 py-3">
@@ -166,6 +172,22 @@ export function ShopItem({
                 {formatMoney(cost1)} {currency.name}
               </Button>
             </div>
+            {maxCount >= 5 && (
+              <div className="flex flex-1 flex-col items-center gap-1">
+                <span className="text-muted-foreground text-xs font-semibold">
+                  5x
+                </span>
+                <Button
+                  variant="secondary"
+                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  disabled={!canBuy5}
+                  onClick={() => handlePurchase(5)}
+                  title={`Cost: ${formatMoney(cost5)} ${currency.name}`}
+                >
+                  {formatMoney(cost5)} {currency.name}
+                </Button>
+              </div>
+            )}
             {maxCount >= 10 && (
               <div className="flex flex-1 flex-col items-center gap-1">
                 <span className="text-muted-foreground text-xs font-semibold">
@@ -195,22 +217,6 @@ export function ShopItem({
                   title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
                 >
                   {formatMoney(cost20)} {currency.name}
-                </Button>
-              </div>
-            )}
-            {maxCount >= 50 && (
-              <div className="flex flex-1 flex-col items-center gap-1">
-                <span className="text-muted-foreground text-xs font-semibold">
-                  50x
-                </span>
-                <Button
-                  variant="secondary"
-                  className="h-8 w-full flex-1 px-0.5 text-xs"
-                  disabled={!canBuy50}
-                  onClick={() => handlePurchase(50)}
-                  title={`Cost: ${formatMoney(cost50)} ${currency.name}`}
-                >
-                  {formatMoney(cost50)} {currency.name}
                 </Button>
               </div>
             )}

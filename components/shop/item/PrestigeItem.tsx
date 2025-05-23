@@ -4,7 +4,11 @@ import { atom, useAtom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 import { ShopItem } from "@/components/shop/item/ShopItem";
-import { prestigePoints, prestigeUpgrades } from "@/atoms/prestige";
+import {
+  lifetimePrestigePoints,
+  prestigePoints,
+  prestigeUpgrades,
+} from "@/atoms/prestige";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 
 interface PrestigeItemProps {
@@ -24,7 +28,7 @@ const findNextItemByThreshold = (currentValue: number): string => {
 };
 
 export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
-  const [ppValue, setPP] = useAtom(prestigePoints);
+  const [ppValue, setPP] = useAtom(lifetimePrestigePoints);
   const upgrade = focusAtom(prestigeUpgrades, (optic) =>
     optic.path(upgradeKey),
   );
@@ -41,7 +45,6 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
   const element = PRESTIGE_UPGRADES[upgradeKey];
   const maxCount = element.maxCount || Infinity;
 
-  // Calculate the next item based on the current PP value
   const nextItem = findNextItemByThreshold(ppValue);
 
   return (
