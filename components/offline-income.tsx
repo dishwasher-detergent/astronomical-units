@@ -28,7 +28,7 @@ export function OfflineIncome() {
   const [offlineTime, setOfflineTime] = useState("");
   const [bonusMessage, setBonusMessage] = useState("");
 
-  const MIN_OFFLINE_MS = 6000;
+  const MIN_OFFLINE_MS = 60000;
   const MAX_OFFLINE_MS = 14400000;
 
   const claimOfflineEarnings = () => {
