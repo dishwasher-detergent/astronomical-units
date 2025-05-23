@@ -11,8 +11,6 @@ export function getIconColorClass(
   equipmentItem: EquipmentItem,
   item: Equipment,
 ): string {
-  console.log(equipmentItem);
-
   if (!item.upgrades) return count > 10 ? "text-amber-400" : "currentColor";
 
   const thresholds = Object.values(item.upgrades).map(
@@ -28,8 +26,6 @@ export function getIconColorClass(
       return value >= item.upgrades[key].maxCount;
     },
   );
-
-  console.log(allUpgradesMaxed);
 
   if (allUpgradesMaxed) return "text-emerald-400";
 
