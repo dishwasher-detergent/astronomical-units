@@ -84,7 +84,7 @@ export default function Home() {
               <DrawerHeader>
                 <DrawerTitle>Equipment Map</DrawerTitle>
                 <DrawerDescription>
-                  Click on the map to view equipment.
+                  <Balance />
                 </DrawerDescription>
               </DrawerHeader>
               <div className="mx-4 h-96 overflow-hidden rounded-xl border">

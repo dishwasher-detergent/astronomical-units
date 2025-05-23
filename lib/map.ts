@@ -1,4 +1,4 @@
-import { Equipment } from "@/types";
+import { Equipment, EquipmentItem } from "@/types";
 
 /**
  * Get the icon color class based on the count and item upgrades.
@@ -6,7 +6,13 @@ import { Equipment } from "@/types";
  * @param item
  * @returns The icon color class.
  */
-export function getIconColorClass(count: number, item: Equipment): string {
+export function getIconColorClass(
+  count: number,
+  equipmentItem: EquipmentItem,
+  item: Equipment,
+): string {
+  console.log(equipmentItem);
+
   if (!item.upgrades) return count > 10 ? "text-amber-400" : "currentColor";
 
   const thresholds = Object.values(item.upgrades).map(
@@ -17,13 +23,18 @@ export function getIconColorClass(count: number, item: Equipment): string {
   const minThreshold = Math.min(...thresholds);
   const maxThreshold = Math.max(...thresholds);
 
-  const allUpgradesMaxed = Object.values(item.upgrades).every(
-    (upgrade) => count >= upgrade.threshold,
+  const allUpgradesMaxed = Object.entries(equipmentItem.upgrades).every(
+    ([key, value]) => {
+      return value >= item.upgrades[key].maxCount;
+    },
   );
+
+  console.log(allUpgradesMaxed);
+
   if (allUpgradesMaxed) return "text-emerald-400";
 
-  if (count >= maxThreshold * 2) return "text-purple-400";
-  if (count >= maxThreshold) return "text-amber-400";
+  if (count >= maxThreshold * 2) return "text-amber-400";
+  if (count >= maxThreshold) return "text-purple-400";
   if (count >= minThreshold) return "text-blue-400";
 
   return "currentColor";

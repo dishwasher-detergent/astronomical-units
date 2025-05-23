@@ -46,8 +46,8 @@ export type EquipmentObject = {
 
 export type EquipmentItem = {
   value: number;
-  upgrades?: Record<string, number>;
-  building?: Record<string, number>; // Map of timestamp when building will be complete
+  upgrades: Record<string, number>;
+  building?: Record<string, number>;
 };
 
 export type GameData = {

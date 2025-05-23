@@ -13,7 +13,13 @@ export type MapItemProps = {
   onItemClick: () => void;
 };
 
-export function MapItem({ item, position, count, onItemClick }: MapItemProps) {
+export function MapItem({
+  item,
+  position,
+  count,
+  onItemClick,
+  equipmentItem,
+}: MapItemProps) {
   return (
     <Button
       size="icon"
@@ -28,7 +34,9 @@ export function MapItem({ item, position, count, onItemClick }: MapItemProps) {
       title={`View ${item.name}`}
     >
       <div className="flex flex-col items-center justify-center">
-        <item.icon className={`size-6 ${getIconColorClass(count, item)}`} />
+        <item.icon
+          className={`size-6 ${getIconColorClass(count, equipmentItem, item)}`}
+        />
         <span className="mt-1 text-xs font-semibold">{count}</span>
       </div>
     </Button>
