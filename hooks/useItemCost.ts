@@ -114,19 +114,19 @@ export function useBulkCosts(key: string) {
 
     return {
       cost1: prestigeCost,
+      cost5: prestigeCost * 5,
       cost10: prestigeCost * 10,
       cost20: prestigeCost * 20,
-      cost50: prestigeCost * 50,
       itemCount: prestigeItemCount,
     };
   }
 
   const cost1 = useItemCost(key, "buy");
+  const cost5 = calculateBulkCost(key, itemCount, 5, discountPercentage);
   const cost10 = calculateBulkCost(key, itemCount, 10, discountPercentage);
   const cost20 = calculateBulkCost(key, itemCount, 20, discountPercentage);
-  const cost50 = calculateBulkCost(key, itemCount, 50, discountPercentage);
 
-  return { cost1, cost10, cost20, cost50, itemCount };
+  return { cost1, cost5, cost10, cost20, itemCount };
 }
 
 export function useAcquireCost(key: string) {
