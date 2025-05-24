@@ -5,18 +5,14 @@ import { LucideCrown } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { totalAu } from "@/atoms/au";
 import {
   canPrestige,
   performPrestige,
   prestigeLevel,
   prestigeMultiplier,
-  currentLifetimeLevel,
-  lifetimeLevelProgress,
 } from "@/atoms/prestige";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/formatters";
-import { getNextLevelRequirement } from "@/lib/prestige";
 
 export function Prestige() {
   const [open, setOpen] = useState(false);
@@ -24,16 +20,6 @@ export function Prestige() {
   const level = useAtomValue(prestigeLevel) || 0;
   const multiplier = useAtomValue(prestigeMultiplier) || 1;
   const doPrestige = useSetAtom(performPrestige);
-
-  const currentLifetimeIncomeValue = useAtomValue(totalAu);
-  const lifetimeLevel = useAtomValue(currentLifetimeLevel);
-  const levelProgress = useAtomValue(lifetimeLevelProgress);
-  const currentPrestigeLevel = useAtomValue(prestigeLevel) || 0;
-
-  const nextLevelRequirement = getNextLevelRequirement(
-    lifetimeLevel,
-    currentPrestigeLevel,
-  );
 
   return (
     <DynamicDrawer
@@ -53,64 +39,32 @@ export function Prestige() {
       }
     >
       <div className="space-y-4">
-        <div className="rounded-md border p-4">
-          <p className="mb-2 font-medium">Level Progress</p>
-          <div className="flex items-center gap-2">
-            <p className="text-muted-foreground text-sm">Current Level:</p>
-            <p className="text-xl font-semibold">{lifetimeLevel}/100</p>
-          </div>
-
-          {lifetimeLevel < 100 && nextLevelRequirement && (
-            <>
-              <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-gray-200">
-                <div
-                  className="bg-primary h-full"
-                  style={{ width: `${levelProgress}%` }}
-                />
-              </div>
-              <p className="text-muted-foreground mt-1 text-xs">
-                Progress: {formatMoney(currentLifetimeIncomeValue)} /{" "}
-                {formatMoney(nextLevelRequirement)} AU (
-                {Math.round(levelProgress)}%)
-              </p>
-            </>
-          )}
-
-          {lifetimeLevel >= 100 && (
-            <p className="text-muted-foreground mt-1 text-sm font-semibold">
-              Maximum level reached! You can now prestige to reset and gain
-              permanent bonuses.
-            </p>
-          )}
-
-          <p className="text-muted-foreground mt-2 text-sm">
-            Earn income to increase your level from 1 to 100. Once you reach
-            level 100, you can prestige to reset your progress and prestige
-            points. Each prestige will require you to reach level 100 again, but
-            with higher income requirements.
-          </p>
-        </div>
+        <p className="text-muted-foreground mt-2 text-sm">
+          Prestiging will reset your progress, but you will gain a multiplier to
+          your income and unlock new upgrades. You can only prestige once you
+          reach level 100.
+        </p>
         <div className="bg-muted rounded-md p-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm font-medium">Reset Count</p>
+              <p className="text-sm font-medium">Prestige Count</p>
               <p className="font-mono text-xl font-bold">{level}</p>
             </div>
             <div>
-              <p className="text-sm font-medium">Current Multiplier</p>
+              {" "}
+              <p className="text-sm font-medium">Next Multiplier</p>
               <p className="font-mono text-xl font-bold">
-                {formatMoney(multiplier)}
+                {formatMoney(multiplier + 0.25)}
               </p>
             </div>
           </div>
         </div>{" "}
         <footer className="flex items-center justify-between">
-          <div className="text-muted-foreground text-sm">
-            {canPerformPrestige
-              ? "You will gain 5 prestige points"
-              : `You need to reach Level 100 (currently ${lifetimeLevel})`}
-          </div>
-          <Button onClick={() => doPrestige()} disabled={!canPerformPrestige}>
+          <Button
+            className="w-full"
+            onClick={() => doPrestige()}
+            disabled={!canPerformPrestige}
+          >
             Prestige Now
           </Button>
         </footer>
