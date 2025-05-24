@@ -39,7 +39,7 @@ export function PrestigeLevelIndicator() {
         <div className="w-full">
           {lifetimeLevel < 100 ? (
             <>
-              <div className="mb-1 flex items-center justify-between text-xs">
+              <div className="mb-1 flex items-center justify-between text-sm">
                 <span>Next Level:</span>
                 <span>{formatMoney(nextLevelRequirement)} AU</span>
               </div>

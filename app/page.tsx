@@ -110,7 +110,7 @@ export default function Home() {
       </div>
       <div className="flex flex-1 flex-col overflow-hidden xl:flex-row">
         <div className="flex w-full flex-col border-b lg:border-r xl:w-96">
-          <div className="grid h-20 place-items-center border-b p-2">
+          <div className="grid h-22 place-items-center border-b p-2">
             <PrestigeLevelIndicator />
           </div>
           <div className="flex-1">
@@ -134,7 +134,7 @@ export default function Home() {
           </div>
           <div className="flex-1 overflow-y-auto">
             <Crew />
-            <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b px-4 py-2 font-semibold">
+            <nav className="bg-background sticky top-0 z-50 flex items-center justify-between border-b px-4 py-3 font-semibold">
               <p>Equipment</p>
             </nav>
             <EquipmentDisplay />

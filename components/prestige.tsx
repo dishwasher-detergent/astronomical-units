@@ -39,7 +39,7 @@ export function Prestige() {
       }
     >
       <div className="space-y-4">
-        <p className="text-muted-foreground mt-2 text-sm">
+        <p className="mt-2 text-sm">
           Prestiging will reset your progress, but you will gain a multiplier to
           your income and unlock new upgrades. You can only prestige once you
           reach level 100.

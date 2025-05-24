@@ -74,8 +74,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     equipment: false,
     icon: LucidePersonStanding,
     mapPosition: {
-      x: 60,
-      y: 50,
+      x: 61,
+      y: 47,
     },
     upgrades: {
       training: {

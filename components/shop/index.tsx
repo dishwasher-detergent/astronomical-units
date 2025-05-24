@@ -19,8 +19,8 @@ export function Shop() {
   return (
     <div className="relative">
       <Tabs defaultValue="general" className="w-full">
-        <nav className="bg-background sticky top-0 z-50 flex h-10 flex-col items-center justify-between font-semibold md:h-20">
-          <p className="hidden w-full px-4 py-2 md:inline">Shop</p>
+        <nav className="bg-background sticky top-0 z-50 flex h-10 flex-col items-center justify-between overflow-hidden font-semibold md:h-22">
+          <p className="hidden w-full px-4 py-3 md:inline">Shop</p>
           <TabsList className="bg-background h-full w-full rounded-none border-y p-0">
             <TabsTrigger
               value="general"
