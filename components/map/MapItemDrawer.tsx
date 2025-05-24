@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { DisplayItem } from "@/components/display/DisplayItem";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
-import { getIconColorClass } from "@/lib/utils";
+import { getIconColor } from "@/lib/map";
 
 export type MapItemDrawerProps = {
   item: Equipment;
@@ -39,7 +39,8 @@ export function MapItemDrawer({
         >
           <div className="flex flex-col items-center justify-center">
             <item.icon
-              className={`size-6 ${getIconColorClass(count, equipmentItem, item)}`}
+              className="size-6"
+              style={{ color: getIconColor(count, equipmentItem, item) }}
             />
             <span className="mt-1 text-xs font-semibold">{count}</span>
           </div>

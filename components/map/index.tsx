@@ -10,6 +10,7 @@ import { BackgroundStars, ConnectionLines } from "@/components/map/MapElements";
 import { useMapEquipment } from "@/hooks/useMapEquipment";
 import { useMapStars } from "@/hooks/useMapStars";
 import { EquipmentWithPosition } from "@/types";
+import { MapKey } from "@/components/map/MapKey";
 
 export function Map() {
   const isMobile = useIsMobile();
@@ -52,7 +53,7 @@ export function Map() {
       <BackgroundStars stars={stars} />
       {equipmentWithPositions.map(renderEquipmentItem)}
       <ConnectionLines items={equipmentWithPositions} />
-
+      <MapKey />
       {equipmentWithPositions.length === 0 && (
         <div className="z-10 rounded-lg p-4 text-center">
           <p className="text-muted-foreground text-sm font-semibold">

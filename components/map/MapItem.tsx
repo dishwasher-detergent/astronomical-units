@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { getIconColor } from "@/lib/map";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
-import { getIconColorClass } from "@/lib/utils";
 
 export type MapItemProps = {
   item: Equipment;
@@ -35,7 +35,8 @@ export function MapItem({
     >
       <div className="flex flex-col items-center justify-center">
         <item.icon
-          className={`size-6 ${getIconColorClass(count, equipmentItem, item)}`}
+          className="size-6"
+          style={{ color: getIconColor(count, equipmentItem, item) }}
         />
         <span className="mt-1 text-xs font-semibold">{count}</span>
       </div>
