@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
 import { Upgrade } from "@/components/shop/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
@@ -21,22 +21,32 @@ export const DisplayUpgrade = memo(
       equipment.upgrades &&
       Object.values(equipment.upgrades).some((upgrade) => upgrade > 0);
 
-    const equippedUpgradesElements = hasEquippedUpgrades
-      ? Object.entries(equipment.upgrades || {}).flatMap(
-          ([upgradeKey, upgradeVal]) => {
-            const upgrades = item?.upgrades;
-            if (!upgrades || upgradeVal <= 0) return [];
+    const equippedUpgradesElements = useMemo(() => {
+      if (!hasEquippedUpgrades) {
+        return [];
+      }
+      return Object.entries(equipment.upgrades || {}).flatMap(
+        ([upgradeKey, upgradeVal]) => {
+          const upgrades = item?.upgrades;
+          if (!upgrades || !upgrades[upgradeKey] || upgradeVal <= 0) {
+            return [];
+          }
 
-            const Icon = upgrades[upgradeKey].icon;
-            return Array.from({ length: upgradeVal }, (_, i) => (
-              <Icon
-                key={`${upgradeKey}_${i}`}
-                className="text-foreground size-4 flex-none"
-              />
-            ));
-          },
-        )
-      : [];
+          const Icon = upgrades[upgradeKey].icon;
+
+          if (!Icon) {
+            return [];
+          }
+
+          return Array.from({ length: upgradeVal }, (_, i) => (
+            <Icon
+              key={`${upgradeKey}_${i}`}
+              className="text-foreground size-4 flex-none"
+            />
+          ));
+        },
+      );
+    }, [hasEquippedUpgrades, equipment.upgrades, item?.upgrades]);
 
     return (
       <>
