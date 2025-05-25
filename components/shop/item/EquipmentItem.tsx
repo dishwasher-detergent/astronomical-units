@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { useMemo } from "react";
 
 import { au } from "@/atoms/au";
@@ -48,7 +48,7 @@ export function EquipmentItem({ elementKey }: EquipmentItemProps) {
 }
 
 export function SellEquipmentItem({ elementKey }: EquipmentItemProps) {
-  const [auValue, setAu] = useAtom(au);
+  const setAu = useSetAtom(au);
   const equipAtoms = useMemo(
     () => createEquipmentAtom(elementKey),
     [elementKey],
