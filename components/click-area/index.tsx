@@ -93,9 +93,9 @@ export function ClickArea() {
         ref={buttonRef}
         onClick={handleClick}
         tabIndex={0}
-        className="bg-muted hover:bg-muted relative flex h-full min-h-48 w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none"
+        className="bg-primary hover:bg-primary relative flex h-full min-h-48 w-full flex-none flex-col items-center justify-center overflow-hidden rounded-none"
       >
-        <div className="text-primary z-10 flex flex-col items-center">
+        <div className="text-primary-foreground z-10 flex flex-col items-center">
           {isMobile ? (
             <span>Tap Here</span>
           ) : (

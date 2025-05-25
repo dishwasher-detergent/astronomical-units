@@ -120,12 +120,12 @@ export function useClickParticles() {
           key={particle.id}
           className={`absolute font-bold ${
             particle.isBonus
-              ? "text-2xl text-yellow-400 drop-shadow-[0_0_4px_rgba(253,224,71,0.7)]"
+              ? "text-2xl text-yellow-200 drop-shadow-[0_0_4px_rgba(253,224,71,0.7)]"
               : particle.isPassive
-                ? "text-sm text-blue-400"
+                ? "text-sm text-blue-200"
                 : particle.value > 0
-                  ? "text-xl text-green-500"
-                  : "text-xl text-red-500"
+                  ? "text-xl text-green-200"
+                  : "text-xl text-red-200"
           } ${particle.isBonus && !particle.value ? "text-[10px] opacity-80" : ""}`}
           style={{
             left: `${particle.x}px`,
