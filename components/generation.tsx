@@ -1,13 +1,11 @@
 "use client";
 
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 
 import { equipment, equipmentRate } from "@/atoms/equipment";
 import { autoIncrement } from "@/atoms/au";
 import { useAnimation } from "@/hooks/useAnimation";
-import { generateEquipmentObject } from "@/lib/equipment";
-import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { lastUpdated } from "@/atoms/global";
 
 type BuildQueueItem = {
@@ -25,6 +23,11 @@ export function Generation() {
 
   const buildQueueRef = useRef<BuildQueueItem[]>([]);
   const nextCompletionRef = useRef<number | null>(null);
+  const timerIdRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUpdateTimeRef = useRef<number>(Date.now());
+  const pendingUpdatesRef = useRef<Record<string, any>>({});
+  const updateScheduledRef = useRef<boolean>(false);
+  const batchedUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const show =
     Object.keys(equipmentValue).filter((key) => equipmentValue[key].value > 0)
@@ -38,14 +41,77 @@ export function Generation() {
     return hasBuildings;
   }, [equipmentValue]);
 
+  const applyBatchedUpdates = useCallback(() => {
+    if (Object.keys(pendingUpdatesRef.current).length === 0) {
+      updateScheduledRef.current = false;
+      return;
+    }
+
+    const updatedEquipment = { ...equipmentValue };
+    let hasChanges = false;
+
+    Object.entries(pendingUpdatesRef.current).forEach(([key, itemUpdate]) => {
+      if (updatedEquipment[key]) {
+        updatedEquipment[key] = {
+          ...updatedEquipment[key],
+          ...itemUpdate,
+        };
+        hasChanges = true;
+      }
+    });
+
+    pendingUpdatesRef.current = {};
+    updateScheduledRef.current = false;
+
+    if (hasChanges) {
+      setEquipment(updatedEquipment);
+    }
+  }, [equipmentValue, setEquipment]);
+
+  const scheduleUpdate = useCallback(
+    (updates: Record<string, any>) => {
+      Object.entries(updates).forEach(([key, value]) => {
+        pendingUpdatesRef.current[key] = {
+          ...(pendingUpdatesRef.current[key] || {}),
+          ...value,
+        };
+      });
+
+      if (!updateScheduledRef.current) {
+        updateScheduledRef.current = true;
+
+        if (batchedUpdateTimeoutRef.current) {
+          clearTimeout(batchedUpdateTimeoutRef.current);
+        }
+
+        batchedUpdateTimeoutRef.current = setTimeout(() => {
+          applyBatchedUpdates();
+          batchedUpdateTimeoutRef.current = null;
+        }, 16);
+      }
+    },
+    [applyBatchedUpdates],
+  );
+
   useAnimation((deltaTime) => {
-    setDelta((current) => current + deltaTime);
+    const now = Date.now();
+    const elapsed = now - lastUpdateTimeRef.current;
+
+    if (elapsed >= 16) {
+      setDelta((current) => current + deltaTime);
+      lastUpdateTimeRef.current = now;
+    }
   }, !show);
 
   useEffect(() => {
     if (!hasBuildingsInProgress) {
       buildQueueRef.current = [];
       nextCompletionRef.current = null;
+
+      if (timerIdRef.current) {
+        clearTimeout(timerIdRef.current);
+        timerIdRef.current = null;
+      }
       return;
     }
 
@@ -74,23 +140,24 @@ export function Generation() {
 
       if (queue.length === 0 || queue[0].time > now) return false;
 
-      const updatedEquipment = { ...equipmentValue };
+      const updates: Record<string, any> = {};
       let hasUpdates = false;
 
       while (queue.length > 0 && queue[0].time <= now) {
         const { key, time, count } = queue.shift()!;
 
-        const item = updatedEquipment[key];
+        const item = equipmentValue[key];
         if (item && item.building) {
-          updatedEquipment[key] = {
-            ...item,
-            value: item.value + count,
-            building: {
-              ...item.building,
-            },
-          };
-
-          delete updatedEquipment[key].building![time.toString()];
+          if (!updates[key]) {
+            updates[key] = {
+              value: item.value + count,
+              building: { ...item.building },
+            };
+            delete updates[key].building[time.toString()];
+          } else {
+            updates[key].value += count;
+            delete updates[key].building[time.toString()];
+          }
           hasUpdates = true;
         }
       }
@@ -98,15 +165,20 @@ export function Generation() {
       nextCompletionRef.current = queue.length > 0 ? queue[0].time : null;
 
       if (hasUpdates) {
-        setEquipment(updatedEquipment);
+        scheduleUpdate(updates);
       }
 
       return hasUpdates;
     };
 
+    if (timerIdRef.current) {
+      clearTimeout(timerIdRef.current);
+      timerIdRef.current = null;
+    }
+
     processCompletions();
 
-    const checkBuildingsTimer = () => {
+    const scheduleNextCheck = () => {
       const nextCompletion = nextCompletionRef.current;
 
       if (nextCompletion === null) return;
@@ -116,16 +188,28 @@ export function Generation() {
 
       if (timeUntilNext === 0) {
         if (processCompletions() && buildQueueRef.current.length > 0) {
-          setTimeout(checkBuildingsTimer, 0);
+          timerIdRef.current = setTimeout(scheduleNextCheck, 0);
         }
       } else {
-        const delay = Math.min(timeUntilNext, 1000); // Cap at 1 second to handle any timing drift
-        setTimeout(checkBuildingsTimer, delay);
+        const delay = Math.min(timeUntilNext, 1000);
+        timerIdRef.current = setTimeout(scheduleNextCheck, delay);
       }
     };
 
-    checkBuildingsTimer();
-  }, [hasBuildingsInProgress, equipmentValue, setEquipment]);
+    scheduleNextCheck();
+
+    return () => {
+      if (timerIdRef.current) {
+        clearTimeout(timerIdRef.current);
+        timerIdRef.current = null;
+      }
+
+      if (batchedUpdateTimeoutRef.current) {
+        clearTimeout(batchedUpdateTimeoutRef.current);
+        batchedUpdateTimeoutRef.current = null;
+      }
+    };
+  }, [hasBuildingsInProgress, equipmentValue, scheduleUpdate]);
 
   useEffect(() => {
     if (delta >= equipmentRateValue) {
