@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { getIconColor } from "@/lib/map";
+import { getAdjustedPosition, getIconColor } from "@/lib/map";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export type MapItemProps = {
   item: Equipment;
@@ -20,14 +21,16 @@ export function MapItem({
   onItemClick,
   equipmentItem,
 }: MapItemProps) {
+  const adjustedPosition = getAdjustedPosition(position);
+
   return (
     <Button
       size="icon"
       variant="ghost"
       className="absolute h-fit w-fit p-2"
       style={{
-        left: `${position.x}%`,
-        top: `${position.y}%`,
+        left: `${adjustedPosition.x}%`,
+        top: `${adjustedPosition.y}%`,
         transform: "translate(-50%, -50%)",
       }}
       onClick={onItemClick}

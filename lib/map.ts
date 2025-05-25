@@ -1,4 +1,4 @@
-import { Equipment, EquipmentItem } from "@/types";
+import { Equipment, EquipmentItem, MapPosition } from "@/types";
 
 /**
  * Get the icon color class based on the count and item upgrades.
@@ -32,4 +32,25 @@ export function getIconColor(
   if (count >= minThreshold) return "var(--upgrade-1)";
 
   return "currentColor";
+}
+
+/**
+ * Adjust map positions for mobile displays to fit better in a square format
+ * @param position Original position (percentage based)
+ * @returns Adjusted position object with x and y coordinates
+ */
+export function getAdjustedPosition(position: MapPosition): MapPosition {
+  const centerX = 50;
+  const centerY = 70;
+
+  const distanceFromCenter = position.x - centerX;
+  const expandedX = centerX + distanceFromCenter * 1.5;
+
+  const verticalDistance = position.y - centerY;
+  const expandedY = centerY + verticalDistance * 1.6;
+
+  return {
+    x: Math.min(Math.max(expandedX, 5), 95),
+    y: Math.min(Math.max(expandedY, 5), 70),
+  };
 }
