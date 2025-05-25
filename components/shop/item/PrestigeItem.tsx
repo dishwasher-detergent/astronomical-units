@@ -2,6 +2,7 @@
 
 import { atom, useAtom, useAtomValue } from "jotai";
 import { focusAtom } from "jotai-optics";
+import { useCallback } from "react";
 
 import { ShopItem } from "@/components/shop/item/ShopItem";
 import {
@@ -17,6 +18,21 @@ interface PrestigeItemProps {
 
 const findNextItemByThreshold = (currentValue: number): string => {
   const upgrades = Object.entries(PRESTIGE_UPGRADES).sort((a, b) => {
+    return a[1].threshold - b[1].threshold;
+  });
+
+  const nextUpgrade = upgrades.find(([_, upgrade]) => {
+    return upgrade.threshold > currentValue;
+  });
+
+  return nextUpgrade ? nextUpgrade[0] : upgrades[upgrades.length - 1][0];
+};
+
+const memoizedFindNextItemByThreshold = (
+  currentValue: number,
+  list: object,
+) => {
+  const upgrades = Object.entries(list).sort((a, b) => {
     return a[1].threshold - b[1].threshold;
   });
 
@@ -46,7 +62,10 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
   const element = PRESTIGE_UPGRADES[upgradeKey];
   const maxCount = element.maxCount || Infinity;
 
-  const nextItem = findNextItemByThreshold(totalPP);
+  const findNextItem = useCallback(
+    () => memoizedFindNextItemByThreshold(totalPP, PRESTIGE_UPGRADES),
+    [totalPP],
+  );
 
   return (
     <ShopItem
@@ -59,7 +78,7 @@ export function PrestigeItem({ upgradeKey }: PrestigeItemProps) {
         name: "PP",
       }}
       maxCount={maxCount}
-      next={nextItem}
+      next={findNextItem()}
     />
   );
 }

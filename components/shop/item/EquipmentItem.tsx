@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom, useSetAtom } from "jotai";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 
 import { au } from "@/atoms/au";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
@@ -26,12 +26,33 @@ const findNextItemByThreshold = (currentValue: number): string => {
   return nextUpgrade ? nextUpgrade[0] : upgrades[upgrades.length - 1][0];
 };
 
+const memoizedFindNextItemByThreshold = (
+  currentValue: number,
+  list: object,
+) => {
+  const upgrades = Object.entries(list).sort((a, b) => {
+    return a[1].threshold - b[1].threshold;
+  });
+
+  const nextUpgrade = upgrades.find(([_, upgrade]) => {
+    return upgrade.threshold > currentValue;
+  });
+
+  return nextUpgrade ? nextUpgrade[0] : upgrades[upgrades.length - 1][0];
+};
+
 export function EquipmentItem({ elementKey }: EquipmentItemProps) {
   const [auValue, setAu] = useAtom(au);
   const equipAtoms = useMemo(
     () => createEquipmentAtom(elementKey),
     [elementKey],
   );
+
+  const findNextItem = useCallback(
+    () => memoizedFindNextItemByThreshold(auValue, EQUIPMENT_LIST),
+    [auValue],
+  );
+
   return (
     <ShopItem
       elementKey={elementKey}
@@ -42,7 +63,7 @@ export function EquipmentItem({ elementKey }: EquipmentItemProps) {
         update: setAu,
         name: "AU",
       }}
-      next={findNextItemByThreshold(auValue)}
+      next={findNextItem()}
     />
   );
 }

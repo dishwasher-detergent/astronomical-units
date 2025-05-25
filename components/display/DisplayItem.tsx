@@ -1,9 +1,8 @@
 "use client";
 
-import { memo, useState, useEffect, useRef } from "react";
+import { memo, useState, useEffect, useRef, useMemo } from "react";
 import { useAtomValue } from "jotai";
 
-import { Badge } from "@/components/ui/badge";
 import { DisplayUpgrade } from "@/components/display/DisplayUpgrade";
 import { Equipment, EquipmentItem } from "@/types";
 import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
@@ -26,9 +25,6 @@ export const DisplayItem = memo(
     const Icon = item.icon;
     const itemRef = useRef<HTMLDivElement>(null);
     const scrollToEquipment = useAtomValue(scrollToEquipmentAtom);
-    const [buildingItems, setBuildingItems] = useState<{
-      [key: string]: { count: number; timeLeft: number; progress: number };
-    }>({});
     const [now, setNow] = useState(Date.now());
     const { multiplier: buildTimeMultiplier } = useBuildTimeReduction();
 
@@ -49,10 +45,9 @@ export const DisplayItem = memo(
       }
     }, [scrollToEquipment, elementKey]);
 
-    useEffect(() => {
+    const buildingItems = useMemo(() => {
       if (!equipment.building || Object.keys(equipment.building).length === 0) {
-        setBuildingItems({});
-        return;
+        return {};
       }
 
       const updatedBuildingItems: {
@@ -75,16 +70,19 @@ export const DisplayItem = memo(
           progress,
         };
       });
+      return updatedBuildingItems;
+    }, [now, equipment.building, item.buildTime, buildTimeMultiplier]);
 
-      setBuildingItems(updatedBuildingItems);
-    }, [now, equipment.building, item.buildTime]);
+    const buildingItemCount = useMemo(() => {
+      return Object.values(buildingItems).reduce(
+        (sum, item) => sum + item.count,
+        0,
+      );
+    }, [buildingItems]);
 
-    const buildingItemCount = Object.values(buildingItems).reduce(
-      (sum, item) => sum + item.count,
-      0,
-    );
-
-    const completedItemCount = equipment.value - buildingItemCount;
+    const completedItemCount = useMemo(() => {
+      return equipment.value - buildingItemCount;
+    }, [equipment.value, buildingItemCount]);
 
     return (
       <article

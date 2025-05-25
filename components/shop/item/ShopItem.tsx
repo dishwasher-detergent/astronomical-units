@@ -1,8 +1,8 @@
 "use client";
 
-import { atom, useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { WritableAtom } from "jotai";
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 import { showElement } from "@/atoms/show";
@@ -41,61 +41,85 @@ export function ShopItem({
 
   const { cost1, cost5, cost10, cost20, itemCount } = useBulkCosts(elementKey);
 
-  const isShowing = showElementValue[elementKey];
-  const Icon = details?.icon || LucidePlus;
-  const canAcquire = cost1 <= currency.value && itemCount < maxCount;
+  const isShowing = useMemo(
+    () => showElementValue[elementKey],
+    [showElementValue, elementKey],
+  );
+  const Icon = useMemo(() => details?.icon || LucidePlus, [details]);
+  const canAcquire = useMemo(
+    () => cost1 <= currency.value && itemCount < maxCount,
+    [cost1, currency.value, itemCount, maxCount],
+  );
 
-  const handlePurchase = (quantity: number = 1) => {
-    if (!canAcquire && quantity === 1) return;
-    if (itemCount >= maxCount) return;
+  const handlePurchase = useCallback(
+    (quantity: number = 1) => {
+      if (!canAcquire && quantity === 1) return;
+      if (itemCount >= maxCount) return;
 
-    const isPrestigeUpgrade =
-      details.multiplier !== undefined && details.auPerSecond === undefined;
+      const isPrestigeUpgrade =
+        details.multiplier !== undefined && details.auPerSecond === undefined;
 
-    let totalCost: number;
-    switch (quantity) {
-      case 5:
-        totalCost = cost5;
-        break;
-      case 10:
-        totalCost = cost10;
-        break;
-      case 20:
-        totalCost = cost20;
-        break;
-      default:
-        totalCost = cost1;
-    }
-
-    if (totalCost > currency.value || itemCount + quantity > maxCount) return;
-    const actualQuantity = Math.min(quantity, maxCount - itemCount);
-
-    if (actualQuantity <= 0) return;
-
-    let actualCost = totalCost;
-    if (actualQuantity < quantity) {
-      if (isPrestigeUpgrade) {
-        actualCost = cost1 * actualQuantity;
-      } else {
-        const discountCount = allUpgrades.upgradeDiscount || 0;
-        const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
-        actualCost = calculateBulkCost(
-          elementKey,
-          itemCount,
-          actualQuantity,
-          discountPercentage,
-        );
+      let totalCost: number;
+      switch (quantity) {
+        case 5:
+          totalCost = cost5;
+          break;
+        case 10:
+          totalCost = cost10;
+          break;
+        case 20:
+          totalCost = cost20;
+          break;
+        default:
+          totalCost = cost1;
       }
-    }
 
-    const baseValue = typeof itemValue === "number" ? itemValue : 0;
-    const newItemValue = Math.min(baseValue + actualQuantity, maxCount);
-    setItemValue(newItemValue);
+      if (totalCost > currency.value || itemCount + quantity > maxCount) return;
+      const actualQuantity = Math.min(quantity, maxCount - itemCount);
 
-    currency.update((current) => current - actualCost);
+      if (actualQuantity <= 0) return;
 
-    onPurchase?.();
-  };
+      let actualCost = totalCost;
+      if (actualQuantity < quantity) {
+        if (isPrestigeUpgrade) {
+          actualCost = cost1 * actualQuantity;
+        } else {
+          const discountCount = allUpgrades.upgradeDiscount || 0;
+          const discountPercentage = discountCount > 0 ? discountCount * 5 : 0;
+          actualCost = calculateBulkCost(
+            elementKey,
+            itemCount,
+            actualQuantity,
+            discountPercentage,
+          );
+        }
+      }
+
+      const baseValue = typeof itemValue === "number" ? itemValue : 0;
+      const newItemValue = Math.min(baseValue + actualQuantity, maxCount);
+      setItemValue(newItemValue);
+
+      currency.update((current) => current - actualCost);
+
+      onPurchase?.();
+    },
+    [
+      canAcquire,
+      itemCount,
+      maxCount,
+      cost1,
+      cost5,
+      cost10,
+      cost20,
+      currency,
+      details,
+      elementKey,
+      itemValue,
+      setItemValue,
+      onPurchase,
+      allUpgrades,
+    ],
+  );
 
   if (isShowing) {
     const isPrestigeUpgrade =
