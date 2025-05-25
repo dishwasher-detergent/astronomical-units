@@ -39,13 +39,7 @@ export function ShopItem({
   const [itemValue, setItemValue] = useAtom(itemAtom);
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
 
-  const {
-    cost1,
-    cost5,
-    cost10,
-    cost20,
-    itemCount,
-  } = useBulkCosts(elementKey);
+  const { cost1, cost5, cost10, cost20, itemCount } = useBulkCosts(elementKey);
 
   const isShowing = showElementValue[elementKey];
   const Icon = details?.icon || LucidePlus;
@@ -165,7 +159,7 @@ export function ShopItem({
               </span>
               <Button
                 variant="default"
-                className="h-8 w-full px-0.5 text-xs"
+                className="w-full px-0.5 text-xs md:h-8"
                 disabled={!canAcquire}
                 onClick={() => handlePurchase(1)}
               >
@@ -179,7 +173,7 @@ export function ShopItem({
                 </span>
                 <Button
                   variant="secondary"
-                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  className="w-full flex-1 px-0.5 text-xs md:h-8"
                   disabled={!canBuy5}
                   onClick={() => handlePurchase(5)}
                   title={`Cost: ${formatMoney(cost5)} ${currency.name}`}
@@ -195,7 +189,7 @@ export function ShopItem({
                 </span>
                 <Button
                   variant="secondary"
-                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  className="w-full flex-1 px-0.5 text-xs md:h-8"
                   disabled={!canBuy10}
                   onClick={() => handlePurchase(10)}
                   title={`Cost: ${formatMoney(cost10)} ${currency.name}`}
@@ -211,7 +205,7 @@ export function ShopItem({
                 </span>
                 <Button
                   variant="secondary"
-                  className="h-8 w-full flex-1 px-0.5 text-xs"
+                  className="w-full flex-1 px-0.5 text-xs md:h-8"
                   disabled={!canBuy20}
                   onClick={() => handlePurchase(20)}
                   title={`Cost: ${formatMoney(cost20)} ${currency.name}`}
