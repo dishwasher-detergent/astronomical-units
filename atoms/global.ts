@@ -29,7 +29,7 @@ const initPrestigeUpgrades = () => {
  * Initial game state data
  */
 const initialGameData: GameData = {
-  income: AU,
+  income: { ...AU },
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
   show: {},
   last_updated: 0,

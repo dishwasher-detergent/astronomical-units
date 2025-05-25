@@ -1,10 +1,9 @@
 "use client";
 
 import { useAtomValue, useSetAtom } from "jotai";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import {
-  addAu,
   auIncrement,
   clickValueAtom,
   equipmentProductionRates,
@@ -14,7 +13,6 @@ import { crew } from "@/atoms/crew";
 import { LOCALE } from "@/constants/GLOBAL";
 import { prestigeMultiplier, prestigeUpgrades } from "@/atoms/prestige";
 import { useClickParticles } from "./click-particles";
-import { animationsEnabled } from "@/atoms/ui";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ClickArea() {
@@ -23,7 +21,6 @@ export function ClickArea() {
   const crewAtom = useAtomValue(crew);
   const clickValue = useAtomValue(clickValueAtom);
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
-  const showAnimations = useAtomValue(animationsEnabled);
   const containerRef = useRef<HTMLDivElement>(null);
   const productionRates = useAtomValue(equipmentProductionRates);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -35,19 +32,17 @@ export function ClickArea() {
     useClickParticles();
 
   const handleClick = (e: React.MouseEvent) => {
-    if (showAnimations) {
-      const rect = containerRef.current?.getBoundingClientRect();
-      const x = e.clientX - (rect?.left || 0);
-      const y = e.clientY - (rect?.top || 0);
+    const rect = containerRef.current?.getBoundingClientRect();
+    const x = e.clientX - (rect?.left || 0);
+    const y = e.clientY - (rect?.top || 0);
 
-      addParticle(x, y, clickValue, false);
-    }
+    addParticle(x, y, clickValue, false);
 
     setClicks();
   };
 
   const triggerParticleInCenter = () => {
-    if (showAnimations && containerRef.current) {
+    if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
@@ -69,10 +64,10 @@ export function ClickArea() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [showAnimations, clickValue]);
+  }, [clickValue]);
 
   useEffect(() => {
-    if (!showAnimations || auPerSecond <= 0) return;
+    if (auPerSecond <= 0) return;
 
     const containerWidth = containerRef.current?.clientWidth || 0;
     const containerHeight = containerRef.current?.clientHeight || 0;
@@ -88,7 +83,7 @@ export function ClickArea() {
 
   return (
     <div ref={containerRef} className="relative h-full min-h-48 w-full">
-      {showAnimations && renderParticles()}
+      {renderParticles()}
       <Button
         ref={buttonRef}
         onClick={handleClick}
