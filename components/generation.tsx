@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import { equipment, equipmentRate } from "@/atoms/equipment";
 import { autoIncrement } from "@/atoms/au";
@@ -22,16 +22,22 @@ export function Generation() {
     Object.keys(equipmentValue).filter((key) => equipmentValue[key].value > 0)
       .length > 0;
 
+  const hasBuildingsInProgress = useMemo(() => {
+    return Object.values(equipmentValue).some(
+      (item) => item.building && Object.keys(item.building).length > 0,
+    );
+  }, [equipmentValue]);
+
   useAnimation((deltaTime) => {
     setDelta((current) => current + deltaTime);
   }, !show);
-  // Check for completed buildings
+
   useEffect(() => {
+    if (!hasBuildingsInProgress) return;
+
     const checkBuildingCompletion = () => {
       const now = Date.now();
       let hasUpdates = false;
-
-      // Create a copy of the equipment state to modify
       const updatedEquipment = { ...equipmentValue };
 
       Object.entries(equipmentValue).forEach(([key, item]) => {
@@ -50,6 +56,7 @@ export function Generation() {
           if (completedCount > 0) {
             updatedEquipment[key] = {
               ...item,
+              value: item.value + completedCount,
               building: newBuilding,
             };
           }
@@ -61,10 +68,23 @@ export function Generation() {
       }
     };
 
-    // Check every 500ms for completed buildings
-    const interval = setInterval(checkBuildingCompletion, 500);
+    const intervalTime = Math.min(
+      500,
+      Math.max(
+        100,
+        500 -
+          Object.values(equipmentValue).reduce((count, item) => {
+            return (
+              count + (item.building ? Object.keys(item.building).length : 0)
+            );
+          }, 0) *
+            5,
+      ),
+    );
+
+    const interval = setInterval(checkBuildingCompletion, intervalTime);
     return () => clearInterval(interval);
-  }, [equipmentValue, setEquipment]);
+  }, [hasBuildingsInProgress, equipmentValue, setEquipment]);
 
   useEffect(() => {
     if (delta >= equipmentRateValue) {

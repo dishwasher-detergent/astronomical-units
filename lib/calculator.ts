@@ -1,5 +1,4 @@
 import { Equipment, EquipmentItem } from "@/types";
-import { upgradeMultiplierCalc } from "./caching";
 
 /**
  * Optimized function to calculate upgrade multipliers using memoization
@@ -13,26 +12,22 @@ export function calculateUpgradeMultiplierOptimized(
   item: Equipment,
   prestigeMultiplier: number = 1,
 ): number {
-  const cacheKey = `${JSON.stringify(equipment)}-${item?.name}-${prestigeMultiplier}`;
+  let multiplier = 1;
 
-  return upgradeMultiplierCalc.calculate(() => {
-    let multiplier = 1;
-
-    if (!item) {
-      return multiplier * prestigeMultiplier;
-    }
-
-    if (equipment?.upgrades) {
-      multiplier += Object.entries(equipment.upgrades).reduce(
-        (acc, [upgradeKey, upgradeVal]) => {
-          const upgradeItem = item.upgrades?.[upgradeKey];
-          if (!upgradeItem) return acc;
-          return acc + (upgradeItem.multiplier ?? 1) * upgradeVal;
-        },
-        0,
-      );
-    }
-
+  if (!item) {
     return multiplier * prestigeMultiplier;
-  }, cacheKey);
+  }
+
+  if (equipment?.upgrades) {
+    multiplier += Object.entries(equipment.upgrades).reduce(
+      (acc, [upgradeKey, upgradeVal]) => {
+        const upgradeItem = item.upgrades?.[upgradeKey];
+        if (!upgradeItem) return acc;
+        return acc + (upgradeItem.multiplier ?? 1) * upgradeVal;
+      },
+      0,
+    );
+  }
+
+  return multiplier * prestigeMultiplier;
 }
