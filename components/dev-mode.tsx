@@ -7,7 +7,6 @@ import { LucideCode2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { au, totalAu, addAu, setAuDirectly } from "@/atoms/au";
 import {
-  performPrestige,
   prestigeLevel,
   prestigeMultiplier,
   prestigePoints,
@@ -18,7 +17,6 @@ import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { showElement } from "@/atoms/show";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { formatMoney } from "@/lib/formatters";
 
@@ -47,7 +45,6 @@ function DevModeContent() {
     Object.keys(EQUIPMENT_LIST)[0],
   );
   const [equipmentAmount, setEquipmentAmount] = useState("1");
-  const setShow = useSetAtom(showElement);
   const handleAddAu = () => {
     const amount = parseFloat(auAmount);
     if (isNaN(amount)) return;

@@ -97,12 +97,11 @@ export function handleEquipmentThresholds(
 
   Object.entries(equipmentList).forEach(([equipKey, equipDetails]) => {
     if (
-      equipKey !== key && // Don't check the same equipment we're updating
-      newVal >= equipDetails.threshold // Check if we've met the threshold
+      equipKey !== key &&
+      newVal >= equipDetails.threshold &&
+      (currentVal < equipDetails.threshold || currentVal === 0)
     ) {
-      if (currentVal < equipDetails.threshold || currentVal === 0) {
-        showFunc(equipKey);
-      }
+      showFunc(equipKey);
     }
   });
 }
