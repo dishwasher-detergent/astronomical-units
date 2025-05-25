@@ -19,47 +19,44 @@ export function createEquipmentAtom(elementKey: string) {
     purchase: atom(
       (get) => get(item),
       (get, set, quantity: number = 1) => {
-        const currentVal = get(item).value;
+        const currentItemState = get(item);
+        const currentVal = currentItemState.value;
         const newVal = currentVal + quantity;
-        const baseBuildTime = EQUIPMENT_LIST[elementKey].buildTime || 0;
 
-        // Apply Rapid Construction prestige upgrade effect if available
-        const allUpgrades = get(prestigeUpgrades) || {};
-        const rapidConstructionLevel = allUpgrades.rapidConstruction || 0;
-        let buildTimeMultiplier = 1;
+        const equipmentData = EQUIPMENT_LIST[elementKey];
+        const baseBuildTime = equipmentData.buildTime || 0;
 
-        if (rapidConstructionLevel > 0 && baseBuildTime > 0) {
-          // Apply multiplicative reduction (0.9^level)
-          buildTimeMultiplier = Math.pow(
-            PRESTIGE_UPGRADES.rapidConstruction.multiplier || 0.9,
-            rapidConstructionLevel,
-          );
+        let buildTime = baseBuildTime;
+
+        if (baseBuildTime > 0) {
+          const allUpgrades = get(prestigeUpgrades) || {};
+          const rapidConstructionLevel = allUpgrades.rapidConstruction || 0;
+
+          if (rapidConstructionLevel > 0) {
+            const prestigeMultiplier =
+              PRESTIGE_UPGRADES.rapidConstruction?.multiplier ?? 0.9;
+            buildTime *= Math.pow(prestigeMultiplier, rapidConstructionLevel);
+          }
         }
 
-        const buildTime = baseBuildTime * buildTimeMultiplier;
-
-        // If build time is specified, set up the building process
         if (buildTime > 0) {
           const now = Date.now();
-          const completionTime = now + buildTime * 1000; // Convert seconds to milliseconds
-
+          const completionTime = now + buildTime * 1000;
           set(item, (current) => ({
             ...current,
-            value: newVal, // Increment value immediately, but item won't produce until completion
+            value: newVal,
             building: {
-              ...current.building,
-              [completionTime]: quantity, // Store how many items will complete at this time
+              ...(current.building || {}),
+              [completionTime]: quantity,
             },
           }));
         } else {
-          // No build time, instant completion
           set(item, (current) => ({
             ...current,
             value: newVal,
           }));
         }
 
-        // Use the shared function to handle threshold checks
         handleEquipmentThresholds(
           elementKey,
           currentVal,
@@ -73,7 +70,9 @@ export function createEquipmentAtom(elementKey: string) {
     sell: atom(
       (get) => get(item),
       (get, set) => {
-        const newVal = get(item).value - 1;
+        const currentValue = get(item).value;
+        const newVal = currentValue - 1;
+
         if (newVal === 0) {
           set(item, () => ({
             upgrades: {},
