@@ -47,7 +47,6 @@ export function ShopItem({
 
   const handlePurchase = (quantity: number = 1) => {
     if (!canAcquire && quantity === 1) return;
-
     if (itemCount >= maxCount) return;
 
     const isPrestigeUpgrade =
@@ -55,14 +54,14 @@ export function ShopItem({
 
     let totalCost: number;
     switch (quantity) {
+      case 5:
+        totalCost = cost5;
+        break;
       case 10:
         totalCost = cost10;
         break;
       case 20:
         totalCost = cost20;
-        break;
-      case 50:
-        totalCost = cost5;
         break;
       default:
         totalCost = cost1;
@@ -88,23 +87,16 @@ export function ShopItem({
         );
       }
     }
-    const newItemValue = Math.min(
-      typeof itemValue === "number"
-        ? itemValue + actualQuantity
-        : actualQuantity,
-      maxCount,
-    );
 
-    if (typeof itemValue === "number") {
-      setItemValue(newItemValue);
-    } else {
-      setItemValue(newItemValue);
-    }
+    const baseValue = typeof itemValue === "number" ? itemValue : 0;
+    const newItemValue = Math.min(baseValue + actualQuantity, maxCount);
+    setItemValue(newItemValue);
 
     currency.update((current) => current - actualCost);
 
     onPurchase?.();
   };
+
   if (isShowing) {
     const isPrestigeUpgrade =
       details.multiplier !== undefined && details.auPerSecond === undefined;
