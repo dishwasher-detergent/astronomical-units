@@ -15,8 +15,6 @@ export const DisplayUpgrade = memo(
     equipment: EquipmentItem;
     primaryKey: string;
   }) => {
-    if (!item?.upgrades) return null;
-
     const hasEquippedUpgrades =
       equipment.upgrades &&
       Object.values(equipment.upgrades).some((upgrade) => upgrade > 0);
@@ -47,6 +45,8 @@ export const DisplayUpgrade = memo(
         },
       );
     }, [hasEquippedUpgrades, equipment.upgrades, item?.upgrades]);
+
+  if (!item?.upgrades) return null;
 
     return (
       <>
