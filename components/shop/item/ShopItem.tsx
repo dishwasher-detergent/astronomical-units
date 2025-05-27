@@ -22,7 +22,6 @@ interface ShopItemProps {
     name: string;
   };
   next?: string;
-  onPurchase?: () => void;
   maxCount?: number;
 }
 
@@ -31,7 +30,6 @@ export function ShopItem({
   itemAtom,
   details,
   currency,
-  onPurchase,
   next,
   maxCount = Infinity,
 }: ShopItemProps) {
@@ -100,8 +98,6 @@ export function ShopItem({
       setItemValue(newItemValue);
 
       currency.update((current) => current - actualCost);
-
-      onPurchase?.();
     },
     [
       canAcquire,
@@ -116,7 +112,6 @@ export function ShopItem({
       elementKey,
       itemValue,
       setItemValue,
-      onPurchase,
       allUpgrades,
     ],
   );

@@ -14,18 +14,6 @@ interface EquipmentItemProps {
   elementKey: string;
 }
 
-const findNextItemByThreshold = (currentValue: number): string => {
-  const upgrades = Object.entries(EQUIPMENT_LIST).sort((a, b) => {
-    return a[1].threshold - b[1].threshold;
-  });
-
-  const nextUpgrade = upgrades.find(([_, upgrade]) => {
-    return upgrade.threshold > currentValue;
-  });
-
-  return nextUpgrade ? nextUpgrade[0] : upgrades[upgrades.length - 1][0];
-};
-
 const memoizedFindNextItemByThreshold = (
   currentValue: number,
   list: object,
