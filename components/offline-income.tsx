@@ -70,9 +70,7 @@ export function OfflineIncome() {
         : 1;
 
     const offlineTimeStr = formatTimeString(offlineDurationMs);
-
-    update(offlineDurationSeconds);
-
+    
     let earned = 0;
 
     Object.entries(equip).forEach(([key, eq]: any) => {
