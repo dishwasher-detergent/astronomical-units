@@ -19,7 +19,6 @@ export function OfflineIncome() {
   const equip = useAtomValue(equipment);
   const presMultiplier = useAtomValue(prestigeMultiplier) || 1;
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
-  const update = useSetAtom(autoIncrement);
   const setCurrentAu = useSetAtom(au);
 
   const initialized = useRef(false);
@@ -130,7 +129,7 @@ export function OfflineIncome() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
     };
-  }, [last, equip, update, presMultiplier, allUpgrades]);
+  }, [last, equip, presMultiplier, allUpgrades]);
 
   return (
     <DynamicDrawer
