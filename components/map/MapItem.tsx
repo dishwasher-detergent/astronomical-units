@@ -29,7 +29,7 @@ export function MapItem({
     <Button
       size="icon"
       variant="ghost"
-      className="absolute h-fit w-fit p-2"
+      className="absolute h-fit w-fit p-2 transition-none"
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
@@ -41,7 +41,7 @@ export function MapItem({
       <div className="flex flex-col items-center justify-center">
         <div className="relative">
           <item.icon
-            className={`size-6 ${isBuilding ? "opacity-50" : ""}`}
+            className={`size-4 ${isBuilding ? "opacity-50" : ""}`}
             style={{ color: getIconColor(count, equipmentItem, item) }}
           />
           {isBuilding && (
