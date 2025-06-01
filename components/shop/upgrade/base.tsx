@@ -63,7 +63,6 @@ export function BaseUpgrade({
             </p>
           </div>
           <UpgradeButton
-            name={element.name}
             cost={element.cost}
             disabled={!canAquire}
             increment={setRank}
@@ -80,7 +79,6 @@ export function BaseUpgrade({
           <TooltipTrigger asChild>
             <div className="relative z-10">
               <UpgradeButton
-                name={element.name}
                 cost={element.cost}
                 disabled={!canAquire}
                 increment={setRank}
