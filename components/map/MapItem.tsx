@@ -1,9 +1,10 @@
 "use client";
 
+import { LucideConstruction } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { getIconColor } from "@/lib/map";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
-import { LucideConstruction } from "lucide-react";
 
 export type MapItemProps = {
   item: Equipment;
@@ -21,8 +22,6 @@ export function MapItem({
   onItemClick,
   equipmentItem,
 }: MapItemProps) {
-  console.log(equipmentItem);
-
   const isBuilding =
     equipmentItem.building && Object.values(equipmentItem.building).length > 0;
 

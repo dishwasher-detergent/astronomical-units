@@ -1,5 +1,7 @@
 "use client";
 
+import { LucideConstruction } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { DisplayItem } from "@/components/display/DisplayItem";
@@ -23,6 +25,9 @@ export function MapItemDrawer({
   auPerSecond,
   elementKey,
 }: MapItemDrawerProps) {
+  const isBuilding =
+    equipmentItem.building && Object.values(equipmentItem.building).length > 0;
+
   return (
     <DynamicDrawer
       button={
@@ -38,10 +43,15 @@ export function MapItemDrawer({
           title={`View ${item.name}`}
         >
           <div className="flex flex-col items-center justify-center">
-            <item.icon
-              className="size-6"
-              style={{ color: getIconColor(count, equipmentItem, item) }}
-            />
+            <div className="relative">
+              <item.icon
+                className={`size-6 ${isBuilding ? "opacity-50" : ""}`}
+                style={{ color: getIconColor(count, equipmentItem, item) }}
+              />
+              {isBuilding && (
+                <LucideConstruction className="absolute -top-0 -left-1/2 size-3.5 translate-x-1/2 animate-pulse text-yellow-500" />
+              )}
+            </div>
             <span className="mt-1 text-xs font-semibold">{count}</span>
           </div>
         </Button>
