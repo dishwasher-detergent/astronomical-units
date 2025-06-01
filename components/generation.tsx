@@ -45,16 +45,14 @@ export function Generation() {
           if (item.building && Object.keys(item.building).length > 0) {
             const currentItemBuilding = item.building;
             let newBuildingForThisItem: EquipmentItem["building"] | null = null;
-            let completedCountForThisItem = 0;
             let itemBuildingChanged = false;
 
             Object.entries(currentItemBuilding).forEach(
-              ([completionTime, count]) => {
+              ([completionTime]) => {
                 if (parseInt(completionTime) <= now) {
                   if (!newBuildingForThisItem) {
                     newBuildingForThisItem = { ...currentItemBuilding };
                   }
-                  completedCountForThisItem += count;
                   delete newBuildingForThisItem![completionTime];
                   itemBuildingChanged = true;
                 }
@@ -69,7 +67,7 @@ export function Generation() {
               const equipmentKey = key as keyof EquipmentObject;
               nextEquipmentState![equipmentKey] = {
                 ...item,
-                value: item.value + completedCountForThisItem,
+                value: item.value,
                 building: newBuildingForThisItem || {},
               };
               hasAnyItemChanged = true;

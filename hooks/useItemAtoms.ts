@@ -66,7 +66,6 @@ export function createEquipmentAtom(elementKey: string) {
         );
       },
     ),
-
     sell: atom(
       (get) => get(item),
       (get, set) => {

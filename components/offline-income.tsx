@@ -3,7 +3,7 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 
-import { autoIncrement, au } from "@/atoms/au";
+import { addAu } from "@/atoms/au";
 import { lastUpdated } from "@/atoms/global";
 import { equipment } from "@/atoms/equipment";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
@@ -19,8 +19,7 @@ export function OfflineIncome() {
   const equip = useAtomValue(equipment);
   const presMultiplier = useAtomValue(prestigeMultiplier) || 1;
   const allUpgrades = useAtomValue(prestigeUpgrades) || {};
-  const update = useSetAtom(autoIncrement);
-  const setCurrentAu = useSetAtom(au);
+  const addOfflineAu = useSetAtom(addAu);
 
   const initialized = useRef(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -32,7 +31,7 @@ export function OfflineIncome() {
   const MAX_OFFLINE_MS = 14400000;
 
   const claimOfflineEarnings = () => {
-    setCurrentAu((current) => current + offlineEarnings);
+    addOfflineAu(offlineEarnings);
     setDialogOpen(false);
   };
 
@@ -70,9 +69,7 @@ export function OfflineIncome() {
         : 1;
 
     const offlineTimeStr = formatTimeString(offlineDurationMs);
-
-    update(offlineDurationSeconds);
-
+    
     let earned = 0;
 
     Object.entries(equip).forEach(([key, eq]: any) => {
@@ -132,7 +129,7 @@ export function OfflineIncome() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
     };
-  }, [last, equip, update, presMultiplier, allUpgrades]);
+  }, [last, equip, presMultiplier, allUpgrades]);
 
   return (
     <DynamicDrawer
