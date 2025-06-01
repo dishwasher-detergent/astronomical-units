@@ -100,7 +100,7 @@ export function ClickArea() {
             +{((crewAtom.value + 1) * multiplier).toLocaleString(LOCALE)} AU
           </span>
           {allUpgrades.preciousFinds > 0 && (
-            <span className="text-muted-foreground text-xs">
+            <span className="text-xs">
               {allUpgrades.preciousFinds * 7}% chance for +50% bonus
             </span>
           )}
