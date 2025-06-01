@@ -156,6 +156,7 @@ export function ShopItem({
             className="text-muted-foreground text-3xl font-bold"
           >
             {itemCount < maxCount ? itemCount : "MAX"}
+            {maxCount !== Infinity && remainingCount > 0 && `/${maxCount}`}
           </output>
         </header>
         <footer className="mt-3">
