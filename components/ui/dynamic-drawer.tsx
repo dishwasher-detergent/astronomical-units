@@ -54,7 +54,7 @@ export function DynamicDrawer({
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
         {button && <DialogTrigger asChild>{button}</DialogTrigger>}
         <DialogContent className="flex max-h-[60vh] flex-col overflow-hidden p-4">
-          <DialogHeader className="flex-none p-0">
+          <DialogHeader className="flex-none p-4">
             <DialogTitle className={`truncate pr-8 ${title ? "" : "hidden"}`}>
               {title}
             </DialogTitle>
@@ -75,7 +75,7 @@ export function DynamicDrawer({
       dismissible={dismissible}
     >
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
-      <DrawerContent>
+      <DrawerContent className="p-4">
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
           <DrawerTitle className={`truncate ${title ? "" : "hidden"}`}>
             {title}
