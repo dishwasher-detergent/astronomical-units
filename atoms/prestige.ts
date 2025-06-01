@@ -7,6 +7,7 @@ import { totalAu } from "@/atoms/au";
 import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
+import { MAX_LEVEL_PRESTIGE } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { generateEquipmentObject } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";
@@ -61,13 +62,13 @@ export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
 
 export const canPrestige = atom((get) => {
   const level = get(currentLifetimeLevel);
-  return level >= 100;
+  return level >= MAX_LEVEL_PRESTIGE;
 });
 
 export const performPrestige = atom(null, (get, set) => {
   const level = get(currentLifetimeLevel);
 
-  if (level < 100) {
+  if (level < MAX_LEVEL_PRESTIGE) {
     return;
   }
 

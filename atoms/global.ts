@@ -5,7 +5,6 @@ import { focusAtom } from "jotai-optics";
 import { atomWithStorage } from "jotai/utils";
 
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
-import { AU } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { mergeNestedObjects } from "@/lib/common";
 import { generateEquipmentObject } from "@/lib/equipment";
@@ -22,7 +21,10 @@ const initPrestigeUpgrades = () => {
 };
 
 const initialGameData: GameData = {
-  income: { ...AU },
+  income: {
+    total: 0,
+    current: 0,
+  },
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
   show: {},
   last_updated: 0,
