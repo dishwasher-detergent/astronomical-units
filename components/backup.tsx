@@ -4,12 +4,10 @@ import React, { useRef, useState } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { toast } from "sonner";
 import { RESET } from "jotai/utils";
-import { LucideDatabaseBackup } from "lucide-react";
 
 import { gameData } from "@/atoms/global";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 
 export function Backup() {
   const isMobile = useIsMobile();
