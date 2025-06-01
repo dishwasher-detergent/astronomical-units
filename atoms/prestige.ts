@@ -129,14 +129,6 @@ export const addPrestigePoints = atom(null, (get, set, amount: number) => {
   set(saveGameState);
 });
 
-export const setPrestigeMultiplier = atom(
-  null,
-  (get, set, multiplier: number) => {
-    set(prestigeMultiplier, multiplier);
-    set(saveGameState);
-  },
-);
-
 if (process.env.NODE_ENV !== "production") {
   prestigeLevel.debugLabel = "Prestige Level";
   prestigeMultiplier.debugLabel = "Prestige Multiplier";
@@ -146,7 +138,6 @@ if (process.env.NODE_ENV !== "production") {
   prestigeUpgrades.debugLabel = "Prestige Upgrades";
   performPrestige.debugLabel = "Perform Prestige";
   addPrestigePoints.debugLabel = "Add Prestige Points (Dev)";
-  setPrestigeMultiplier.debugLabel = "Set Prestige Multiplier (Dev)";
   currentLifetimeLevel.debugLabel = "Current Prestige Level";
   lifetimeLevelProgress.debugLabel = "Prestige Level Progress";
 }

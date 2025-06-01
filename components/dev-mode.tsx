@@ -5,7 +5,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { LucideCode2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { au, totalAu, addAu, setAuDirectly } from "@/atoms/au";
+import { au, totalAu, addAu } from "@/atoms/au";
 import {
   prestigeLevel,
   prestigeMultiplier,
@@ -37,7 +37,6 @@ function DevModeContent() {
   const level = useAtomValue(prestigeLevel);
   const points = useAtomValue(prestigePoints);
   const multiplier = useAtomValue(prestigeMultiplier);
-  const setAuAmountDirectly = useSetAtom(setAuDirectly);
   const addAuAmount = useSetAtom(addAu);
   const addEquipmentAmount = useSetAtom(addEquipment);
   const addPrestigeAmount = useSetAtom(addPrestigePoints);
@@ -50,13 +49,6 @@ function DevModeContent() {
     if (isNaN(amount)) return;
 
     addAuAmount(amount);
-  };
-
-  const handleSetAu = () => {
-    const amount = parseFloat(auAmount);
-    if (isNaN(amount)) return;
-
-    setAuAmountDirectly(amount);
   };
 
   const handleAddPrestigePoints = () => {
@@ -115,12 +107,9 @@ function DevModeContent() {
                 type="number"
                 value={auAmount}
                 onChange={(e) => setAuAmount(e.target.value)}
-              />{" "}
+              />
             </div>
             <Button onClick={handleAddAu}>Add AU</Button>
-            <Button onClick={handleSetAu} variant="outline">
-              Set AU
-            </Button>
           </div>
         </TabsContent>
         <TabsContent value="prestige" className="space-y-4 py-4">

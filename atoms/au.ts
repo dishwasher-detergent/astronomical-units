@@ -149,12 +149,6 @@ export const addAu = atom(null, (get, set, amount: number) => {
   });
 });
 
-export const setAuDirectly = atom(null, (get, set, amount: number) => {
-  set(au, amount);
-  set(totalAu, amount);
-  set(prestigeIncome, amount);
-});
-
 if (process.env.NODE_ENV !== "production") {
   au.debugLabel = "AUs";
   clickValueAtom.debugLabel = "Click Value";
@@ -162,5 +156,4 @@ if (process.env.NODE_ENV !== "production") {
   auIncrement.debugLabel = "AU Increment";
   autoIncrement.debugLabel = "Auto Increment";
   addAu.debugLabel = "Add AU (Dev)";
-  setAuDirectly.debugLabel = "Set AU (Dev)";
 }
