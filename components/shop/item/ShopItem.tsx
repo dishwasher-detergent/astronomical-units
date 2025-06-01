@@ -126,28 +126,25 @@ export function ShopItem({
 
     return (
       <article className="w-full border-b border-dashed px-4 py-3">
-        <header className="flex items-start justify-between">
+        <header className="flex items-start justify-between gap-4">
           <div>
             <h3 className="flex items-center gap-2">
               <Icon className="size-4" aria-hidden="true" />
               <span className="truncate">{details.name}</span>
             </h3>
+            {isPrestigeUpgrade && (
+              <p className="text-muted-foreground text-sm">
+                {details.description}
+              </p>
+            )}
             <dl className="text-muted-foreground m-0 flex items-center gap-1 text-sm">
-              {isPrestigeUpgrade ? (
-                <dd>
-                  {details.multiplier > 1
-                    ? `+${((details.multiplier - 1) * 100).toFixed(0)}% boost`
-                    : `${((1 - details.multiplier) * 100).toFixed(0)}% reduction`}
-                </dd>
-              ) : (
-                details.auPerSecond > 0 && (
-                  <>
-                    <dd className="font-mono">
-                      +{formatMoney(details.auPerSecond)}
-                    </dd>
-                    <dt>AU/s</dt>
-                  </>
-                )
+              {!isPrestigeUpgrade && details.auPerSecond > 0 && (
+                <>
+                  <dd className="font-mono">
+                    +{formatMoney(details.auPerSecond)}
+                  </dd>
+                  <dt>AU/s</dt>
+                </>
               )}
             </dl>
           </div>

@@ -90,7 +90,7 @@ export const DisplayItem = memo(
         ref={itemRef}
         className="w-full space-y-2 border-dashed md:border-b md:px-4 md:py-3"
       >
-        <header className="flex items-start justify-between gap-6">
+        <header className="flex items-start justify-between gap-4">
           <div>
             <h3 className="flex items-center gap-2">
               <Icon className="size-4" aria-hidden="true" />

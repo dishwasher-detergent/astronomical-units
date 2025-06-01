@@ -57,7 +57,7 @@ export function BaseUpgrade({
         >
           <MobileBalance />
           <article className="w-full p-4">
-            <header className="flex items-start justify-between">
+            <header className="flex items-start justify-between gap-4">
               <div>
                 <h3 className="flex items-center gap-2 text-lg">
                   <Icon className="size-5" aria-hidden="true" />

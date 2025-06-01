@@ -132,7 +132,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-1 flex-row overflow-hidden">
-          <div className="w-96 flex-none overflow-y-auto border-r">
+          <div className="w-[30rem] flex-none overflow-y-auto border-r">
             <Shop />
           </div>
           <div className="flex-1 overflow-y-auto">
