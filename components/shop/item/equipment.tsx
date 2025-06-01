@@ -7,8 +7,8 @@ import { au } from "@/atoms/au";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { useSellCost } from "@/hooks/useItemCost";
 import { createEquipmentAtom } from "@/hooks/useItemAtoms";
-import { ShopItem } from "@/components/shop/item/ShopItem";
-import { SellItem } from "@/components/shop/item/SellItem";
+import { ShopItem } from "@/components/shop/item/shop";
+import { SellItem } from "@/components/shop/item/sell";
 
 interface EquipmentItemProps {
   elementKey: string;

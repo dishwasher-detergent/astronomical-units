@@ -4,7 +4,7 @@ import { LucideConstruction } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
-import { DisplayItem } from "@/components/display/DisplayItem";
+import { DisplayItem } from "@/components/display/item";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
 import { getIconColor } from "@/lib/map";
 

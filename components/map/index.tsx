@@ -5,13 +5,13 @@ import { scrollToEquipmentAtom } from "@/atoms/scrollTo";
 import { useState, MouseEvent, TouchEvent, useRef, useEffect } from "react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { MapItem } from "@/components/map/MapItem";
-import { MapItemDrawer } from "@/components/map/MapItemDrawer";
-import { BackgroundStars, ConnectionLines } from "@/components/map/MapElements";
+import { MapItem } from "@/components/map/item";
+import { MapItemDrawer } from "@/components/map/item-drawer";
+import { BackgroundStars, ConnectionLines } from "@/components/map/elements";
 import { useMapEquipment } from "@/hooks/useMapEquipment";
 import { useMapStars } from "@/hooks/useMapStars";
 import { EquipmentWithPosition, MapPosition } from "@/types";
-import { MapKey } from "@/components/map/MapKey";
+import { MapKey } from "@/components/map/legend";
 
 export function Map() {
   const isMobile = useIsMobile();

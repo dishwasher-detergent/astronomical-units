@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 import { LucidePersonStanding } from "lucide-react";
 
 import { crew } from "@/atoms/crew";
-import { DisplayUpgrade } from "@/components/display/DisplayUpgrade";
+import { DisplayUpgrade } from "@/components/display/upgrade";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 
 export function Crew() {

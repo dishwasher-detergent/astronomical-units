@@ -1,4 +1,4 @@
-import { Star } from "@/components/map/MapElements";
+import { Star } from "@/components/map/elements";
 import { useEffect, useState } from "react";
 
 /**

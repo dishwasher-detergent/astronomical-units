@@ -4,7 +4,7 @@ import { atom, useAtom, useAtomValue } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { useCallback } from "react";
 
-import { ShopItem } from "@/components/shop/item/ShopItem";
+import { ShopItem } from "@/components/shop/item/shop";
 import {
   lifetimePrestigePoints,
   prestigePoints,

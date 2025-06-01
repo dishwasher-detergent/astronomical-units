@@ -6,9 +6,9 @@ import { LucideLock } from "lucide-react";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
-import { PrestigeItem } from "@/components/shop/item/PrestigeItem";
-import { CrewItem } from "@/components/shop/item/CrewItem";
-import { EquipmentItem } from "@/components/shop/item/EquipmentItem";
+import { PrestigeItem } from "@/components/shop/item/prestige";
+import { CrewItem } from "@/components/shop/item/crew";
+import { EquipmentItem } from "@/components/shop/item/equipment";
 import { prestigeLevel } from "@/atoms/prestige";
 import { Tip } from "@/components/ui/tip";
 

@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import { useMemo } from "react";
 
-import { ShopItem } from "@/components/shop/item/ShopItem";
+import { ShopItem } from "@/components/shop/item/shop";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 import { au } from "@/atoms/au";
 import { createEquipmentAtom } from "@/hooks/useItemAtoms";

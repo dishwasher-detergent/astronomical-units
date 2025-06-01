@@ -3,13 +3,13 @@
 import { memo, useState, useEffect, useRef, useMemo } from "react";
 import { useAtomValue } from "jotai";
 
-import { DisplayUpgrade } from "@/components/display/DisplayUpgrade";
+import { DisplayUpgrade } from "@/components/display/upgrade";
 import { Equipment, EquipmentItem } from "@/types";
-import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
+import { SellEquipmentItem } from "@/components/shop/item/equipment";
 import { formatMoney } from "@/lib/formatters";
 import { useBuildTimeReduction } from "@/hooks/useBuildTimeReduction";
 import { scrollToEquipmentAtom } from "@/atoms/scrollTo";
-import { DisplayBuilding } from "@/components/display/DisplayBuilding";
+import { DisplayBuilding } from "@/components/display/building";
 
 export const DisplayItem = memo(
   ({
