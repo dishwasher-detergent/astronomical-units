@@ -25,7 +25,7 @@ export function MobileBalance() {
         <p className="text-muted-foreground text-sm font-semibold">
           AU Balance
         </p>
-        <p className="">
+        <p className="font-mono">
           <AuBalance />
         </p>
       </div>
@@ -33,7 +33,7 @@ export function MobileBalance() {
         <p className="text-muted-foreground text-sm font-semibold">
           PP Balance
         </p>
-        <p className="">
+        <p className="font-mono">
           <PpBalance />
         </p>
       </div>
