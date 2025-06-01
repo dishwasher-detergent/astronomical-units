@@ -88,9 +88,7 @@ export function handleEquipmentThresholds(
   if (equip) {
     Object.entries(equip).forEach(([upgradeKey, value]: [string, any]) => {
       if (newVal >= value.threshold) {
-        if (currentVal < value.threshold || currentVal === 0) {
-          showFunc(`${key}_${upgradeKey}`);
-        }
+        showFunc(`${key}_${upgradeKey}`);
       }
     });
   }
