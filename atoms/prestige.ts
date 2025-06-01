@@ -103,6 +103,7 @@ export const performPrestige = atom(null, (get, set) => {
   const prestigePointsReward = 5;
   const currentLevel = get(prestigeLevel) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
+  const newLifetime = currentLifetime + prestigePointsReward;
   const currentPoints = get(prestigePoints) || 0;
   const newCurrentPoints = currentPoints + prestigePointsReward;
   const currentMultiplier = get(prestigeMultiplier) || 1;
@@ -121,13 +122,13 @@ export const performPrestige = atom(null, (get, set) => {
       income: 0,
       level: currentLevel + 1,
       points: newCurrentPoints,
-      lifetime: currentLifetime + prestigePointsReward,
+      lifetime: newLifetime,
       multiplier: newMultiplier,
     },
   }));
 
   Object.entries(PRESTIGE_UPGRADES).forEach(([key, value]: any) => {
-    if (newCurrentPoints >= value.threshold) {
+    if (newLifetime >= value.threshold) {
       set(show, key);
     }
   });

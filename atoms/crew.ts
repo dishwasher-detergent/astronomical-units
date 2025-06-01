@@ -6,24 +6,12 @@ import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
 
-/**
- * Direct focus atom to the crew equipment
- * This is a shorthand for accessing crew data
- */
 export const crew = focusAtom(gameData, (optic) =>
   optic.path("equipment.crew"),
 );
 
-/**
- * Memoized atom for crew value
- * This improves performance by avoiding unnecessary recalculations
- */
 export const crewValue = atom((get) => get(crew).value);
 
-/**
- * Optimized atom for crew interactions
- * Using the equipment item family under the hood for better state management
- */
 export const crewCurrent = atom(
   (get) => get(crewValue),
   (get, set) => {
