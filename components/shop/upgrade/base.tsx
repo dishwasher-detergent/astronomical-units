@@ -19,6 +19,7 @@ import { DynamicPopover } from "@/components/ui/dynamic-popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { formatMoney } from "@/lib/formatters";
 import { Tip } from "@/components/ui/tip";
+import { MobileBalance } from "@/components/balance";
 
 export function BaseUpgrade({
   atom,
@@ -55,6 +56,7 @@ export function BaseUpgrade({
             </Button>
           }
         >
+          <MobileBalance />
           <div className="mb-6">
             <p>
               Quantity: {rankValue ?? 0}/{element.maxCount}

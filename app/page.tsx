@@ -17,7 +17,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Balance } from "@/components/balance";
+import { MobileBalance } from "@/components/balance";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useInstallDetection } from "@/hooks/useInstallDetection";
 import { Map } from "@/components/map";
@@ -57,11 +57,12 @@ export default function Home() {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
+              <MobileBalance />
               <div className="mx-auto flex h-full w-full flex-col overflow-hidden">
                 <DrawerHeader className="flex-none">
                   <DrawerTitle>Shop</DrawerTitle>
                   <DrawerDescription>
-                    <Balance />
+                    Buy equipment, crew, and upgrades to enhance your journey.
                   </DrawerDescription>
                 </DrawerHeader>
                 <div className="flex-1 overflow-y-auto pb-4">
@@ -84,9 +85,11 @@ export default function Home() {
               <DrawerHeader>
                 <DrawerTitle>Equipment Map</DrawerTitle>
                 <DrawerDescription>
-                  <Balance />
+                  Visualize your equipment and their connections across the
+                  universe.
                 </DrawerDescription>
               </DrawerHeader>
+              <MobileBalance />
               <div className="mx-4 h-96 overflow-hidden rounded-xl border">
                 <Map />
               </div>
