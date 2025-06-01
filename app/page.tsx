@@ -71,7 +71,7 @@ export default function Home() {
               </div>
             </DrawerContent>
           </Drawer>
-          <Drawer>
+          <Drawer handleOnly>
             <DrawerTrigger asChild>
               <Button
                 size="icon"
