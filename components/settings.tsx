@@ -19,7 +19,7 @@ export function Settings() {
     >
       <div className="space-y-4">
         <div>
-          <p className="mb-1 text-sm font-semibold">Preferences</p>
+          <p className="mb-1 text-sm font-semibold">Theme</p>
           <ModeToggle />
         </div>
         <div>

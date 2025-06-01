@@ -58,57 +58,44 @@ export function Backup() {
   };
 
   return (
-    <DynamicDrawer
-      title="Backup"
-      description="Backup your game data"
-      button={
-        <Button variant="secondary">
-          <LucideDatabaseBackup />
-          Backup
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-row gap-2">
+        <Button className="flex-1" onClick={handleDownload}>
+          Download Backup
         </Button>
-      }
-      open={open}
-      setOpen={setOpen}
-    >
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-row gap-2">
-          <Button className="flex-1" onClick={handleDownload}>
-            Download Backup
-          </Button>
-          <Button
-            className="flex-1"
-            variant="secondary"
-            onClick={triggerFileInput}
-          >
-            Restore from Backup
-          </Button>
-        </div>
-        <div>
-          <p className="text-destructive mb-1 text-sm font-semibold">
-            Danger Zone
-          </p>
-          <div className="border-destructive rounded-xl border border-dashed p-2">
-            <Button
-              className="w-full"
-              variant="destructive"
-              onClick={() => {
-                toast.error("Game data reset successfully!");
-                setGameData(RESET);
-                setOpen(false);
-              }}
-            >
-              Reset Game Data
-            </Button>
-          </div>
-        </div>
-        <input
-          type="file"
-          accept="application/json"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          onChange={handleRestore}
-        />
+        <Button
+          className="flex-1"
+          variant="secondary"
+          onClick={triggerFileInput}
+        >
+          Restore from Backup
+        </Button>
       </div>
-    </DynamicDrawer>
+      <div>
+        <p className="text-destructive mb-1 text-sm font-semibold">
+          Danger Zone
+        </p>
+        <div className="border-destructive rounded-xl border border-dashed p-2">
+          <Button
+            className="w-full"
+            variant="destructive"
+            onClick={() => {
+              toast.error("Game data reset successfully!");
+              setGameData(RESET);
+              setOpen(false);
+            }}
+          >
+            Reset Game Data
+          </Button>
+        </div>
+      </div>
+      <input
+        type="file"
+        accept="application/json"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleRestore}
+      />
+    </div>
   );
 }
