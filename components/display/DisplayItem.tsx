@@ -88,7 +88,7 @@ export const DisplayItem = memo(
     return (
       <article
         ref={itemRef}
-        className="w-full space-y-2 border-dashed p-4 md:border-b md:px-4 md:py-3"
+        className="w-full space-y-2 border-dashed md:border-b md:px-4 md:py-3"
       >
         <header className="flex items-start justify-between gap-6">
           <div>
