@@ -1,8 +1,5 @@
 import { atom } from "jotai";
 
-/**
- * Atom to track which equipment item to scroll to
- */
 export const scrollToEquipmentAtom = atom<string | null>(null);
 
 // Debug label

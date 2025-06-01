@@ -13,14 +13,13 @@ import { gameData } from "./global";
 export const totalAu = focusAtom(gameData, (optic) =>
   optic.path("income.total"),
 );
+
 export const au = focusAtom(gameData, (optic) => optic.path("income.current"));
+
 export const prestigeIncome = focusAtom(gameData, (optic) =>
   optic.path("prestige.income"),
 );
 
-/**
- * Memoized calculation of click value to avoid recalculating on each click
- */
 export const clickValueAtom = atom((get) => {
   const item = EQUIPMENT_LIST.crew;
   const crewAtom = get(crew);
@@ -66,11 +65,6 @@ export const auIncrement = atom(null, (get, set) => {
   });
 });
 
-/**
- * Memoized calculation for equipment production rates
- * This avoids recalculating production rates for each equipment
- * item unless their values change
- */
 export const equipmentProductionRates = atom((get) => {
   const equip = get(equipment);
   const presMultiplier = get(prestigeMultiplier) || 1;
@@ -97,9 +91,6 @@ export const equipmentProductionRates = atom((get) => {
   return rates;
 });
 
-/**
- * Auto-increment function for AU
- */
 export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   const productionRates = get(equipmentProductionRates);
   const allUpgrades = get(prestigeUpgrades) || {};
@@ -141,9 +132,6 @@ export const autoIncrement = atom(null, (get, set, seconds: number = 1) => {
   }
 });
 
-/**
- * Helper utility to add AU directly
- */
 export const addAu = atom(null, (get, set, amount: number) => {
   const currentAu = get(au);
   const currentTotalAu = get(totalAu);
@@ -161,9 +149,6 @@ export const addAu = atom(null, (get, set, amount: number) => {
   });
 });
 
-/**
- * Helper utility to set AU directly (for development)
- */
 export const setAuDirectly = atom(null, (get, set, amount: number) => {
   set(au, amount);
   set(totalAu, amount);

@@ -11,10 +11,6 @@ import { mergeNestedObjects } from "@/lib/common";
 import { generateEquipmentObject } from "@/lib/equipment";
 import { GameData } from "@/types";
 
-/**
- * Initialize prestige upgrades with default values
- * Memoized to avoid recreating on every render
- */
 const initPrestigeUpgrades = () => {
   const upgrades: Record<string, number> = {};
 
@@ -25,9 +21,6 @@ const initPrestigeUpgrades = () => {
   return upgrades;
 };
 
-/**
- * Initial game state data
- */
 const initialGameData: GameData = {
   income: { ...AU },
   equipment: generateEquipmentObject(EQUIPMENT_LIST),
@@ -43,9 +36,6 @@ const initialGameData: GameData = {
   },
 };
 
-/**
- * Core game data atom with localStorage persistence and optimized storage
- */
 export const gameData = atomWithStorage(
   "GAME_DATA",
   initialGameData,
@@ -100,18 +90,10 @@ export const gameData = atomWithStorage(
   { getOnInit: true },
 );
 
-/**
- * Last updated timestamp atom
- * Useful for tracking when the game state was last saved
- */
 export const lastUpdated = focusAtom(gameData, (optic) =>
   optic.prop("last_updated"),
 );
 
-/**
- * Atom to manually trigger a save
- * Useful for ensuring critical state changes are persisted
- */
 export const saveGameState = atom(null, (get, set) => {
   const currentData = get(gameData);
   set(gameData, {

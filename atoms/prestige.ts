@@ -15,9 +15,6 @@ import {
   calculatePrestigeLevel,
 } from "@/lib/prestige";
 
-/**
- * Focus atoms for accessing prestige data directly
- */
 export const prestigeLevel = focusAtom(gameData, (optic) =>
   optic.path("prestige.level"),
 );
@@ -26,19 +23,11 @@ export const prestigeMultiplier = focusAtom(gameData, (optic) =>
   optic.path("prestige.multiplier"),
 );
 
-/**
- * Calculate the prestige level based on prestige income
- * Based on income earned in current prestige cycle
- */
 export const currentLifetimeLevel = atom((get) => {
   const prestigeIncomeValue = get(gameData).prestige.income;
   return calculatePrestigeLevel(prestigeIncomeValue);
 });
 
-/**
- * Calculate progress to next prestige level
- * Uses prestige income from current cycle
- */
 export const lifetimeLevelProgress = atom((get) => {
   const prestigeIncomeValue = get(gameData).prestige.income;
   return calculateNextLevelProgress(prestigeIncomeValue);
@@ -56,10 +45,6 @@ export const prestigeUpgrades = focusAtom(gameData, (optic) =>
   optic.path("prestige.upgrades"),
 );
 
-/**
- * Atom family for individual prestige upgrades
- * This prevents unnecessary rerenders when only one upgrade changes
- */
 export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
   atom(
     (get) => (get(prestigeUpgrades) || {})[upgradeKey] || 0,
@@ -74,25 +59,11 @@ export const prestigeUpgradeFamily = atomFamily((upgradeKey: string) =>
   ),
 );
 
-/**
- * Fixed prestige points (5) when player reaches level 100
- */
-export const potentialPrestigePoints = atom((get) => {
-  const level = get(currentLifetimeLevel);
-  return level >= 100 ? 5 : 0;
-});
-
-/**
- * Whether the player can prestige now (only at level 100)
- */
 export const canPrestige = atom((get) => {
   const level = get(currentLifetimeLevel);
   return level >= 100;
 });
 
-/**
- * Perform prestige reset with optimized state updates
- */
 export const performPrestige = atom(null, (get, set) => {
   const level = get(currentLifetimeLevel);
 
@@ -140,9 +111,6 @@ export const performPrestige = atom(null, (get, set) => {
   });
 });
 
-/**
- * Helper to add prestige points directly (for development or cheats)
- */
 export const addPrestigePoints = atom(null, (get, set, amount: number) => {
   const currentPoints = get(prestigePoints) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
@@ -160,9 +128,6 @@ export const addPrestigePoints = atom(null, (get, set, amount: number) => {
   set(saveGameState);
 });
 
-/**
- * Helper to set prestige multiplier directly (for development)
- */
 export const setPrestigeMultiplier = atom(
   null,
   (get, set, multiplier: number) => {
@@ -176,7 +141,6 @@ if (process.env.NODE_ENV !== "production") {
   prestigeMultiplier.debugLabel = "Prestige Multiplier";
   prestigePoints.debugLabel = "Prestige Points";
   lifetimePrestigePoints.debugLabel = "Lifetime Prestige Points";
-  potentialPrestigePoints.debugLabel = "Potential Prestige Points";
   canPrestige.debugLabel = "Can Prestige";
   prestigeUpgrades.debugLabel = "Prestige Upgrades";
   performPrestige.debugLabel = "Perform Prestige";
