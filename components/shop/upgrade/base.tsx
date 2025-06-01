@@ -39,6 +39,7 @@ export function BaseUpgrade({
   const isShowing = showElementValue[`${parentKey}_${elementKey}`];
   const element = EQUIPMENT_LIST[parentKey].upgrades![elementKey];
   const Icon = element?.icon || LucidePlus;
+  const remainingCount = element.maxCount - rankValue;
 
   if (isShowing && !isMobile != null) {
     const canAquire = element.cost <= auValue && rankValue < element.maxCount;
@@ -48,8 +49,6 @@ export function BaseUpgrade({
         <DynamicPopover
           open={open}
           setOpen={setOpen}
-          title={element.name}
-          description={element.description}
           button={
             <Button className="size-10" size="icon" disabled={!canAquire}>
               <Icon className="size-4" />
@@ -57,18 +56,37 @@ export function BaseUpgrade({
           }
         >
           <MobileBalance />
-          <div className="mb-6">
-            <p>
-              Quantity: {rankValue ?? 0}/{element.maxCount}
-            </p>
-          </div>
-          <UpgradeButton
-            cost={element.cost}
-            disabled={!canAquire}
-            increment={setRank}
-          >
-            {formatMoney(element.cost)} AU
-          </UpgradeButton>
+          <article className="w-full p-4">
+            <header className="flex items-start justify-between">
+              <div>
+                <h3 className="flex items-center gap-2 text-lg">
+                  <Icon className="size-5" aria-hidden="true" />
+                  <span className="truncate">{element.name}</span>
+                </h3>
+                <p className="text-muted-foreground m-0 flex items-center gap-1 text-sm">
+                  {element.description}
+                </p>
+              </div>
+              <output
+                aria-label="Current count"
+                className="text-muted-foreground text-3xl font-bold"
+              >
+                {rankValue < element.maxCount ? rankValue : "MAX"}
+                {element.maxCount !== Infinity &&
+                  remainingCount > 0 &&
+                  `/${element.maxCount}`}
+              </output>
+            </header>
+            <footer className="mt-6">
+              <UpgradeButton
+                cost={element.cost}
+                disabled={!canAquire}
+                increment={setRank}
+              >
+                {formatMoney(element.cost)} AU
+              </UpgradeButton>
+            </footer>
+          </article>
         </DynamicPopover>
       );
     }

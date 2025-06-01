@@ -159,16 +159,13 @@ export function ShopItem({
             {maxCount !== Infinity && remainingCount > 0 && `/${maxCount}`}
           </output>
         </header>
-        <footer className="mt-3">
+        <footer className="mt-6">
           <div
             className="flex flex-wrap gap-2"
             role="group"
             aria-label="Purchase options"
           >
             <div className="flex flex-1 flex-col items-center gap-1">
-              <span className="text-muted-foreground text-xs font-semibold">
-                1x
-              </span>
               <Button
                 variant="default"
                 className="w-full px-0.5 text-xs md:h-8"
@@ -177,12 +174,12 @@ export function ShopItem({
               >
                 {formatMoney(cost1)} {currency.name}
               </Button>
+              <span className="text-muted-foreground text-xs font-semibold">
+                1x
+              </span>
             </div>
             {maxCount >= 5 && (
               <div className="flex flex-1 flex-col items-center gap-1">
-                <span className="text-muted-foreground text-xs font-semibold">
-                  5x
-                </span>
                 <Button
                   variant="secondary"
                   className="w-full flex-1 px-0.5 text-xs md:h-8"
@@ -192,13 +189,13 @@ export function ShopItem({
                 >
                   {formatMoney(cost5)} {currency.name}
                 </Button>
+                <span className="text-muted-foreground text-xs font-semibold">
+                  5x
+                </span>
               </div>
             )}
             {maxCount >= 10 && (
               <div className="flex flex-1 flex-col items-center gap-1">
-                <span className="text-muted-foreground text-xs font-semibold">
-                  10x
-                </span>
                 <Button
                   variant="secondary"
                   className="w-full flex-1 px-0.5 text-xs md:h-8"
@@ -208,13 +205,13 @@ export function ShopItem({
                 >
                   {formatMoney(cost10)} {currency.name}
                 </Button>
+                <span className="text-muted-foreground text-xs font-semibold">
+                  10x
+                </span>
               </div>
             )}
             {maxCount >= 20 && (
               <div className="flex flex-1 flex-col items-center gap-1">
-                <span className="text-muted-foreground text-xs font-semibold">
-                  20x
-                </span>
                 <Button
                   variant="secondary"
                   className="w-full flex-1 px-0.5 text-xs md:h-8"
@@ -224,6 +221,9 @@ export function ShopItem({
                 >
                   {formatMoney(cost20)} {currency.name}
                 </Button>
+                <span className="text-muted-foreground text-xs font-semibold">
+                  20x
+                </span>
               </div>
             )}
           </div>

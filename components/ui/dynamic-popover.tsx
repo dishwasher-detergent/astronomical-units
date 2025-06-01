@@ -14,6 +14,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useState } from "react";
 
 export function DynamicPopover({
   title,
@@ -22,15 +23,27 @@ export function DynamicPopover({
   children,
   setOpen,
   open,
+  dismissible = true,
 }: {
   title?: string;
   description?: string;
-  button: string | React.ReactNode;
+  button?: string | React.ReactNode;
   children: React.ReactNode;
-  setOpen: (e: boolean) => void;
-  open: boolean;
+  dismissible?: boolean;
+  setOpen?: (e: boolean) => void;
+  open?: boolean;
 }) {
   const isMobile = useIsMobile();
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const isOpen = open !== undefined ? open : internalOpen;
+  const handleOpenChange = (value: boolean) => {
+    if (setOpen) {
+      setOpen(value);
+    } else {
+      setInternalOpen(value);
+    }
+  };
 
   if (!isMobile) {
     return (
@@ -44,11 +57,17 @@ export function DynamicPopover({
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>{button}</DrawerTrigger>
-      <DrawerContent className="mb-4 p-4">
+    <Drawer
+      open={isOpen}
+      onOpenChange={handleOpenChange}
+      dismissible={dismissible}
+    >
+      {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
+      <DrawerContent>
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
-          {title && <DrawerTitle className="truncate">{title}</DrawerTitle>}
+          <DrawerTitle className={`truncate ${title ? "" : "hidden"}`}>
+            {title}
+          </DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         {children}

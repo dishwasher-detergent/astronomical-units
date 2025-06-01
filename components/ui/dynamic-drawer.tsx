@@ -48,6 +48,7 @@ export function DynamicDrawer({
       setInternalOpen(value);
     }
   };
+
   if (!isMobile) {
     return (
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -74,7 +75,7 @@ export function DynamicDrawer({
       dismissible={dismissible}
     >
       {button && <DrawerTrigger asChild>{button}</DrawerTrigger>}
-      <DrawerContent className="mb-4 p-4">
+      <DrawerContent>
         <DrawerHeader className="mb-4 px-0 pb-0 text-left">
           <DrawerTitle className={`truncate ${title ? "" : "hidden"}`}>
             {title}

@@ -9,6 +9,7 @@ import { SellEquipmentItem } from "@/components/shop/item/EquipmentItem";
 import { formatMoney } from "@/lib/formatters";
 import { useBuildTimeReduction } from "@/hooks/useBuildTimeReduction";
 import { scrollToEquipmentAtom } from "@/atoms/scrollTo";
+import { DisplayBuilding } from "@/components/display/DisplayBuilding";
 
 export const DisplayItem = memo(
   ({
@@ -87,7 +88,7 @@ export const DisplayItem = memo(
     return (
       <article
         ref={itemRef}
-        className="w-full space-y-2 border-dashed md:border-b md:px-4 md:py-3"
+        className="w-full space-y-2 border-dashed p-4 md:border-b md:px-4 md:py-3"
       >
         <header className="flex items-start justify-between gap-6">
           <div>
@@ -108,26 +109,13 @@ export const DisplayItem = memo(
           <dd className="font-mono">+{formatMoney(auPerSecond)}</dd>
           <dt>AU/s</dt>
         </dl>
-        {Object.entries(buildingItems).length > 0 && (
-          <div className="bg-muted/60 flex flex-row flex-wrap gap-2 rounded-lg p-3">
-            {Object.entries(buildingItems).map(([time, data]) => (
-              <div
-                key={time}
-                className="grid size-5 place-items-center rounded-xl"
-              >
-                <p className="text-xs font-semibold">
-                  {Math.ceil(data.timeLeft)}s
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+        <DisplayBuilding buildingItems={buildingItems} />
         <DisplayUpgrade
           item={item}
           equipment={equipment}
           primaryKey={elementKey}
         />
-        <footer className="mt-3">
+        <footer className="mt-6">
           <SellEquipmentItem elementKey={elementKey} />
         </footer>
       </article>
