@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DynamicDrawer } from "@/components/ui/dynamic-drawer";
 import { DisplayItem } from "@/components/display/DisplayItem";
 import { Equipment, EquipmentItem, MapPosition } from "@/types";
-import { getAdjustedPosition, getIconColor } from "@/lib/map";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { getIconColor } from "@/lib/map";
 
 export type MapItemDrawerProps = {
   item: Equipment;
@@ -24,8 +23,6 @@ export function MapItemDrawer({
   auPerSecond,
   elementKey,
 }: MapItemDrawerProps) {
-  const adjustedPosition = getAdjustedPosition(position);
-
   return (
     <DynamicDrawer
       button={
@@ -34,8 +31,8 @@ export function MapItemDrawer({
           variant="ghost"
           className="absolute h-fit w-fit p-2"
           style={{
-            left: `${adjustedPosition.x}%`,
-            top: `${adjustedPosition.y}%`,
+            left: `${position.x}%`,
+            top: `${position.y}%`,
             transform: "translate(-50%, -50%)",
           }}
           title={`View ${item.name}`}
