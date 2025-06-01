@@ -7,7 +7,7 @@ import { totalAu } from "@/atoms/au";
 import { gameData, saveGameState } from "@/atoms/global";
 import { show } from "@/atoms/show";
 import { EQUIPMENT_LIST } from "@/constants/EQUIPMENT_LIST";
-import { MAX_LEVEL_PRESTIGE } from "@/constants/GLOBAL";
+import { MAX_LEVEL_PRESTIGE, PRESTIGE_REWARD } from "@/constants/GLOBAL";
 import { PRESTIGE_UPGRADES } from "@/constants/PRESTIGE_UPGRADES";
 import { generateEquipmentObject } from "@/lib/equipment";
 import { formatMoney } from "@/lib/formatters";
@@ -72,7 +72,7 @@ export const performPrestige = atom(null, (get, set) => {
     return;
   }
 
-  const prestigePointsReward = 5;
+  const prestigePointsReward = PRESTIGE_REWARD;
   const currentLevel = get(prestigeLevel) || 0;
   const currentLifetime = get(lifetimePrestigePoints) || 0;
   const newLifetime = currentLifetime + prestigePointsReward;

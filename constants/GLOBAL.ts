@@ -15,7 +15,7 @@ export const generateLevelRequirements = (
 ): number[] => {
   const requirements: number[] = [0];
   const baseRequirement = 1_000 * Math.pow(1.5, prestigeLevel);
-  const growthMultiplier = 1.5 + prestigeLevel * 0.01;
+  const growthMultiplier = 1.2 + prestigeLevel * 0.01;
 
   for (let level = 1; level <= MAX_LEVEL_PRESTIGE; level++) {
     if (level <= 10) {
@@ -38,6 +38,7 @@ export const generateLevelRequirements = (
   return requirements;
 };
 
+export const PRESTIGE_REWARD = 5;
 export const MAX_LEVEL_PRESTIGE = 100;
 export const BASE_PRESTIGE_LEVEL_REQUIREMENTS = generateLevelRequirements(0);
 export const PRESTIGE_LEVEL_REQUIREMENTS = BASE_PRESTIGE_LEVEL_REQUIREMENTS;
