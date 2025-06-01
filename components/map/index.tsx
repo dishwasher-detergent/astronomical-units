@@ -2,7 +2,7 @@
 
 import { useSetAtom } from "jotai";
 import { scrollToEquipmentAtom } from "@/atoms/scrollTo";
-import { useState, MouseEvent, TouchEvent } from "react";
+import { useState, MouseEvent, TouchEvent, useRef, useEffect } from "react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MapItem } from "@/components/map/MapItem";
@@ -19,12 +19,29 @@ export function Map() {
   const equipmentWithPositions = useMapEquipment();
   const stars = useMapStars(100);
 
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [mapDimensions, setMapDimensions] = useState({ width: 0, height: 0 });
+
   const [panOffset, setPanOffset] = useState<MapPosition>({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
   const [startPanPosition, setStartPanPosition] = useState<MapPosition>({
     x: 0,
     y: 0,
   });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (mapContainerRef.current) {
+        setMapDimensions({
+          width: mapContainerRef.current.offsetWidth,
+          height: mapContainerRef.current.offsetHeight,
+        });
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
 
   const getEventPosition = (e: MouseEvent | TouchEvent): MapPosition => {
     if ("touches" in e) {
@@ -34,6 +51,17 @@ export function Map() {
   };
 
   const handlePanStart = (e: MouseEvent | TouchEvent) => {
+    let targetElement = e.target as HTMLElement;
+    while (targetElement && targetElement !== mapContainerRef.current) {
+      if (
+        targetElement.tagName === "BUTTON" ||
+        targetElement.getAttribute("role") === "button"
+      ) {
+        return;
+      }
+      targetElement = targetElement.parentElement as HTMLElement;
+    }
+
     setIsPanning(true);
     setStartPanPosition(getEventPosition(e));
   };
@@ -43,7 +71,7 @@ export function Map() {
     const currentPosition = getEventPosition(e);
     const deltaX = currentPosition.x - startPanPosition.x;
     const deltaY = currentPosition.y - startPanPosition.y;
-    const sensitivity = 0.1;
+    const sensitivity = 1;
 
     setPanOffset((prevOffset) => ({
       x: prevOffset.x - deltaX * sensitivity,
@@ -56,19 +84,25 @@ export function Map() {
     setIsPanning(false);
   };
 
+  const getScreenPosition = (centerRelativePos: MapPosition): MapPosition => {
+    const centerX = mapDimensions.width / 2;
+    const centerY = mapDimensions.height / 2;
+    return {
+      x: centerX + centerRelativePos.x - panOffset.x,
+      y: centerY + centerRelativePos.y - panOffset.y,
+    };
+  };
+
   const renderEquipmentItem = (props: EquipmentWithPosition) => {
     const { key, item, position, count, equipmentItem, auPerSecond } = props;
-    const pannedPosition: MapPosition = {
-      x: position.x - panOffset.x,
-      y: position.y - panOffset.y,
-    };
+    const screenPosition = getScreenPosition(position);
 
     if (isMobile) {
       return (
         <MapItemDrawer
           key={key}
           item={item}
-          position={pannedPosition}
+          position={screenPosition}
           count={count}
           equipmentItem={equipmentItem}
           auPerSecond={auPerSecond}
@@ -81,26 +115,26 @@ export function Map() {
       <MapItem
         key={key}
         item={item}
-        position={pannedPosition}
+        position={screenPosition}
         count={count}
         equipmentItem={equipmentItem}
         auPerSecond={auPerSecond}
-        onItemClick={() => setScrollToEquipment(key)}
+        onItemClick={() => {
+          setScrollToEquipment(key);
+        }}
       />
     );
   };
 
   const pannedEquipmentWithPositions = equipmentWithPositions.map((eq) => ({
     ...eq,
-    position: {
-      x: eq.position.x - panOffset.x,
-      y: eq.position.y - panOffset.y,
-    },
+    position: getScreenPosition(eq.position),
   }));
 
   return (
     <div
-      className="bg-muted relative grid size-full cursor-grab touch-none place-items-center select-none active:cursor-grabbing" // Added touch-none, select-none and cursor styles
+      ref={mapContainerRef}
+      className="bg-muted relative grid size-full cursor-grab touch-none place-items-center overflow-hidden select-none active:cursor-grabbing"
       onMouseDown={handlePanStart as (e: MouseEvent) => void}
       onTouchStart={handlePanStart as (e: TouchEvent) => void}
       onMouseMove={handlePanMove as (e: MouseEvent) => void}
@@ -110,8 +144,12 @@ export function Map() {
       onTouchEnd={handlePanEnd}
     >
       <BackgroundStars stars={stars} />
-      {equipmentWithPositions.map(renderEquipmentItem)}
-      <ConnectionLines items={pannedEquipmentWithPositions} /> <MapKey />
+      {mapDimensions.width > 0 &&
+        equipmentWithPositions.map(renderEquipmentItem)}
+      {mapDimensions.width > 0 && (
+        <ConnectionLines items={pannedEquipmentWithPositions} />
+      )}
+      <MapKey />
       {equipmentWithPositions.length === 0 && (
         <div className="z-10 rounded-lg p-4 text-center">
           <p className="text-muted-foreground text-sm font-semibold">

@@ -74,8 +74,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     equipment: false,
     icon: LucidePersonStanding,
     mapPosition: {
-      x: 61,
-      y: 47,
+      x: 0,
+      y: 0,
     },
     upgrades: {
       training: {
@@ -128,8 +128,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 5,
     icon: LucidePlaneTakeoff,
     mapPosition: {
-      x: 59,
-      y: 55,
+      x: -81,
+      y: 74,
     },
     upgrades: {
       seats: {
@@ -180,8 +180,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 12,
     icon: LucidePickaxe,
     mapPosition: {
-      x: 56,
-      y: 60,
+      x: 14,
+      y: -155,
     },
     upgrades: {
       cargo_capacity: {
@@ -233,8 +233,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 20,
     icon: LucideSatelliteDish,
     mapPosition: {
-      x: 51,
-      y: 62,
+      x: 116,
+      y: 151,
     },
     upgrades: {
       solarPanels: {
@@ -285,8 +285,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideRocket,
     buildTime: 18,
     mapPosition: {
-      x: 45,
-      y: 62,
+      x: -188,
+      y: -38,
     },
     upgrades: {
       boosters: {
@@ -338,8 +338,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 30,
     icon: LucideBuilding2,
     mapPosition: {
-      x: 39,
-      y: 58,
+      x: 96,
+      y: 208,
     },
     upgrades: {
       livingQuarters: {
@@ -392,8 +392,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideMountain,
     buildTime: 45,
     mapPosition: {
-      x: 36,
-      y: 52,
+      x: 103,
+      y: -204,
     },
     upgrades: {
       atmosphereGenerators: {
@@ -445,8 +445,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideTentTree,
     buildTime: 60,
     mapPosition: {
-      x: 36,
-      y: 45,
+      x: -254,
+      y: 102,
     },
     upgrades: {
       buildings: {
@@ -516,8 +516,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideCableCar,
     buildTime: 90,
     mapPosition: {
-      x: 40,
-      y: 38,
+      x: -28,
+      y: 278,
     },
     upgrades: {
       cableMaterial: {
@@ -571,8 +571,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 100,
     icon: LucideBolt,
     mapPosition: {
-      x: 46,
-      y: 34,
+      x: 220,
+      y: -180,
     },
     upgrades: {
       energySource: {
@@ -626,8 +626,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideCircleDot,
     buildTime: 120,
     mapPosition: {
-      x: 55,
-      y: 33,
+      x: -184,
+      y: -237,
     },
     upgrades: {
       constructionMaterials: {
@@ -679,8 +679,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideCpu,
     buildTime: 110,
     mapPosition: {
-      x: 63,
-      y: 37,
+      x: 313,
+      y: 70,
     },
     upgrades: {
       qubits: {
@@ -732,8 +732,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideDoorOpen,
     buildTime: 110,
     mapPosition: {
-      x: 68,
-      y: 45,
+      x: -24,
+      y: -338,
     },
     upgrades: {
       portalStabilization: {
@@ -786,8 +786,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 130,
     icon: LucideAtom,
     mapPosition: {
-      x: 69,
-      y: 54,
+      x: -249,
+      y: 267,
     },
     upgrades: {
       fuelEfficiency: {
@@ -840,8 +840,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideShip,
     buildTime: 180,
     mapPosition: {
-      x: 65,
-      y: 63,
+      x: 364,
+      y: -158,
     },
     upgrades: {
       fleetSize: {
@@ -893,8 +893,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideHouse,
     buildTime: 210,
     mapPosition: {
-      x: 57,
-      y: 70,
+      x: 100,
+      y: 367,
     },
     upgrades: {
       generatorStability: {
@@ -946,8 +946,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideCastle,
     buildTime: 230,
     mapPosition: {
-      x: 47,
-      y: 72,
+      x: -388,
+      y: -58,
     },
     upgrades: {
       populationCapacity: {
@@ -999,8 +999,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideCompass,
     buildTime: 250,
     mapPosition: {
-      x: 36,
-      y: 68,
+      x: -110,
+      y: -404,
     },
     upgrades: {
       sensorArray: {
@@ -1052,8 +1052,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideAnvil,
     buildTime: 280,
     mapPosition: {
-      x: 29,
-      y: 60,
+      x: 351,
+      y: 262,
     },
     upgrades: {
       energyConversion: {
@@ -1105,8 +1105,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     icon: LucideClock,
     buildTime: 320,
     mapPosition: {
-      x: 26,
-      y: 48,
+      x: -238,
+      y: 383,
     },
     upgrades: {
       temporalStability: {
@@ -1158,8 +1158,8 @@ export const EQUIPMENT_LIST: Record<string, Equipment> = {
     buildTime: 360,
     icon: LucideSun,
     mapPosition: {
-      x: 29,
-      y: 36,
+      x: -453,
+      y: -151,
     },
     upgrades: {
       solarCollectors: {

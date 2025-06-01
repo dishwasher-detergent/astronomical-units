@@ -47,10 +47,10 @@ export function ConnectionLines({
           <line
             color="currentColor"
             key={`line-${index}`}
-            x1={`${item.position.x}%`}
-            y1={`${item.position.y}%`}
-            x2={`${next.position.x}%`}
-            y2={`${next.position.y}%`}
+            x1={item.position.x}
+            y1={item.position.y}
+            x2={next.position.x}
+            y2={next.position.y}
             strokeWidth="1"
             strokeDasharray="4"
           />

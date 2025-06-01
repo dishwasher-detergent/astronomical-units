@@ -31,8 +31,8 @@ export function MapItemDrawer({
           variant="ghost"
           className="absolute h-fit w-fit p-2"
           style={{
-            left: `${position.x}%`,
-            top: `${position.y}%`,
+            left: `${position.x}px`,
+            top: `${position.y}px`,
             transform: "translate(-50%, -50%)",
           }}
           title={`View ${item.name}`}
